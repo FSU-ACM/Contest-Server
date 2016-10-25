@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+          href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+
+  <script>
+    function submit() {
+      var content = document.getElementById('input_field').value;
+      window.location = "send/" + content;
+    }
+  </script>
+
+  <div class="vcenter">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <h3>ACM Fall Programming Contest</h3>
+
+        <div class="input-group">
+          <input id="input_field" type="text" class="form-control" placeholder="Enter your FSUID...">
+          <span class="input-group-btn">
+            <button class="btn btn-default"
+                    type="button"
+                    id="btn_submit"
+                    onclick="submit();">Submit</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+      <div class="col-lg-4"></div>
+    </div><!-- /.row -->
+  </div>
+
+
+
+</body>
+</html>

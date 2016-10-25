@@ -1,0 +1,17 @@
+<!doctype html>
+<title>ACM Programming Contest</title>
+{% if email %}
+  <h1>Confirmation email sent to: <br /> {{ email }}!</h1>
+{% else %}
+  <h1>No email address on file. Please politely inform one of the officers.</h1>
+{% endif %}
+
+<script>
+
+function redir() {
+  window.location = "/"
+}
+
+setTimeout(redir, 7000);
+
+</script>
