@@ -1,10 +1,24 @@
 from flask import redirect, url_for, render_template, request
+from flask_nav import Nav
+from flask_nav.elements import *
 
 from app import app
 from app.models import *
 from signin import sign_in
 
+# Nav bar
+topbar = Navbar('SPC2017',
+	Link('Sponsors', '/sponsors'),
+	Link('Register', '/register'),
+)
 
+nav = Nav()
+nav.register_element('top', topbar)
+nav.init_app(app)
+
+
+
+# Routes
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -18,12 +32,6 @@ def send_mail(fsuid):
     # else:
     #     return render_template('walkin.html')
     return render_template('confirm.html', email=addr)
-
-
-# @app.route('/confirm')
-# def confirm():
-#     email = request.args['addr']
-#     return render_template('confirm.html', email=email)
 
 @app.route('/teams')
 def teams():

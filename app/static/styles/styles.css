@@ -1,0 +1,97 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+html {
+  height: 100%; }
+
+body {
+  color: #191919;
+  background-color: #ffffff;
+  font: 16px/1 "Open Sans", sans-serif;
+  position: relative;
+  line-height: 1.8; }
+
+a {
+  color: #afafaf; }
+  a:hover {
+    color: #191919;
+    text-decoration: none; }
+
+#main {
+  padding-top: 24px; }
+
+.post {
+  font-size: 14px; }
+
+.post-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px; }
+
+.post-meta {
+  color: #afafaf; }
+
+.sidebar {
+  line-height: 1.5;
+  font-size: 16px; }
+
+.sidebar-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  color: #191919; }
+
+.officers {
+  padding-top: 16px; }
+
+.officer {
+  padding-top: 16px; }
+
+.officer-name {
+  font-size: 16px; }
+
+.officer-role {
+  font-size: 14px; }
+
+.page {
+  font-size: 14px;
+  padding-bottom: 32px; }
+  .page h1 {
+    font-size: 24px; }
+  .page h2 {
+    font-size: 20px; }
+
+.base {
+  height: 100%; }
+
+.navbar .container-fluid {
+  padding: 0px; }
+
+.navbar-container {
+  margin-top: 32px; }
+
+.navbar-default {
+  z-index: 1024;
+  background-color: transparent;
+  border-radius: 0;
+  border-width: 0; }
+  .navbar-default .navbar-brand {
+    font-family: "Montserrat", sans-serif;
+    color: #000000;
+    font-weight: 700; }
+    .navbar-default .navbar-brand:hover {
+      color: #000000; }
+    @media screen and (min-width: 1100px) {
+      .navbar-default .navbar-brand {
+        font-size: 56px; } }
+
+.navbar-nav {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 18px; }
+
+.dropdown-menu > li > a {
+  color: #191919 !important; }
+
+@media (min-width: 768px) {
+  .nav {
+    float: right !important; } }
+
+/*# sourceMappingURL=styles.css.map */
