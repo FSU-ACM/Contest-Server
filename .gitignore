@@ -1,3 +1,7 @@
 *.pyc
-
 *.pem
+*.sassc
+
+# Config based
+/instance
+/storage
