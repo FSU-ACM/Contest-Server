@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+  <h2>Preregistration</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('preregister') }}" method=post>
+    <dl>
+      <dt>Name:
+      <dd><input type=text name=name>
+      <dt>Email:
+      <dd><input type=text name=email>
+      <dd><input type=submit value=Preregiter>
+    </dl>
+  </form>
+{% endblock %}

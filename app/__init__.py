@@ -12,7 +12,8 @@ bootstrap = Bootstrap(app)
 app.url_map.strict_slashes = False
 
 # DB Config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///storage/contest.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:acmAtFSU@localhost/spcWebDB'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://outUser:spc17ftw@localhost/spcWebDB'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 

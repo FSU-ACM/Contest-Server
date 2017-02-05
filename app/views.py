@@ -33,7 +33,29 @@ def send_mail(fsuid):
     #     return render_template('walkin.html')
     return render_template('confirm.html', email=addr)
 
+
 @app.route('/teams')
 def teams():
     teams = Team.query.all()
     return render_template('teams.html', teams=teams)
+
+@app.route('/preregister',methods=['POST','GET'])
+def preregister():
+    error = None
+    #Getting information from formi
+    if request.method =='POST':
+        name = request.form['name']
+        email = request.form['email']
+        #Creating entry and inserting it into the database
+        if not Preregistration.query.filter_by(email=email).first():
+            entry = Preregistration(email,name)
+            db.session.add(entry)
+            db.session.commit()
+            return render_template('prereg_land.html',email=email,name=name)
+   	else:
+            error = "Email already in list"
+    return render_template('prereg.html',error=error)
+
+#@app.route('/preregister_entry',methods=['POST'])
+#def preregister_entry():
+
