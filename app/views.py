@@ -8,8 +8,10 @@ from signin import sign_in
 
 # Nav bar
 topbar = Navbar('SPC2017',
-	Link('Sponsors', '/sponsors'),
-	Link('Register', '/register'),
+    Link('Home', '/'),
+	Link('Preregister', '/preregister'),
+	# Link('Sponsors', '/#sponsors'),
+    # Link('FAQ','/#faq')
 )
 
 nav = Nav()
@@ -52,10 +54,6 @@ def preregister():
             db.session.add(entry)
             db.session.commit()
             return render_template('prereg_land.html',email=email,name=name)
-   	else:
-            error = "Email already in list"
+       	else:
+                error = "Email already in list"
     return render_template('prereg.html',error=error)
-
-#@app.route('/preregister_entry',methods=['POST'])
-#def preregister_entry():
-

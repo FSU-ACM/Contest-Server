@@ -1,9 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700)
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700)
 
+@font-face
+	font-family: "Avenir-Next-Bold"
+	src: url(../fonts/Avenir-Next-Bold.ttf)
 
 $body-font:		'Open Sans', sans-serif
-$brand-font:	'Montserrat', sans-serif
+$banner-font:	'Montserrat', sans-serif
+$brand-font:	'Avenir-Next-Bold', sans-serif
 
 // Colors
 $acm-blue:		#0182ac
@@ -16,8 +20,12 @@ $light-grey:	#afafaf
 $mid-grey:		#626262
 $dark-grey:		#191919
 
-$text: 			$dark-grey
+$bg-blue:		#00bcd4
+$banner-yellow:	#ffe902
+
+$text: 			$white
 $subtitle:		$light-grey
+
 
 $title-size-main:	56px
 $title-size-small:	20px
@@ -30,12 +38,10 @@ html
 
 body
 	color:				$text
-	background-color:	$white
+	background-color:	$bg-blue
 	font: 				16px/1 $body-font
-	// height:				100%
 	position: 			relative
 	line-height:		1.8
-
 
 a
 	color:				$subtitle
@@ -43,54 +49,38 @@ a
 		color:			$text
 		text-decoration: none
 
+h1,h2,h3,h4,h5
+	font-family:		$brand-font
+
 #main
 	padding-top:		24px
 
 // Custom element stylings
-
-.post
-	font-size:			14px
-
-.post-title
-	font-family: 		$brand-font
-	font-size:			24px
-
-.post-meta
-	color: 				$subtitle
-
-.sidebar
-	line-height:		1.5
-	font-size:			16px
-
-.sidebar-title
-	font-family:		$brand-font
-	font-size:			20px
-	color:				$dark-grey
-
-.officers
-	padding-top:		16px
-
-.officer
-	padding-top: 		16px
-
-.officer-name
-	font-size:			16px
-
-.officer-role
-	font-size:			14px
-
-
-// Dynamic Page stylings
-
-.page
-	font-size:			14px
-	padding-bottom: 	32px
+.banner
+	text-transform: uppercase
 
 	h1
-		font-size:		24px
-
+		font-size:		78px
+		line-height: 	0.9
+		font-family: 	$banner-font
+		font-weight: 	700
+		color:			$banner-yellow
 	h2
-		font-size:		20px
+		font-size:		44px
+		line-height: 	0.8
+
+.form-container
+	background-color: 	$white
+	color:				$dark-grey
+	padding:			32px
+	border-radius: 		4px
+
+	h2,label
+		text-transform: uppercase
+
+.hlink
+	color:				#ff6e40
+	text-decoration: 	underline
 
 // Bootstrap Styles
 
@@ -110,20 +100,21 @@ a
 	border-radius: 		0
 	border-width: 		0
 
-
 	.navbar-brand
-		font-family: 		$brand-font
-		color:				$black
-		font-weight: 		700
-		// font-size:			20px
+		font-family: 	$brand-font
+		color:			$white
+		font-size:		22px
 
 		&:hover
-			color:			$black
+			color:			$white
 
 
 		@media screen and (min-width: 1100px)
-			font-size:		56px
+			font-size:	50px
 
+	.navbar-nav li a
+		font-weight: 	700
+		color:			$white
 
 .navbar-nav
 	text-transform:		uppercase

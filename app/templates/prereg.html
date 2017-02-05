@@ -1,14 +1,36 @@
 {% extends "base.html" %}
-{% block body %}
-  <h2>Preregistration</h2>
+{% block content %}
+
+<div class="container form-container">
+
   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
-  <form action="{{ url_for('preregister') }}" method=post>
-    <dl>
-      <dt>Name:
-      <dd><input type=text name=name>
-      <dt>Email:
-      <dd><input type=text name=email>
-      <dd><input type=submit value=Preregiter>
-    </dl>
-  </form>
+
+  <h2>Preregistration</h2>
+
+  <p>
+    Preregister for the Spring Programming Contest, taking place on <strong>March 25th</strong>.
+    <br />
+    <br />
+    By preregistering, you will be notified via email when full registration
+    opens and a spot will be reserved for you.
+  </p>
+
+    <form action="{{ url_for('preregister') }}" method=post class='form-horizontal'>
+
+      <label for="register-name">Your name</label>
+      <input type="text" class="form-control" id="register-name" name=name placeholder="Bob Myers">
+
+      <label for="register-email">Your email</label>
+      <input type="text" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu">
+
+      <br />
+
+      <input class="btn btn-primary" type=submit value=Submit>
+
+    </form>
+
+  </div>
+
+</div>
+
 {% endblock %}
