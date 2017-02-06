@@ -2,14 +2,22 @@ from flask import redirect, url_for, render_template, request
 from flask_nav import Nav
 from flask_nav.elements import *
 
+import bleach, re
+
 from app import app
 from app.models import *
 from signin import sign_in
 
+
+# Email validator
+EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
+
 # Nav bar
 topbar = Navbar('SPC2017',
-	Link('Sponsors', '/sponsors'),
-	Link('Register', '/register'),
+    Link('Home', '/'),
+	Link('Preregister', '/preregister'),
+	# Link('Sponsors', '/#sponsors'),
+    # Link('FAQ','/#faq')
 )
 
 nav = Nav()
@@ -42,20 +50,23 @@ def teams():
 @app.route('/preregister',methods=['POST','GET'])
 def preregister():
     error = None
+    success = None
     #Getting information from formi
     if request.method =='POST':
-        name = request.form['name']
-        email = request.form['email']
-        #Creating entry and inserting it into the database
-        if not Preregistration.query.filter_by(email=email).first():
+        name = bleach.clean(request.form['name'])
+        email = bleach.clean(request.form['email'])
+
+        # Check valid Email
+        if not EMAIL_REGEX.match(email):
+            error = "Please submit a valid email."
+        # Check unique email
+        elif not Preregistration.query.filter_by(email=email).first():
+            #Creating entry and inserting it into the database
             entry = Preregistration(email,name)
             db.session.add(entry)
             db.session.commit()
-            return render_template('prereg_land.html',email=email,name=name)
-   	else:
-            error = "Email already in list"
-    return render_template('prereg.html',error=error)
-
-#@app.route('/preregister_entry',methods=['POST'])
-#def preregister_entry():
-
+            #return render_template('prereg_land.html',email=email,name=name)
+            success = """Congratulations, {}, you are now preregistered for the contest! We'll contact you at your email ({}) when full registration opens.""".format(name,email)
+       	else:
+            error = "This email is already registered."
+    return render_template('prereg.html',error=error,success=success)

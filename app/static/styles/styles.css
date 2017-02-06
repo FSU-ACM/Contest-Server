@@ -1,11 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@font-face {
+  font-family: "Avenir-Next-Bold";
+  src: url(../fonts/Avenir-Next-Bold.ttf); }
 html {
   height: 100%; }
 
 body {
-  color: #191919;
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #00bcd4;
   font: 16px/1 "Open Sans", sans-serif;
   position: relative;
   line-height: 1.8; }
@@ -13,50 +16,50 @@ body {
 a {
   color: #afafaf; }
   a:hover {
-    color: #191919;
+    color: #ffffff;
     text-decoration: none; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "Avenir-Next-Bold", sans-serif; }
 
 #main {
   padding-top: 24px; }
 
-.post {
-  font-size: 14px; }
+.banner {
+  text-transform: uppercase; }
+  .banner h1 {
+    font-size: 36px;
+    line-height: 0.9;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: #ffe902; }
+    @media screen and (min-width: 500px) {
+      .banner h1 {
+        font-size: 56px; } }
+    @media screen and (min-width: 768px) {
+      .banner h1 {
+        font-size: 78px; } }
+  .banner h2 {
+    font-size: 30px;
+    line-height: 0.8; }
+    @media screen and (min-width: 500px) {
+      .banner h2 {
+        font-size: 38px; } }
+    @media screen and (min-width: 768px) {
+      .banner h2 {
+        font-size: 44px; } }
 
-.post-title {
-  font-family: "Montserrat", sans-serif;
-  font-size: 24px; }
+.form-container {
+  background-color: #ffffff;
+  color: #191919;
+  padding: 32px;
+  border-radius: 4px; }
+  .form-container h2, .form-container label {
+    text-transform: uppercase; }
 
-.post-meta {
-  color: #afafaf; }
-
-.sidebar {
-  line-height: 1.5;
-  font-size: 16px; }
-
-.sidebar-title {
-  font-family: "Montserrat", sans-serif;
-  font-size: 20px;
-  color: #191919; }
-
-.officers {
-  padding-top: 16px; }
-
-.officer {
-  padding-top: 16px; }
-
-.officer-name {
-  font-size: 16px; }
-
-.officer-role {
-  font-size: 14px; }
-
-.page {
-  font-size: 14px;
-  padding-bottom: 32px; }
-  .page h1 {
-    font-size: 24px; }
-  .page h2 {
-    font-size: 20px; }
+.hlink {
+  color: #ff6e40;
+  text-decoration: underline; }
 
 .base {
   height: 100%; }
@@ -73,14 +76,17 @@ a {
   border-radius: 0;
   border-width: 0; }
   .navbar-default .navbar-brand {
-    font-family: "Montserrat", sans-serif;
-    color: #000000;
-    font-weight: 700; }
+    font-family: "Avenir-Next-Bold", sans-serif;
+    color: #ffffff;
+    font-size: 22px; }
     .navbar-default .navbar-brand:hover {
-      color: #000000; }
+      color: #ffffff; }
     @media screen and (min-width: 1100px) {
       .navbar-default .navbar-brand {
-        font-size: 56px; } }
+        font-size: 50px; } }
+  .navbar-default .navbar-nav li a {
+    font-weight: 700;
+    color: #ffffff; }
 
 .navbar-nav {
   text-transform: uppercase;
@@ -88,7 +94,7 @@ a {
   font-size: 18px; }
 
 .dropdown-menu > li > a {
-  color: #191919 !important; }
+  color: #ffffff !important; }
 
 @media (min-width: 768px) {
   .nav {

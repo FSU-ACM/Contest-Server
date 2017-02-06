@@ -2,8 +2,28 @@
 {% extends "base.html" %}
 {% block title %}ACM at FSU{% endblock %}
 
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{url_for('static', filename='styles/text-shadow.css')}}">
+{% endblock %}
+
+
 <!-- -->
 {% block content %}
+
+	<div class="container">
+		<div class="banner">
+			<h1 class="banner-shadow1">Spring</h1>
+			<h1 class="banner-shadow1">Programming</h1>
+			<h1 class="banner-shadow1">Contest 2017</h1>
+			<br />
+			<h2>March 25th</h2>
+			<h2>8AM – 3PM</h2>
+			<h2><a href="/preregister" class="hlink">Preregister Now</a></h2>
+		</div>
+	</div>
+
+
 
 {% endblock %}
 
