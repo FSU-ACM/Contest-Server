@@ -28,14 +28,26 @@ h1, h2, h3, h4, h5 {
 .banner {
   text-transform: uppercase; }
   .banner h1 {
-    font-size: 78px;
+    font-size: 36px;
     line-height: 0.9;
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
     color: #ffe902; }
+    @media screen and (min-width: 500px) {
+      .banner h1 {
+        font-size: 56px; } }
+    @media screen and (min-width: 768px) {
+      .banner h1 {
+        font-size: 78px; } }
   .banner h2 {
-    font-size: 44px;
+    font-size: 30px;
     line-height: 0.8; }
+    @media screen and (min-width: 500px) {
+      .banner h2 {
+        font-size: 38px; } }
+    @media screen and (min-width: 768px) {
+      .banner h2 {
+        font-size: 44px; } }
 
 .form-container {
   background-color: #ffffff;

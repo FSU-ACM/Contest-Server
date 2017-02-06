@@ -44,6 +44,7 @@ def teams():
 @app.route('/preregister',methods=['POST','GET'])
 def preregister():
     error = None
+    success = None
     #Getting information from formi
     if request.method =='POST':
         name = request.form['name']
@@ -53,7 +54,8 @@ def preregister():
             entry = Preregistration(email,name)
             db.session.add(entry)
             db.session.commit()
-            return render_template('prereg_land.html',email=email,name=name)
+            #return render_template('prereg_land.html',email=email,name=name)
+            success = """Congratulations, {}, you're now preregistered for the contest! We'll contact you at your email ({}) when full registration opens.""".format(name,email)
        	else:
-                error = "Email already in list"
-    return render_template('prereg.html',error=error)
+            error = "This email is already registered."
+    return render_template('prereg.html',error=error,success=success)

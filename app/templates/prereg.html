@@ -3,7 +3,21 @@
 
 <div class="container form-container">
 
-  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  {% if error %}
+	<div class="alert alert-danger" role="alert">
+		<strong>Houston, we have a problem:</strong>
+		{{ error }}
+	</div>
+	{% endif %}
+
+  {% if success %}
+	<div class="alert alert-success" role="alert">
+		<strong>Mission accomplished!</strong>
+		{{ success }}
+	</div>
+	{% endif %}
+
+
 
   <h2>Preregistration</h2>
 
