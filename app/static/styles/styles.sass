@@ -1,11 +1,17 @@
+// Import fonts
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700)
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700)
+@import url('https://fonts.googleapis.com/css?family=Roboto')
+
+// Import the mixins
+@import "css3-mixins.sass"
 
 @font-face
 	font-family: "Avenir-Next-Bold"
 	src: url(../fonts/Avenir-Next-Bold.ttf)
 
-$body-font:		'Open Sans', sans-serif
+$body-font:		'Roboto', sans-serif
+$nav-font:		'Open Sans', sans-serif
 $banner-font:	'Montserrat', sans-serif
 $brand-font:	'Avenir-Next-Bold', sans-serif
 
@@ -20,8 +26,9 @@ $light-grey:	#afafaf
 $mid-grey:		#626262
 $dark-grey:		#191919
 
-$bg-blue:		#00bcd4
 $banner-yellow:	#ffe902
+$accent:		#ff6e40
+$night:			#373560
 
 $text: 			$white
 $subtitle:		$light-grey
@@ -53,11 +60,16 @@ html
 	height:				100%
 
 body
+	height:				100%
 	color:				$text
-	background-color:	$bg-blue
+	// background-color:	$bg-blue
 	font: 				16px/1 $body-font
 	position: 			relative
 	line-height:		1.8
+	// background-color: 	$night
+	background-image: 	url("../assets/star-cloud-tile.png")
+	background-repeat: 	repeat
+	background-attachment: fixed
 
 a
 	color:				$subtitle
@@ -74,9 +86,16 @@ h1,h2,h3,h4,h5
 // Custom element stylings
 .banner
 	text-transform: uppercase
+	height: 100%
+
+	// This pulls the banner behind the
+	// navbar
+	margin-top: -70px
+	padding-top: 70px
 
 	h1
 		@include font-size($h1b-font-sizes)
+		@include text-shadow(-3px, 0px, 0px, rgba(255, 233, 2, 0.4))
 		line-height: 	0.9
 		font-family: 	$banner-font
 		font-weight: 	700
@@ -84,8 +103,29 @@ h1,h2,h3,h4,h5
 
 	h2
 		@include font-size($h2b-font-sizes)
+		@include text-shadow(-3px, 0px, 0px, rgba(233, 233, 233, 0.4))
 		line-height: 	0.8
 
+	.hlink
+		@include text-shadow(-3px, 0px, 0px, rgba(233, 50, 50, 0.4))
+
+		&:hover
+			color:		$banner-yellow
+
+.sponsors
+	background-color: 	$white
+	color:				$dark-grey
+	box-shadow: 		0px -3px 20px 3px rgba(0,0,0,.25)
+	height: 75%
+	padding: 			48px 0px 48px 0px
+
+	h1
+		font-family: 	$banner-font
+		font-weight: 	700
+
+.logo-wrap
+	display: inline-block
+	padding: 40px 10px
 
 
 .form-container
@@ -98,12 +138,35 @@ h1,h2,h3,h4,h5
 		text-transform: uppercase
 
 .hlink
-	color:				#ff6e40
+	color:				$accent
 	text-decoration: 	underline
+
+.footer
+	z-index: 10
+	background-color: 	$night
+	padding: 48px
+	font-size: 14px
+
+	ul
+		list-style:		none
+		padding-left:	0px
+
+	li
+		line-height: 	1.3
+
+	a
+		color: 			$light-grey
+
 
 // Bootstrap Styles
 .base
 	height:				100%
+
+.row-eq-height
+	display: -webkit-box
+	display: -webkit-flex
+	display: -ms-flexbox
+	display: flex
 
 .navbar
 	.container-fluid
@@ -134,7 +197,11 @@ h1,h2,h3,h4,h5
 		font-weight: 	700
 		color:			$white
 
+		&:hover
+			color:		$banner-yellow
+
 .navbar-nav
+	font-family:		$nav-font
 	text-transform:		uppercase
 	letter-spacing: 	1px
 	font-size: 			18px
@@ -146,3 +213,7 @@ h1,h2,h3,h4,h5
 @media (min-width: 768px)
 	.nav
 		float: right !important
+
+@media (min-width: 1200px)
+	.container
+		max-width: 970px

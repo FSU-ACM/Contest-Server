@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-{% extends "base.html" %}
+{% extends "page.html" %}
 {% block title %}ACM at FSU{% endblock %}
 
-{% block styles %}
-	{{ super() }}
-	<link rel="stylesheet" href="{{url_for('static', filename='styles/text-shadow.css')}}">
-{% endblock %}
 
-
-<!-- -->
+<!-- Content in here -->
 {% block content %}
 
-	<div class="container">
-		<div class="banner">
-			<h1 class="banner-shadow1">Spring</h1>
-			<h1 class="banner-shadow1">Programming</h1>
-			<h1 class="banner-shadow1">Contest 2017</h1>
+	<div class="container banner">
+
+		<!-- <div class="parallax-window"
+			data-parallax="scroll"
+			data-image-src="{{url_for('static', filename='assets/star-cloud-tile.png')}}"> -->
+
+			<h1 class="">Spring</h1>
+			<h1 class="">Programming</h1>
+			<h1 class="">Contest 2017</h1>
 			<br />
-			<h2>March 25th</h2>
-			<h2>8AM – 3PM</h2>
+			<h2 class="">March 25th</h2>
+			<h2 class="">8AM – 3PM</h2>
 			<h2><a href="/preregister" class="hlink">Preregister Now</a></h2>
+		<!-- </div> -->
+
+	</div>
 		</div>
 	</div>
 
@@ -30,5 +32,6 @@
 
 <!-- Put scripts here -->
 {% block scripts %}
-	<script src="{{url_for('.static', filename='js/index.js')}}"></script>
+{{super()}}
+<script src="{{url_for('static', filename='js/index.js')}}"></script>
 {% endblock %}
