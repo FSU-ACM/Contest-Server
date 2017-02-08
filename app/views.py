@@ -4,13 +4,13 @@ from flask_nav.elements import *
 
 import bleach, re
 
-from app import app
+from app import app, recaptcha
 from app.models import *
 from signin import sign_in
 
 
 # Email validator
-EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
+EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
 # Nav bar
 topbar = Navbar('SPC2017',
@@ -49,16 +49,23 @@ def teams():
 
 @app.route('/preregister',methods=['POST','GET'])
 def preregister():
+
     error = None
     success = None
+
     #Getting information from formi
     if request.method =='POST':
         name = bleach.clean(request.form['name'])
         email = bleach.clean(request.form['email'])
 
+        # Verify recaptcha
+        if not recaptcha.verify():
+            error = "Please complete the ReCaptcha."
+
         # Check valid Email
-        if not EMAIL_REGEX.match(email):
+        elif not EMAIL_REGEX.match(email):
             error = "Please submit a valid email."
+
         # Check unique email
         elif not Preregistration.query.filter_by(email=email).first():
             #Creating entry and inserting it into the database
@@ -69,4 +76,5 @@ def preregister():
             success = """Congratulations, {}, you are now preregistered for the contest! We'll contact you at your email ({}) when full registration opens.""".format(name,email)
        	else:
             error = "This email is already registered."
+
     return render_template('prereg.html',error=error,success=success)

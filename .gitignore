@@ -4,4 +4,4 @@
 
 # Config based
 /instance
-/storage
+app/storage
