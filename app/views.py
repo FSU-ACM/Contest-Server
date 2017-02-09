@@ -13,9 +13,10 @@ from signin import sign_in
 EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
 # Nav bar
-topbar = Navbar('SPC2017',
+topbar = Navbar('',
     Link('Home', '/'),
 	Link('Preregister', '/preregister'),
+    Link('About', '/#about')
 	# Link('Sponsors', '/#sponsors'),
     # Link('FAQ','/#faq')
 )
