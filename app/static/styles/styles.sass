@@ -1,7 +1,7 @@
 // Import fonts
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700)
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700)
-@import url('https://fonts.googleapis.com/css?family=Roboto')
+// @import url('https://fonts.googleapis.com/css?family=Roboto')
 
 // Import the mixins
 @import "css3-mixins.sass"
@@ -10,7 +10,7 @@
 	font-family: "Avenir-Next-Bold"
 	src: url(../fonts/Avenir-Next-Bold.ttf)
 
-$body-font:		'Roboto', sans-serif
+// $body-font:		'Roboto', sans-serif
 $nav-font:		'Open Sans', sans-serif
 $banner-font:	'Montserrat', sans-serif
 $brand-font:	'Avenir-Next-Bold', sans-serif
@@ -30,15 +30,16 @@ $banner-yellow:	#ffe902
 $accent:		#ff6e40
 $night:			#373560
 
-$text: 			$white
+$text: 			$dark-grey
 $subtitle:		$light-grey
 
 
 $title-size-main:	56px
 $title-size-small:	20px
 
-$h1b-font-sizes: (null: 36px, 500px: 56px, 768px: 78px)
-$h2b-font-sizes: (null: 30px, 500px: 38px, 768px: 44px)
+$h1b-font-sizes: (null: 36px, 500px: 56px, 768px: 78px, 1300px:96px)
+$h2b-font-sizes: (null: 30px, 500px: 38px, 768px: 44px, 1300px:76px)
+$btn-font-sizes: (null: 12px, 500px: 18px)
 
 @mixin font-size($fs-map)
 	@each $fs-breakpoint, $fs-font-size in $fs-map
@@ -50,26 +51,22 @@ $h2b-font-sizes: (null: 30px, 500px: 38px, 768px: 44px)
 				font-size: $fs-font-size
 
 
-
-
-
-
 // HTML Element Tags
 
 html
 	height:				100%
+	background-color:	$night
+	background-image: 	url("../assets/star-cloud-tile.png")
+	background-repeat: 	repeat
+	background-attachment: fixed
 
 body
 	height:				100%
 	color:				$text
-	// background-color:	$bg-blue
-	font: 				16px/1 $body-font
+	font: 				16px/1 $nav-font
 	position: 			relative
 	line-height:		1.8
-	// background-color: 	$night
-	background-image: 	url("../assets/star-cloud-tile.png")
-	background-repeat: 	repeat
-	background-attachment: fixed
+	background: linear-gradient(rgba(255,0,0,0), rgba(255,140,0,0.5))
 
 a
 	color:				$subtitle
@@ -84,9 +81,30 @@ h1,h2,h3,h4,h5
 	padding-top:		24px
 
 // Custom element stylings
+
+.block
+	height: 100%
+	max-height: 900px
+
+	@media screen and (max-width: 1100px)
+		max-height: 700px
+
+	@media screen and (max-width: 768px)
+		max-height: 600px
+
+.sheet
+	background-color: 	$white
+	color:				$dark-grey
+	// box-shadow: 		0px 5px 20px 3px rgba(0,0,0,.25)
+	padding: 48px 0 128px 0
+
+.sheet-gap
+	height: 100px
+	background-color: rgba(255,140,0,0.5)
+
+
 .banner
 	text-transform: uppercase
-	height: 100%
 
 	// This pulls the banner behind the
 	// navbar
@@ -105,6 +123,38 @@ h1,h2,h3,h4,h5
 		@include font-size($h2b-font-sizes)
 		@include text-shadow(-3px, 0px, 0px, rgba(233, 233, 233, 0.4))
 		line-height: 	0.8
+		color:			$white
+
+	button
+		@include font-size($btn-font-sizes)
+		border-radius: 100px
+		padding: 4px 48px
+		font-family: $nav-font
+		font-weight: 700
+		text-transform: uppercase
+		margin-right: 16px
+		margin-bottom: 16px
+
+	.register
+		border: 3px solid $accent
+		background-color: $accent
+		color: $white
+
+		&:hover
+			background: $white
+			border-color: $white
+			color: $accent
+
+	.sponsor-us
+		border: 3px solid $white
+		background-color: rgba(0,0,0,0)
+		color: $white
+
+		&:hover
+			background-color: $white
+			color: $accent
+
+
 
 	.hlink
 		@include text-shadow(-3px, 0px, 0px, rgba(233, 50, 50, 0.4))
@@ -112,10 +162,20 @@ h1,h2,h3,h4,h5
 		&:hover
 			color:		$banner-yellow
 
+	@media screen and (max-width: 768px)
+		text-align: center
+
+.about
+	background-color: $white
+
+	p
+		font-weight: 500
+		font-size: 18px
+
+	.hashtag
+		opacity: 0.6
+
 .sponsors
-	background-color: 	$white
-	color:				$dark-grey
-	box-shadow: 		0px -3px 20px 3px rgba(0,0,0,.25)
 	height: 75%
 	padding: 			48px 0px 48px 0px
 
@@ -143,7 +203,7 @@ h1,h2,h3,h4,h5
 
 .footer
 	z-index: 10
-	background-color: 	$night
+	background-color: 	$accent
 	padding: 48px
 	font-size: 14px
 
