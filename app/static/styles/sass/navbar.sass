@@ -1,0 +1,45 @@
+.navbar
+	.container-fluid
+		padding:		0px
+
+.navbar-container
+	margin-top: 		32px
+
+.navbar-default
+	z-index: 			1024
+	background-color: 	rgba(0,0,0,0)
+	border-radius: 		0
+	border-width: 		0
+
+	.navbar-brand
+		font-family: 	$brand-font
+		color:			$white
+		font-size:		22px
+
+		&:hover
+			color:		$white
+
+
+		@media screen and (min-width: 1100px)
+			font-size:	50px
+
+	.navbar-nav li a
+		font-weight: 	700
+		color:			$white
+
+		&:hover
+			color:		$banner-yellow
+
+.navbar-nav
+	font-family:		$body-font
+	text-transform:		uppercase
+	letter-spacing: 	1px
+	font-size: 			18px
+
+
+.dropdown-menu>li>a
+	color:				$text !important
+
+@media (min-width: 768px)
+	.nav
+		float: right !important

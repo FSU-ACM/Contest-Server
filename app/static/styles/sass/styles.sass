@@ -1,0 +1,87 @@
+@import "generics.sass"
+@import "index.sass"
+@import "navbar.sass"
+
+
+// HTML Element Tags
+html
+	height:				100%
+	background-color:	$night
+	background-image: 	url("../../assets/star-cloud-tile.png")
+	background-repeat: 	repeat
+	background-attachment: fixed
+
+body
+	height:				100%
+	color:				$text
+	font: 				16px/1 $body-font
+	position: 			relative
+	line-height:		1.8
+	background: linear-gradient(rgba(255,0,0,0), rgba(255,140,0,0.5))
+
+a
+	color:				$subtitle
+	&:hover
+		color:			$text
+		text-decoration: none
+
+h1,h2,h3,h4,h5
+	font-family:		$brand-font
+
+#main
+	padding-top:		24px
+
+
+// Generic element stylings
+
+.block
+	height: 100%
+	max-height: 900px
+
+	@media screen and (max-width: 1100px)
+		max-height: 700px
+
+	@media screen and (max-width: 768px)
+		max-height: 600px
+
+.sheet
+	background-color: 	$white
+	color:				$dark-grey
+	// box-shadow: 		0px 5px 20px 3px rgba(0,0,0,.25)
+	padding: 48px 0 128px 0
+
+.sheet-gap
+	height: 100px
+	background-color: rgba(255,140,0,0.5)
+
+
+// Specific stylings
+
+.form-container
+	background-color: 	$white
+	color:				$dark-grey
+	padding:			32px
+	border-radius: 		4px
+
+	h2,label
+		text-transform: uppercase
+
+.footer
+	z-index: 10
+	background-color: 	$accent
+	padding: 48px
+	font-size: 14px
+
+	ul
+		list-style:		none
+		padding-left:	0px
+
+	li
+		line-height: 	1.3
+
+	a
+		color: 			$light-grey
+
+@media (min-width: 1200px)
+	.container
+		max-width: 970px

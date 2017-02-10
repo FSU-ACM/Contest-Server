@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACQ,sEAA8D;AAC9D,uEAA+D;;;;;;;;;;;;;;;EAMtE,WAAW,EAAE,kBAAkB;EAC/B,GAAG,EAAE,qCAAqC",
+"sources": ["../sass/generics.sass"],
+"names": [],
+"file": "generics.css"
+}

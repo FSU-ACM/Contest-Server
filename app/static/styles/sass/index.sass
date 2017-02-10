@@ -1,0 +1,107 @@
+
+// Banner
+.banner
+	text-transform: uppercase
+
+	// This pulls the banner behind the navbar
+	margin-top: -70px
+	padding-top: 70px
+
+	h1
+		@include font-size($h1b-font-sizes)
+		@include text-shadow(-3px, 0px, 0px, rgba(255, 233, 2, 0.4))
+		line-height: 	0.9
+		font-family: 	$banner-font
+		font-weight: 	700
+		color:			$banner-yellow
+
+	h2
+		@include font-size($h2b-font-sizes)
+		@include text-shadow(-3px, 0px, 0px, rgba(233, 233, 233, 0.4))
+		line-height: 	0.8
+		color:			$white
+
+	button
+		@include font-size($btn-font-sizes)
+		border-radius: 100px
+		padding: 4px 48px
+		font-family: $body-font
+		font-weight: 700
+		text-transform: uppercase
+		margin-right: 16px
+		margin-bottom: 16px
+
+	.register
+		border: 3px solid $accent
+		background-color: $accent
+		color: $white
+
+		&:hover
+			background: $white
+			border-color: $white
+			color: $accent
+
+	.sponsor-us
+		border: 3px solid $white
+		background-color: rgba(0,0,0,0)
+		color: $white
+
+		&:hover
+			background-color: $white
+			color: $accent
+
+
+
+	.hlink
+		@include text-shadow(-3px, 0px, 0px, rgba(233, 50, 50, 0.4))
+
+		&:hover
+			color:		$banner-yellow
+
+	@media screen and (max-width: 768px)
+		text-align: center
+
+
+// About
+.about
+	background-color: $white
+
+	p
+		font-weight: 500
+		font-size: 18px
+
+	.hashtag
+		color: $accent
+
+
+// Sponsors
+.sponsors
+	height: 75%
+	padding: 			48px 0px 48px 0px
+
+	h1
+		font-family: 	$banner-font
+		font-weight: 	700
+
+.sponsor-wrapper
+	min-height: 500px
+
+.sponsor-row
+	display: flex
+	justify-content: center
+
+.sponsor-wrap
+	display: flex
+	justify-content: center
+	max-width: 350px
+	max-height: 200px
+
+.sponsor-inner-wrap
+	align-self: center
+	padding: 0 2rem
+
+	img
+		width: 100%
+
+	#harris
+		padding-top: 11%
