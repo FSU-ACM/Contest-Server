@@ -15,7 +15,7 @@ the required variables. Below is a sample configuration.
 DEBUG = True
 
 # SQLAlchemy Configuration
-SQLALCHEMY_DATABASE_URI = 'mysql://root:acmAtFSU@localhost/spcWebDB'
+SQLALCHEMY_DATABASE_URI = 'mysql://user:pass@localhost/spcWebDB'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 ```
 
