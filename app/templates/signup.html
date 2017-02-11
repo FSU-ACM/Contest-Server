@@ -1,0 +1,73 @@
+{% extends "page.html" %}
+{% block content %}
+
+<div class="container form-container">
+
+  {% if error %}
+	<div class="alert alert-danger" role="alert">
+		<strong>Houston, we have a problem:</strong>
+		{{ error }}
+	</div>
+	{% endif %}
+
+  {% if success %}
+	<div class="alert alert-success" role="alert">
+		<strong>Mission accomplished!</strong>
+		{{ success }}
+	</div>
+	{% endif %}
+
+
+
+  <h2>Sign up</h2>
+
+    <form action="{{ url_for('signup') }}" method=post class='form-horizontal'>
+
+      <label for="register-firstname">First Name*</label>
+      <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="bobject">
+
+      <label for="register-lastname">Last Name*</label>
+      <input type="text" class="form-control" id="register-lastname" name=lastname placeholder="oriented">
+
+      <label for="register-age">Age*</label>
+      <input type="text" class="form-control" id="register-age" name=age>
+
+      <label for="register-gender">Gender*</label>
+      <input type="radio" id="register-gender" name="gender" value="Male" checked> Male </input>
+      <input type="radio" id="register-gender" name="gender" value="Female"> Female </input>
+
+	  <br/>
+	  
+      <label for="register-race">Race*</label>
+      <input type="text" class="form-control" id="register-race" name=race>
+      
+      <label for="register-degree">Degree(Undergraduate/Graduate)*</label>
+      <input type="text" class="form-control" id="register-degree" name=degree>
+    
+	  <label for="register-major">Major</label>
+	  <input type="text" class="form-control" id="register-major" name=major>
+	  
+	  <label for="register-advcourses">Advanced Courses</label>
+	  <input type="text" class="form-control" id="register-advcourses" name=advcourses>
+	  
+      <label for="register-email">Email*</label>
+      <input type="text" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu">
+
+      <label for="register-password">Password*</label>
+      <input type="password" class="form-control" id="register-password" name=password placeholder="******">
+
+      <br />
+
+			{{ recaptcha }}
+
+      <br />
+	  
+      <input class="btn btn-primary" type=submit value="Sign up">
+	  
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}
