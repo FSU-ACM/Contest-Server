@@ -15,9 +15,8 @@ EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 # Nav bar
 topbar = Navbar('SPC2017',
     Link('Home', '/'),
-	Link('Preregister', '/preregister'),
+	Link('Register', '/register'),
 	Link('Login','/login'),
-	Link('Sign up','/signup')
 	# Link('Sponsors', '/#sponsors'),
     # Link('FAQ','/#faq')
 )
@@ -79,7 +78,7 @@ def preregister():
        	else:
             error = "This email is already registered."
 
-    return render_template('prereg.html',error=error,success=success)	
+    return render_template('prereg.html',error=error,success=success)
 
 @app.route('/login',methods=['POST','GET'])
 def login():
@@ -92,18 +91,18 @@ def login():
         email = bleach.clean(request.form['email'])
         password = bleach.clean(request.form['password'])
 
-        # Verify recaptcha
-        if not recaptcha.verify():
-            error = "Please complete the ReCaptcha."
+        # # Verify recaptcha
+        # if not recaptcha.verify():
+        #     error = "Please complete the ReCaptcha."
 
         # Check valid Email
-        elif not EMAIL_REGEX.match(email):
+        if not EMAIL_REGEX.match(email):
             error = "Please submit a valid email."
 
-        # verify that the password is not empty	
+        # verify that the password is not empty
         elif not password:
             error = "Please enter a valid password."
-			
+
         # Check unique email
         elif Preregistration.query.filter_by(email=email).first():
             #Creating entry and inserting it into the database
@@ -117,8 +116,8 @@ def login():
 
     return render_template('login.html',error=error,success=success)
 
-@app.route('/signup',methods=['POST','GET'])
-def signup():
+@app.route('/profile', methods=['POST','GET'])
+def profile():
 
     error = None
     success = None
@@ -127,28 +126,25 @@ def signup():
     if request.method =='POST':
         firstname = bleach.clean(request.form['firstname'])
         lastname = bleach.clean(request.form['lastname'])
-        age = bleach.clean(request.form['age'])
+        fsuid = bleach.clean(request.form['fsuid'])
+        dob = bleach.clean(request.form['dob'])
         gender = bleach.clean(request.form['gender'])
-        race = bleach.clean(request.form['race'])
-        degree = bleach.clean(request.form['degree'])
+        race = None
+        if 'race' in request.form:
+            race = bleach.clean(request.form['race'])
         major = bleach.clean(request.form['major'])
+        gradyear = bleach.clean(request.form['gradyear'])
+        degree = bleach.clean(request.form['degree'])
         advcourses = bleach.clean(request.form['advcourses'])
         email = bleach.clean(request.form['email'])
         password = bleach.clean(request.form['password'])
 
-        error = verifyuserdetails(firstname, lastname, age, gender, race, degree, major, password)	
-        # verify that user has entered all the required information	
+        # verify that user has entered all the required information
+        error = verifyuserdetails(firstname, lastname, fsuid, dob, gender, race, major, gradyear, degree, advcourses, password)
         if error :
-		    pass
-			
-        # Verify recaptcha
-        elif not recaptcha.verify():
-            error = "Please complete the ReCaptcha."
+            pass
 
-        # Check valid Email
-        elif not EMAIL_REGEX.match(email):
-            error = "Please submit a valid email."
-			
+        # TODO fix this so it updates an existing user profile
         # Check unique email
         elif not Preregistration.query.filter_by(email=email).first():
             #Creating entry and inserting it into the database
@@ -160,32 +156,55 @@ def signup():
         else:
             error = "This email is already registered."
 
-    return render_template('signup.html',error=error,success=success)	
-	
-def verifyuserdetails(firstname, lastname, age, gender, race, degree, major, password):
+    return render_template('profile.html',error=error,success=success)
+
+
+@app.route('/register', methods=['POST','GET'])
+def register():
+
+    error = None
+
+    if request.method == 'POST':
+        # Validate login; deny or redirect to profile
+        pass
+
+    return render_template('register.html',error=error)
+
+
+
+def verifyuserdetails(firstname, lastname, fsuid, dob, gender, race, major, gradyear, degree, advcourses, password):
     error = ""
     if not firstname:
-        error += "Please enter a valid first name."	
-		
-    if not lastname:
-        error += "Please enter a valid last name.\n"	
+        error += "Please enter a valid first name."
 
-    if not age:
-        error += "Please enter a valid age.\n"
+    if not lastname:
+        error += "Please enter a valid last name.\n"
+
+    if not fsuid or not fsuid.isdigit():
+        error += "Please enter a valid fsuid.\n"
+
+    if not dob:
+        error += "Please enter a valid date of birth.\n"
 
     if not gender:
-        error += "Please select a gender.\n"	
+        error += "Please select a gender.\n"
 
     if not race:
         error += "Please select a race.\n"
-        
-    if not degree:
-        error += "Please enter a valid degree.\n"	
 
     if not major:
-        error += "Please enter a valid major.\n"			
+        error += "Please enter a valid major.\n"
+
+    if not gradyear or not gradyear.isdigit():
+        error += "Please enter a valid graduation year.\n"
+
+    if not degree:
+        error += "Please select a valid degree.\n"
+
+    if not advcourses:
+        error += "Please select a valid advancedcourses.\n"
 
     if not password:
-        error += "Please enter a valid password."	
+        error += "Please enter a valid password."
 
-	return error	
+    return error
