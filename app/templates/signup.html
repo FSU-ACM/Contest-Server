@@ -4,18 +4,18 @@
 <div class="container form-container">
 
   {% if error %}
-	<div class="alert alert-danger" role="alert">
-		<strong>Houston, we have a problem:</strong>
-		{{ error }}
-	</div>
-	{% endif %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Houston, we have a problem:</strong>
+    {{ error }}
+  </div>
+  {% endif %}
 
   {% if success %}
-	<div class="alert alert-success" role="alert">
-		<strong>Mission accomplished!</strong>
-		{{ success }}
-	</div>
-	{% endif %}
+  <div class="alert alert-success" role="alert">
+    <strong>Mission accomplished!</strong>
+    {{ success }}
+  </div>
+  {% endif %}
 
 
 
@@ -24,46 +24,72 @@
     <form action="{{ url_for('signup') }}" method=post class='form-horizontal'>
 
       <label for="register-firstname">First Name*</label>
-      <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="bobject">
+      <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="bobject" required>
 
       <label for="register-lastname">Last Name*</label>
-      <input type="text" class="form-control" id="register-lastname" name=lastname placeholder="oriented">
+      <input type="text" class="form-control" id="register-lastname" name=lastname placeholder="oriented" required>
 
-      <label for="register-age">Age*</label>
-      <input type="text" class="form-control" id="register-age" name=age>
+      <label for="register-fsuid">FSUID*</label>
+      <input type="number" class="form-control" id="register-fsuid" name=fsuid min="1" required>
 
-      <label for="register-gender">Gender*</label>
-      <input type="radio" id="register-gender" name="gender" value="Male" checked> Male </input>
-      <input type="radio" id="register-gender" name="gender" value="Female"> Female </input>
+      <label for="register-dob">Date of Birth*</label>
+      <input type="date" class="form-control" id="register-dob" name=dob min="1" required>
 
-	  <br/>
-	  
-      <label for="register-race">Race*</label>
-      <input type="text" class="form-control" id="register-race" name=race>
+      <label for="register-gender">Gender*</label><br/>
+      <select name="gender" id="register-gender" required>
+        <option value=""></option>
+        <option value="Male">Male</option>
+        <option value="Female">female</option>     
+      </select>
+
+      <br/>
+
+      <label for="register-race">Race*</label><br/>
+      <div style='overflow:scroll;width:300px;height:200px;block'>
+        <input type="checkbox" id="register-race" name=race value="American Indian or Native Alaskan">American Indian or Native Alaskan</input><br/>
+        <input type="checkbox" id="register-race" name=race value="Asian">Asian</input><br/> 
+        <input type="checkbox" id="register-race" name=race value="Black or African American">Black or African American</input> <br/>
+        <input type="checkbox" id="register-race" name=race value="Native Hawaiian or other Pacific Islander">Native Hawaiian or other Pacific Islander</input> <br/>
+        <input type="checkbox" id="register-race" name=race value="White">White</input><br/>
+        <input type="checkbox" id="register-race" name=race value="Hispanic">Hispanic</input><br/>
+      </div>
+      <br/>
+
+      <label for="register-major">Major</label>
+      <input type="text" class="form-control" id="register-major" name=major required>
+
+      <label for="register-gradyear">Graduation Year*</label>
+      <input type="number" class="form-control" id="register-gradyear" name=gradyear min="2016" max="9999" required>
+
+      <label for="register-degree">Degree(Graduate vs Undergraduate)*</label>
+      <input type="radio" id="register-degree" name=degree value="undergraduate" required>Undergraduate</input>
+      <input type="radio" id="register-degree" name=degree value="graduate" required>Graduate</input>
       
-      <label for="register-degree">Degree(Undergraduate/Graduate)*</label>
-      <input type="text" class="form-control" id="register-degree" name=degree>
+      <br/>
+
+      <label for="register-advcourses">Most advanced programming Courses</label>
+      <input type="radio" id="register-advcourses" name=advcourses value="COP3014" required>COP3014</input>
+      <input type="radio" id="register-advcourses" name=advcourses value="COP3330" required>COP3330</input>
+      <input type="radio" id="register-advcourses" name=advcourses value="COP4530" required>COP4530</input>
+      <input type="radio" id="register-advcourses" name=advcourses value="COP4531" required>COP4531</input>
+      <input type="radio" id="register-advcourses" name=advcourses value="n/a" required>n/a</input>
     
-	  <label for="register-major">Major</label>
-	  <input type="text" class="form-control" id="register-major" name=major>
-	  
-	  <label for="register-advcourses">Advanced Courses</label>
-	  <input type="text" class="form-control" id="register-advcourses" name=advcourses>
-	  
+      <br/>
+
       <label for="register-email">Email*</label>
-      <input type="text" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu">
+      <input type="email" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu" required>
 
       <label for="register-password">Password*</label>
-      <input type="password" class="form-control" id="register-password" name=password placeholder="******">
+      <input type="password" class="form-control" id="register-password" name=password placeholder="******" required>
 
       <br />
 
-			{{ recaptcha }}
+      {{ recaptcha }}
 
       <br />
-	  
+    
       <input class="btn btn-primary" type=submit value="Sign up">
-	  
+    
     </form>
 
   </div>
