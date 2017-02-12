@@ -4,8 +4,8 @@ from flask_nav.elements import *
 
 import bleach, re
 
-from app import app, recaptcha
-from app.models import *
+from app import app, recaptcha, db
+from app.models.Preregistration import Preregistration
 from signin import sign_in
 
 
