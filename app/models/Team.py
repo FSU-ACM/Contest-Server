@@ -18,6 +18,8 @@ class Team(db.Model):
     username = db.Column(db.String(120), unique=False)
     password = db.Column(db.String(120), unique=False)
 
+    members = db.relationship("Profile",back_populates="team")
+
     def __init__(self, team_name, username, password):
         self.team_name = team_name
         self.username = username
