@@ -9,7 +9,7 @@ class Account(db.Model):
     # category = db.relationship('Category',
     #     backref=db.backref('posts', lazy='dynamic'))
 
-    profile_id = db.Column(db.Integer, db.ForeignKey('Profile.id'))
+    profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
     profile = db.relationship('Profile',uselist=False,back_populates='Profile')
 
     def __init__(self,id,email,password):
