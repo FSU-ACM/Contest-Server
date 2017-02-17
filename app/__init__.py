@@ -5,10 +5,17 @@ from flask_recaptcha import ReCaptcha
 from flask_nav import Nav
 from flask_nav.elements import *
 
+import random
+import string
+from datetime import timedelta
+
 import os
 
 # Init & Config
 app = Flask(__name__, instance_relative_config=True)
+app.secret_key=''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(30))
+#By default in Flask, permanent_session_lifetime is set to 31 days
+#app.permanent_session_lifetime = timedelta(minutes=30)
 app.config.from_object('config')
 app.config.from_pyfile('config.py')
 
