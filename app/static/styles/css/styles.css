@@ -94,31 +94,28 @@
     color: #ff6e40; }
 
 .sponsors {
-  height: 75%;
+  min-height: 75%;
   padding: 48px 0px 48px 0px; }
   .sponsors h1 {
     font-family: "Montserrat", sans-serif;
     font-weight: 700; }
 
-.sponsor-wrapper {
-  min-height: 500px; }
-
 .sponsor-row {
   display: flex;
-  justify-content: center; }
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px; }
 
 .sponsor-wrap {
-  display: flex;
   justify-content: center;
-  max-width: 350px;
-  max-height: 200px; }
-
-.sponsor-inner-wrap {
-  align-self: center;
-  padding: 0 2rem; }
-  .sponsor-inner-wrap img {
-    width: 100%; }
-  .sponsor-inner-wrap #harris {
+  align-self: center; }
+  .sponsor-wrap .sponsor-img {
+    max-width: 150px;
+    margin: 20px;
+    max-height: 100px; }
+  .sponsor-wrap .sponsor-img-large {
+    max-width: 400px; }
+  .sponsor-wrap #harris {
     padding-top: 11%; }
 
 .navbar .container-fluid {
@@ -172,7 +169,8 @@ body {
   font: 16px/1 "Open Sans", sans-serif;
   position: relative;
   line-height: 1.8;
-  background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 140, 0, 0.5)); }
+  background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 140, 0, 0.5));
+  background-attachment: fixed; }
 
 a {
   color: #afafaf; }
