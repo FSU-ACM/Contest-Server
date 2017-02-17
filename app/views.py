@@ -5,7 +5,8 @@ from flask_nav.elements import *
 import bleach, re
 
 from app import app, recaptcha, db
-from app.models.Preregistration import Preregistration
+# from app.models.Preregistration import Preregistration
+from app.models import Account, Preregistration, Profile, Team
 from signin import sign_in
 
 
@@ -113,7 +114,7 @@ def login():
         elif Preregistration.query.filter_by(email=email).first():
 
             # if login fails because of incorrecct password, increment the counter
-            # variable in session object. 
+            # variable in session object.
             #session['counter']=session.get('counter',0)+1
 
             #If login fails 3rd time and beyond, make user enter recaptcha
@@ -129,7 +130,7 @@ def login():
             db.session.add(entry)
             db.session.commit()
             session['email']=email
-            return render_template('profile.html',error=error, success=success, insertrecaptcha = insertrecaptcha)    
+            return render_template('profile.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
             #return render_template('prereg_land.html',email=email,name=name)
         else:
             error = "This email is not registered."
@@ -177,7 +178,7 @@ def profile():
             #Creating entry and inserting it into the database
             entry = Profile(firstname,lastname,fsuid,dob,gender,race,major,gradyear,gradterm,degree,advcourses,foodallergies)
             db.session.add(entry)
-            db.session.commit()           
+            db.session.commit()
             #return render_template('prereg_land.html',email=email,name=name)
             success = "Profile updated successfully"
         else:
@@ -192,23 +193,40 @@ def register():
     error = None
 
     if request.method == 'POST':
+
         # Validate login; deny or redirect to profile
         email = bleach.clean(request.form['email'])
         password = bleach.clean(request.form['password'])
 
-        # Check valid Email
+        # Validate email
         if not EMAIL_REGEX.match(email):
             error = "Please submit a valid email."
+
+        # Validate password
         elif not password:
-            error += "Please enter a valid password."
-        elif not Preregistration.query.filter_by(email=email).first():
-            entry = Account(email, password)            
-            db.session.add(entry)
+            error = "Please enter a valid password."
+
+        # SUCCESS STATE
+        elif not Account.query.filter_by(email=email).first():
+			# Create an account for our user
+            account = Account(email, password)
+
+			# Let's see if they preregistered
+            prereg = Preregistration.query.filter_by(email=email).first()
+            if prereg:
+                # Link for lulz
+				account.prereg = prereg
+
+            # DB transactions
+            db.session.add(account)
             db.session.commit()
-            session['email']=email   
-            return render_template('profile.html', error=error)
+
+            # Set cookie, redirect to profile page.
+            session['email']=email
+            return redirect('/profile', code=302)
+
         else:
-            error = "This email is already linked to an another account."        
+            error = "This email is already linked to an another account."
 
     return render_template('register.html',error=error)
 

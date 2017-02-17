@@ -9,14 +9,15 @@ class Account(db.Model):
     # category = db.relationship('Category',
     #     backref=db.backref('posts', lazy='dynamic'))
 
-    profile_id = db.Column(db.Integer, db.ForeignKey('Profile.id'))
-    profile = db.relationship('Profile',uselist=False,back_populates='Profile')
+    # profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
+    profile = db.relationship('Profile', uselist=False, back_populates="account")
 
-    def __init__(self,id,email,password):
-        self.id = id
-        self.email = fsuid
-        self.name = name
+    # prereg_id = db.Column(db.Integer, db.ForeignKey('preregistration.id'))
+    prereg = db.relationship('Preregistration', uselist=False, back_populates="account")
 
+    def __init__(self,email,password):
+        self.email = email
+        self.password = password
 
     def __repr__(self):
         return '<Account %r>' % self.email

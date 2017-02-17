@@ -11,12 +11,9 @@ class Profile(db.Model):
     year = db.Column(db.String(64), unique=True)
     mostProg = db.Column(db.String(64), unique=True)
 
-    # category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    # category = db.relationship('Category',
-    #     backref=db.backref('posts', lazy='dynamic'))
-
-    account_id = db.Column(db.Integer, db.ForeignKey('Account.id'))
-    account = db.relationship('Account',back_populates='Account')
+    # Account relationship
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+    account = db.relationship("Account", back_populates="profile")
 
     def __init__(self, fsuid, name,email=None, gender=None):
         self.fsuid = fsuid
