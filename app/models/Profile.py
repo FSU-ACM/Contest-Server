@@ -15,7 +15,7 @@ class Profile(db.Model):
     # category = db.relationship('Category',
     #     backref=db.backref('posts', lazy='dynamic'))
 
-    account_id = db.Column(db.Integer, db.ForeignKey('Account.id'))
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
     account = db.relationship('Account',back_populates='Account')
 
     def __init__(self, fsuid, name,email=None, gender=None):
