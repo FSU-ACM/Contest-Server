@@ -2,8 +2,8 @@ from app import db
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    f_name = db.Column(db.String(128), unique=False, nullable=False)
-    l_name = db.Column(db.String(128), unique=False, nullable=False)
+    fname = db.Column(db.String(128), unique=False, nullable=False)
+    lname = db.Column(db.String(128), unique=False, nullable=False)
     fsuid = db.Column(db.String(64), unique=True, nullable=True)
     dob = db.Column(db.Date, unique=False, nullable=False)
     gender = db.Column(db.String(64), unique=False)

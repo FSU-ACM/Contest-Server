@@ -149,26 +149,36 @@ def profile():
 
     #Getting information from formi
     if request.method =='POST':
+        race = None
+        status = None
+        major=None
+        gradyear=None
+        gradterm=None
+        status=None
+        advProg=None
         firstname = bleach.clean(request.form['firstname'])
         lastname = bleach.clean(request.form['lastname'])
         fsuid = bleach.clean(request.form['fsuid'])
         dob = bleach.clean(request.form['dob'])
         gender = bleach.clean(request.form['gender'])
-        race = None
+        foodallergies = bleach.clean(request.form['foodallergies'])
+        email=None
+        if 'email' in session:
+            email = session['email']
         if 'race' in request.form:
             race = bleach.clean(request.form['race'])
-        major = bleach.clean(request.form['major'])
-        gradyear = bleach.clean(request.form['gradyear'])
-        gradterm = bleach.clean(request.form['gradterm'])
-        degree = None
-        if 'degree' in request.form:
-            degree = bleach.clean(request.form['degree'])
-        advcourses = bleach.clean(request.form['advcourses'])
-        foodallergies = bleach.clean(request.form['foodallergies'])
-        email = session['email']
+        ifstudent = bleach.clean(request.form['ifstudent']) 
+        ifstudent=True if ifstudent=='True' else False
+        if ifstudent:        
+            major = bleach.clean(request.form['major'])
+            gradyear = bleach.clean(request.form['gradyear'])
+            gradterm = bleach.clean(request.form['gradterm'])
+            if 'status' in request.form:
+                status = bleach.clean(request.form['status'])
+            advProg = bleach.clean(request.form['advProg'])
 
         # verify that user has entered all the required information
-        error = verifyuserdetails(firstname, lastname, dob, major, advcourses)
+        error = verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent)
         if error :
             pass
 
@@ -176,7 +186,7 @@ def profile():
         # Check unique email
         elif Preregistration.query.filter_by(email=email).first():
             #Creating entry and inserting it into the database
-            entry = Profile(firstname,lastname,fsuid,dob,gender,race,major,gradyear,gradterm,degree,advcourses,foodallergies)
+            entry = Profile(fname=firstname,lname=lastname,fsuid=fsuid,dob=dob,gender=gender,race=race,major=major,gradyear=gradyear,gradterm=gradterm,status=status,advProg=advProg,foodallergies=foodallergies)
             db.session.add(entry)
             db.session.commit()
             #return render_template('prereg_land.html',email=email,name=name)
@@ -231,7 +241,7 @@ def register():
     return render_template('register.html',error=error)
 
 
-def verifyuserdetails(firstname, lastname, dob, major, advcourses):
+def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     if not firstname:
         error += "Please enter a valid first name."
@@ -242,10 +252,10 @@ def verifyuserdetails(firstname, lastname, dob, major, advcourses):
     if not dob:
         error += "Please enter a valid date of birth.\n"
 
-    if not major:
+    if not major and ifstudent:
         error += "Please enter a valid major.\n"
 
-    if not advcourses:
-        error += "Please select a valid advancedcourses.\n"
+    if not advProg and ifstudent:
+        error += "Please select a valid most advanced program.\n"
 
     return error
