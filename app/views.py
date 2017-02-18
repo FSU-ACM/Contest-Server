@@ -1,6 +1,7 @@
 from flask import redirect, url_for, render_template, request, session
 from flask_nav import Nav
 from flask_nav.elements import *
+from datetime import date,datetime
 
 import bleach, re
 
@@ -93,14 +94,18 @@ def login():
     success = None
     insertrecaptcha = False
 
+    #Check if user got wrong password 3 times or more, then activate recaptcha
+    if 'counter' in session and session['counter'] >= 3:
+            insertrecaptcha = True
+            #If reCaptcha is not verified we return
+            if not recaptcha.verify():
+                error = "Please complete the ReCaptcha."
+                return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
+
     #Getting information from formi
     if request.method =='POST':
         email = bleach.clean(request.form['email'])
         password = bleach.clean(request.form['password'])
-
-        # # Verify recaptcha
-        # if not recaptcha.verify():
-        #     error = "Please complete the ReCaptcha."
 
         # Check valid Email
         if not EMAIL_REGEX.match(email):
@@ -111,31 +116,34 @@ def login():
             error = "Please enter a valid password."
 
         # Check unique email
-        elif Preregistration.query.filter_by(email=email).first():
-
-            # if login fails because of incorrecct password, increment the counter
-            # variable in session object.
-            #session['counter']=session.get('counter',0)+1
-
-            #If login fails 3rd time and beyond, make user enter recaptcha
-            # if session['counter'] >=3:
-            #     insertrecaptcha  = True
-            #     error = "You have made too many incorrct login attempts. Please verify that you are not a robot."
-            # else:
-            #     error = "Invalid password"
-            # return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
-
-            #Creating entry and inserting it into the database
-            entry = Login(email,password)
-            db.session.add(entry)
-            db.session.commit()
-            session['email']=email
-            return render_template('profile.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
-            #return render_template('prereg_land.html',email=email,name=name)
+        elif Account.query.filter_by(email=email).first():
+            # Check unique email and password
+            if not Account.query.filter_by(password=password,email=email).first():
+                #if login fails because of incorrecct password, increment the counter
+                # variable in session object.
+                session['counter']=session.get('counter',0)+1
+                #If login fails 3rd time and beyond, make user enter recaptcha
+                if session['counter'] >= 3:
+                     insertrecaptcha = True
+                     # Turn reCaptcha in login on
+                     # Session variable to execute verify
+                     error = "You have made too many incorrect login attempts. Please verify that you are not a robot."
+                else:
+                     error = "Invalid password"
+                #return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
+            else:
+                # Creating entry and inserting it into the database
+                # Why are we creating an entry?
+                # commenting out
+                    #entry = Login(email,password)
+                    #db.session.add(entry)
+                    #db.session.commit()
+                session['email']=email
+                return redirect(url_for("profile"))
         else:
             error = "This email is not registered."
 
-    return render_template('login.html',error=error,success=success)
+    return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
 
 @app.route('/profile', methods=['POST','GET'])
 def profile():
@@ -144,13 +152,13 @@ def profile():
     success = None
 
     # check if the user is logged in. If not, rturn to the login page
-    # if 'email' not in session:
-    #     return redirect(url_for('login'))
+    if 'email' not in session:
+         return redirect(url_for('login'))
 
-    #Getting information from formi
+    #Getting information from form
     if request.method =='POST':
-        race = None
-        status = None
+        race=None
+        status=None
         major=None
         gradyear=None
         gradterm=None
@@ -167,9 +175,9 @@ def profile():
             email = session['email']
         if 'race' in request.form:
             race = bleach.clean(request.form['race'])
-        ifstudent = bleach.clean(request.form['ifstudent']) 
+        ifstudent = bleach.clean(request.form['ifstudent'])
         ifstudent=True if ifstudent=='True' else False
-        if ifstudent:        
+        if ifstudent:
             major = bleach.clean(request.form['major'])
             gradyear = bleach.clean(request.form['gradyear'])
             gradterm = bleach.clean(request.form['gradterm'])
@@ -179,23 +187,46 @@ def profile():
 
         # verify that user has entered all the required information
         error = verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent)
+        # search for profile and account objects filtering by email in session
+        profile,account = db.session.query(Profile,Account).filter(Account.email==email).first()
+
         if error :
             pass
-
-        # TODO fix this so it updates an existing user profile
-        # Check unique email
-        elif Preregistration.query.filter_by(email=email).first():
-            #Creating entry and inserting it into the database
-            entry = Profile(fname=firstname,lname=lastname,fsuid=fsuid,dob=dob,gender=gender,race=race,major=major,gradyear=gradyear,gradterm=gradterm,status=status,advProg=advProg,foodallergies=foodallergies)
-            db.session.add(entry)
+        # Check if profile exists
+        elif profile:
+            #Parsing dob after verify
+            dob = datetime.strptime(dob,"%Y-%m-%d")
+            #Updating profile records
+            profile.account_id=account.id
+            profile.fname=firstname
+            profile.lname=lastname
+            profile.fsuid=fsuid
+            profile.dob=dob
+            profile.gender=gender
+            profile.race=race
+            profile.major=major
+            profile.gradyear=gradyear
+            profile.gradterm=gradterm
+            profile.status=status
+            profile.advProg=advProg
+            profile.foodallergies=foodallergies
             db.session.commit()
-            #return render_template('prereg_land.html',email=email,name=name)
             success = "Profile updated successfully"
         else:
-            error = "This email is not registered."
-
+            #Parsing dob after verify
+            dob = datetime.strptime(dob,"%Y-%m-%d")
+            # Check if account exists
+            if account:
+                #Creating entry and inserting it into the database
+                entry = Profile(account_id=account.id,fname=firstname,lname=lastname,fsuid=fsuid,dob=dob,gender=gender,race=race,major=major,gradyear=gradyear,gradterm=gradterm,status=status,advProg=advProg,foodallergies=foodallergies)
+                db.session.add(entry)
+                db.session.commit()
+                #return render_template('prereg_land.html',email=email,name=name)
+                success = "Profile updated successfully"
+            else:
+                error = "This email is not registered."
+    #render profile page
     return render_template('profile.html',error=error,success=success)
-
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -243,14 +274,26 @@ def register():
 
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
+    dob_date = None
+    wrong_dob_format = False
+    #dob_date = datetime.strptime(dob,"%Y-%m-%d")
+    #Checking date format
+    try:
+        dob_date = datetime.strptime(dob,"%Y-%m-%d")
+    except ValueError as err:
+        print(err)
+        wrong_dob_format = True
+    if dob_date > datetime(2017,01,01) or dob_date < datetime(1890,01,01):
+        wrong_dob_format = True
+
     if not firstname:
         error += "Please enter a valid first name."
 
     if not lastname:
         error += "Please enter a valid last name.\n"
 
-    if not dob:
-        error += "Please enter a valid date of birth.\n"
+    if not dob or wrong_dob_format:
+        error += "Please enter a valid date of birth. Format yyyy-mm-dd.\n"
 
     if not major and ifstudent:
         error += "Please enter a valid major.\n"

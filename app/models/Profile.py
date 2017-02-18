@@ -20,15 +20,15 @@ class Profile(db.Model):
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
     account = db.relationship("Account", back_populates="profile")
 
-    team_id = db.Column(db.Integer,db.ForeignKey('team.id'))
+    team_id = db.Column(db.Integer,db.ForeignKey('team.id'),nullable=True)
     team = db.relationship("Team", back_populates="members")
 
-    def __init__(self,f_name,l_name,account_id,team_id,dob,\
+    def __init__(self,fname,lname,account_id,dob,team_id=None,\
                  fsuid=None,gender=None,race=None,foodallergies=None,\
                  major=None,year=None,gradyear=None,gradterm=None,\
                  advProg=None,status=None):
-        self.f_name = f_name
-        self.l_name = l_name
+        self.fname = fname
+        self.lname = lname
         self.fsuid = fsuid
         self.dob = dob
         self.gender = gender
