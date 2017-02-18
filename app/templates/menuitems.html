@@ -1,12 +1,5 @@
-<style>
-  div.menuitems ul.menuitemnschild a { color: black; }
-  div.menuitems ul.menuitemnschild a:hover { color: red; }
-</style>
-
-<div class="menuitems" aria-expanded="true"">
-  <ul class="menuitemnschild" style="list-style-type:none;display:inline" >
-    <li><a href="{{ url_for('profile') }}">Profile</a></li>
-    <li><a href="{{ url_for('teams') }}">Team</a></li>
-    <li><a href="{{ url_for('teams') }}">Update Password</a></li>
-  </ul>
+<div class="menuitems" aria-expanded="true">
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('teams') }}">Team</a>
+    <a href="{{ url_for('teams') }}">Update Password</a>
 </div>    

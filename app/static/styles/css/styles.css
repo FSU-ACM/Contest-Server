@@ -230,4 +230,23 @@ h1, h2, h3, h4, h5 {
   .container {
     max-width: 970px; } }
 
+div.menuitems{
+    float:right;
+}    
+
+div.menuitems a{
+    font-family: "Avenir-Next-Bold", sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    z-index: 1024;
+    background-color: transparent;
+    border-radius: 0;
+    border-width: 0;
+    margin-left:20px;
+}    
+
+div.menuitems a:hover{
+    color:#ff0000
+}
+
 /*# sourceMappingURL=styles.css.map */
