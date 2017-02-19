@@ -235,14 +235,13 @@ div.menuitems{
 }    
 
 div.menuitems a{
-    font-family: "Avenir-Next-Bold", sans-serif;
-    font-size: 22px;
+    font-family: "Open Sans", sans-serif;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 18px;
     z-index: 1024;
-    background-color: transparent;
-    border-radius: 0;
-    border-width: 0;
     margin-left:20px;
+    font-weight: 700;
 }    
 
 div.menuitems a:hover{

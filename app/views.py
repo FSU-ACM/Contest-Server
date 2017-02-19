@@ -2,6 +2,7 @@ from flask import redirect, url_for, render_template, request, session
 from flask_nav import Nav
 from flask_nav.elements import *
 from datetime import date,datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import bleach, re
 
@@ -115,33 +116,36 @@ def login():
         elif not password:
             error = "Please enter a valid password."
 
-        # Check unique email
-        elif Account.query.filter_by(email=email).first():
-            # Check unique email and password
-            if not Account.query.filter_by(password=password,email=email).first():
-                #if login fails because of incorrecct password, increment the counter
-                # variable in session object.
-                session['counter']=session.get('counter',0)+1
-                #If login fails 3rd time and beyond, make user enter recaptcha
-                if session['counter'] >= 3:
-                     insertrecaptcha = True
-                     # Turn reCaptcha in login on
-                     # Session variable to execute verify
-                     error = "You have made too many incorrect login attempts. Please verify that you are not a robot."
-                else:
-                     error = "Invalid password"
-                #return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
-            else:
-                # Creating entry and inserting it into the database
-                # Why are we creating an entry?
-                # commenting out
-                    #entry = Login(email,password)
-                    #db.session.add(entry)
-                    #db.session.commit()
-                session['email']=email
-                return redirect(url_for("profile"))
         else:
-            error = "This email is not registered."
+            account = Account.query.filter_by(email=email).first()
+            # Check unique email
+            if account:
+                passwordmatched = check_password_hash(account.password, password)
+                # Check unique email and password
+                if not passwordmatched:
+                    #if login fails because of incorrecct password, increment the counter
+                    # variable in session object.
+                    session['counter']=session.get('counter',0)+1
+                    #If login fails 3rd time and beyond, make user enter recaptcha
+                    if session['counter'] >= 3:
+                         insertrecaptcha = True
+                         # Turn reCaptcha in login on
+                         # Session variable to execute verify
+                         error = "You have made too many incorrect login attempts. Please verify that you are not a robot."
+                    else:
+                         error = "Invalid password"
+                    #return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
+                else:
+                    # Creating entry and inserting it into the database
+                    # Why are we creating an entry?
+                    # commenting out
+                        #entry = Login(email,password)
+                        #db.session.add(entry)
+                        #db.session.commit()
+                    session['email']=email
+                    return redirect(url_for("profile"))
+            else:
+                error = "This email is not registered."
 
     return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
 
@@ -170,9 +174,8 @@ def profile():
         dob = bleach.clean(request.form['dob'])
         gender = bleach.clean(request.form['gender'])
         foodallergies = bleach.clean(request.form['foodallergies'])
-        email=None
-        if 'email' in session:
-            email = session['email']
+        email = session['email']
+        print("email:",email)
         if 'race' in request.form:
             race = bleach.clean(request.form['race'])
         ifstudent = bleach.clean(request.form['ifstudent'])
@@ -250,6 +253,7 @@ def register():
         # SUCCESS STATE
         elif not Account.query.filter_by(email=email).first():
 			# Create an account for our user
+            password = generate_password_hash(password)
             account = Account(email, password)
 
 			# Let's see if they preregistered
@@ -271,7 +275,47 @@ def register():
 
     return render_template('register.html',error=error)
 
+@app.route('/updatepassword', methods=['POST','GET'])
+def updatepassword():
+    error = None
+    success = None
+    
+    # check if the user is logged in. If not, return to the login page
+    if 'email' not in session:
+        return redirect(url_for('login'))
+         
+    if request.method=='POST':
+        email=session['email']
+        currentpassword=request.form['currentpassword']
+        newpassword=request.form['newpassword']
+        
+        if newpassword == currentpassword:
+            error = "New password cannot be same as the current password"
+        else:    
+            account = db.session.query(Account).filter(Account.email==email).first()
+            passwordmatched = check_password_hash(account.password, currentpassword)
+            if passwordmatched:
+                newpassword = generate_password_hash(newpassword)
+                account.password = newpassword
+                db.session.add(account)
+                db.session.commit()
+                success="Password updated successfully"            
+            else:
+                error = "Your current password is invalid"
+    
+    return render_template('updatepassword.html',error=error,success=success)
+        
 
+@app.route('/logout', methods=['POST','GET'])
+def logout():
+    try:
+        del session['email']
+    except KeyError:
+        pass
+
+    return redirect("/",code=302)
+
+    
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     dob_date = None
