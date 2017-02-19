@@ -1,23 +1,17 @@
 from app import db
+# from app.models import Profile, Preregistration
 
-class Account(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(128), unique=False, nullable=False)
-    password = db.Column(db.String(128), unique=False, nullable=False)
-
-    # category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    # category = db.relationship('Category',
-    #     backref=db.backref('posts', lazy='dynamic'))
+class Account(db.Document):
+    email = db.StringField(primary_key=True, required=True, unique=True)
+    password = db.StringField(required=True)
+    profile = db.ReferenceField('Profile')
+    pref = db.ReferenceField('Preregistration')
 
     # profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
-    profile = db.relationship('Profile', uselist=False, back_populates="account")
+    # profile = db.relationship('Profile', uselist=False, back_populates="account")
 
     # prereg_id = db.Column(db.Integer, db.ForeignKey('preregistration.id'))
-    prereg = db.relationship('Preregistration', uselist=False, back_populates="account")
-
-    def __init__(self,email,password):
-        self.email = email
-        self.password = password
+    # prereg = db.relationship('Preregistration', uselist=False, back_populates="account")
 
     def __repr__(self):
         return '<Account %r>' % self.email

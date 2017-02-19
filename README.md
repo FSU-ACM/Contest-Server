@@ -14,9 +14,15 @@ the required variables. Below is a sample configuration.
 # General dev config
 DEBUG = True
 
-# SQLAlchemy Configuration
-SQLALCHEMY_DATABASE_URI = 'mysql://user:pass@localhost/spcWebDB'
-SQLALCHEMY_TRACK_MODIFICATIONS = True
+# MongoDB
+MONGODB_SETTINGS = {
+	'db': 'database',		# name of the database in MongoDB
+	'host': 'localhost', 	# hostname of server
+	'port': 27017,
+    'username': 'username', # Database user
+    'password': 'password', # User's password
+}
+
 ```
 
 These config values override the basic config values from the root's
