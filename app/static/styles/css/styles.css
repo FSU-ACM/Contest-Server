@@ -228,4 +228,22 @@ h1, h2, h3, h4, h5 {
   .container {
     max-width: 970px; } }
 
+div.menuitems{
+    float:right;
+}    
+
+div.menuitems a{
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 18px;
+    z-index: 1024;
+    margin-left:20px;
+    font-weight: 700;
+}    
+
+div.menuitems a:hover{
+    color:#ff0000
+}
+
 /*# sourceMappingURL=styles.css.map */

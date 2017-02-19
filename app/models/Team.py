@@ -1,30 +1,33 @@
 from app import db
-from sqlalchemy.types import TypeDecorator, Unicode
+# from app.models import Profile
 
-class CoerceUTF8(TypeDecorator):
-    """Safely coerce Python bytestrings to Unicode
-    before passing off to the database."""
+# from sqlalchemy.types import TypeDecorator, Unicode
 
-    impl = Unicode
+# class CoerceUTF8(TypeDecorator):
+#     """Safely coerce Python bytestrings to Unicode
+#     before passing off to the database."""
+#
+#     impl = Unicode
+#
+#     def process_bind_param(self, value, dialect):
+#         if isinstance(value, str):
+#             value = value.decode('utf-8')
+#         return value
 
-    def process_bind_param(self, value, dialect):
-        if isinstance(value, str):
-            value = value.decode('utf-8')
-        return value
+class Team(db.Document):
+    team_name = db.StringField(required=True)
+    username = db.StringField(required=True, unique=True)
+    password = db.StringField(required=True)
 
-class Team(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    team_name = db.Column(CoerceUTF8(120), unique=False)
-    username = db.Column(db.String(120), unique=False)
-    password = db.Column(db.String(120), unique=False)
+    # members = db.relationship("Profile",back_populates="team")
+    members = db.ListField(db.ReferenceField('Profile'))
 
-    def __init__(self, team_name, username, password):
-        self.team_name = team_name
-        self.username = username
-        self.password = password
 
     def __repr__(self):
-        return '<Team %r>' % self.team_name
+        if self.team_name is not None:
+            return '<Team %r>' % self.team_name
+        else:
+            return super(Team, self).__repr__()
 
     def csv(self, include_students=False):
 

@@ -1,0 +1,51 @@
+{% extends "page.html" %}
+{% block content %}
+
+<div class="container form-container">
+
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Houston, we have a problem:</strong>
+    {{ error }}
+  </div>
+  {% endif %}
+
+  {% if success %}
+  <div class="alert alert-success" role="alert">
+    <strong>Mission accomplished!</strong>
+    {{ success }}
+  </div>
+  {% endif %}
+
+
+
+  <h2>Create an account</h2>
+
+  <p>
+    On the next page, you will complete your profile, including team registration.
+  </p>
+
+    <form action="{{ url_for('register') }}" method=post class='form-horizontal'>
+
+      <label for="register-email">Email*</label>
+      <input type="email" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu" required>
+
+      <label for="register-password">Password*</label>
+      <input type="password" class="form-control" id="register-password" name=password placeholder="******" required>
+
+      <br />
+
+      {{ recaptcha }}
+
+      <br />
+
+      <button class="btn btn-primary" type=submit>Register</button>
+
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "page.html" %}
+{% block content %}
+
+<div class="container form-container">
+
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Houston, we have a problem:</strong>
+    {{ error }}
+  </div>
+  {% endif %}
+
+  {% if success %}
+  <div class="alert alert-success" role="alert">
+    <strong>Mission accomplished!</strong>
+    {{ success }}
+  </div>
+  {% endif %}
+
+  {% include "/menuitems.html" %}
+
+  <br/>
+
+  <h2>Complete Your Profile</h2>
+  <p>
+    Not all fields are required. Once you have completed and saved your profile,
+    then you will be able to register a team.
+  </p>
+
+    <form action="{{ url_for('profile') }}" method=post class='form-horizontal'>
+
+      <label for="register-firstname">First Name*</label>
+      <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="Melina" required>
+      <br/>
+
+      <label for="register-lastname">Last Name*</label>
+      <input type="text" class="form-control" id="register-lastname" name=lastname placeholder="Myers" required>
+      <br/>
+
+      <label for="register-fsuid">FSUID</label>
+      <!--Changed from number to text because fsuid contains letters-->
+      <input type="text" class="form-control" id="register-fsuid" name=fsuid min="1" placeholder="abc12d">
+      <p>*If you are receiving extra credit for participating, this field is required.</p>
+      <br/>
+
+      <label for="register-dob">Date of Birth*</label>
+      <input type="date" class="form-control" id="register-dob" name=dob min="1">
+      <br/>
+
+      <label for="register-gender">Gender</label><br/>
+      <select name="gender" id="register-gender">
+        <option value=""></option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Non-Binary">Non-Binary</option>
+      </select>
+      <br/>
+      <br/>
+
+      <label for="register-race">Race</label><br/>
+      <!-- <div style='overflow:scroll;width:300px;height:200px;block'> -->
+        <input type="checkbox" id="register-race" name=race value="American Indian or Native Alaskan">American Indian or Native Alaskan</input><br/>
+        <input type="checkbox" id="register-race" name=race value="Asian">Asian</input><br/>
+        <input type="checkbox" id="register-race" name=race value="Black or African American">Black or African American</input> <br/>
+        <input type="checkbox" id="register-race" name=race value="Native Hawaiian or other Pacific Islander">Native Hawaiian or other Pacific Islander</input> <br/>
+        <input type="checkbox" id="register-race" name=race value="White">White</input><br/>
+        <input type="checkbox" id="register-race" name=race value="Hispanic">Hispanic</input><br/>
+      <!-- </div> -->
+      <br/>
+
+      <label for="register-allergies">Food Allergies</label>
+      <p>Let us know if you have any food allergies.</p>
+      <input type="text" class="form-control" id="register-allergies" name=foodallergies>
+      <br />
+
+
+			<h3>Student Info</h3>
+			<p>If you're a student, please fill these out!</p>
+      <!-- <label for="register-ifstudent">Are you a student? (If no, please ignore the next questions)</label><br/>
+      <input type="radio" id="register-ifstudent" name=ifstudent value="True" checked>Yes</input><br />
+      <input type="radio" id="register-ifstudent" name=ifstudent value="False">No</input><br />
+      <br/> -->
+
+      <label for="register-major">Major</label>
+      <input type="text"
+        class="form-control"
+        id="register-major"
+        name=major
+        style="text-transform:capitalize"
+        placeholder="e.g. Computer Science, Information Technology, Mathematics">
+      <br/>
+
+      <label for="register-gradyear">Graduation Year</label>
+      <input type="number"
+        class="form-control"
+        id="register-gradyear"
+        name=gradyear
+        min="2000"
+        max="2030"
+        placeholder="2017">
+      <br/>
+
+      <label for="register-gradterm">Graduation Semester</label><br/>
+      <select name="gradterm" id="register-gradterm">
+        <option value=""></option>
+        <option value="Spring">Spring</option>
+        <option value="Summer">Summer</option>
+        <option value="Fall">Fall</option>
+      </select>
+      <br/>
+      <br/>
+
+      <label for="register-status">Student Status (Undergrad / Graduate / etc.)</label><br />
+      <input type="radio" id="register-status" name=status value="undergraduate">Undergraduate</input><br />
+      <input type="radio" id="register-status" name=status value="graduate">Graduate</input><br />
+      <input type="radio" id="register-status" name=status value="highschool">High School</input><br />
+      <input type="radio" id="register-status" name=status value="nonstatus">Non-status seeking</input><br />
+      <br/>
+
+      <label for="register-advProg">Furthest Programming Course</label>
+      <p>Please select the course you are currently in, or have taken most recently.</p>
+      <select name="advProg" id="register-advProg">
+        <option value=""></option>
+        <option value="N/A">N/A</option>
+        <option value="COP3014">COP3014</option>
+        <option value="COP3330">COP3330</option>
+        <option value="COP4530">COP4530</option>
+        <option value="COP4531">COP4531</option>
+      </select>
+      <br />
+      <br />
+
+      <input class="btn btn-primary" type=submit value="Save Profile">
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}
