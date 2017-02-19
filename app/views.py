@@ -222,7 +222,7 @@ def register():
         elif not password:
             error = "Please enter a valid password."
 
-		elif not recaptcha.verify():
+        elif not recaptcha.verify():
             error = "Please complete the ReCaptcha."
 
         # SUCCESS STATE
