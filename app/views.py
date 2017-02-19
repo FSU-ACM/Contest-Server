@@ -18,10 +18,10 @@ EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 # Nav bar
 topbar = Navbar('',
     Link('Home', '/'),
+    Link('FAQ','/#faq'),
+	Link('Sponsors', '/#sponsors'),
 	Link('Register', '/register'),
 	Link('Login','/login'),
-	# Link('Sponsors', '/#sponsors'),
-    # Link('FAQ','/#faq')
 )
 
 nav = Nav()
