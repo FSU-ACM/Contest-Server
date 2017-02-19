@@ -2,7 +2,6 @@ from flask import redirect, url_for, render_template, request, session
 from flask_nav import Nav
 from flask_nav.elements import *
 from datetime import date,datetime
-from werkzeug.security import generate_password_hash, check_password_hash
 
 
 import bleach, re
@@ -144,82 +143,59 @@ def profile():
 
     error = None
     success = None
+    email = None
 
     # check if the user is logged in. If not, rturn to the login page
     if 'email' not in session:
          return redirect(url_for('login'))
+    else:
+        email = session['email']
 
     #Getting information from form
     if request.method =='POST':
-        race=None
-        status=None
-        major=None
-        gradyear=None
-        gradterm=None
-        status=None
-        advProg=None
 
-        firstname = bleach.clean(request.form['firstname'])
-        lastname = bleach.clean(request.form['lastname'])
-        fsuid = bleach.clean(request.form['fsuid'])
-        dob = bleach.clean(request.form['dob'])
-        gender = bleach.clean(request.form['gender'])
-        foodallergies = bleach.clean(request.form['foodallergies'])
-        email = session['email']
-        print("email:",email)
-        if 'race' in request.form:
-            race = bleach.clean(request.form['race'])
-        ifstudent = bleach.clean(request.form['ifstudent'])
-        ifstudent=True if ifstudent=='True' else False
-        if ifstudent:
-            major = bleach.clean(request.form['major'])
-            gradyear = bleach.clean(request.form['gradyear'])
-            gradterm = bleach.clean(request.form['gradterm'])
-            if 'status' in request.form:
-                status = bleach.clean(request.form['status'])
-            advProg = bleach.clean(request.form['advProg'])
+        # Extract important data from form
+        data = dict()
+        for k,v in request.form.iteritems():
+            data[k] = bleach.clean(v)
 
-        # verify that user has entered all the required information
-        error = verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent)
-        # search for profile and account objects filtering by email in session
-        profile,account = db.session.query(Profile,Account).filter(Account.email==email).first()
+        # Special case to get race
+        race = request.values.getlist('race')
+        if len(race) > 0:
+            data['race'] = race
 
-        if error :
-            pass
-        # Check if profile exists
-        elif profile:
-            #Parsing dob after verify
-            dob = datetime.strptime(dob,"%Y-%m-%d")
-            #Updating profile records
-            profile.account_id=account.id
-            profile.fname=firstname
-            profile.lname=lastname
-            profile.fsuid=fsuid
-            profile.dob=dob
-            profile.gender=gender
-            profile.race=race
-            profile.major=major
-            profile.gradyear=gradyear
-            profile.gradterm=gradterm
-            profile.status=status
-            profile.advProg=advProg
-            profile.foodallergies=foodallergies
-            db.session.commit()
-            success = "Profile updated successfully"
+        # Clean empty fields (TODO: make this unnessessary)
+        to_delete = []
+        for k,v in data.iteritems():
+            if v is None or v == "":
+                to_delete.append(k)
+        for k in to_delete:
+            print "Removed %s" % k
+            del data[k]
+
+
+        # Let's save our data.
+        account = Account.objects(email=email).first()
+        profile = account.profile
+        if profile:
+            # update profile
+            profile.update(**data)
+            success = "Profile updated."
         else:
-            #Parsing dob after verify
-            dob = datetime.strptime(dob,"%Y-%m-%d")
-            # Check if account exists
-            if account:
-                #Creating entry and inserting it into the database
-                entry = Profile(account_id=account.id,fname=firstname,lname=lastname,fsuid=fsuid,dob=dob,gender=gender,race=race,major=major,gradyear=gradyear,gradterm=gradterm,status=status,advProg=advProg,foodallergies=foodallergies)
-                db.session.add(entry)
-                db.session.commit()
-                #return render_template('prereg_land.html',email=email,name=name)
-                success = "Profile updated successfully"
-            else:
-                error = "This email is not registered."
-    #render profile page
+            profile = Profile(**data)
+            account.profile = profile
+            success = "Profile created."
+
+        # Save and handle errors
+        try:
+            profile.save()
+            account.save()
+        except Exception as e:
+            error =  "Hey, there's been an error! Sorry about that. "
+            error += "Please email hello@acmatfsu.org and let us know. "
+            error += "We'll try and get it sorted out ASAP."
+            print e
+
     return render_template('profile.html',error=error,success=success)
 
 @app.route('/register', methods=['POST','GET'])
@@ -268,19 +244,19 @@ def register():
 def updatepassword():
     error = None
     success = None
-    
+
     # check if the user is logged in. If not, return to the login page
     if 'email' not in session:
         return redirect(url_for('login'))
-         
+
     if request.method=='POST':
         email=session['email']
         currentpassword=request.form['currentpassword']
         newpassword=request.form['newpassword']
-        
+
         if newpassword == currentpassword:
             error = "New password cannot be same as the current password"
-        else:    
+        else:
             account = db.session.query(Account).filter(Account.email==email).first()
             passwordmatched = check_password_hash(account.password, currentpassword)
             if passwordmatched:
@@ -288,12 +264,12 @@ def updatepassword():
                 account.password = newpassword
                 db.session.add(account)
                 db.session.commit()
-                success="Password updated successfully"            
+                success="Password updated successfully"
             else:
                 error = "Your current password is invalid"
-    
+
     return render_template('updatepassword.html',error=error,success=success)
-        
+
 
 @app.route('/logout', methods=['POST','GET'])
 def logout():
@@ -304,7 +280,7 @@ def logout():
 
     return redirect("/",code=302)
 
-    
+
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     dob_date = None

@@ -1,12 +1,12 @@
 from app import db
 
 class Profile(db.Document):
-    fname = db.StringField(required=True)
-    lname = db.StringField(required=True)
+    firstname = db.StringField(required=True)
+    lastname = db.StringField(required=True)
     fsuid = db.StringField(unique=True)
-    dob = db.DateTimeField()
+    dob = db.DateTimeField(null=True)
     gender = db.StringField()
-    race = db.StringField()
+    race = db.ListField(db.StringField())
     foodallergies = db.StringField()
     major = db.StringField()
     year = db.StringField()
