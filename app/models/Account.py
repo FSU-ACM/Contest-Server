@@ -5,7 +5,7 @@ class Account(db.Document):
     email = db.StringField(primary_key=True, required=True, unique=True)
     password = db.StringField(required=True)
     profile = db.ReferenceField('Profile')
-    pref = db.ReferenceField('Preregistration')
+    prereg = db.ReferenceField('Preregistration')
 
     # profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
     # profile = db.relationship('Profile', uselist=False, back_populates="account")
