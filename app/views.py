@@ -2,6 +2,7 @@ from flask import redirect, url_for, render_template, request, session
 from flask_nav import Nav
 from flask_nav.elements import *
 from datetime import date,datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 import bleach, re
@@ -164,10 +165,8 @@ def profile():
         dob = bleach.clean(request.form['dob'])
         gender = bleach.clean(request.form['gender'])
         foodallergies = bleach.clean(request.form['foodallergies'])
-        
-        email=None
-        if 'email' in session:
-            email = session['email']
+        email = session['email']
+        print("email:",email)
         if 'race' in request.form:
             race = bleach.clean(request.form['race'])
         ifstudent = bleach.clean(request.form['ifstudent'])
@@ -265,7 +264,47 @@ def register():
 
     return render_template('register.html',error=error)
 
+@app.route('/updatepassword', methods=['POST','GET'])
+def updatepassword():
+    error = None
+    success = None
+    
+    # check if the user is logged in. If not, return to the login page
+    if 'email' not in session:
+        return redirect(url_for('login'))
+         
+    if request.method=='POST':
+        email=session['email']
+        currentpassword=request.form['currentpassword']
+        newpassword=request.form['newpassword']
+        
+        if newpassword == currentpassword:
+            error = "New password cannot be same as the current password"
+        else:    
+            account = db.session.query(Account).filter(Account.email==email).first()
+            passwordmatched = check_password_hash(account.password, currentpassword)
+            if passwordmatched:
+                newpassword = generate_password_hash(newpassword)
+                account.password = newpassword
+                db.session.add(account)
+                db.session.commit()
+                success="Password updated successfully"            
+            else:
+                error = "Your current password is invalid"
+    
+    return render_template('updatepassword.html',error=error,success=success)
+        
 
+@app.route('/logout', methods=['POST','GET'])
+def logout():
+    try:
+        del session['email']
+    except KeyError:
+        pass
+
+    return redirect("/",code=302)
+
+    
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     dob_date = None
