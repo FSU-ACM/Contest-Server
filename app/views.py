@@ -305,7 +305,17 @@ def updatepassword():
     
     return render_template('updatepassword.html',error=error,success=success)
         
-   
+
+@app.route('/logout', methods=['POST','GET'])
+def logout():
+    try:
+        del session['email']
+    except KeyError:
+        pass
+
+    return redirect("/",code=302)
+
+    
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     dob_date = None
