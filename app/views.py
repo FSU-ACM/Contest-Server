@@ -16,7 +16,7 @@ from signin import sign_in
 EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
 # Nav bar
-topbar = Navbar('SPC2017',
+topbar = Navbar('',
     Link('Home', '/'),
 	Link('Register', '/register'),
 	Link('Login','/login'),
@@ -116,8 +116,9 @@ def login():
 
         # Check accounts if we don't have an error yet
         if error is None:
+
             account = Account.objects(email=email).first()
-            correctpwd = account.check_password(password)
+            correctpwd = account.check_password(password) if account else False
 
             # SUCCESS
             if account and correctpwd:
@@ -145,11 +146,17 @@ def profile():
     success = None
     email = None
 
+
     # check if the user is logged in. If not, rturn to the login page
     if 'email' not in session:
          return redirect(url_for('login'))
     else:
         email = session['email']
+
+
+    # Get the account stuff
+    account = Account.objects(email=email).first()
+    profile = account.profile
 
     #Getting information from form
     if request.method =='POST':
@@ -175,8 +182,6 @@ def profile():
 
 
         # Let's save our data.
-        account = Account.objects(email=email).first()
-        profile = account.profile
         if profile:
             # update profile
             profile.update(**data)
@@ -196,7 +201,7 @@ def profile():
             error += "We'll try and get it sorted out ASAP."
             print e
 
-    return render_template('profile.html',error=error,success=success)
+    return render_template('profile.html',error=error,success=success,profile=profile)
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -254,19 +259,16 @@ def updatepassword():
         currentpassword=request.form['currentpassword']
         newpassword=request.form['newpassword']
 
-        if newpassword == currentpassword:
+        # Check if the old password is corect
+        account = Account.objects(email=email).first()
+        if not account.check_password(currentpassword):
+            error = "That's not your current password."
+        elif newpassword == currentpassword:
             error = "New password cannot be same as the current password"
         else:
-            account = db.session.query(Account).filter(Account.email==email).first()
-            passwordmatched = check_password_hash(account.password, currentpassword)
-            if passwordmatched:
-                newpassword = generate_password_hash(newpassword)
-                account.password = newpassword
-                db.session.add(account)
-                db.session.commit()
-                success="Password updated successfully"
-            else:
-                error = "Your current password is invalid"
+            account.set_password(newpassword)
+            account.save()
+            success = "Password updated successfully"
 
     return render_template('updatepassword.html',error=error,success=success)
 
