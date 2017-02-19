@@ -222,6 +222,9 @@ def register():
         elif not password:
             error = "Please enter a valid password."
 
+		elif not recaptcha.verify():
+            error = "Please complete the ReCaptcha."
+
         # SUCCESS STATE
         elif not Account.objects(email=email).first():
 			# Create an account for our user
