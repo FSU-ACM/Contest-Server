@@ -94,6 +94,9 @@
   .about .hashtag {
     color: #ff6e40; }
 
+#faqs p {
+  font-size: 18px; }
+
 .sponsors {
   min-height: 75%;
   padding: 48px 0px 48px 0px; }
