@@ -3,6 +3,7 @@ from flask_nav import Nav
 from flask_nav.elements import *
 from datetime import date,datetime
 
+
 import bleach, re
 
 from app import app, recaptcha, db
@@ -75,14 +76,13 @@ def preregister():
             error = "Please submit a valid email."
 
         # Check unique email
-        elif not Preregistration.query.filter_by(email=email).first():
+        elif not Preregistration.objects(email=email).first():
             #Creating entry and inserting it into the database
-            entry = Preregistration(email,name)
-            db.session.add(entry)
-            db.session.commit()
-            #return render_template('prereg_land.html',email=email,name=name)
+            prereg = Preregistration(email=email,name=name)
+            prereg.save()
             success = """Congratulations, {}, you are now preregistered for the contest! We'll contact you at your email ({}) when full registration opens.""".format(name,email)
-       	else:
+
+        else:
             error = "This email is already registered."
 
     return render_template('prereg.html',error=error,success=success)
@@ -94,15 +94,12 @@ def login():
     success = None
     insertrecaptcha = False
 
-    #Check if user got wrong password 3 times or more, then activate recaptcha
+    # Activate recaptcha if too many bad attempts
     if 'counter' in session and session['counter'] >= 3:
-            insertrecaptcha = True
-            #If reCaptcha is not verified we return
-            if not recaptcha.verify():
-                error = "Please complete the ReCaptcha."
-                return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
+        insertrecaptcha = True
 
-    #Getting information from formi
+
+    # Getting information from form
     if request.method =='POST':
         email = bleach.clean(request.form['email'])
         password = bleach.clean(request.form['password'])
@@ -110,40 +107,36 @@ def login():
         # Check valid Email
         if not EMAIL_REGEX.match(email):
             error = "Please submit a valid email."
-
         # verify that the password is not empty
         elif not password:
             error = "Please enter a valid password."
+        # If we needed recaptcha, make sure they have it
+        elif insertrecaptcha and not recaptcha.verify():
+            error = "Please complete the ReCaptcha."
 
-        # Check unique email
-        elif Account.query.filter_by(email=email).first():
-            # Check unique email and password
-            if not Account.query.filter_by(password=password,email=email).first():
-                #if login fails because of incorrecct password, increment the counter
-                # variable in session object.
-                session['counter']=session.get('counter',0)+1
-                #If login fails 3rd time and beyond, make user enter recaptcha
-                if session['counter'] >= 3:
-                     insertrecaptcha = True
-                     # Turn reCaptcha in login on
-                     # Session variable to execute verify
-                     error = "You have made too many incorrect login attempts. Please verify that you are not a robot."
-                else:
-                     error = "Invalid password"
-                #return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
-            else:
-                # Creating entry and inserting it into the database
-                # Why are we creating an entry?
-                # commenting out
-                    #entry = Login(email,password)
-                    #db.session.add(entry)
-                    #db.session.commit()
+        # Check accounts if we don't have an error yet
+        if error is None:
+            account = Account.objects(email=email).first()
+            correctpwd = account.check_password(password)
+
+            # SUCCESS
+            if account and correctpwd:
                 session['email']=email
-                return redirect(url_for("profile"))
-        else:
-            error = "This email is not registered."
+                return redirect('/profile', code=302)
+            # FAILURE : Incorrect Password
+            elif account and not correctpwd:
+                #If login fails 3rd time and beyond, make user enter recaptcha
+                session['counter']=session.get('counter',0)+1
+                if session['counter'] >= 3:
+                    insertrecaptcha = True # Turn reCaptcha in login on
+                    error = "You have made too many incorrect login attempts. Please verify that you are not a robot."
+                else:
+                    error = "Invalid password."
+            # FAILURE : Email not registered.
+            else:
+                error = "This email is not registered."
 
-    return render_template('login.html',error=error, success=success, insertrecaptcha = insertrecaptcha)
+    return render_template('login.html',error=error, success=success, insertrecaptcha=insertrecaptcha)
 
 @app.route('/profile', methods=['POST','GET'])
 def profile():
@@ -164,12 +157,14 @@ def profile():
         gradterm=None
         status=None
         advProg=None
+
         firstname = bleach.clean(request.form['firstname'])
         lastname = bleach.clean(request.form['lastname'])
         fsuid = bleach.clean(request.form['fsuid'])
         dob = bleach.clean(request.form['dob'])
         gender = bleach.clean(request.form['gender'])
         foodallergies = bleach.clean(request.form['foodallergies'])
+        
         email=None
         if 'email' in session:
             email = session['email']
@@ -248,19 +243,18 @@ def register():
             error = "Please enter a valid password."
 
         # SUCCESS STATE
-        elif not Account.query.filter_by(email=email).first():
+        elif not Account.objects(email=email).first():
 			# Create an account for our user
-            account = Account(email, password)
+            account = Account(email=email)
+            account.set_password(password)
 
 			# Let's see if they preregistered
-            prereg = Preregistration.query.filter_by(email=email).first()
+            prereg = Preregistration.objects(email=email).first()
             if prereg:
-                # Link for lulz
 				account.prereg = prereg
 
             # DB transactions
-            db.session.add(account)
-            db.session.commit()
+            account.save()
 
             # Set cookie, redirect to profile page.
             session['email']=email

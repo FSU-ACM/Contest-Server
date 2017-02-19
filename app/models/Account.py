@@ -1,17 +1,19 @@
 from app import db
-# from app.models import Profile, Preregistration
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Account(db.Document):
-    email = db.StringField(primary_key=True, required=True, unique=True)
+    email = db.EmailField(primary_key=True)
     password = db.StringField(required=True)
     profile = db.ReferenceField('Profile')
     prereg = db.ReferenceField('Preregistration')
 
-    # profile_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
-    # profile = db.relationship('Profile', uselist=False, back_populates="account")
+    # Handles password-things
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
 
-    # prereg_id = db.Column(db.Integer, db.ForeignKey('preregistration.id'))
-    # prereg = db.relationship('Preregistration', uselist=False, back_populates="account")
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
 
     def __repr__(self):
         return '<Account %r>' % self.email
