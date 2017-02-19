@@ -58,7 +58,8 @@
     font-weight: 700;
     text-transform: uppercase;
     margin-right: 16px;
-    margin-bottom: 16px; }
+    margin-bottom: 16px;
+    min-width: 220px; }
     @media screen and (min-width: 500px) {
       .banner button {
         font-size: 18px; } }
@@ -92,6 +93,9 @@
     font-size: 18px; }
   .about .hashtag {
     color: #ff6e40; }
+
+#faqs p {
+  font-size: 18px; }
 
 .sponsors {
   min-height: 75%;
@@ -169,8 +173,7 @@ body {
   font: 16px/1 "Open Sans", sans-serif;
   position: relative;
   line-height: 1.8;
-  background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 140, 0, 0.5));
-  background-attachment: fixed; }
+  background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 140, 0, 0.5)); }
 
 a {
   color: #afafaf; }
@@ -210,6 +213,14 @@ h1, h2, h3, h4, h5 {
   border-radius: 4px; }
   .form-container h2, .form-container label {
     text-transform: uppercase; }
+  .form-container .menuitems {
+    text-align: right;
+    margin-bottom: 16px; }
+    .form-container .menuitems a {
+      text-transform: uppercase;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 700;
+      margin-left: 20px; }
 
 .footer {
   z-index: 10;

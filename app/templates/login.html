@@ -1,0 +1,43 @@
+{% extends "page.html" %}
+{% block content %}
+
+<div class="container form-container">
+
+
+  {% if error %}
+	<div class="alert alert-danger" role="alert">
+		<strong>Houston, we have a problem:</strong>
+		{{ error }}
+	</div>
+	{% endif %}
+
+
+  <h2>Login</h2>
+
+    <form action="{{ url_for('login') }}" method=post class='form-horizontal'>
+
+      <label for="register-email">Email*</label>
+      <input type="email" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu" required>
+
+      <label for="register-password">Password*</label>
+      <input type="password" class="form-control" id="register-password" name=password placeholder="******" required>
+
+      {% if insertrecaptcha %}
+          <br />
+
+          {{ recaptcha }}
+
+          <br />
+      {% endif %}    
+
+      <br />
+
+      <input class="btn btn-primary" type=submit value="Login">
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

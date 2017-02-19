@@ -1,6 +1,7 @@
 *.pyc
 *.pem
 *.sassc
+*.afdesign
 
 # Config based
 /instance

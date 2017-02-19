@@ -58,7 +58,8 @@
     font-weight: 700;
     text-transform: uppercase;
     margin-right: 16px;
-    margin-bottom: 16px; }
+    margin-bottom: 16px;
+    min-width: 220px; }
     @media screen and (min-width: 500px) {
       .banner button {
         font-size: 18px; } }
@@ -92,6 +93,9 @@
     font-size: 18px; }
   .about .hashtag {
     color: #ff6e40; }
+
+#faqs p {
+  font-size: 18px; }
 
 .sponsors {
   min-height: 75%;
