@@ -3,6 +3,9 @@
 
 <div class="container form-container">
 
+  {% include "/menuitems.html" %}
+
+
   {% if error %}
   <div class="alert alert-danger" role="alert">
     <strong>Houston, we have a problem:</strong>
@@ -17,60 +20,85 @@
   </div>
   {% endif %}
 
-  {% include "/menuitems.html" %}
-
-  <br/>
-
   <h2>Complete Your Profile</h2>
   <p>
-    Not all fields are required. Once you have completed and saved your profile,
-    then you will be able to register a team.
+    Not all fields are required. <a href="/#team-faq">Team registration coming soon.</a>
+    <br />
   </p>
+
+  {% if profile %}
+  <div class="alert alert-info" role="alert">
+    Repopulating fields is hard! Even though only some are showing, we promise
+    all of them were actually recorded.
+  </div>
+  {% endif %}
 
     <form action="{{ url_for('profile') }}" method=post class='form-horizontal'>
 
       <label for="register-firstname">First Name*</label>
-      <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="Melina" required>
+      <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="Melina" value="{{profile.firstname}}" required>
       <br/>
 
       <label for="register-lastname">Last Name*</label>
-      <input type="text" class="form-control" id="register-lastname" name=lastname placeholder="Myers" required>
+      <input type="text" class="form-control" id="register-lastname" name=lastname placeholder="Myers" value="{{profile.lastname}}" required>
       <br/>
 
       <label for="register-fsuid">FSUID</label>
       <!--Changed from number to text because fsuid contains letters-->
-      <input type="text" class="form-control" id="register-fsuid" name=fsuid min="1" placeholder="abc12d">
+      <input type="text" class="form-control" id="register-fsuid" name=fsuid min="1" value="{{profile.fsuid}}" placeholder="abc12d">
       <p>*If you are receiving extra credit for participating, this field is required.</p>
       <br/>
 
-      <label for="register-dob">Date of Birth*</label>
+      <!-- <label for="register-dob">Date of Birth</label>
       <input type="date" class="form-control" id="register-dob" name=dob min="1">
-      <br/>
+      <br/> -->
 
       <label for="register-gender">Gender</label><br/>
       <select name="gender" id="register-gender">
         <option value=""></option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Non-Binary">Non-Binary</option>
+        <option value="Male" {% if profile.gender == "Male"%}selected="true"{%endif%}>Male</option>
+        <option value="Female"  {% if profile.gender == "Female"%}selected="true"{%endif%}>Female</option>
+        <option value="Non-Binary" {% if profile.gender == "Non-Binary"%}selected="true"{%endif%}>Non-Binary</option>
       </select>
       <br/>
       <br/>
 
       <label for="register-race">Race</label><br/>
-      <!-- <div style='overflow:scroll;width:300px;height:200px;block'> -->
-        <input type="checkbox" id="register-race" name=race value="American Indian or Native Alaskan">American Indian or Native Alaskan</input><br/>
-        <input type="checkbox" id="register-race" name=race value="Asian">Asian</input><br/>
-        <input type="checkbox" id="register-race" name=race value="Black or African American">Black or African American</input> <br/>
-        <input type="checkbox" id="register-race" name=race value="Native Hawaiian or other Pacific Islander">Native Hawaiian or other Pacific Islander</input> <br/>
-        <input type="checkbox" id="register-race" name=race value="White">White</input><br/>
-        <input type="checkbox" id="register-race" name=race value="Hispanic">Hispanic</input><br/>
-      <!-- </div> -->
+        <input
+          type="checkbox"
+          id="register-race"
+          name=race
+          value="American Indian or Native Alaskan">American Indian or Native Alaskan</input><br/>
+        <input
+          type="checkbox"
+          id="register-race"
+          name=race
+          value="Asian">Asian</input><br/>
+        <input
+          type="checkbox"
+          id="register-race"
+          name=race
+          value="Black or African American">Black or African American</input> <br/>
+        <input
+          type="checkbox"
+          id="register-race"
+          name=race
+          value="Native Hawaiian or other Pacific Islander">Native Hawaiian or other Pacific Islander</input> <br/>
+        <input
+          type="checkbox"
+          id="register-race"
+          name=race
+          value="White">White</input><br/>
+        <input
+          type="checkbox"
+          id="register-race"
+          name=race
+          value="Hispanic">Hispanic</input><br/>
       <br/>
 
       <label for="register-allergies">Food Allergies</label>
       <p>Let us know if you have any food allergies.</p>
-      <input type="text" class="form-control" id="register-allergies" name=foodallergies>
+      <input type="text" class="form-control" id="register-allergies" name=foodallergies value="{{profile.foodallergies}}">
       <br />
 
 
@@ -87,7 +115,8 @@
         id="register-major"
         name=major
         style="text-transform:capitalize"
-        placeholder="e.g. Computer Science, Information Technology, Mathematics">
+        placeholder="e.g. Computer Science, Information Technology, Mathematics"
+        value="{{profile.major}}">
       <br/>
 
       <label for="register-gradyear">Graduation Year</label>
@@ -97,7 +126,8 @@
         name=gradyear
         min="2000"
         max="2030"
-        placeholder="2017">
+        placeholder="2017"
+        value="{{profile.gradyear}}">
       <br/>
 
       <label for="register-gradterm">Graduation Semester</label><br/>

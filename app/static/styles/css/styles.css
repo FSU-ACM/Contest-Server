@@ -58,7 +58,8 @@
     font-weight: 700;
     text-transform: uppercase;
     margin-right: 16px;
-    margin-bottom: 16px; }
+    margin-bottom: 16px;
+    min-width: 220px; }
     @media screen and (min-width: 500px) {
       .banner button {
         font-size: 18px; } }
@@ -93,32 +94,32 @@
   .about .hashtag {
     color: #ff6e40; }
 
+#faqs p {
+  font-size: 18px; }
+
 .sponsors {
-  height: 75%;
+  min-height: 75%;
   padding: 48px 0px 48px 0px; }
   .sponsors h1 {
     font-family: "Montserrat", sans-serif;
     font-weight: 700; }
 
-.sponsor-wrapper {
-  min-height: 500px; }
-
 .sponsor-row {
   display: flex;
-  justify-content: center; }
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px; }
 
 .sponsor-wrap {
-  display: flex;
   justify-content: center;
-  max-width: 350px;
-  max-height: 200px; }
-
-.sponsor-inner-wrap {
-  align-self: center;
-  padding: 0 2rem; }
-  .sponsor-inner-wrap img {
-    width: 100%; }
-  .sponsor-inner-wrap #harris {
+  align-self: center; }
+  .sponsor-wrap .sponsor-img {
+    max-width: 150px;
+    margin: 20px;
+    max-height: 100px; }
+  .sponsor-wrap .sponsor-img-large {
+    max-width: 400px; }
+  .sponsor-wrap #harris {
     padding-top: 11%; }
 
 .navbar .container-fluid {
@@ -212,6 +213,14 @@ h1, h2, h3, h4, h5 {
   border-radius: 4px; }
   .form-container h2, .form-container label {
     text-transform: uppercase; }
+  .form-container .menuitems {
+    text-align: right;
+    margin-bottom: 16px; }
+    .form-container .menuitems a {
+      text-transform: uppercase;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 700;
+      margin-left: 20px; }
 
 .footer {
   z-index: 10;
@@ -229,23 +238,5 @@ h1, h2, h3, h4, h5 {
 @media (min-width: 1200px) {
   .container {
     max-width: 970px; } }
-
-div.menuitems{
-    float:right;
-}    
-
-div.menuitems a{
-    font-family: "Open Sans", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 18px;
-    z-index: 1024;
-    margin-left:20px;
-    font-weight: 700;
-}    
-
-div.menuitems a:hover{
-    color:#ff0000
-}
 
 /*# sourceMappingURL=styles.css.map */

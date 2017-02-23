@@ -1,3 +1,4 @@
+@import "generics.sass"
 
 // Banner
 .banner
@@ -30,6 +31,7 @@
 		text-transform: uppercase
 		margin-right: 16px
 		margin-bottom: 16px
+		min-width: 220px
 
 	.register
 		border: 3px solid $accent
@@ -73,35 +75,38 @@
 	.hashtag
 		color: $accent
 
+// FAQ
+#faqs
+	p
+		font-size: 18px
+
 
 // Sponsors
 .sponsors
-	height: 75%
+	min-height: 75%
 	padding: 			48px 0px 48px 0px
 
 	h1
 		font-family: 	$banner-font
 		font-weight: 	700
 
-.sponsor-wrapper
-	min-height: 500px
-
 .sponsor-row
 	display: flex
+	flex-wrap: wrap
 	justify-content: center
+	margin-bottom: 32px
 
 .sponsor-wrap
-	display: flex
 	justify-content: center
-	max-width: 350px
-	max-height: 200px
-
-.sponsor-inner-wrap
 	align-self: center
-	padding: 0 2rem
 
-	img
-		width: 100%
+	.sponsor-img
+		max-width: 150px
+		margin: 20px
+		max-height: 100px
+
+	.sponsor-img-large
+		max-width: 400px
 
 	#harris
 		padding-top: 11%
