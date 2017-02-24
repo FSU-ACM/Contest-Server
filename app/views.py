@@ -22,6 +22,7 @@ topbar = Navbar('',
 	Link('Sponsors', '/#sponsors'),
 	Link('Register', '/register'),
 	Link('Login','/login'),
+    Link('Teams','/allteams'),
 )
 
 nav = Nav()
@@ -51,10 +52,10 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-@app.route('/teams')
-def teams():
+@app.route('/allteams')
+def allteams():
     teams = Team.query.all()
-    return render_template('teams.html', teams=teams)
+    return render_template('allteams.html', teams=teams)
 
 @app.route('/preregister',methods=['POST','GET'])
 def preregister():
@@ -164,7 +165,10 @@ def profile():
         # Extract important data from form
         data = dict()
         for k,v in request.form.iteritems():
-            data[k] = bleach.clean(v)
+            # add to dict only if there is a values
+            v = bleach.clean(v)
+            if v:
+                data[k] = v
 
         # Special case to get race
         race = request.values.getlist('race')
@@ -285,6 +289,24 @@ def logout():
 
     return redirect("/",code=302)
 
+
+@app.route('/team', methods=['POST','GET'])
+def team():
+
+    error = None
+    success = None
+    team = None
+    
+    # check if the user is logged in. If not, return to the login page
+    if 'email' not in session:
+        return redirect(url_for('login'))
+
+    if request.method=='POST':
+        email=session['email']
+        teams = Team.query.all()
+
+    return render_template('team.html', team=team, error=error, success=success)
+    
 
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
