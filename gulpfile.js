@@ -6,7 +6,7 @@ var sass_dest = "app/static/styles/css";
 gulp.task('sass', function() {
 	var sass = require('gulp-sass');
 
-	gulp.src('src/sass/**.sass')
+	gulp.src('app/static/styles/sass/*.sass')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest(sass_dest));
 });

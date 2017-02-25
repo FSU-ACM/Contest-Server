@@ -1,7 +1,7 @@
 {% extends "/super/form.html" %}
 {% block content %}
 
-<div class="container form-container">
+<div class="container form-sheet">
 
   {% include "/form/menuitems.html" %}
 
@@ -20,6 +20,13 @@
   </div>
   {% endif %}
 
+	{% if message %}
+	<div class="alert alert-info" role="alert">
+		<strong>Whoa there!</strong>
+		{{ message }}
+	</div>
+	{% endif %}
+
   <h2>Complete Your Profile</h2>
   <p>
     Not all fields are required. Once you save your profile, you may create or join a team.
@@ -33,7 +40,7 @@
   </div>
   {% endif %} -->
 
-    <form action="{{ url_for('profile') }}" method=post class='form-horizontal'>
+    <form action="{{ url_for('profile') }}" method=post>
 
       <label for="register-firstname">First Name*</label>
       <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="Melina" value="{{profile.firstname}}" required>
