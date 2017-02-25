@@ -16,17 +16,25 @@ from signin import sign_in
 EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
 # Nav bar
-topbar = Navbar('',
+nav_logged_in = Navbar('',
     Link('Home', '/'),
     Link('FAQ','/#faq'),
     Link('Sponsors', '/#sponsors'),
     Link('Teams','/allteams'),
     Link('Profile','/profile'),
-    Link('Register', '/register'),
+)
+
+nav_logged_out = Navbar('',
+    Link('Home', '/'),
+    Link('FAQ','/#faq'),
+    Link('Sponsors', '/#sponsors'),
+    Link('Teams','/allteams'),
+    Link('Login','/login'),
 )
 
 nav = Nav()
-nav.register_element('top', topbar)
+nav.register_element('logged_in', nav_logged_in)
+nav.register_element('logged_out', nav_logged_out)
 nav.init_app(app)
 
 # Auth tools
@@ -64,7 +72,8 @@ def allteams():
     teams = Team.objects.filter(teamName__exists=True)
     return render_template('allteams.html', teams=teams)
 
-@app.route('/preregister',methods=['POST','GET'])
+# Route disabled
+# @app.route('/preregister', methods=['POST','GET'])
 def preregister():
 
     error = None
