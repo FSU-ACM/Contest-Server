@@ -9,7 +9,8 @@ import bleach, re
 from app import app, recaptcha, db
 # from app.models.Preregistration import Preregistration
 from app.models import Account, Preregistration, Profile, Team
-from signin import sign_in
+from email import reset_password_email
+from password import reset_password as reset_pass
 
 
 # Email validator
@@ -112,7 +113,7 @@ def login():
     #     return redirect('/profile', code=302)
 
     # error = request.args.get('error', None)
-    error = None
+    error = request.args.get('error', None)
     success = request.args.get('success', None)
     insertrecaptcha = False
 
@@ -145,7 +146,7 @@ def login():
             # SUCCESS
             if account and correctpwd:
                 session['email']=email
-                return redirect('/profile', code=302)
+                return redirect(url_for('profile'), code=302)
             # FAILURE : Incorrect Password
             elif account and not correctpwd:
                 #If login fails 3rd time and beyond, make user enter recaptcha
@@ -155,7 +156,7 @@ def login():
                     error = "You have made too many incorrect login attempts. Please verify that you are not a robot."
                 else:
                     error = "Invalid password."
-            # FAILURE : Email not registered.
+            # FAILURE : Email not (register)ed.
             else:
                 error = "This email is not registered."
 
@@ -166,6 +167,8 @@ def profile():
 
     error = request.args.get('error', None)
     success = request.args.get('success', None)
+    message = request.args.get('message', None)
+
 
     # check if the user is logged in. If not, rturn to the login page
     if 'email' not in session:
@@ -226,7 +229,8 @@ def profile():
             error += "We'll try and get it sorted out ASAP."
             print e
 
-    return render_template('/form/profile.html',error=error,success=success,profile=profile)
+    return render_template('/form/profile.html',error=error,success=success,
+        message=message, profile=profile)
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -234,45 +238,55 @@ def register():
     error = request.args.get('error', None)
     success = request.args.get('success', None)
 
-    if request.method == 'POST':
+    # Disuade from registering twice
+    action, profile = verify_profile(session)
+    print action, profile
+    action = None if not profile else redirect(url_for('profile',
+        message="You are already registered!"))
 
-        # Validate login; deny or redirect to profile
-        email = bleach.clean(request.form['email'])
-        password = bleach.clean(request.form['password'])
+    if not action:
 
-        # Validate email
-        if not EMAIL_REGEX.match(email):
-            error = "Please submit a valid email."
+        if request.method == 'POST':
 
-        # Validate password
-        elif not password:
-            error = "Please enter a valid password."
+            # Validate login; deny or redirect to profile
+            email = bleach.clean(request.form['email'])
+            password = bleach.clean(request.form['password'])
 
-        elif not recaptcha.verify():
-            error = "Please complete the ReCaptcha."
+            # Validate email
+            if not EMAIL_REGEX.match(email):
+                error = "Please submit a valid email."
 
-        # SUCCESS STATE
-        elif not Account.objects(email=email).first():
-            # Create an account for our user
-            account = Account(email=email)
-            account.set_password(password)
+            # Validate password
+            elif not password:
+                error = "Please enter a valid password."
 
-            # Let's see if they preregistered
-            prereg = Preregistration.objects(email=email).first()
-            if prereg:
-                account.prereg = prereg
+            elif not recaptcha.verify():
+                error = "Please complete the ReCaptcha."
 
-            # DB transactions
-            account.save()
+            # SUCCESS STATE
+            elif not Account.objects(email=email).first():
+                # Create an account for our user
+                account = Account(email=email)
+                account.set_password(password)
 
-            # Set cookie, redirect to profile page.
-            session['email']=email
-            return redirect('/form/profile', code=302)
+                # Let's see if they preregistered
+                prereg = Preregistration.objects(email=email).first()
+                account.prereg = prereg if prereg else None
 
-        else:
-            error = "This email is already linked to an another account."
+                # DB transactions
+                account.save()
 
-    return render_template('/form/register.html',error=error)
+                # Set cookie, redirect to profile page.
+                session['email']=email
+                action = redirect(url_for('profile'), code=302)
+
+            else:
+                error = "This email is already linked to an another account."
+
+        action = action if action is not None else \
+            render_template('/form/register.html',error=error)
+
+    return action
 
 @app.route('/updatepassword', methods=['POST','GET'])
 def updatepassword():
@@ -302,6 +316,29 @@ def updatepassword():
     return render_template('/form/updatepassword.html', error=error,success=success)
 
 
+@app.route('/resetpassword', methods=['POST'])
+def reset_password():
+
+    error, success = None, None
+    error_msg = "No such email on file."
+
+    email = request.form['email']
+
+    error = None if EMAIL_REGEX.match(email) else error_msg
+
+    if not error:
+
+        account = Account.objects(email=email).first()
+
+        if account:
+            reset_password_email(email, reset_pass(account))
+            success = "Password email sent."
+        else:
+            error = error_msg
+
+    return redirect(url_for('login', success=success, error=error))
+
+
 @app.route('/logout', methods=['POST','GET'])
 def logout():
     try:
@@ -310,7 +347,7 @@ def logout():
     except KeyError:
         pass
 
-    return redirect("/",code=302)
+    return redirect(url_for('index'),code=302)
 
 @app.route('/profile/team', methods=['GET'])
 def team():

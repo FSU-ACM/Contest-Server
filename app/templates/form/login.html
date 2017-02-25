@@ -1,43 +1,91 @@
 {% extends "/super/form.html" %}
 {% block content %}
 
-<div class="container form-container">
+<div class="container login-container form-sheet">
 
 
   {% if error %}
 	<div class="alert alert-danger" role="alert">
-		<strong>Houston, we have a problem:</strong>
+		<strong>Uh oh:</strong>
 		{{ error }}
 	</div>
 	{% endif %}
 
+  {% if success %}
+  <div class="alert alert-success" role="alert">
+    <strong>Awesome!</strong>
+    {{ success }}
+  </div>
+  {% endif %}
 
-  <h2>Login</h2>
+  <div class="login-form">
 
-    <form action="{{ url_for('login') }}" method=post class='form-horizontal'>
+    <form action="{{ url_for('login') }}" method=post >
 
-      <label for="register-email">Email*</label>
-      <input type="email" class="form-control" id="register-email" name=email placeholder="bobject.oriented.programming@cs.fsu.edu" required>
+      <h2>Login</h2>
+      <!-- <label for="register-email">Email*</label> -->
+      <input type="email"
+        class="form-control textbox"
+        id="register-email"
+        name=email
+        placeholder="Email"
+        required>
 
-      <label for="register-password">Password*</label>
-      <input type="password" class="form-control" id="register-password" name=password placeholder="******" required>
+      <!-- <label for="register-password">Password*</label> -->
+      <input type="password"
+        class="form-control textbox"
+        id="register-password"
+        name=password
+        placeholder="Password" required>
 
       {% if insertrecaptcha %}
           <br />
-
           {{ recaptcha }}
-
           <br />
       {% endif %}
 
       <br />
-
-      <input class="btn btn-primary" type=submit value="Login">
-
+      <input id="btn-submit" class="btn btn-full-color" type=submit value="Log In">
     </form>
+
+    <button id="forgot-password" data-toggle="modal" data-target="#forgot-password-modal">Forgot your password?</button>
+
+    <hr />
+    <input class="btn btn-outline" value="Register" onclick="location.href='{{url_for('register')}}';">
 
   </div>
 
+
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="forgot-password-modal" tabindex="-1" role="dialog" aria-labelledby="forgot-password-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Just drop in your email, and we'll send you a new password.
+        </p>
+        <form action="{{url_for('reset_password')}}" method=post>
+        <input type="email"
+          class="form-control textbox"
+          id="reset-password-email"
+          name=email
+          placeholder="Enter your email"
+          required>
+
+        <input class="btn btn-primary" type=submit value="Send email">
+        </form>
+      </div>
+      <!-- <div class="modal-footer"> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
