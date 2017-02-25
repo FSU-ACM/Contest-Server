@@ -22,16 +22,16 @@
 
   <h2>Complete Your Profile</h2>
   <p>
-    Not all fields are required. <a href="/#team-faq">Team registration coming soon.</a>
+    Not all fields are required. Once you save your profile, you may create or join a team.
     <br />
   </p>
 
-  {% if profile %}
+  <!-- {% if profile %}
   <div class="alert alert-info" role="alert">
     Repopulating fields is hard! Even though only some are showing, we promise
     all of them were actually recorded.
   </div>
-  {% endif %}
+  {% endif %} -->
 
     <form action="{{ url_for('profile') }}" method=post class='form-horizontal'>
 

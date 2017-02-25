@@ -1,0 +1,129 @@
+{% extends "page.html" %}
+{% block content %}
+
+<div class="container form-container">
+
+  {% include "/menuitems.html" %}
+
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Houston, we have a problem:</strong>
+    {{ error }}
+  </div>
+  {% endif %}
+
+  {% if success %}
+  <div class="alert alert-success" role="alert">
+    <strong>Mission accomplished!</strong>
+    {{ success }}
+  </div>
+  {% endif %}
+
+
+  {% if not team %}
+  <!-- If they don't have a team, show the join/create items. -->
+  <h2>Manage Team</h2>
+	<div class="row">
+
+    <div class="col-md-6 column-left">
+      <form action="/profile/team/join" method=post>
+        <label for="teamID">Join Existing Team</label>
+        <input type="text"
+          class="form-control"
+          id="teamID"
+          name=teamID
+          placeholder="Enter team ID" required>
+          <br />
+        <input type="text"
+          class="form-control"
+          id="teamPasscode"
+          name=teamPasscode
+          placeholder="Enter team passcode" required>
+        <br/>
+        <input class="btn btn-primary" type=submit value="Join Team">
+      </form>
+      <br />
+    </div>
+
+		<div class="col-md-6">
+			<form action="/profile/team" method=post>
+	      <label for="teamName">Create New Team</label>
+	      <input type="text"
+          class="form-control"
+          id="teamName"
+          name=teamName
+          placeholder="Enter team name">
+	      <br/>
+	      <input class="btn btn-primary" type=submit value="Create Team">
+	    </form>
+      <br />
+		</div>
+
+	</div> <!-- /row -->
+
+  {% else %}
+  <!-- Show the team roster and management things -->
+  <h2>Your Team</h2>
+  <row>
+    <div class="col-md-6">
+      <form action="{{url_for('team_update')}}" method=post>
+        <label for="teamName">Team Name</label>
+        <input type="text"
+          class="form-control"
+          id="teamName"
+          name=teamName
+          placeholder="Enter a team name"
+          value="{{team.teamName}}">
+          <br />
+        <input class="btn btn-primary" type=submit value="Update">
+      </form>
+
+      <br />
+
+      <h4>Team Members</h4>
+      <ul>
+        {% for member in team.members %}
+        <li>{{member.firstname}} {{member.lastname}}</li>
+        {% endfor %}
+      </ul>
+
+
+      <br />
+
+      <form action="{{url_for('team_leave')}}" method=post>
+        <input class="btn btn-danger" type=submit value="Leave Team">
+      </form>
+
+    </div>
+
+    <div class="col-md-6">
+      <label>Team Details</label>
+      <p>Share these with your friends so they can join your team.</p>
+      <strong>Team ID:</strong> {{team.teamID}} <br />
+      <strong>Team Passcode:</strong> {{team.teamPass}} <br />
+    </div>
+
+
+
+
+
+  </row>
+
+  {% endif %}
+
+    <!-- <form action="{{ url_for('updatepassword') }}" method=post class='form-horizontal'>
+
+      <label for="register-currentpassword">Current Password*</label>
+      <input type="password" class="form-control" id="register-currentpassword" name=currentpassword required>
+
+      <br/>
+
+      <label for="register-newpassword">New Password*</label>
+      <input type="password" class="form-control" id="register-newpassword" name=newpassword required>
+      <br/>
+
+      <input class="btn btn-primary" type=submit value="Save password">
+    </form> -->
+</div>
+
+{% endblock %}
