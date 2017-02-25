@@ -93,7 +93,7 @@ def preregister():
         else:
             error = "This email is already registered."
 
-    return render_template('prereg.html',error=error,success=success)
+    return render_template('/form/prereg.html',error=error,success=success)
 
 @app.route('/login',methods=['POST','GET'])
 def login():
@@ -150,7 +150,7 @@ def login():
             else:
                 error = "This email is not registered."
 
-    return render_template('login.html',error=error, success=success, insertrecaptcha=insertrecaptcha)
+    return render_template('/form/login.html',error=error, success=success, insertrecaptcha=insertrecaptcha)
 
 @app.route('/profile', methods=['POST','GET'])
 def profile():
@@ -217,7 +217,7 @@ def profile():
             error += "We'll try and get it sorted out ASAP."
             print e
 
-    return render_template('profile.html',error=error,success=success,profile=profile)
+    return render_template('/form/profile.html',error=error,success=success,profile=profile)
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -258,12 +258,12 @@ def register():
 
             # Set cookie, redirect to profile page.
             session['email']=email
-            return redirect('/profile', code=302)
+            return redirect('/form/profile', code=302)
 
         else:
             error = "This email is already linked to an another account."
 
-    return render_template('register.html',error=error)
+    return render_template('/form/register.html',error=error)
 
 @app.route('/updatepassword', methods=['POST','GET'])
 def updatepassword():
@@ -290,7 +290,7 @@ def updatepassword():
             account.save()
             success = "Password updated successfully"
 
-    return render_template('updatepassword.html', error=error,success=success)
+    return render_template('/form/updatepassword.html', error=error,success=success)
 
 
 @app.route('/logout', methods=['POST','GET'])
@@ -322,7 +322,7 @@ def team():
         # Let's see if they have a team
         team = profile.team
 
-        action = render_template('profile_team.html', team=team,
+        action = render_template('/form/profile_team.html', team=team,
             profile=profile, error=error, success=success)
 
     return action
