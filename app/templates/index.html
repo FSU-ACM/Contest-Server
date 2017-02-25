@@ -1,5 +1,9 @@
-{% extends "/super/page.html" %}
+{% extends "/super/base.html" %}
 
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{url_for('static', filename='styles/css/index.css')}}">
+{% endblock %}
 
 <!-- Content in here -->
 {% block content %}
@@ -19,8 +23,8 @@
 
 			<br />
 
-			<button class="register" onclick="location.href='/register';">Register</button>
-			<button class="sponsor-us" onclick="location.href='mailto:hello@acmatfsu.org';">Sponsor Us</button>
+			<button class="btn-full-color" onclick="location.href='/register';">Register</button>
+			<button class="btn-outline" onclick="location.href='mailto:hello@acmatfsu.org';">Sponsor Us</button>
 
 			<!-- <h2><a href="/preregister" class="hlink">Preregister Now</a></h2> -->
 		<!-- </div> -->

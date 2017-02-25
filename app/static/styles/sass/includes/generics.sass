@@ -1,0 +1,73 @@
+@import "css3-mixins.sass"
+
+// HTML Elements
+a
+	color:				$subtitle
+	&:hover
+		color:			$text
+		text-decoration: none
+
+h1,h2,h3,h4,h5
+	font-family:		$brand-font
+
+
+// Generic element stylings
+.block
+	height: 100%
+	max-height: 900px
+
+	@media screen and (max-width: 1100px)
+		max-height: 700px
+
+	@media screen and (max-width: 768px)
+		max-height: 600px
+
+.sheet
+	background-color: 	$white
+	color:				$dark-grey
+	padding: 48px 0 128px 0
+
+.sheet-gap
+	height: 100px
+	background-color: rgba(255,140,0,0.5)
+
+.btn-primary
+	background-color: $accent
+	border-color: $accent
+
+	&:hover
+		background-color: $white
+		color: $accent
+		border-color: $accent
+
+.btn-base
+	@include font-size($btn-font-sizes)
+	border-radius: 100px
+	padding: 4px 48px
+	font-family: $body-font
+	font-weight: 700
+	text-transform: uppercase
+	// margin-right: 16px
+	// margin-bottom: 16px
+	min-width: 220px
+
+.btn-full-color
+	@extend .btn-base
+	border: 3px solid $accent
+	background-color: $accent
+	color: $white
+
+	&:hover
+		background: $white
+		border-color: $white
+		color: $accent
+
+.btn-outline
+	@extend .btn-base
+	border: 3px solid $white
+	background-color: rgba(0,0,0,0)
+	color: $white
+
+	&:hover
+		background-color: $white
+		color: $accent
