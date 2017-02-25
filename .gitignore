@@ -1,6 +1,7 @@
 *.pyc
 *.pem
 *.sassc
+*.sass-cache*
 *.afdesign
 
 # Config based
