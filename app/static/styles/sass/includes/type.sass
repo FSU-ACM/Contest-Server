@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700)
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700)
+
+@font-face
+	font-family: "Avenir-Next-Bold"
+	src: url(../../fonts/Avenir-Next-Bold.ttf)
+
+$body-font:		'Open Sans', sans-serif
+$banner-font:	'Montserrat', sans-serif
+$brand-font:	'Avenir-Next-Bold', sans-serif
+
+$h1b-font-sizes: (null: 36px, 500px: 56px, 768px: 78px, 1300px:96px)
+$h2b-font-sizes: (null: 30px, 500px: 38px, 768px: 44px, 1300px:76px)
+$btn-font-sizes: (null: 12px, 500px: 18px)
+
+@mixin font-size($fs-map)
+	@each $fs-breakpoint, $fs-font-size in $fs-map
+		@if $fs-breakpoint == null
+			font-size: $fs-font-size
+
+		@else
+			@media screen and (min-width: $fs-breakpoint)
+				font-size: $fs-font-size

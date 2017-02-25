@@ -1,7 +1,9 @@
 *.pyc
 *.pem
 *.sassc
+*.sass-cache*
 *.afdesign
+node_modules/
 
 # Config based
 /instance

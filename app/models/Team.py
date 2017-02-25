@@ -15,12 +15,17 @@ from app import db
 #         return value
 
 class Team(db.Document):
-    team_name = db.StringField(required=True)
-    username = db.StringField(required=True, unique=True)
-    password = db.StringField(required=True)
+    teamName = db.StringField()
 
-    # members = db.relationship("Profile",back_populates="team")
-    members = db.ListField(db.ReferenceField('Profile'))
+    # For joining the team in the db
+    teamID    = db.StringField(required=True, unique=True)
+    teamPass  = db.StringField(required=True)
+
+    # Password for domjudge
+    domPass   = db.StringField(required=True)
+
+    # List of participants on team
+    members = db.ListField(db.ReferenceField('Profile'), null=True)
 
 
     def __repr__(self):
@@ -29,13 +34,13 @@ class Team(db.Document):
         else:
             return super(Team, self).__repr__()
 
-    def csv(self, include_students=False):
-
-        part1 = "{0},{1},{2}".format(self.username, self.password,
-            self.team_name.encode('utf-8'))
-
-        if include_students:
-            for student in self.students:
-                part1+=(","+str(student.fsuid))
-
-        return part1
+    # def csv(self, include_students=False):
+    #
+    #     part1 = "{0},{1},{2}".format(self.domuser, self.dompass,
+    #         self.team_name.encode('utf-8'))
+    #
+    #     if include_students:
+    #         for student in self.students:
+    #             part1+=(","+str(student.fsuid))
+    #
+    #     return part1
