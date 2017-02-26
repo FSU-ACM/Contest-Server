@@ -4,7 +4,8 @@ if len(sys.argv) is not 2:
     print "usage: ./createTeamCredentials target"
     exit()
 
-sys.path.append('../..')
+# Run this script from ACM-Contest directory
+# sys.path.append('../..')
 
 from xkcdpass import xkcd_password as xp
 from app.models import Team
@@ -24,8 +25,9 @@ def create(target):
 
     # Don't overwrite teams
     start = Team.objects.count()
+    diff = target - start
 
-    for i in range(start, target + start):
+    for i in range(start, target):
         teamID = "acm-%i" % i
         teamPass = password()
         domPass = password()

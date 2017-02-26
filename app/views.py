@@ -168,7 +168,7 @@ def profile():
     error = request.args.get('error', None)
     success = request.args.get('success', None)
     message = request.args.get('message', None)
-
+    profile = None
 
     # check if the user is logged in. If not, rturn to the login page
     if 'email' not in session:
@@ -213,16 +213,15 @@ def profile():
         if profile:
             # update profile
             profile.update(**data)
-            success = "Profile updated."
         else:
             profile = Profile(**data)
             account.profile = profile
-            success = "Profile created."
 
         # Save and handle errors
         try:
             profile.save()
             account.save()
+            success = "Profile updated."
         except Exception as e:
             error =  "Hey, there's been an error! Sorry about that. "
             error += "Please email hello@acmatfsu.org and let us know. "
