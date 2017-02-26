@@ -179,10 +179,6 @@ def profile():
     account = Account.objects(email=email).first()
     profile = account.profile
 
-    # same the profile id
-    if profile:
-        session['profile_id'] = str(profile.id)
-
     #Getting information from form
     if request.method =='POST':
 
@@ -222,11 +218,16 @@ def profile():
             profile.save()
             account.save()
             success = "Profile updated."
+
         except Exception as e:
             error =  "Hey, there's been an error! Sorry about that. "
             error += "Please email hello@acmatfsu.org and let us know. "
             error += "We'll try and get it sorted out ASAP."
             print e
+
+    # If there's a profile at this point, add it to the session
+    if profile:
+        session['profile_id'] = str(profile.id)
 
     return render_template('/form/profile.html',error=error,success=success,
         message=message, profile=profile)
