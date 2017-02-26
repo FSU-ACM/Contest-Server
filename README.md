@@ -40,3 +40,7 @@ MAIL_DEFAULT_SENDER = 'acm@cs.fsu.edu'
 
 These config values override the basic config values from the root's
 `/config.py` file
+
+
+## Mail handling
+todo
