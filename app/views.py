@@ -416,6 +416,7 @@ def team_create():
 
         # Set the team name
         team.teamName = request.form['teamName'] or team.teamID
+        team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
 
         # Safety first!
         try:
@@ -448,6 +449,7 @@ def team_update():
         try:
             team = profile.team
             team.teamName = request.form['teamName'] or "Unnamed Team"
+            team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
             team.save()
             sucess = "Team name updated."
         except:

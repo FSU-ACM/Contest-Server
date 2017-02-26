@@ -15,6 +15,9 @@ from app import db
 #         return value
 
 class Team(db.Document):
+
+	MAX_NAME_LENGTH = 30
+
     teamName = db.StringField()
 
     # For joining the team in the db
