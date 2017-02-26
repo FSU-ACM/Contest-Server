@@ -3,7 +3,7 @@ from app import db
 class Profile(db.Document):
     firstname = db.StringField(required=True)
     lastname = db.StringField(required=True)
-    fsuid = db.StringField(unique=True)
+    fsuid = db.StringField()
     dob = db.DateTimeField(null=True)
     gender = db.StringField()
     race = db.ListField(db.StringField())
