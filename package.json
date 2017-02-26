@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/FSU-ACM/ACM-Contest-Server.git"
   },
-  "author": "",
+  "author": "ACM at FSU",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/FSU-ACM/ACM-Contest-Server/issues"
