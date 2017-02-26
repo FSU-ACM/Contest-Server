@@ -21,7 +21,7 @@ nav_logged_in = Navbar('',
     Link('Home', '/'),
     Link('FAQ','/#faq'),
     Link('Sponsors', '/#sponsors'),
-    Link('Teams','/allteams'),
+    # Link('Teams','/allteams'),
     Link('Profile','/profile'),
 )
 
@@ -29,7 +29,7 @@ nav_logged_out = Navbar('',
     Link('Home', '/'),
     Link('FAQ','/#faq'),
     Link('Sponsors', '/#sponsors'),
-    Link('Teams','/allteams'),
+    # Link('Teams','/allteams'),
     Link('Login','/login'),
 )
 
