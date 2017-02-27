@@ -331,7 +331,8 @@ def reset_password():
         account = Account.objects(email=email).first()
 
         if account:
-            reset_password_email(email, reset_pass(account))
+            pass = reset_pass(account)
+            reset_password_email(email, pass)
             success = "Password email sent."
         else:
             error = error_msg
