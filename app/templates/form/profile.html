@@ -1,9 +1,9 @@
-{% extends "page.html" %}
+{% extends "/super/form.html" %}
 {% block content %}
 
-<div class="container form-container">
+<div class="container form-sheet">
 
-  {% include "/menuitems.html" %}
+  {% include "/form/menuitems.html" %}
 
 
   {% if error %}
@@ -20,20 +20,27 @@
   </div>
   {% endif %}
 
+	{% if message %}
+	<div class="alert alert-info" role="alert">
+		<strong>Whoa there!</strong>
+		{{ message }}
+	</div>
+	{% endif %}
+
   <h2>Complete Your Profile</h2>
   <p>
-    Not all fields are required. <a href="/#team-faq">Team registration coming soon.</a>
+    Not all fields are required. Once you save your profile, you may create or join a team.
     <br />
   </p>
 
-  {% if profile %}
+  <!-- {% if profile %}
   <div class="alert alert-info" role="alert">
     Repopulating fields is hard! Even though only some are showing, we promise
     all of them were actually recorded.
   </div>
-  {% endif %}
+  {% endif %} -->
 
-    <form action="{{ url_for('profile') }}" method=post class='form-horizontal'>
+    <form action="{{ url_for('profile') }}" method=post>
 
       <label for="register-firstname">First Name*</label>
       <input type="text" class="form-control" id="register-firstname" name=firstname placeholder="Melina" value="{{profile.firstname}}" required>
@@ -133,29 +140,29 @@
       <label for="register-gradterm">Graduation Semester</label><br/>
       <select name="gradterm" id="register-gradterm">
         <option value=""></option>
-        <option value="Spring">Spring</option>
-        <option value="Summer">Summer</option>
-        <option value="Fall">Fall</option>
+        <option value="Spring" {% if profile.gradterm == "Spring"%}selected="true"{%endif%}>Spring</option>
+        <option value="Summer" {% if profile.gradterm == "Summer"%}selected="true"{%endif%}>Summer</option>
+        <option value="Fall" {% if profile.gradterm == "Fall"%}selected="true"{%endif%}>Fall</option>
       </select>
       <br/>
       <br/>
 
       <label for="register-status">Student Status (Undergrad / Graduate / etc.)</label><br />
-      <input type="radio" id="register-status" name=status value="undergraduate">Undergraduate</input><br />
-      <input type="radio" id="register-status" name=status value="graduate">Graduate</input><br />
-      <input type="radio" id="register-status" name=status value="highschool">High School</input><br />
-      <input type="radio" id="register-status" name=status value="nonstatus">Non-status seeking</input><br />
+      <input type="radio" id="register-status" name=status value="undergraduate" {% if profile.status == "undergraduate"%}checked {%endif%}>Undergraduate</input><br />
+      <input type="radio" id="register-status" name=status value="graduate" {% if profile.status == "graduate"%}checked {%endif%}>Graduate</input><br />
+      <input type="radio" id="register-status" name=status value="highschool" {% if profile.status == "highschool"%}checked {%endif%}>High School</input><br />
+      <input type="radio" id="register-status" name=status value="nonstatus" {% if profile.status == "nonstatus"%}checked {%endif%}>Non-status seeking</input><br />
       <br/>
 
       <label for="register-advProg">Furthest Programming Course</label>
       <p>Please select the course you are currently in, or have taken most recently.</p>
       <select name="advProg" id="register-advProg">
         <option value=""></option>
-        <option value="N/A">N/A</option>
-        <option value="COP3014">COP3014</option>
-        <option value="COP3330">COP3330</option>
-        <option value="COP4530">COP4530</option>
-        <option value="COP4531">COP4531</option>
+        <option value="N/A" {% if profile.advProg == "N/A"%}selected="true"{%endif%}>N/A</option>
+        <option value="COP3014" {% if profile.advProg == "COP3014"%}selected="true"{%endif%}>COP3014</option>
+        <option value="COP3330" {% if profile.advProg == "COP3330"%}selected="true"{%endif%}>COP3330</option>
+        <option value="COP4530" {% if profile.advProg == "COP4530"%}selected="true"{%endif%}>COP4530</option>
+        <option value="COP4531" {% if profile.advProg == "COP4531"%}selected="true"{%endif%}>COP4531</option>
       </select>
       <br />
       <br />

@@ -23,7 +23,24 @@ MONGODB_SETTINGS = {
     'password': 'password', # User's password
 }
 
+# ReCaptcha
+RECAPTCHA_ENABLED = True
+RECAPTCHA_SITE_KEY = '6LeyxBQUAAAAAHBpG2htNplW1qjcgODp47P6FHuE'
+RECAPTCHA_SECRET_KEY = ''
+
+
+# Email Config
+MAIL_SERVER = 'mail.cs.fsu.edu'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USE_SSL = False
+MAIL_DEFAULT_SENDER = 'acm@cs.fsu.edu'
+
 ```
 
 These config values override the basic config values from the root's
 `/config.py` file
+
+
+## Mail handling
+todo

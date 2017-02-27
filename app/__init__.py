@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 from flask_recaptcha import ReCaptcha
 from flask_nav import Nav
 from flask_nav.elements import *
+from flask_mail import Mail
 
 import random
 import string
@@ -23,6 +24,7 @@ app.config.from_pyfile('config.py')
 bootstrap = Bootstrap(app)
 db = MongoEngine(app)
 recaptcha = ReCaptcha(app=app)
+mail = Mail(app)
 
 # Other Config
 app.url_map.strict_slashes = False

@@ -1,0 +1,14 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}ACM Spring Programming Contest 2017{% endblock %}
+
+
+{% block navbar %}
+<div class="container navbar-container">
+
+  {% if not session.profile_id %}
+		{{nav.logged_out.render()}}
+  {% else %}
+		{{nav.logged_in.render()}}
+  {% endif %}
+</div>
+{% endblock %}

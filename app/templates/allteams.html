@@ -1,0 +1,20 @@
+{% extends "/super/page.html" %}
+{% block content %}
+
+<div class="container form-container"
+
+  <ol>
+    {% for team in teams %}
+    <li>{{team.teamName}}
+      <ul>
+        {% for member in team.members %}
+          <li>{{member.firstname}} {{member.lastname}}</li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ol>
+
+</div>
+
+{% endblock %}

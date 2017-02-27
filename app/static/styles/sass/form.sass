@@ -1,0 +1,107 @@
+// Generic styles
+@import "includes/color.sass"
+@import "includes/type.sass"
+@import "includes/generics.sass"
+
+// Sub-element styles
+@import "includes/navbar.sass"
+
+
+body
+	background-color: $night
+	background-image: 	url("../../assets/star-cloud-tile.png")
+	background-repeat: 	repeat
+	background-attachment: fixed
+
+	color:				$text
+	font: 				16px/1 $body-font
+	position: 			relative
+	line-height:		1.8
+
+
+// Generic form styles
+
+.textbox
+	font-family: 'Helvetica', sans-serif
+	font-weight: 400
+	font-size: 1em
+	padding: 0 10px
+
+
+.form-sheet
+	background-color: 	$white
+	color:				$dark-grey
+	padding:			32px
+	border-radius: 		4px
+	-webkit-font-smoothing: antialiased
+
+
+	h2,label
+		// text-transform: uppercase
+
+
+
+	.menuitems
+		display: flex
+		flex-direction: row
+		justify-content: flex-end
+		flex-wrap: wrap
+		margin-bottom: 16px
+
+		a
+			text-transform: uppercase
+			font-family: $body-font
+			font-weight: 700
+			margin-left: 20px
+
+	.column-left
+		@media screen and (min-width: 992px)
+			border-right: 4px solid $light-grey
+
+
+// Unique form styles
+.login-container
+	// display: flex
+	// flex-direction: column
+	// justify-content: center
+
+	max-width: 500px
+	text-align: center
+
+	.login-form
+		display: flex
+		flex-direction: column
+		justify-content: center
+
+		h2
+			margin: 0.5em 0
+
+		input
+			height: 2.75em
+			margin: 0.5em 0
+
+		.btn-full-color:hover
+			border-color: $accent
+
+		hr
+			// border-color: $accent
+			width: 100%
+
+		#btn-submit
+			width: 100%
+
+		#forgot-password
+			margin-top: 0.5em
+
+	.btn-outline
+		color: $accent
+		background-color: $white
+		border-color: $accent
+
+
+#forgot-password
+	background: rgba(0,0,0,0)
+	border: 0
+
+#reset-password-email
+	margin-bottom: 0.5em
