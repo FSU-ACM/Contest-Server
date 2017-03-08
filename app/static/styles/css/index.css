@@ -216,7 +216,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 32px; }
+  margin-bottom: 24px; }
 
 .sponsor-wrap {
   justify-content: center;
@@ -225,7 +225,11 @@ body {
     max-width: 150px;
     margin: 20px;
     max-height: 100px; }
+  .sponsor-wrap .sponsor-img-medium {
+    max-width: 200px;
+    margin: 20px; }
   .sponsor-wrap .sponsor-img-large {
-    max-width: 400px; }
+    max-width: 350px;
+    margin: 20px; }
   .sponsor-wrap #harris {
     padding-top: 11%; }
