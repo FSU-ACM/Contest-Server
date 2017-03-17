@@ -18,8 +18,11 @@ class Profile(db.Document):
     # Account relationship
     team = db.ReferenceField('Team')
 
+    # Extra credit relationship
+    courses = db.ListField(db.ReferenceField('Course'), null=True)
+
     def __repr__(self):
         if self.fsuid is not None:
-            return '<Profile %r>' % self.fsuid
+            return '<Profile %r>' % (self.firstname + ' ' + self.lastname)
         else:
             return super(Profile, self).__repr__()
