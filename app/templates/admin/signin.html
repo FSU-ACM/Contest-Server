@@ -1,19 +1,6 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}SPC: Sign In{% endblock %}
+{% extends "/super/page.html" %}
+{% block content %}
 
 
-{% block navbar %}
-<div class="container navbar-container">
 
-  {% if not session.profile_id %}
-		{{nav.logged_out.render()}}
-  {% else %}
-		{{nav.logged_in.render()}}
-  {% endif %}
-</div>
-{% endblock %}
-
-{% block styles %}
-  {{ super() }}
-  <link rel="stylesheet" href="{{url_for('static', filename='styles/css/admin.css')}}">
 {% endblock %}

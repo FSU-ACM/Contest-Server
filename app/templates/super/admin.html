@@ -1,0 +1,12 @@
+{% extends "bootstrap/base.html" %}
+
+{% block navbar %}
+<div class="container navbar-container">
+	{{nav.admin.render()}}
+</div>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{url_for('static', filename='styles/css/admin.css')}}">
+{% endblock %}
