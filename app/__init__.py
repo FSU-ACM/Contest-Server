@@ -5,6 +5,8 @@ from flask_recaptcha import ReCaptcha
 from flask_nav import Nav
 from flask_nav.elements import *
 from flask_mail import Mail
+from flask_basicauth import BasicAuth
+
 
 import random
 import string
@@ -25,6 +27,7 @@ bootstrap = Bootstrap(app)
 db = MongoEngine(app)
 recaptcha = ReCaptcha(app=app)
 mail = Mail(app)
+basic_auth = BasicAuth(app)
 
 # Other Config
 app.url_map.strict_slashes = False
@@ -46,4 +49,4 @@ def dated_url_for(endpoint, **values):
 
 
 
-from app import views
+from app import views, views_admin
