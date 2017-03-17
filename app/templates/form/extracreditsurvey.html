@@ -1,0 +1,46 @@
+{% extends "/super/form.html" %}
+{% block content %}
+
+<div class="container form-sheet">
+
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Houston, we have a problem:</strong>
+    {{ error }}
+  </div>
+  {% endif %}
+
+  {% if success %}
+  <div class="alert alert-success" role="alert">
+    <strong>Mission accomplished!</strong>
+    {{ success }}
+  </div>
+  {% endif %}
+
+  {% include "/form/menuitems.html" %}
+
+  <br/>
+
+    {% if allcourses %}
+    
+    <form action="{{ url_for('extracreditsurvey') }}" method=post class='form-horizontal'>
+
+    <label for="register-ec_courses">Please select from the following courses</label><br/>
+    {% for courses in allcourses %}
+
+        <input
+          type="checkbox"
+          id="register-ec_courses"
+          name=ec_courses
+          value={{ courses.code}}>{{ courses.code}}</input><br/>
+
+    {% endif %}
+    
+    <input class="btn btn-primary" type=submit value="Save courses">
+    </form>
+    
+    {% endif %}
+
+</div>
+
+{% endblock %}

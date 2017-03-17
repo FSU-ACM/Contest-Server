@@ -542,6 +542,33 @@ def team_leave():
     return action
 
 
+@app.route('/extracreditsurvey', methods=['POST','GET'])
+def extracreditsurvey():
+    error=None
+    success=success
+    allcourses=None
+    selectedcourses=None
+    
+    action, profile = verify_profile(session)
+    print action, profile
+    action = None if not profile else redirect(url_for('profile',
+        message="Please login first"))
+    
+    # get all courses from the databse for extra credit and store it in allcourses
+    # allcourses = ???
+        
+    if request.method =='POST':
+        if 'courses' in request.form:
+            selectedcourses = bleach.clean(request.form['ec_courses'])
+            
+        # save these courses for the extra credit survey associated with the profile      
+
+        success = "Your courses were saved successfully"
+            
+    return render_template('extracreditsurvey.html',error=error,success=success,
+        allcourses=allcourses, selectedcourses=selectedcourses)
+    
+    
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     dob_date = None
