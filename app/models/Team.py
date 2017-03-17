@@ -16,7 +16,7 @@ from app import db
 
 class Team(db.Document):
 
-	MAX_NAME_LENGTH = 30
+    MAX_NAME_LENGTH = 30
 
     teamName = db.StringField()
 
