@@ -12,6 +12,6 @@ def sign_in():
     error, success = None, None
 
     if request.method == 'POST':
-
+        pass
 
     return render_template('/admin/signin.html', error=error, success=success)

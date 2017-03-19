@@ -33,7 +33,7 @@ nav_logged_out = Navbar('',
     Link('Login','/login'),
 )
 
-nav_admin = NavBar('',
+nav_admin = Navbar('',
     Link('Home', '/'),
 )
 
