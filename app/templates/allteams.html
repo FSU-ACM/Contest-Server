@@ -24,6 +24,15 @@
           {% endfor %}
         </tr>
       {% endfor %}
+
+      {% if teams|length < 2 %}
+        <td></td>
+      {% endif %}
+
+      {% if teams|length < 3 %}
+        <td></td>
+      {% endif %}
+
     </tbody>
 
   </table>
