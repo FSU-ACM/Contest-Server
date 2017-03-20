@@ -1,19 +1,32 @@
-{% extends "/super/page.html" %}
+{% extends "/super/form.html" %}
 {% block content %}
 
-<div class="container form-container"
+<div class="container form-container form-sheet">
 
-  <ol>
-    {% for team in teams %}
-    <li>{{team.teamName}}
-      <ul>
-        {% for member in team.members %}
-          <li>{{member.firstname}} {{member.lastname}}</li>
-        {% endfor %}
-      </ul>
-    </li>
-    {% endfor %}
-  </ol>
+  <h1>Teams and Members</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Team Members</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for team in teams %}
+        <tr>
+          <td>{{team.teamName}}</td>
+          {% for member in team.members %}
+            <td>{{member.firstname}} {{member.lastname}}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
 
 </div>
 
