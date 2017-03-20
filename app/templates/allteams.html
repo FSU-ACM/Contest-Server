@@ -22,16 +22,17 @@
           {% for member in team.members %}
             <td>{{member.firstname}} {{member.lastname}}</td>
           {% endfor %}
+
+          {% if teams|length < 2 %}
+            <td></td>
+          {% endif %}
+
+          {% if teams|length < 3 %}
+            <td></td>
+          {% endif %}
+
         </tr>
       {% endfor %}
-
-      {% if teams|length < 2 %}
-        <td></td>
-      {% endif %}
-
-      {% if teams|length < 3 %}
-        <td></td>
-      {% endif %}
 
     </tbody>
 
