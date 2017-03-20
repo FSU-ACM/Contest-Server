@@ -23,11 +23,11 @@
             <td>{{member.firstname}} {{member.lastname}}</td>
           {% endfor %}
 
-          {% if teams|length < 2 %}
+          {% if team.members|length < 2 %}
             <td></td>
           {% endif %}
 
-          {% if teams|length < 3 %}
+          {% if team.members|length < 3 %}
             <td></td>
           {% endif %}
 
