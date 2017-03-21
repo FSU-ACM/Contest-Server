@@ -33,7 +33,7 @@ class Team(db.Document):
 
     def __repr__(self):
         if self.team_name is not None:
-            return '<Team %r>' % self.team_name
+            return '<Team %r>' % self.teamName
         else:
             return super(Team, self).__repr__()
 
