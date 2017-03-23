@@ -15,6 +15,9 @@ class Profile(db.Document):
     advProg = db.StringField()
     status = db.StringField()
 
+    # Block editing
+    shadowban = db.BooleanField()
+
     # Account relationship
     team = db.ReferenceField('Team')
 

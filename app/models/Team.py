@@ -16,6 +16,10 @@ class Team(db.Document):
     # List of participants on team
     members = db.ListField(db.ReferenceField('Profile'), null=True)
 
+    # Block editing
+    shadowban = db.BooleanField()
+
+
 
     def __repr__(self):
         if self.team_name is not None:
