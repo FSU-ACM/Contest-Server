@@ -1,0 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@font-face {
+  font-family: "Avenir-Next-Bold";
+  src: url(../../fonts/Avenir-Next-Bold.ttf); }
+
+/* -------------------------------------------------------------
+ *  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
+ *  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
+ *
+ *  List of CSS3 Sass Mixins File to be @imported and @included as you need
+ *
+ *  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
+ *  ENDING css files
+ *
+ *  note: All CSS3 Properties are being supported by Safari 5
+ *  more info: http://www.findmebyip.com/litmus/#css3-properties
+ *
+ *------------------------------------------------------------- */
+a {
+  color: #afafaf; }
+  a:hover {
+    color: #191919;
+    text-decoration: none; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "Avenir-Next-Bold", sans-serif; }
+
+.block {
+  height: 100%;
+  max-height: 900px; }
+  @media screen and (max-width: 1100px) {
+    .block {
+      max-height: 700px; } }
+  @media screen and (max-width: 768px) {
+    .block {
+      max-height: 600px; } }
+
+.sheet {
+  background-color: #ffffff;
+  color: #191919;
+  padding: 48px 0 128px 0; }
+
+.sheet-gap {
+  height: 100px;
+  background-color: rgba(255, 140, 0, 0.5); }
+
+.btn-primary {
+  background-color: #ff6e40;
+  border-color: #ff6e40; }
+  .btn-primary:hover {
+    background-color: #ffffff;
+    color: #ff6e40;
+    border-color: #ff6e40; }
+
+.btn-base, .btn-full-color, .btn-outline {
+  font-size: 12px;
+  border-radius: 100px;
+  padding: 4px 48px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 220px; }
+  @media screen and (min-width: 500px) {
+    .btn-base, .btn-full-color, .btn-outline {
+      font-size: 18px; } }
+
+.btn-full-color {
+  border: 3px solid #ff6e40;
+  background-color: #ff6e40;
+  color: #ffffff; }
+  .btn-full-color:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #ff6e40; }
+
+.btn-outline {
+  border: 3px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff; }
+  .btn-outline:hover {
+    background-color: #ffffff;
+    color: #ff6e40; }
+
+.navbar .container-fluid {
+  padding: 0px; }
+
+.navbar-container {
+  margin-top: 32px; }
+
+.navbar-default {
+  z-index: 1024;
+  background-color: transparent;
+  border-radius: 0;
+  border-width: 0; }
+  .navbar-default .navbar-brand {
+    font-family: "Avenir-Next-Bold", sans-serif;
+    color: #ffffff;
+    font-size: 22px; }
+    .navbar-default .navbar-brand:hover {
+      color: #ffffff; }
+    @media screen and (min-width: 1100px) {
+      .navbar-default .navbar-brand {
+        font-size: 50px; } }
+  .navbar-default .navbar-nav li a {
+    font-weight: 700;
+    color: #ffffff; }
+    .navbar-default .navbar-nav li a:hover {
+      color: #ffe902; }
+
+.navbar-nav {
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 18px; }
+
+.dropdown-menu > li > a {
+  color: #191919 !important; }
+
+@media (min-width: 768px) {
+  .nav {
+    float: right !important; } }
+
+html, body {
+  height: 100%; }
+
+.container {
+  max-width: 700px; }
+
+.sign-in {
+  margin-top: 100px; }
+
+.navbar-default .navbar-nav li a {
+  color: #000000; }
