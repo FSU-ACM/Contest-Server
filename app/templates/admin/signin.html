@@ -1,6 +1,42 @@
-{% extends "/super/page.html" %}
+{% extends "/super/admin.html" %}
 {% block content %}
 
+
+<div class="sign-in">
+
+  <div class="container">
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+      <strong>Uh oh:</strong>
+      {{ error }}
+    </div>
+    {% endif %}
+
+    {% if success %}
+    <div class="alert alert-success" role="alert">
+      <strong>Success!</strong>
+      {{ success }}
+    </div>
+    {% endif %}
+
+    <form action="{{ url_for('sign_in') }}" method=post >
+
+      <div class="input-group input-group-lg">
+        <input type="text" class="form-control" placeholder="Email" name=email
+          aria-describedby="sizing-addon1" autofocus>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type=submit>Sign In</button>
+        </span>
+      </div>
+
+    </form>
+
+
+
+  </div>
+
+</div>
 
 
 {% endblock %}

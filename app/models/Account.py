@@ -7,6 +7,8 @@ class Account(db.Document):
     profile = db.ReferenceField('Profile')
     prereg = db.ReferenceField('Preregistration')
 
+    signin = db.DateTimeField(null=True)
+
     # Handles password-things
     def set_password(self, password):
         self.password = generate_password_hash(password)
