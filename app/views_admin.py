@@ -47,8 +47,9 @@ def sign_in():
                 try:
                     sign_in_email(email, team.teamID, team.domPass)
                     account.signin = datetime.datetime.now
+                    account.save()
                     success = "Welcome, %s!" % (account.profile.firstname)
                 except:
-                    error = "There's been an issue sending your email."
+                    error = "There's been an issue sending your email. Go find Andrew!"
 
     return render_template('/admin/signin.html', error=error, success=success)
