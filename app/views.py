@@ -184,9 +184,9 @@ def profile():
     account = Account.objects(email=email).first()
     profile = account.profile
 
-    # Shadowban?
-    if profile.shadowban is True:
-        abort(404)
+    # # Shadowban?
+    # if profile is not None and profile.shadowban is True:
+    #     abort(404)
 
     #Getting information from form
     if request.method =='POST':
@@ -459,9 +459,9 @@ def team_update():
         try:
             team = profile.team
 
-            # Shadowban?
-            if team.shadowban is True:
-                abort(404)
+            # # Shadowban?
+            # if team.shadowban is True:
+            #     abort(404)
 
             team.teamName = request.form['teamName'] or "Unnamed Team"
             team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
