@@ -16,11 +16,11 @@ DEBUG = True
 
 # MongoDB
 MONGODB_SETTINGS = {
-	'db': 'database',		# name of the database in MongoDB
+	'db':   'database',	# name of the database in MongoDB
 	'host': 'localhost', 	# hostname of server
 	'port': 27017,
-    'username': 'username', # Database user
-    'password': 'password', # User's password
+    'username': 'username',	# Database user
+    'password': 'password',	# User's password
 }
 
 # ReCaptcha
