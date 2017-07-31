@@ -15,9 +15,15 @@ def page_not_found(e):
 def page_not_found(e):
     return render_template('500.html'), 500
 
+@app.route('/allteams')
+def allteams():
+    teams = Team.objects.filter(teamName__exists=True)
+    return render_template('allteams.html', teams=teams)
 
+
+from . import account
 from . import admin
 from . import nav
-from . import views
-from . import account
 from . import register
+from . import team
+# from . import views
