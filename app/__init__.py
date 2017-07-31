@@ -22,6 +22,9 @@ app.secret_key=''.join(random.SystemRandom().choice(string.hexdigits) for _ in r
 app.config.from_object('config')
 app.config.from_pyfile('config.py')
 
+# add pugjs support
+app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
+
 # Init modules
 bootstrap = Bootstrap(app)
 db = MongoEngine(app)
