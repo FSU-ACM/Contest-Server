@@ -1,20 +1,20 @@
-# /views_admin.py
+# views.admin.sign_in
 
 from flask import redirect, url_for, render_template, request, session
-
-import re
 
 from app import app, basic_auth
 from app.models import Account, Profile, Team
 from app.email import sign_in_email
+from app.views._util.auth import verify_email
 
-import datetime
-
-EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+import datetime, re
 
 @app.route('/signin', methods=['POST', 'GET'])
 @basic_auth.required
 def sign_in():
+    """
+    This view is for contest volunteers to sign in attendees.
+    """
 
     error = request.args.get('error', None)
     success = request.args.get('success', None)
@@ -22,7 +22,7 @@ def sign_in():
 
     if request.method == 'POST':
 
-        if email == None or email == '' or not EMAIL_REGEX.match(email):
+        if email == None or email == '' or not verify_email(email):
             error = "Please enter a valid email."
         else:
             # Retrieve team data : email => account => profile => team

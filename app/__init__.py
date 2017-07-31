@@ -51,5 +51,4 @@ def dated_url_for(endpoint, **values):
     return url_for(endpoint, **values)
 
 
-
-from app import views, views_admin
+from . import util, views
