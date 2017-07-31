@@ -4,7 +4,7 @@ from app import app, recaptcha, db
 from app.models import Account, Preregistration, Profile, Team
 from app.util.email import reset_password_email
 from app.util.password import reset_password as reset_pass
-from app.views._util.auth import *
+from app.util.views.auth import *
 
 from datetime import date,datetime
 import bleach, re

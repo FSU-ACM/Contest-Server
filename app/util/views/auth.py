@@ -1,4 +1,4 @@
-# views._util.auth
+# util.views.auth
 
 from flask import redirect, url_for
 from app.models import Profile
