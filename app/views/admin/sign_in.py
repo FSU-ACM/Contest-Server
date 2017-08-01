@@ -4,7 +4,7 @@ from flask import redirect, url_for, render_template, request, session
 
 from app import app, basic_auth
 from app.models import Account, Profile, Team
-from app.email import sign_in_email
+from app.util.email import sign_in_email
 from app.util.views.auth import verify_email
 
 import datetime, re
