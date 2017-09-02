@@ -1,0 +1,15 @@
+version: '2'
+services:
+    webapp:
+        container_name: contest-webapp
+        build: ..
+        image: contest-unf
+        environment:
+            FLASK_CONFIG: '/webapp/config/production.py'
+    db:
+        container_name: contest-db
+        image: "mongo"
+#         volumes:
+#             - deploy_contest-db-2017fa:/data/db
+# volumes:
+#     deploy_contest-db-2017fa:
