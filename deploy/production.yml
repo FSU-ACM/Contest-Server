@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    extends:
+      file: docker-compose.yml
+      service: db
+    volumes:
+      - data:/data/db
+  webapp:
+    extends:
+      file: docker-compose.yml
+      service: webapp
+    # Temporary, need to replace with nginx service
+    environment:
+      FLASK_CONFIG: '/webapp/config/production.py'
+      VIRTUAL_HOST: 'foo.bar.com'
+  nginx:
+    image: jwilder/nginx-proxy
+    volumes:
+      # - /etc/nginx/certs
+      # - /etc/nginx/vhost.d
+      # - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - "80:80"
+      # - "443:443"
+    restart: always
+volumes:
+  data:
+    external:
+      name: contest-db-2017fa

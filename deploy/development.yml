@@ -1,24 +1,24 @@
 version: '2'
 services:
-    db:
-        extends:
-            file: docker-compose.yml
-            service: db
-        ports:
-            - "8027:27017"
-        volumes:
-            - data:/data/db
-    webapp:
-        extends:
-            file: docker-compose.yml
-            service: webapp
-        volumes:
-            - ..:/webapp
-        ports:
-            - "8080:80"
-        environment:
-            FLASK_CONFIG: '/webapp/config/development.py'
+  db:
+    extends:
+      file: docker-compose.yml
+      service: db
+    ports:
+      - "8027:27017"
+    volumes:
+      - data:/data/db
+  webapp:
+    extends:
+      file: docker-compose.yml
+      service: webapp
+    volumes:
+      - ..:/webapp
+    ports:
+      - "8080:80"
+    environment:
+      FLASK_CONFIG: '/webapp/config/development.py'
 volumes:
-    data:
-        external:
-            name: contest-db-2017fa
+  data:
+    external:
+      name: contest-db-2017fa
