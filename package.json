@@ -4,7 +4,11 @@
   "description": "Flask App for ACM Programming Contest",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "make": "gulp && docker build -t contest-server .",
+    "dev": "docker-compose -f deploy/development.yml up",
+    "dev2": "docker-compose -f deploy/development.yml up -d",
+    "prod": "gulp && npm run prod2",
+    "prod2": "docker-compose -f deploy/docker-compose.yml up -d"
   },
   "repository": {
     "type": "git",
