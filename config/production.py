@@ -1,13 +1,15 @@
 # Default production config
 DEBUG = False
 
+TEAM_COUNT = 500
+
 # MongoDB
 MONGODB_SETTINGS = {
-	'db': None,	# "project"
-	'host': None, # "127.0.0.1"
-	'port': None, # 12345
-    'username': None, # 'username'
-    'password': None, # 'passwd'
+	'db': 'fpc2017',	# "project"
+	'host': 'db', 		# "127.0.0.1"
+	'port': 27017, 		# 27017
+    # 'username': None, # 'username'
+    # 'password': None, # 'passwd'
 }
 
 # ReCaptcha
