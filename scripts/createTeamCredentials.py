@@ -1,11 +1,15 @@
-import sys
+# THIS SCRIPT MIGHT NOT WORK OK
+
+import sys, os
 
 if len(sys.argv) is not 2:
     print "usage: ./createTeamCredentials target"
     exit()
 
 # Run this script from ACM-Contest directory
-# sys.path.append('../..')
+currentdir = os.path.dirname(os.path.abspath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir)
 
 from xkcdpass import xkcd_password as xp
 from app.models import Team
