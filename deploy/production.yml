@@ -10,10 +10,9 @@ services:
     extends:
       file: docker-compose.yml
       service: webapp
-    # Temporary, need to replace with nginx service
     environment:
       FLASK_CONFIG: '/webapp/config/production.py'
-      VIRTUAL_HOST: 'foo.bar.com'
+      VIRTUAL_HOST: 'test.localhost'
   nginx:
     image: jwilder/nginx-proxy
     volumes:

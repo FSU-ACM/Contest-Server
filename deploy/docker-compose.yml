@@ -8,7 +8,6 @@ services:
     environment:
       FLASK_CONFIG: '/webapp/config/production.py'
   db:
-    container_name: contest-db
     image: "mongo"
     restart: "always"
 #     volumes:
