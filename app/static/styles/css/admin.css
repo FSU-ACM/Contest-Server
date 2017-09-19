@@ -1,8 +1,22 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-@font-face {
-  font-family: "Avenir-Next-Bold";
-  src: url(../../fonts/Avenir-Next-Bold.ttf); }
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+.red {
+  color: #DC3D3D; }
+
+.green {
+  color: #95C66F; }
+
+.purple {
+  color: #B73A99; }
+
+.brown {
+  color: #B07953; }
+
+.gray {
+  color: #01ABA5; }
+
+.white {
+  color: #ffffff; }
 
 /* -------------------------------------------------------------
  *  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
@@ -24,7 +38,7 @@ a {
     text-decoration: none; }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Avenir-Next-Bold", sans-serif; }
+  font-family: "Roboto Mono", monospace; }
 
 .block {
   height: 100%;
@@ -39,7 +53,7 @@ h1, h2, h3, h4, h5 {
 .sheet {
   background-color: #ffffff;
   color: #191919;
-  padding: 48px 0 128px 0; }
+  padding: 48px 0 64px 0; }
 
 .sheet-gap {
   height: 100px;
@@ -57,7 +71,7 @@ h1, h2, h3, h4, h5 {
   font-size: 12px;
   border-radius: 100px;
   padding: 4px 48px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   min-width: 220px; }
@@ -94,7 +108,7 @@ h1, h2, h3, h4, h5 {
   border-radius: 0;
   border-width: 0; }
   .navbar-default .navbar-brand {
-    font-family: "Avenir-Next-Bold", sans-serif;
+    font-family: "Roboto Mono", monospace;
     color: #ffffff;
     font-size: 22px; }
     .navbar-default .navbar-brand:hover {
@@ -109,8 +123,8 @@ h1, h2, h3, h4, h5 {
       color: #ffe902; }
 
 .navbar-nav {
-  font-family: "Open Sans", sans-serif;
-  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  text-transform: lowercase;
   letter-spacing: 1px;
   font-size: 18px; }
 

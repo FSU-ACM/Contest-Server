@@ -1,7 +1,8 @@
 var gulp = require('gulp');
 
-var src = "app/static/styles/sass",
-	dest = "app/static/styles/css";
+var src = "app/static/styles/sass/*.sass",
+	dest = "app/static/styles/css",
+	watch = "app/static/styles/sass/**";
 
 // Compiles .sass into .css
 gulp.task('sass', function() {
@@ -13,8 +14,8 @@ gulp.task('sass', function() {
 });
 
 // Monitors and .sass
-gulp.task('watch', function() {
-	gulp.watch(src, ['sass']);
+gulp.task('watch', ['sass'], function() {
+	gulp.watch(watch, ['sass']);
 });
 
 //
