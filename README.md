@@ -6,14 +6,28 @@ https://docs.google.com/document/d/1_9VTQSOmZ_X8lVzaUFmRy_2ldRHsIqK-1720amgIq0U/
 
 ## Developing and Deployment
 This suite uses Docker for both development and deployment. You will need to
-install both [Docker](https://www.docker.com/community-edition) and [Docker Compose](https://docs.docker.com/compose/install/).
+install both [Docker](https://www.docker.com/community-edition) and
+[Docker Compose](https://docs.docker.com/compose/install/).
 
 Once both are installed, you can launch the suite in development mode using:
 ```
 docker-compose -f .docker/development.yml up -d
 ```
 
-For deployment, use `.docker/production.yml` instead. 
+For deployment, use `.docker/production.yml` instead.
+
+### Styles
+This project uses Sass to define the styles. Sass needs to be pre-compiled into
+CSS before the image is built. In Development mode, when Sass rebuilds the
+changes are automatically updated in the app. However, if you are making
+changes outside of development mode, run `gulp` to rebuild the Sass styles.
+
+For setting up Gulp and Sass:
+```
+npm install
+npm install -g gulp
+```
+Be sure to install npm beforehand. 
 
 
 ## Configuration
