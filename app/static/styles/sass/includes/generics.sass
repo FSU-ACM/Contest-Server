@@ -10,6 +10,9 @@ a
 h1,h2,h3,h4,h5
 	font-family:		$mono
 
+input
+	border-radius: 0
+
 
 // Generic element stylings
 .block
@@ -42,14 +45,14 @@ h1,h2,h3,h4,h5
 
 .btn-base
 	@include font-size($btn-font-sizes)
-	border-radius: 100px
+	border-radius: 4px
 	padding: 4px 48px
-	font-family: $body
+	font-family: $mono
 	font-weight: 700
-	text-transform: uppercase
-	// margin-right: 16px
-	// margin-bottom: 16px
+	text-transform: lowercase
 	min-width: 220px
+	height: 2.75em
+
 
 .btn-full-color
 	@extend .btn-base

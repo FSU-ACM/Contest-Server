@@ -40,6 +40,9 @@ a {
 h1, h2, h3, h4, h5 {
   font-family: "Roboto Mono", monospace; }
 
+input {
+  border-radius: 0; }
+
 .block {
   height: 100%;
   max-height: 900px; }
@@ -60,33 +63,34 @@ h1, h2, h3, h4, h5 {
   background-color: rgba(255, 140, 0, 0.5); }
 
 .btn-primary {
-  background-color: #ff6e40;
-  border-color: #ff6e40; }
+  background-color: #DC3D3D;
+  border-color: #DC3D3D; }
   .btn-primary:hover {
     background-color: #ffffff;
-    color: #ff6e40;
-    border-color: #ff6e40; }
+    color: #DC3D3D;
+    border-color: #DC3D3D; }
 
 .btn-base, .btn-full-color, .btn-outline {
   font-size: 12px;
-  border-radius: 100px;
+  border-radius: 4px;
   padding: 4px 48px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto Mono", monospace;
   font-weight: 700;
-  text-transform: uppercase;
-  min-width: 220px; }
+  text-transform: lowercase;
+  min-width: 220px;
+  height: 2.75em; }
   @media screen and (min-width: 500px) {
     .btn-base, .btn-full-color, .btn-outline {
       font-size: 18px; } }
 
 .btn-full-color {
-  border: 3px solid #ff6e40;
-  background-color: #ff6e40;
+  border: 3px solid #DC3D3D;
+  background-color: #DC3D3D;
   color: #ffffff; }
   .btn-full-color:hover {
     background: #ffffff;
     border-color: #ffffff;
-    color: #ff6e40; }
+    color: #DC3D3D; }
 
 .btn-outline {
   border: 3px solid #ffffff;
@@ -94,7 +98,7 @@ h1, h2, h3, h4, h5 {
   color: #ffffff; }
   .btn-outline:hover {
     background-color: #ffffff;
-    color: #ff6e40; }
+    color: #DC3D3D; }
 
 .navbar .container-fluid {
   padding: 0px; }
@@ -120,7 +124,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 700;
     color: #ffffff; }
     .navbar-default .navbar-nav li a:hover {
-      color: #ffe902; }
+      color: #DC3D3D; }
 
 .navbar-nav {
   font-family: "Roboto", sans-serif;
@@ -188,7 +192,7 @@ body {
       height: 2.75em;
       margin: 0.5em 0; }
     .login-container .login-form .btn-full-color:hover {
-      border-color: #ff6e40; }
+      border-color: #DC3D3D; }
     .login-container .login-form hr {
       width: 100%; }
     .login-container .login-form #btn-submit {
@@ -196,9 +200,9 @@ body {
     .login-container .login-form #forgot-password {
       margin-top: 0.5em; }
   .login-container .btn-outline {
-    color: #ff6e40;
+    color: #DC3D3D;
     background-color: #ffffff;
-    border-color: #ff6e40; }
+    border-color: #DC3D3D; }
 
 #forgot-password {
   background: transparent;
