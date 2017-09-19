@@ -1,7 +1,6 @@
 version: '2'
 services:
   webapp:
-    # container_name: contest-webapp
     build: ..
     image: contest-unf
     restart: always
@@ -10,7 +9,3 @@ services:
   db:
     image: "mongo"
     restart: "always"
-#     volumes:
-#       - deploy_contest-db-2017fa:/data/db
-# volumes:
-#   deploy_contest-db-2017fa:

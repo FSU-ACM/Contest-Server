@@ -7,7 +7,7 @@ services:
     ports:
       - "8027:27017"
     volumes:
-      - data:/data/db
+      - ../.data:/data/db
   webapp:
     extends:
       file: docker-compose.yml
@@ -18,7 +18,3 @@ services:
       - "8080:80"
     environment:
       FLASK_CONFIG: '/webapp/config/development.py'
-volumes:
-  data:
-    external:
-      name: contest-db-2017fa

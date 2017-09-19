@@ -5,7 +5,7 @@ services:
       file: docker-compose.yml
       service: db
     volumes:
-      - data:/data/db
+      - /data/contest:/data/db
   webapp:
     extends:
       file: docker-compose.yml
@@ -24,7 +24,7 @@ services:
       - "80:80"
       # - "443:443"
     restart: always
-volumes:
-  data:
-    external:
-      name: contest-db-2017fa
+# volumes:
+#   data:
+#     external:
+#       name: contest-db-2017fa

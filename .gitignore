@@ -11,3 +11,6 @@ app/storage
 
 # os junk
 *.DS_Store
+
+# dev storage
+.data
