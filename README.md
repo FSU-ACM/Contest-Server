@@ -4,6 +4,17 @@ Flask suite for running Fall/Spring Programming Contests
 Here is the requirements documents:
 https://docs.google.com/document/d/1_9VTQSOmZ_X8lVzaUFmRy_2ldRHsIqK-1720amgIq0U/edit?usp=sharing
 
+## Developing and Deployment
+This suite uses Docker for both development and deployment. You will need to
+install both [Docker](https://www.docker.com/community-edition) and [Docker Compose](https://docs.docker.com/compose/install/).
+
+Once both are installed, you can launch the suite in development mode using:
+```
+docker-compose -f .docker/development.yml up -d
+```
+
+For deployment, use `.docker/production.yml` instead. 
+
 
 ## Configuration
 Configuration is handled by creating a `/instance` folder in the project's
