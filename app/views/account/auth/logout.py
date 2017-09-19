@@ -7,7 +7,7 @@ from app import app
 def logout():
     try:
         del session['email']
-        del session['profile_id']
+        # del session['profile_id']
     except KeyError:
         pass
 

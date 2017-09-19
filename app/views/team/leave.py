@@ -3,10 +3,10 @@
 from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha, db
-from app.models import Profile, Team
+from app.models import Account, Team
 from app.util.views.auth import *
 
-@app.route('/profile/team/leave', methods=['POST'])
+@app.route('/account/team/leave', methods=['POST'])
 def team_leave():
     """
     This route allows a user to leave their team.
@@ -14,21 +14,21 @@ def team_leave():
 
     error, success = None, None
 
-    # Access profile (n/a throws 404)
-    action, profile = verify_profile(session)
+    # Access account (n/a throws 404)
+    action, account = get_account(session)
 
     # Green means go
     if not action:
 
         # Retrieve team
-        team = profile.team
+        team = account.team
 
         # Attempt to leave
         try:
-            profile.team = None
-            profile.save()
+            account.team = None
+            account.save()
 
-            team.members.remove(profile)
+            team.members.remove(account)
 
             # Clear name if last member
             if len(team.members) is 0:

@@ -1,5 +1,6 @@
 # views.nav.nav
 
+from flask import url_for
 from flask_nav import Nav
 from flask_nav.elements import *
 
@@ -10,7 +11,7 @@ nav_logged_in = Navbar('',
     Link('FAQ','/#faq'),
     Link('Sponsors', '/#sponsors'),
     Link('Teams','/allteams'),
-    Link('Profile','/profile'),
+    Link('Account', '/account/profile'),
 )
 
 nav_logged_out = Navbar('',

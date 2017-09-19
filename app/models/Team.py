@@ -14,7 +14,7 @@ class Team(db.Document):
     domPass   = db.StringField(required=True)
 
     # List of participants on team
-    members = db.ListField(db.ReferenceField('Profile'), null=True)
+    members = db.ListField(db.ReferenceField('Account'), null=True)
 
     # Block editing
     shadowban = db.BooleanField()

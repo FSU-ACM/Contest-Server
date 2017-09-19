@@ -24,7 +24,7 @@ def reset_password():
         account = Account.objects(email=email).first()
 
         if account:
-            pwd = pass_util.reset_pass(account)
+            pwd = pass_util.reset_password(account)
             email_util.reset_password_email(email, pwd)
             success = "Password email sent."
         else:

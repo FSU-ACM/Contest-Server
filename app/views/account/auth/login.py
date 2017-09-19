@@ -11,11 +11,6 @@ import bleach
 @app.route('/login',methods=['POST','GET'])
 def login():
 
-    # maybe enable after checking security
-    # if 'email' in session and 'profile_id' in session:
-    #     return redirect('/profile', code=302)
-
-    # error = request.args.get('error', None)
     error = request.args.get('error', None)
     success = request.args.get('success', None)
     insertrecaptcha = False
@@ -23,7 +18,6 @@ def login():
     # Activate recaptcha if too many bad attempts
     if 'counter' in session and session['counter'] >= 3:
         insertrecaptcha = True
-
 
     # Getting information from form
     if request.method =='POST':

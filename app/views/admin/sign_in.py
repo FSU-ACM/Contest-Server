@@ -25,15 +25,15 @@ def sign_in():
         if email == None or email == '' or not verify_email(email):
             error = "Please enter a valid email."
         else:
-            # Retrieve team data : email => account => profile => team
+            # Retrieve team data : email => account => team
             account, team = None, None
             try:
                 account = Account.objects(email=email).first()
-                team = account.profile.team
+                team = account.team
             except:
                 if account is None:
                     error = "No account found for email %s." % email
-                elif account.profile is None:
+                elif account.team is None:
                     error = "Please join a team before signing in."
                 else:
                     error = "Mysterious error! Go find Andrew, he'll know what to do."
@@ -48,7 +48,7 @@ def sign_in():
                     sign_in_email(email, team.teamID, team.domPass)
                     account.signin = datetime.datetime.now
                     account.save()
-                    success = "Welcome, %s!" % (account.profile.firstname)
+                    success = "Welcome, %s!" % (account.email)
                 except:
                     error = "There's been an issue sending your email. Go find Andrew!"
 

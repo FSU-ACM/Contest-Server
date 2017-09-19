@@ -15,8 +15,8 @@ def register():
     success = request.args.get('success', None)
 
     # Disuade from registering twice
-    action, profile = verify_profile(session)
-    action = None if not profile else redirect(url_for('profile',
+    action, account = get_account(session)
+    action = None if not account else redirect(url_for('profile',
         message="You are already registered!"))
 
     if not action:

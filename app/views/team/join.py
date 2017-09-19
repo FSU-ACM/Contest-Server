@@ -3,10 +3,10 @@
 from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha, db
-from app.models import Profile, Team
+from app.models import Account, Team
 from app.util.views.auth import *
 
-@app.route('/profile/team/join', methods=['POST'])
+@app.route('/account/team/join', methods=['POST'])
 def team_join():
     """
     This route allows a user to join a team.
@@ -14,10 +14,10 @@ def team_join():
 
     error, success = None, None
 
-    # Access profile (n/a throws 404)
-    action, profile = verify_profile(session)
+    # Access account (n/a throws 404)
+    action, account = get_account(session)
 
-    # Perform join if profile exists
+    # Perform join if account exists
     if not action:
 
         # Team lookup
@@ -28,16 +28,16 @@ def team_join():
 
             # Max 3 members
             if not team.members:
-                team.members = [profile] # See workaround notice above
+                team.members = [account] # See workaround notice above
                 team.save()
-                profile.team = team
-                profile.save()
+                account.team = team
+                account.save()
                 success = "You joined the team!"
             elif len(team.members) < 3:
-                team.members.append(profile)
-                profile.team = team
+                team.members.append(account)
+                account.team = team
                 team.save()
-                profile.save()
+                account.save()
                 success = "You joined the team!"
             else:
                 error = "Team %s already has 3 members." % \
