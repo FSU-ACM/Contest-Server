@@ -158,9 +158,8 @@ body {
   padding: 0 10px; }
 
 .form-sheet {
-  background-color: #ffffff;
   color: #191919;
-  padding: 32px;
+  padding: 0px 32px;
   border-radius: 4px; }
   .form-sheet .menuitems {
     display: flex;
