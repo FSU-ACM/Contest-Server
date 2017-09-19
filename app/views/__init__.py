@@ -6,7 +6,7 @@ from app.models import Team
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index/index.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
