@@ -4,7 +4,8 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app
 from app.models import Team, Account
-from app.util.views.auth import get_account
+from app.util.auth import get_account
+from app.util.team import rename_team
 
 import bleach
 
@@ -25,16 +26,15 @@ def team_update():
 
     # Given account and team, do:
     if not action:
-        try:
-            team = account.team
 
-            team.teamName = request.form['teamName'] or "Unnamed Team"
-            team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
-            team.save()
-            sucess = "Team name updated."
+        name = request.form['teamName'] or "Unnamed Team"
+        team = account.team
+
+        try:
+            success = rename_team(team, name)
         except:
             abort(500)
 
-        action = redirect(url_for('team', success=sucess, error=error))
+        action = redirect(url_for('team', success=success, error=error))
 
     return action

@@ -4,7 +4,7 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha
 from app.models import Account
-from app.util.views.auth import *
+from app.util.auth import *
 
 import bleach
 

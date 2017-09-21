@@ -4,7 +4,8 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha, db
 from app.models import Account, Team
-from app.util.views.auth import *
+from app.util.auth import *
+from app.util.team import join_team
 
 @app.route('/account/team/join', methods=['POST'])
 def team_join():
@@ -20,30 +21,9 @@ def team_join():
     # Perform join if account exists
     if not action:
 
-        # Team lookup
         teamID, teamPass = request.form['teamID'], request.form['teamPasscode']
-        team = Team.objects(teamID=teamID,teamPass=teamPass).first()
 
-        if team:
-
-            # Max 3 members
-            if not team.members:
-                team.members = [account] # See workaround notice above
-                team.save()
-                account.team = team
-                account.save()
-                success = "You joined the team!"
-            elif len(team.members) < 3:
-                team.members.append(account)
-                account.team = team
-                team.save()
-                account.save()
-                success = "You joined the team!"
-            else:
-                error = "Team %s already has 3 members." % \
-                    team.teamName or team.teamID
-        else:
-            error = "Team with those credentials not found."
+        error, success = join_team(account, teamID=teamID, teamPass=teamPass)
 
         action = redirect(url_for('team', success=success, error=error))
 

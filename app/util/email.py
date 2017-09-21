@@ -10,7 +10,7 @@ def send_async_mail(app, msg):
 # Main reset functionality
 def reset_password_email(address, password):
 
-    msg = Message("Spring Programming Contest - Password Reset", sender="acm@cs.fsu.edu")
+    msg = Message("ACM Programming Contest - Password Reset", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
     msg.body = "Here's your new password: %s. " % password
     msg.body += "Please consider setting a new password once you log back in."
@@ -23,7 +23,7 @@ def reset_password_email(address, password):
 # Sign in functionality
 def sign_in_email(address, domuser, dompass):
 
-    msg = Message("Spring Programming Contest - Domjudge Credentials", sender="acm@cs.fsu.edu")
+    msg = Message("ACM Programming Contest - Domjudge Credentials", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
     msg.body = "Here's your Domjudge credentials: \n\n"
     msg.body += "Username: {0} \n".format(domuser)
@@ -31,6 +31,23 @@ def sign_in_email(address, domuser, dompass):
     msg.body += "\n"
     msg.body += "Log in at domjudge.springprogrammingcontest.com.\n"
     msg.body += "\nRegards,\nACM at FSU"
+
+    # mail.send(msg)
+    thr = Thread(target=send_async_mail, args=[app, msg])
+    thr.start()
+
+# Quick registration support
+def quick_register_email(address, password, teamname):
+
+    msg = Message("ACM Programming Contest - Your Password", sender="acm@cs.fsu.edu")
+    msg.add_recipient(address)
+    msg.body = "Hello! Thanks for registering on team %s.\n\n" % teamnname
+    msg.body += "You can log in at contest.acmatfsu.org/login. "
+    msg.body += "Here's your password: %s. " % password
+    msg.body += "Please consider setting a new password once you log. \n\n"
+    msg.body += "Once you log in, you can edit your profile and modify your team. You will need to remember your email so you can use it to sign in on the day of the contest.\n\n"
+    msg.body += "If you think you're getting this email as an error, let us know at hello@acmatsfu.org.\n\n"
+    msg.body += "Regards,\nACM at FSU"
 
     # mail.send(msg)
     thr = Thread(target=send_async_mail, args=[app, msg])

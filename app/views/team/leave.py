@@ -4,7 +4,8 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha, db
 from app.models import Account, Team
-from app.util.views.auth import *
+from app.util.auth import *
+from app.util.team import leave_team
 
 @app.route('/account/team/leave', methods=['POST'])
 def team_leave():
@@ -25,18 +26,7 @@ def team_leave():
 
         # Attempt to leave
         try:
-            account.team = None
-            account.save()
-
-            team.members.remove(account)
-
-            # Clear name if last member
-            if len(team.members) is 0:
-                team.members = []
-                team.teamName = None
-            team.save()
-
-            success = "You have left the team."
+            success = leave_team(account, team)
         except Exception as e:
             print e
             abort(500)
