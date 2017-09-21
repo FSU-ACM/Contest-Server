@@ -1,5 +1,5 @@
 {% extends "form/form.html" %}
-{% block content %}
+{% block form %}
 
 <div class="container form-container form-sheet">
 
@@ -20,7 +20,11 @@
         <tr>
           <td>{{team.teamName}}</td>
           {% for member in team.members %}
-            <td>{{member.firstname}} {{member.lastname}}</td>
+            {% if member.profile %}
+            <td>{{member.profile.firstname}} {{member.profile.lastname}}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
           {% endfor %}
 
           {% if team.members|length < 2 %}

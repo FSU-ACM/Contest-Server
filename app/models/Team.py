@@ -41,27 +41,15 @@ class Team(db.Document):
 
 # Pre generate teams
 if Team.objects.count() < app.config['TEAM_COUNT']:
-    from xkcdpass import xkcd_password as xp
+    from app.util.password import make_password
     target = app.config['TEAM_COUNT']
-
-    # Wind up
-    wordfile = xp.locate_wordfile()
-    mywords = xp.generate_wordlist(wordfile=wordfile, min_length=3, max_length=5)
-
-    # Easy wrapper
-    def password():
-        words = xp.generate_xkcdpassword(mywords, numwords=3).split()
-        words = [s.capitalize() for s in words]
-        return ''.join(words)
-
 
     # Don't overwrite teams
     start = Team.objects.count()
-    diff = target - start
 
     for i in range(start, target):
         teamID = "acm-%i" % i
-        teamPass = password()
-        domPass = password()
+        teamPass = make_password()
+        domPass = make_password()
 
         Team(teamID=teamID, teamPass=teamPass, domPass=domPass).save()

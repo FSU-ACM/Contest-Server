@@ -56,7 +56,7 @@ input {
 .sheet {
   background-color: #ffffff;
   color: #191919;
-  padding: 48px 0 64px 0; }
+  padding: 16px 0 32px 0; }
 
 .sheet-gap {
   height: 100px;
@@ -100,11 +100,16 @@ input {
     background-color: #ffffff;
     color: #DC3D3D; }
 
-.navbar .container-fluid {
-  padding: 0px; }
+.navbar {
+  margin-bottom: 0; }
+  .navbar .container-fluid {
+    padding: 0px; }
 
 .navbar-container {
-  margin-top: 32px; }
+  min-height: 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 
 .navbar-default {
   z-index: 1024;
@@ -171,7 +176,7 @@ body {
     flex-direction: row;
     justify-content: flex-end;
     flex-wrap: wrap;
-    margin-bottom: 16px; }
+    margin: 16px 0; }
     .form-sheet .menuitems a {
       text-transform: lowercase;
       font-family: "Roboto", sans-serif;

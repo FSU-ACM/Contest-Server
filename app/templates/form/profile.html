@@ -3,7 +3,9 @@
 
 <div class="form-sheet">
 
-  {% include "/form/menuitems.html" %}
+  {% if session.profile_id %}
+    {% include "form/menuitems.html" %}
+  {% endif %}
 
 
   {% if error %}
@@ -58,9 +60,9 @@
 
       <input class="btn btn-primary" type=submit value="Save Profile">
 
-      <hr />
-
       {% if session.profile_id %}
+
+        <hr />
 
         <!-- <label for="register-dob">Date of Birth</label>
         <input type="date" class="form-control" id="register-dob" name=dob min="1">

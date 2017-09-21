@@ -56,7 +56,7 @@ input {
 .sheet {
   background-color: #ffffff;
   color: #191919;
-  padding: 48px 0 64px 0; }
+  padding: 16px 0 32px 0; }
 
 .sheet-gap {
   height: 100px;
@@ -100,11 +100,16 @@ input {
     background-color: #ffffff;
     color: #DC3D3D; }
 
-.navbar .container-fluid {
-  padding: 0px; }
+.navbar {
+  margin-bottom: 0; }
+  .navbar .container-fluid {
+    padding: 0px; }
 
 .navbar-container {
-  margin-top: 32px; }
+  min-height: 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 
 .navbar-default {
   z-index: 1024;
@@ -157,12 +162,12 @@ body {
     max-width: 970px; } }
 
 .banner {
+  position: relative;
   text-align: center;
   display: flex;
   flex-direction: column;
   vertical-align: center;
-  justify-content: center;
-  margin-bottom: 64px; }
+  justify-content: center; }
   .banner h1 {
     font-size: 20px;
     line-height: 1.5;
@@ -175,8 +180,8 @@ body {
         font-size: 44px; } }
   @media screen and (min-width: 768px) {
     .banner {
-      height: 700px;
-      margin-top: -70px; } }
+      height: 100%;
+      margin-top: -102px; } }
   .banner .btn-wrapper {
     display: flex;
     justify-content: center;
@@ -185,6 +190,12 @@ body {
     .banner .btn-wrapper * {
       margin: 4px 16px;
       padding: 4px 16px; }
+  .banner .down-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    color: white; }
 
 .about {
   background-color: #ffffff; }

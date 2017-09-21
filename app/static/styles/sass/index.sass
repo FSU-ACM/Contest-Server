@@ -3,12 +3,13 @@
 
 // Banner
 .banner
+	position: relative
 	text-align: center
 	display: flex
 	flex-direction: column
 	vertical-align: center
 	justify-content: center
-	margin-bottom: 64px
+	// margin-bottom: 64px
 
 
 	h1
@@ -17,8 +18,8 @@
 		font-family: 	$mono
 
 	@media screen and (min-width: 768px)
-		height: 700px
-		margin-top: -70px
+		height: 100%
+		margin-top: -102px
 
 	.btn-wrapper
 		display: flex
@@ -29,6 +30,13 @@
 		*
 			margin: 4px 16px
 			padding: 4px 16px
+
+	.down-indicator
+		position: absolute
+		bottom: 24px
+		left: 0
+		right: 0
+		color: white
 
 
 // About
