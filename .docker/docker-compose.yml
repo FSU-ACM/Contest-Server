@@ -4,8 +4,6 @@ services:
     build: ..
     image: contest-unf
     restart: always
-    environment:
-      FLASK_CONFIG: '/webapp/config/production.py'
   db:
     image: "mongo"
     restart: "always"
