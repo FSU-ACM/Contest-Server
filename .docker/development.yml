@@ -18,3 +18,4 @@ services:
       - "8080:80"
     environment:
       FLASK_CONFIG: '/webapp/config/development.py'
+      FLASK_DEBUG: 1
