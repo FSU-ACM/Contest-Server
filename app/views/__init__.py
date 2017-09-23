@@ -1,6 +1,6 @@
 # app.views
 
-from flask import render_template
+from flask import render_template, jsonify
 from app import app
 from app.models import Team
 
@@ -20,6 +20,10 @@ def page_not_found(e):
 def allteams():
     teams = Team.objects.filter(teamName__exists=True)
     return render_template('allteams.html', teams=teams)
+
+@app.route('/debugg')
+def debugg():
+    return jsonify(app.config['DEBUG'])
 
 
 from . import account

@@ -37,11 +37,11 @@ def sign_in_email(address, domuser, dompass):
     thr.start()
 
 # Quick registration support
-def quick_register_email(address, password, teamname):
+def quick_register_email(address, password):
 
     msg = Message("ACM Programming Contest - Your Password", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
-    msg.body = "Hello! Thanks for registering on team %s.\n\n" % teamnname
+    msg.body = "Hello! Thanks for registering for the contest.\n\n"
     msg.body += "You can log in at contest.acmatfsu.org/login. "
     msg.body += "Here's your password: %s. " % password
     msg.body += "Please consider setting a new password once you log. \n\n"

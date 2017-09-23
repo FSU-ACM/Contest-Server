@@ -8,26 +8,7 @@
   {% endif %}
 
 
-  {% if error %}
-  <div class="alert alert-danger" role="alert">
-    <strong>Houston, we have a problem:</strong>
-    {{ error }}
-  </div>
-  {% endif %}
-
-  {% if success %}
-  <div class="alert alert-success" role="alert">
-    <strong>Mission accomplished!</strong>
-    {{ success }}
-  </div>
-  {% endif %}
-
-	{% if message %}
-	<div class="alert alert-info" role="alert">
-		<strong>Whoa there!</strong>
-		{{ message }}
-	</div>
-	{% endif %}
+  {% include "form/feedback.html" %}
 
   <h2>Complete Your Profile</h2>
   <p>

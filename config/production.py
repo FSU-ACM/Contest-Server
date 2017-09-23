@@ -23,6 +23,8 @@ MAIL_PORT = 587
 MAIL_USE_TLS = True
 MAIL_USE_SSL = False
 MAIL_DEFAULT_SENDER = 'acm@cs.fsu.edu'
+MAIL_USERNAME = None
+MAIL_PASSWORD = None
 
 # Basic Auth Creds
 # BASIC_AUTH_USERNAME = ''
