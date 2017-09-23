@@ -27,7 +27,7 @@ For setting up Gulp and Sass:
 npm install
 npm install -g gulp
 ```
-Be sure to install npm beforehand. 
+Be sure to install npm beforehand.
 
 
 ## Configuration
@@ -60,6 +60,8 @@ MAIL_PORT = 587
 MAIL_USE_TLS = True
 MAIL_USE_SSL = False
 MAIL_DEFAULT_SENDER = 'acm@cs.fsu.edu'
+MAIL_USERNAME = None
+MAIL_PASSWORD = None
 
 ```
 
@@ -109,7 +111,7 @@ from flask import redirect, url_for, render_template, request, session
 from app import app, basic_auth
 from app.models import Account, Profile, Team
 from app.email import sign_in_email
-from app.util.views.auth import verify_email
+from app.util.auth import verify_email
 
 import datetime, re
 
