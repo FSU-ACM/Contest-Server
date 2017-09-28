@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
     judgehost:
         image: "nauxuron/judgehost"
@@ -9,3 +9,6 @@ services:
             - DOMSERVER_HOST=http://domjudge.acmatfsu.org
             - DOMSERVER_USER=judgehost
             - DOMSERVER_PASSWORD=localpass
+    sysctls:
+        - cgroup_enable=memory
+        - swapaccount=1
