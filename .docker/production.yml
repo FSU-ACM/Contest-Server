@@ -10,7 +10,7 @@ services:
       # - /usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
-      - "80:80"
+      - "8080:80"
       # - "443:443"
 
   # Registration system database
@@ -43,5 +43,5 @@ services:
     extends:
       file: domserver.yml
       service: domdb
-    # environment:
-      # VIRTUAL_HOST: 'db.domjudge.acmatfsu.org'
+    environment:
+      VIRTUAL_HOST: 'db.domjudge.acmatfsu.org'
