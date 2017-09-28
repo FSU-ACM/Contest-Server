@@ -1,18 +1,7 @@
 version: '2'
 services:
-  db:
-    extends:
-      file: docker-compose.yml
-      service: db
-    volumes:
-      - /data/contest:/data/db
-  webapp:
-    extends:
-      file: docker-compose.yml
-      service: webapp
-    environment:
-      FLASK_CONFIG: '/webapp/config/production.py'
-      VIRTUAL_HOST: 'test.localhost'
+
+  # Proxy server [entry point] TODO: SSL
   nginx:
     image: jwilder/nginx-proxy
     volumes:
@@ -23,8 +12,36 @@ services:
     ports:
       - "80:80"
       # - "443:443"
-    restart: always
-# volumes:
-#   data:
-#     external:
-#       name: contest-db-2017fa
+
+  # Registration system database
+  db:
+    extends:
+      file: registration.yml
+      service: db
+    volumes:
+      - /data/contest:/data/db
+
+  # Registration system webapp
+  webapp:
+    extends:
+      file: registration.yml
+      service: webapp
+    environment:
+      FLASK_CONFIG: '/webapp/config/production.py'
+      VIRTUAL_HOST: 'contest.acmatfsu.org'
+
+  # Domjudge server
+  domserver:
+    extends:
+      file: domserver.yml
+      service: domserver
+    environment:
+      VIRTUAL_HOST: 'domjudge.acmatfsu.org'
+
+  # Domjudge database
+  domdb:
+    extends:
+      file: domserver.yml
+      service: domdb
+    environment:
+      # VIRTUAL_HOST: 'db.domjudge.acmatfsu.org'
