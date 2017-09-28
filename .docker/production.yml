@@ -43,5 +43,5 @@ services:
     extends:
       file: domserver.yml
       service: domdb
-    environment:
+    # environment:
       # VIRTUAL_HOST: 'db.domjudge.acmatfsu.org'
