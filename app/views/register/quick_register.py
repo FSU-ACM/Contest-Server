@@ -78,9 +78,9 @@ def quick_register_post():
 
         # Put on team, send email
         first = True
+        team = None
         while len(accounts) > 0:
             account = accounts.pop(0)
-            team = None
             if first:
                 team = create_team(account, name)
                 first = False
