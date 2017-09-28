@@ -6,4 +6,6 @@ services:
         cap_add:
             - SYS_ADMIN
         environment:
-            - DOMSERVER_PASSWORD=password
+            - DOMSERVER_HOST=http://domjudge.acmatfsu.org
+            - DOMSERVER_USER=judgehost
+            - DOMSERVER_PASSWORD=localpass
