@@ -1,0 +1,9 @@
+version: '3'
+services:
+    judgehost:
+        image: "nauxuron/judgehost"
+        # hostname: judgehost01
+        cap_add:
+            - SYS_ADMIN
+        environment:
+            - DOMSERVER_PASSWORD=password
