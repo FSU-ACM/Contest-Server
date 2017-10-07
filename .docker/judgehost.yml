@@ -1,14 +1,12 @@
 version: '2'
 services:
     judgehost:
-        image: "nauxuron/judgehost"
-        # hostname: judgehost01
+        image: "andrewsosa/domjudge-judgehost"
+        security_opt:
+            - apparmor:unconfined
         cap_add:
             - SYS_ADMIN
         environment:
-            - DOMSERVER_HOST=http://domjudge.acmatfsu.org
+            # - DOMSERVER_HOST=[hostname]/api
             - DOMSERVER_USER=judgehost
             - DOMSERVER_PASSWORD=localpass
-    sysctls:
-        cgroup_enable: memory
-        swapaccount: 1
