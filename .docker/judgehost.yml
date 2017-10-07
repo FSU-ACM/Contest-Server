@@ -2,8 +2,7 @@ version: '2'
 services:
     judgehost:
         image: "andrewsosa/domjudge-judgehost"
-        security_opt:
-            - apparmor:unconfined
+        privileged: true
         cap_add:
             - SYS_ADMIN
         environment:
