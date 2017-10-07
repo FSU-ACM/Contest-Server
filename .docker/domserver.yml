@@ -1,9 +1,9 @@
 version: '2'
 services:
     domserver:
-        image: "nauxuron/domjudge-domserver"
+        image: "andrewsosa/domjudge-domserver"
         ports:
-            - "4321:80"
+            - "8082:80"
         environment:
             - DOMJUDGE_DB_PASSWORD=localpass
             - DOMJUDGE_DB_ROOT_PASSWORD=localpass

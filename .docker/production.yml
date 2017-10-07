@@ -43,5 +43,11 @@ services:
     extends:
       file: domserver.yml
       service: domdb
+      
+  # Judgehost
+  judgehost:
+    extends:
+      file: judgehost.yml
+      service: judgehost
     environment:
-      VIRTUAL_HOST: 'db.domjudge.acmatfsu.org'
+      DOMSERVER_HOST: 'domserver/api'
