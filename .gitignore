@@ -17,3 +17,6 @@ app/storage
 
 # Configuration
 config/production.py
+
+teams.tsv
+accounts.tsv
