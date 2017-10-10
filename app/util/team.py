@@ -85,6 +85,7 @@ def leave_team(account, team):
     if len(team.members) is 0:
         team.members = []
         team.teamName = None
+        team.division = None
         team.teamPass = make_password()
     team.save()
 
