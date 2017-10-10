@@ -36,7 +36,8 @@ def quick_register_post():
     form = request.form.to_dict()
 
     # Collect details
-    name = request.form['teamname']
+    name = form.get('teamname', None)
+    division = form.get('division', None)
     emails = [
         bleach.clean(form.get('email1', None)),
         bleach.clean(form.get('email2', None)),
@@ -49,6 +50,12 @@ def quick_register_post():
     # Make sure this is done
     if not recaptcha.verify():
         error = "Please complete the ReCaptcha."
+
+    # Make sure and division are provided
+    if not error:
+        if not name or not division:
+            error = "Please provide your team and division with atleast one email."
+    name = bleach.clean(name)
 
     # Verify all emails
     if not error:
@@ -83,6 +90,7 @@ def quick_register_post():
             account = accounts.pop(0)
             if first:
                 team = create_team(account, name)
+                team.division = division
                 first = False
             else:
                 error, x = join_team(account, team=team)

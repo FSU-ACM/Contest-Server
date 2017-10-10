@@ -28,9 +28,11 @@ def team_update():
     if not action:
 
         name = request.form['teamName'] or "Unnamed Team"
+        division = request.form['division'] or 1
         team = account.team
 
         try:
+            team.division = division
             success = rename_team(team, name)
         except:
             abort(500)
