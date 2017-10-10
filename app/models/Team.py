@@ -13,6 +13,9 @@ class Team(db.Document):
     # Password for domjudge
     domPass   = db.StringField(required=True)
 
+    # Division field
+    division  = db.IntField(required=False)
+
     # List of participants on team
     members = db.ListField(db.ReferenceField('Account'), null=True)
 

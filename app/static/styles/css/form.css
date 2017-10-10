@@ -210,6 +210,9 @@ body {
     background-color: #ffffff;
     border-color: #DC3D3D; }
 
+.division span {
+  padding: 4px; }
+
 #forgot-password {
   background: transparent;
   border: 0; }

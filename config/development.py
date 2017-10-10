@@ -18,7 +18,7 @@ RECAPTCHA_SITE_KEY = '6LeyxBQUAAAAAHBpG2htNplW1qjcgODp47P6FHuE'
 RECAPTCHA_SECRET_KEY = ''
 
 # Email Config
-MAIL_SERVER = 'mail.cs.fsu.edu'
+MAIL_SERVER = 'mail2.cs.fsu.edu'
 MAIL_PORT = 587
 MAIL_USE_TLS = True
 MAIL_USE_SSL = False
