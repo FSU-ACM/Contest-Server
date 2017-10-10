@@ -37,6 +37,11 @@ def create_team(account, name):
 
     return team
 
+def set_division(team, division):
+    team.division = division
+    team.save()
+    # TODO make this more...robust
+
 def join_team(account, teamID=None, teamPass=None, team=None):
 
     error, success = None, None
