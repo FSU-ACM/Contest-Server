@@ -90,7 +90,7 @@ def quick_register_post():
             account = accounts.pop(0)
             if first:
                 team = create_team(account, name)
-                team.division = division
+                set_division(team, division)
                 first = False
             else:
                 error, x = join_team(account, team=team)

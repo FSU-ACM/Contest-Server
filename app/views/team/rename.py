@@ -32,7 +32,7 @@ def team_update():
         team = account.team
 
         try:
-            team.division = division
+            set_division(team, division)
             success = rename_team(team, name)
         except:
             abort(500)
