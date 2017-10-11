@@ -1,8 +1,8 @@
 version: '2'
 services:
 
-  # Proxy server [entry point] TODO: SSL
-  nginx:
+  # Proxy server [entry point]
+  nginx-proxy:
     image: jwilder/nginx-proxy
     volumes:
       - /etc/nginx/certs
@@ -13,12 +13,12 @@ services:
       - "8080:80"
       - "443:443"
 
-  letsencrypt-nginx-proxy-companion:
+  nginx-ssl:
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     volumes_from:
-      - "nginx"
+      - "nginx-proxy"
 
   # Registration system database
   db:
