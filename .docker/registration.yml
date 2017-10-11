@@ -4,6 +4,8 @@ services:
     build: ..
     image: contest-unf
     restart: always
+    ports:
+      - "8083:80"
   db:
     image: "mongo"
     restart: "always"
