@@ -5,7 +5,7 @@ from flask import redirect, url_for, render_template, request, session, abort
 from app import app
 from app.models import Team, Account
 from app.util.auth import get_account
-from app.util.team import rename_team
+from app.util.team import rename_team, set_division
 
 import bleach
 
@@ -28,7 +28,7 @@ def team_update():
     if not action:
 
         name = request.form['teamName'] or "Unnamed Team"
-        division = request.form['division'] or 1
+        division = request.form['division'] or None
         team = account.team
 
         try:
