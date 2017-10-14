@@ -71,7 +71,7 @@ input {
     border-color: #DC3D3D; }
 
 .btn-base, .btn-full-color, .btn-outline {
-  font-size: 12px;
+  font-size: 16px;
   border-radius: 4px;
   padding: 4px 48px;
   font-family: "Roboto Mono", monospace;
@@ -167,7 +167,9 @@ body {
   display: flex;
   flex-direction: column;
   vertical-align: center;
-  justify-content: center; }
+  justify-content: center;
+  height: 100%;
+  margin-top: -102px; }
   .banner h1 {
     font-size: 20px;
     line-height: 1.5;
@@ -178,10 +180,6 @@ body {
     @media screen and (min-width: 768px) {
       .banner h1 {
         font-size: 44px; } }
-  @media screen and (min-width: 768px) {
-    .banner {
-      height: 100%;
-      margin-top: -102px; } }
   .banner .btn-wrapper {
     display: flex;
     justify-content: center;
