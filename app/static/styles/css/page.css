@@ -71,7 +71,7 @@ input {
     border-color: #DC3D3D; }
 
 .btn-base, .btn-full-color, .btn-outline {
-  font-size: 12px;
+  font-size: 16px;
   border-radius: 4px;
   padding: 4px 48px;
   font-family: "Roboto Mono", monospace;
