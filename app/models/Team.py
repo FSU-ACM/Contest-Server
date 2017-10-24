@@ -45,10 +45,16 @@ class Team(db.Document):
 # Pre generate teams
 if Team.objects.count() < app.config['TEAM_COUNT']:
     from app.util.password import make_password
-    target = app.config['TEAM_COUNT']
 
     # Don't overwrite teams
-    start = Team.objects.count()
+    start = 1 + Team.objects.count()
+    target = 1 + app.config['TEAM_COUNT']
+
+    """
+    Domjudge doesn't support acm-0 (0 is not a valid ID), so
+    whenever we start generating acm-x we use +1. Hence, to reach 300
+    teams we must genenrate acm-1 through acm-301. 
+    """
 
     for i in range(start, target):
         teamID = "acm-%i" % i
