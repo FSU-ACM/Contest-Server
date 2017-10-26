@@ -3,12 +3,12 @@
 from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app
-from app.models import Account, Profile, Team
-from app.util.views.auth import *
+from app.models import Account, Profile
+from app.util.auth import *
 
 import bleach
 
-@app.route('/profile', methods=['POST','GET'])
+@app.route('/account/profile', methods=['POST','GET'])
 def profile():
 
     error = request.args.get('error', None)
@@ -24,10 +24,6 @@ def profile():
     # Get the account stuff
     account = Account.objects(email=email).first()
     profile = account.profile
-
-    # # Shadowban?
-    # if profile is not None and profile.shadowban is True:
-    #     abort(404)
 
     #Getting information from form
     if request.method =='POST':
@@ -75,9 +71,12 @@ def profile():
             error += "We'll try and get it sorted out ASAP."
             print e
 
-    # If there's a profile at this point, add it to the session
     if profile:
+        # If there's a profile at this point, add it to the session
         session['profile_id'] = str(profile.id)
+    else:
+        # Set message for non-profile
+        message = "Please provide your basic information before you proceed."
 
     return render_template('/form/profile.html',error=error,success=success,
         message=message, profile=profile)

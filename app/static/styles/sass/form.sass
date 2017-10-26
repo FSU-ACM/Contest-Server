@@ -1,23 +1,4 @@
-// Generic styles
-@import "includes/color.sass"
-@import "includes/type.sass"
-@import "includes/generics.sass"
-
-// Sub-element styles
-@import "includes/navbar.sass"
-
-
-body
-	background-color: $night
-	background-image: 	url("../../assets/star-cloud-tile.png")
-	background-repeat: 	repeat
-	background-attachment: fixed
-
-	color:				$text
-	font: 				16px/1 $body-font
-	position: 			relative
-	line-height:		1.8
-
+@import "page"
 
 // Generic form styles
 
@@ -29,29 +10,20 @@ body
 
 
 .form-sheet
-	background-color: 	$white
 	color:				$dark-grey
-	padding:			32px
+	padding:			0px 32px
 	border-radius: 		4px
-	-webkit-font-smoothing: antialiased
-
-
-	h2,label
-		// text-transform: uppercase
-
-
 
 	.menuitems
 		display: flex
 		flex-direction: row
 		justify-content: flex-end
 		flex-wrap: wrap
-		margin-bottom: 16px
+		margin: 16px 0
 
 		a
-			text-transform: uppercase
-			font-family: $body-font
-			font-weight: 700
+			text-transform: lowercase
+			font-family: $body
 			margin-left: 20px
 
 	.column-left
@@ -97,6 +69,10 @@ body
 		color: $accent
 		background-color: $white
 		border-color: $accent
+
+.division
+		span
+			padding: 4px
 
 
 #forgot-password

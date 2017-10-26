@@ -8,7 +8,10 @@ a
 		text-decoration: none
 
 h1,h2,h3,h4,h5
-	font-family:		$brand-font
+	font-family:		$mono
+
+input
+	border-radius: 0
 
 
 // Generic element stylings
@@ -25,7 +28,7 @@ h1,h2,h3,h4,h5
 .sheet
 	background-color: 	$white
 	color:				$dark-grey
-	padding: 48px 0 128px 0
+	padding: 16px 0 32px 0
 
 .sheet-gap
 	height: 100px
@@ -42,14 +45,14 @@ h1,h2,h3,h4,h5
 
 .btn-base
 	@include font-size($btn-font-sizes)
-	border-radius: 100px
+	border-radius: 4px
 	padding: 4px 48px
-	font-family: $body-font
+	font-family: $mono
 	font-weight: 700
-	text-transform: uppercase
-	// margin-right: 16px
-	// margin-bottom: 16px
+	text-transform: lowercase
 	min-width: 220px
+	height: 2.75em
+
 
 .btn-full-color
 	@extend .btn-base

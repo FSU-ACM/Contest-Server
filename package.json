@@ -2,10 +2,6 @@
   "name": "acm-contest",
   "version": "1.0.0",
   "description": "Flask App for ACM Programming Contest",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FSU-ACM/ACM-Contest-Server.git"

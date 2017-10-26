@@ -18,8 +18,6 @@ class Profile(db.Document):
     # Block editing
     shadowban = db.BooleanField()
 
-    # Account relationship
-    team = db.ReferenceField('Team')
 
     # Extra credit relationship
     courses = db.ListField(db.ReferenceField('Course'), null=True)

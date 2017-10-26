@@ -6,7 +6,7 @@ from app import app
 from app.models import Account
 from app.util import email as email_util
 from app.util import password as pass_util
-from app.util.views import auth as auth_util
+from app.util import auth as auth_util
 
 
 @app.route('/resetpassword', methods=['POST'])
@@ -24,7 +24,7 @@ def reset_password():
         account = Account.objects(email=email).first()
 
         if account:
-            pwd = pass_util.reset_pass(account)
+            pwd = pass_util.reset_password(account)
             email_util.reset_password_email(email, pwd)
             success = "Password email sent."
         else:

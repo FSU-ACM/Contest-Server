@@ -1,4 +1,4 @@
-from app import db
+from app import app, db
 
 class Team(db.Document):
 
@@ -13,8 +13,11 @@ class Team(db.Document):
     # Password for domjudge
     domPass   = db.StringField(required=True)
 
+    # Division field
+    division  = db.IntField(required=False)
+
     # List of participants on team
-    members = db.ListField(db.ReferenceField('Profile'), null=True)
+    members = db.ListField(db.ReferenceField('Account'), null=True)
 
     # Block editing
     shadowban = db.BooleanField()
@@ -37,3 +40,25 @@ class Team(db.Document):
     #             part1+=(","+str(student.fsuid))
     #
     #     return part1
+
+
+# Pre generate teams
+if Team.objects.count() < app.config['TEAM_COUNT']:
+    from app.util.password import make_password
+
+    # Don't overwrite teams
+    start = 1 + Team.objects.count()
+    target = 1 + app.config['TEAM_COUNT']
+
+    """
+    Domjudge doesn't support acm-0 (0 is not a valid ID), so
+    whenever we start generating acm-x we use +1. Hence, to reach 300
+    teams we must genenrate acm-1 through acm-301. 
+    """
+
+    for i in range(start, target):
+        teamID = "acm-%i" % i
+        teamPass = make_password()
+        domPass = make_password()
+
+        Team(teamID=teamID, teamPass=teamPass, domPass=domPass).save()

@@ -4,6 +4,37 @@ Flask suite for running Fall/Spring Programming Contests
 Here is the requirements documents:
 https://docs.google.com/document/d/1_9VTQSOmZ_X8lVzaUFmRy_2ldRHsIqK-1720amgIq0U/edit?usp=sharing
 
+## Developing and Deployment
+This suite uses Docker for both development and deployment. You will need to
+install both [Docker](https://www.docker.com/community-edition) and
+[Docker Compose](https://docs.docker.com/compose/install/).
+
+Once both are installed, you can launch the suite in development mode using:
+```
+docker-compose -f .docker/development.yml up -d
+```
+
+For deployment, use `.docker/production.yml` instead.
+
+### Deployment
+
+**IMPORTANT**: See section on Domjudge for bringing up Domjudge containers.
+
+Also, you may need to restart the Nginx proxy after launching the whole suite.  
+
+### Styles
+This project uses Sass to define the styles. Sass needs to be pre-compiled into
+CSS before the image is built. In Development mode, when Sass rebuilds the
+changes are automatically updated in the app. However, if you are making
+changes outside of development mode, run `gulp` to rebuild the Sass styles.
+
+For setting up Gulp and Sass:
+```
+npm install
+npm install -g gulp
+```
+Be sure to install npm beforehand.
+
 
 ## Configuration
 Configuration is handled by creating a `/instance` folder in the project's
@@ -35,6 +66,8 @@ MAIL_PORT = 587
 MAIL_USE_TLS = True
 MAIL_USE_SSL = False
 MAIL_DEFAULT_SENDER = 'acm@cs.fsu.edu'
+MAIL_USERNAME = None
+MAIL_PASSWORD = None
 
 ```
 
@@ -84,7 +117,7 @@ from flask import redirect, url_for, render_template, request, session
 from app import app, basic_auth
 from app.models import Account, Profile, Team
 from app.email import sign_in_email
-from app.util.views.auth import verify_email
+from app.util.auth import verify_email
 
 import datetime, re
 
@@ -93,3 +126,16 @@ import datetime, re
 
 ## Mail handling
 todo
+
+## Domjudge
+
+IMPORTANT: Before launching the whole suite:
+
+1. Bring `up` the `domdb` service alone so it may configure itself.
+2. Bring `up` the `nginx-proxy` and `domserver` service. Connect to `domserver` to make sure it has launched properly.
+3. Now you can `up` all the other components of `production.yml`.
+
+
+### Judgehosts
+
+Judgehosts should be launched separately from the rest of the suite, as they are prone to crashing. Be sure to provide them with the correct domain address, or attach them to the suite's Docker network and set the hostname accordingly.

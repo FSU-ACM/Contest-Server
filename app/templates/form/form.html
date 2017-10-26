@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{url_for('static', filename='styles/css/form.css')}}">
+{% endblock %}
+
+{% block content %}
+
+  <div class="sheet">
+    <div class="container">
+      {% block form %}
+      {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}

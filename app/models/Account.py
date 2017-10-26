@@ -2,12 +2,16 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class Account(db.Document):
-    email = db.EmailField(primary_key=True)
+    email = db.EmailField(required=True)
     password = db.StringField(required=True)
     profile = db.ReferenceField('Profile')
     prereg = db.ReferenceField('Preregistration')
 
     signin = db.DateTimeField(null=True)
+
+    # Teams relationship
+    team = db.ReferenceField('Team')
+
 
     # Handles password-things
     def set_password(self, password):
