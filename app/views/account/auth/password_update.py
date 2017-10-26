@@ -6,7 +6,7 @@ from app import app
 from app.models import Account
 
 
-@app.route('/updatepassword', methods=['POST','GET'])
+@app.route('/account/updatepassword', methods=['POST','GET'])
 def updatepassword():
 
     error, success = None, None

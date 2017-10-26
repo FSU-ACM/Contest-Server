@@ -3,29 +3,40 @@
 
 // Banner
 .banner
-	text-transform: uppercase
+	position: relative
+	text-align: center
+	display: flex
+	flex-direction: column
+	vertical-align: center
+	justify-content: center
+	// margin-bottom: 64px
+	height: 100%
+	margin-top: -102px
 
-	// This pulls the banner behind the navbar
-	margin-top: -70px
-	padding-top: 70px
 
 	h1
 		@include font-size($h1b-font-sizes)
-		@include text-shadow(-3px, 0px, 0px, rgba(255, 233, 2, 0.4))
-		line-height: 	0.9
-		font-family: 	$banner-font
-		font-weight: 	700
-		color:			$banner-yellow
+		line-height: 	1.5
+		font-family: 	$mono
 
-	h2
-		@include font-size($h2b-font-sizes)
-		@include text-shadow(-3px, 0px, 0px, rgba(233, 233, 233, 0.4))
-		line-height: 	0.8
-		color:			$white
+	// @media screen and (min-width: 768px)
 
+	.btn-wrapper
+		display: flex
+		justify-content: center
+		flex-wrap: wrap
+		margin-top: 8px
 
-	@media screen and (max-width: 768px)
-		text-align: center
+		*
+			margin: 4px 16px
+			padding: 4px 16px
+
+	.down-indicator
+		position: absolute
+		bottom: 24px
+		left: 0
+		right: 0
+		color: white
 
 
 // About
@@ -51,7 +62,7 @@
 	padding: 			48px 0px 48px 0px
 
 	h1
-		font-family: 	$banner-font
+		font-family: 	$mono
 		font-weight: 	700
 
 .sponsor-row

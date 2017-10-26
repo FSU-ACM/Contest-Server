@@ -1,7 +1,7 @@
 # util.views.auth
 
 from flask import redirect, url_for
-from app.models import Profile
+from app.models import Account, Profile
 import re
 
 # Email validator
@@ -17,6 +17,17 @@ def verify_login(session):
           return redirect(url_for('login')), None, None
     else:
         return None, session['email'], session['profile_id']
+
+def get_account(session):
+    """
+    Retrieves account via email in session, otherwise redirects
+    to login page.
+    """
+    if 'email' not in session:
+        return redirect(url_for('login')), None
+    else:
+        account = Account.objects.get_or_404(email=session['email'])
+        return None, account
 
 def verify_profile(session):
     """

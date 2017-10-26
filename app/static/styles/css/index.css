@@ -1,8 +1,22 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-@font-face {
-  font-family: "Avenir-Next-Bold";
-  src: url(../../fonts/Avenir-Next-Bold.ttf); }
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+.red {
+  color: #DC3D3D; }
+
+.green {
+  color: #95C66F; }
+
+.purple {
+  color: #B73A99; }
+
+.brown {
+  color: #B07953; }
+
+.gray {
+  color: #01ABA5; }
+
+.white {
+  color: #ffffff; }
 
 /* -------------------------------------------------------------
  *  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
@@ -24,7 +38,10 @@ a {
     text-decoration: none; }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Avenir-Next-Bold", sans-serif; }
+  font-family: "Roboto Mono", monospace; }
+
+input {
+  border-radius: 0; }
 
 .block {
   height: 100%;
@@ -39,40 +56,41 @@ h1, h2, h3, h4, h5 {
 .sheet {
   background-color: #ffffff;
   color: #191919;
-  padding: 48px 0 128px 0; }
+  padding: 16px 0 32px 0; }
 
 .sheet-gap {
   height: 100px;
   background-color: rgba(255, 140, 0, 0.5); }
 
 .btn-primary {
-  background-color: #ff6e40;
-  border-color: #ff6e40; }
+  background-color: #DC3D3D;
+  border-color: #DC3D3D; }
   .btn-primary:hover {
     background-color: #ffffff;
-    color: #ff6e40;
-    border-color: #ff6e40; }
+    color: #DC3D3D;
+    border-color: #DC3D3D; }
 
 .btn-base, .btn-full-color, .btn-outline {
-  font-size: 12px;
-  border-radius: 100px;
+  font-size: 16px;
+  border-radius: 4px;
   padding: 4px 48px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto Mono", monospace;
   font-weight: 700;
-  text-transform: uppercase;
-  min-width: 220px; }
+  text-transform: lowercase;
+  min-width: 220px;
+  height: 2.75em; }
   @media screen and (min-width: 500px) {
     .btn-base, .btn-full-color, .btn-outline {
       font-size: 18px; } }
 
 .btn-full-color {
-  border: 3px solid #ff6e40;
-  background-color: #ff6e40;
+  border: 3px solid #DC3D3D;
+  background-color: #DC3D3D;
   color: #ffffff; }
   .btn-full-color:hover {
     background: #ffffff;
     border-color: #ffffff;
-    color: #ff6e40; }
+    color: #DC3D3D; }
 
 .btn-outline {
   border: 3px solid #ffffff;
@@ -80,13 +98,18 @@ h1, h2, h3, h4, h5 {
   color: #ffffff; }
   .btn-outline:hover {
     background-color: #ffffff;
-    color: #ff6e40; }
+    color: #DC3D3D; }
 
-.navbar .container-fluid {
-  padding: 0px; }
+.navbar {
+  margin-bottom: 0; }
+  .navbar .container-fluid {
+    padding: 0px; }
 
 .navbar-container {
-  margin-top: 32px; }
+  min-height: 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 
 .navbar-default {
   z-index: 1024;
@@ -94,7 +117,7 @@ h1, h2, h3, h4, h5 {
   border-radius: 0;
   border-width: 0; }
   .navbar-default .navbar-brand {
-    font-family: "Avenir-Next-Bold", sans-serif;
+    font-family: "Roboto Mono", monospace;
     color: #ffffff;
     font-size: 22px; }
     .navbar-default .navbar-brand:hover {
@@ -106,13 +129,14 @@ h1, h2, h3, h4, h5 {
     font-weight: 700;
     color: #ffffff; }
     .navbar-default .navbar-nav li a:hover {
-      color: #ffe902; }
+      color: #DC3D3D; }
 
 .navbar-nav {
-  font-family: "Open Sans", sans-serif;
-  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  text-transform: lowercase;
   letter-spacing: 1px;
-  font-size: 18px; }
+  font-size: 18px;
+  text-align: right; }
 
 .dropdown-menu > li > a {
   color: #191919 !important; }
@@ -123,76 +147,53 @@ h1, h2, h3, h4, h5 {
 
 html {
   height: 100%;
-  background-color: #373560;
-  background-image: url("../../assets/star-cloud-tile.png");
-  background-repeat: repeat;
-  background-attachment: fixed; }
+  background-color: #292C36; }
 
 body {
   height: 100%;
   color: #191919;
-  font: 16px/1 "Open Sans", sans-serif;
+  font: 16px/1 "Roboto", sans-serif;
   position: relative;
   line-height: 1.8;
-  background: linear-gradient(rgba(255, 0, 0, 0), rgba(255, 140, 0, 0.5)); }
-
-#main {
-  padding-top: 24px; }
-
-.footer {
-  z-index: 10;
-  background-color: #ff6e40;
-  padding: 48px;
-  font-size: 14px; }
-  .footer ul {
-    list-style: none;
-    padding-left: 0px; }
-  .footer li {
-    line-height: 1.3; }
-  .footer a {
-    color: #afafaf; }
+  background: transparent; }
 
 @media (min-width: 1200px) {
   .container {
     max-width: 970px; } }
 
 .banner {
-  text-transform: uppercase;
-  margin-top: -70px;
-  padding-top: 70px; }
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  vertical-align: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: -102px; }
   .banner h1 {
-    font-size: 36px;
-    text-shadow: -3px 0px 0px rgba(255, 233, 2, 0.4);
-    line-height: 0.9;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    color: #ffe902; }
+    font-size: 20px;
+    line-height: 1.5;
+    font-family: "Roboto Mono", monospace; }
     @media screen and (min-width: 500px) {
       .banner h1 {
-        font-size: 56px; } }
+        font-size: 32px; } }
     @media screen and (min-width: 768px) {
       .banner h1 {
-        font-size: 78px; } }
-    @media screen and (min-width: 1300px) {
-      .banner h1 {
-        font-size: 96px; } }
-  .banner h2 {
-    font-size: 30px;
-    text-shadow: -3px 0px 0px rgba(233, 233, 233, 0.4);
-    line-height: 0.8;
-    color: #ffffff; }
-    @media screen and (min-width: 500px) {
-      .banner h2 {
-        font-size: 38px; } }
-    @media screen and (min-width: 768px) {
-      .banner h2 {
         font-size: 44px; } }
-    @media screen and (min-width: 1300px) {
-      .banner h2 {
-        font-size: 76px; } }
-  @media screen and (max-width: 768px) {
-    .banner {
-      text-align: center; } }
+  .banner .btn-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px; }
+    .banner .btn-wrapper * {
+      margin: 4px 16px;
+      padding: 4px 16px; }
+  .banner .down-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    color: white; }
 
 .about {
   background-color: #ffffff; }
@@ -200,7 +201,7 @@ body {
     font-weight: 500;
     font-size: 18px; }
   .about .hashtag {
-    color: #ff6e40; }
+    color: #DC3D3D; }
 
 #faqs p {
   font-size: 18px; }
@@ -209,7 +210,7 @@ body {
   min-height: 75%;
   padding: 48px 0px 48px 0px; }
   .sponsors h1 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Roboto Mono", monospace;
     font-weight: 700; }
 
 .sponsor-row {

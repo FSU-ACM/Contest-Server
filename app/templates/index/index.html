@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{url_for('static', filename='styles/css/index.css')}}">
+{% endblock %}
+
+<!-- Content in here -->
+{% block content %}
+
+	<div class="container banner">
+
+			<h1 class="green">/* acm at fsu */</h1>
+			<h1>
+				<span class="red">[fall]</span>
+				<span class="white">programming</span>
+				<span class="brown">contest</span>
+			</h1>
+			<h1 class="gray">October 28th 8AM – 4PM</h2>
+
+			<br />
+
+			<div class="btn-wrapper">
+				<input class="btn btn-full-color" type="button" onclick="location.href='/quickregister'"   value="Quick Register">
+				<input class="btn btn-outline" type="button" onclick="location.href='mailto:hello@acmatfsu.org';" value="Contact Us">
+			</div>
+
+			<div class="down-indicator">
+				<i class="fa fa-chevron-down fa-lg" aria-hidden="true"></i>
+			</div>
+
+	</div>
+
+	{% include 'index/about.html' %}
+	{% include 'index/faqs.html' %}
+	{% include 'index/sponsors.html' %}
+
+
+{% endblock %}
+
+
+<!-- Put scripts here -->
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static', filename='js/index.js')}}"></script>
+{% endblock %}

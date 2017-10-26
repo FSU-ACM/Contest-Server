@@ -1,9 +1,15 @@
 .navbar
+	// height: 102px
+	margin-bottom: 0
 	.container-fluid
 		padding:		0px
 
 .navbar-container
-	margin-top: 		32px
+	// margin-top: 		32px
+	min-height: 102px
+	display: flex
+	flex-direction: column
+	justify-content: center
 
 .navbar-default
 	z-index: 			1024
@@ -12,7 +18,7 @@
 	border-width: 		0
 
 	.navbar-brand
-		font-family: 	$brand-font
+		font-family: 	$mono
 		color:			$white
 		font-size:		22px
 
@@ -27,13 +33,14 @@
 		color:			$white
 
 		&:hover
-			color:		$banner-yellow
+			color:		$accent
 
 .navbar-nav
-	font-family:		$body-font
-	text-transform:		uppercase
+	font-family:		$body
+	text-transform:		lowercase
 	letter-spacing: 	1px
 	font-size: 			18px
+	text-align: 		right
 
 
 .dropdown-menu>li>a

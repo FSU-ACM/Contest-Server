@@ -4,7 +4,7 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha
 from app.models import Account, Preregistration, Profile, Team
-from app.util.views.auth import *
+from app.util.auth import *
 
 import bleach
 
@@ -15,8 +15,8 @@ def register():
     success = request.args.get('success', None)
 
     # Disuade from registering twice
-    action, profile = verify_profile(session)
-    action = None if not profile else redirect(url_for('profile',
+    action, account = get_account(session)
+    action = None if not account else redirect(url_for('profile',
         message="You are already registered!"))
 
     if not action:

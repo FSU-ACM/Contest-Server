@@ -1,0 +1,66 @@
+version: '2'
+services:
+
+  # Proxy server [entry point]
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    volumes:
+      - /etc/nginx/certs
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - "8080:80"
+      - "443:443"
+
+  nginx-ssl:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    volumes_from:
+      - "nginx-proxy"
+
+  # Registration system database
+  db:
+    extends:
+      file: registration.yml
+      service: db
+    volumes:
+      - /data/contest:/data/db
+
+  # Registration system webapp
+  webapp:
+    extends:
+      file: registration.yml
+      service: webapp
+    environment:
+      FLASK_CONFIG: '/webapp/config/production.py'
+      VIRTUAL_HOST: 'contest.acmatfsu.org'
+      LETSENCRYPT_HOST: 'contest.acmatfsu.org'
+      LETSENCRYPT_EMAIL: 'andrew@acmatfsu.org'
+    volumes:
+      - /acm/contest/share:/webapp/share
+
+  # Domjudge server
+  domserver:
+    extends:
+      file: domserver.yml
+      service: domserver
+    environment:
+      VIRTUAL_HOST: 'domjudge.acmatfsu.org,bastion.cs.fsu.edu'
+      LETSENCRYPT_HOST: 'bastion.cs.fsu.edu,domjudge.acmatfsu.org'
+      LETSENCRYPT_EMAIL: 'andrew@acmatfsu.org'
+
+  # Domjudge database
+  domdb:
+    extends:
+      file: domserver.yml
+      service: domdb
+
+  # Judgehost
+  judgehost:
+    extends:
+      file: judgehost.yml
+      service: judgehost
+    environment:
+      DOMSERVER_HOST: 'domserver/api'

@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    extends:
+      file: registration.yml
+      service: db
+    ports:
+      - "8027:27017"
+    volumes:
+      - ../.data:/data/db
+  webapp:
+    extends:
+      file: registration.yml
+      service: webapp
+    volumes:
+      - ..:/webapp
+    ports:
+      - "8080:80"
+    environment:
+      FLASK_CONFIG: '/webapp/config/development.py'
+      FLASK_DEBUG: 1

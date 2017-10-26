@@ -1,7 +1,7 @@
-{% extends "/super/form.html" %}
-{% block content %}
+{% extends "form/form.html" %}
+{% block form %}
 
-<div class="container form-sheet">
+<div class="form-sheet">
 
   {% include "/form/menuitems.html" %}
 
@@ -26,7 +26,7 @@
 	<div class="row">
 
     <div class="col-md-6 column-left">
-      <form action="/profile/team/join" method=post>
+      <form action="{{url_for('team_join')}}" method=post>
         <label for="teamID">Join Existing Team</label>
         <input type="text"
           class="form-control"
@@ -46,7 +46,7 @@
     </div>
 
 		<div class="col-md-6">
-			<form action="/profile/team" method=post>
+			<form action="{{url_for('team')}}" method=post>
 	      <label for="teamName">Create New Team</label>
 	      <input type="text"
           class="form-control"
@@ -75,6 +75,10 @@
           placeholder="Enter a team name"
           value="{{team.teamName}}">
           <br />
+
+        {% include "form/division.html" %}
+        <br />
+
         <input class="btn btn-primary" type=submit value="Update">
       </form>
 
@@ -83,7 +87,7 @@
       <h4>Team Members</h4>
       <ul>
         {% for member in team.members %}
-        <li>{{member.firstname}} {{member.lastname}}</li>
+        <li>{{member.email}}</li>
         {% endfor %}
       </ul>
 

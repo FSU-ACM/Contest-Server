@@ -1,0 +1,11 @@
+version: '2'
+services:
+    judgehost:
+        image: "andrewsosa/domjudge-judgehost"
+        privileged: true
+        cap_add:
+            - SYS_ADMIN
+        environment:
+            # - DOMSERVER_HOST=[hostname]/api
+            - DOMSERVER_USER=judgehost
+            - DOMSERVER_PASSWORD=localpass

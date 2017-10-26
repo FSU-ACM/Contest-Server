@@ -11,3 +11,12 @@ app/storage
 
 # os junk
 *.DS_Store
+
+# dev storage
+.data
+
+# Configuration
+config/production.py
+
+teams.tsv
+accounts.tsv

@@ -1,0 +1,23 @@
+<div class="division">
+
+    <label for="division">Division</label><br />
+
+    <input
+        type="radio"
+        id="division"
+        name=division value=1
+        {% if team and team.division == 1 %} checked {% endif %}/>
+    <span>Upper Division</span>
+    <br />
+
+    <input
+        type="radio"
+        id="division"
+        name=division value=2
+        {% if team and team.division == 2 %} checked {% endif %}
+
+        />
+    <span>Lower Division</span>
+    <br />
+
+</div>
