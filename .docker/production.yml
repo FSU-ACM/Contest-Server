@@ -38,6 +38,8 @@ services:
       VIRTUAL_HOST: 'contest.acmatfsu.org'
       LETSENCRYPT_HOST: 'contest.acmatfsu.org'
       LETSENCRYPT_EMAIL: 'andrew@acmatfsu.org'
+    volumes:
+      - /acm/contest/share:/webapp/share
 
   # Domjudge server
   domserver:
@@ -45,8 +47,8 @@ services:
       file: domserver.yml
       service: domserver
     environment:
-      VIRTUAL_HOST: 'domjudge.acmatfsu.org'
-      LETSENCRYPT_HOST: 'domjudge.acmatfsu.org'
+      VIRTUAL_HOST: 'domjudge.acmatfsu.org,bastion.cs.fsu.edu'
+      LETSENCRYPT_HOST: 'bastion.cs.fsu.edu,domjudge.acmatfsu.org'
       LETSENCRYPT_EMAIL: 'andrew@acmatfsu.org'
 
   # Domjudge database
