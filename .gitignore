@@ -4,6 +4,7 @@
 *.sass-cache*
 *.afdesign
 node_modules/
+.idea
 
 # Config based
 /instance
@@ -12,11 +13,10 @@ app/storage
 # os junk
 *.DS_Store
 
-# dev storage
-.data
 
 # Configuration
 config/production.py
 
+# Account files
 teams.tsv
 accounts.tsv
