@@ -1,8 +1,12 @@
+# This file is for ease of use in development. This configuration mirrors
+# the .docker/development.yml config. You may edit this as you wish, but
+# DO NOT COMMIT your changes to source control.
+
 version: '2'
 services:
   db:
     extends:
-      file: registration.yml
+      file: .docker/registration.yml
       service: db
     ports:
       - "8027:27017"
@@ -10,10 +14,10 @@ services:
       - /data/contest:/data/db
   webapp:
     extends:
-      file: registration.yml
+      file: .docker/registration.yml
       service: webapp
     volumes:
-      - ..:/webapp
+      - .:/webapp
     ports:
       - "8080:80"
     environment:
