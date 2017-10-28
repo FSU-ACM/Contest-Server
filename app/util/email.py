@@ -29,7 +29,7 @@ def sign_in_email(address, domuser, dompass):
     msg.body += "Username: {0} \n".format(domuser)
     msg.body += "Password: {0} \n".format(dompass)
     msg.body += "\n"
-    msg.body += "Log in at domjudge.springprogrammingcontest.com.\n"
+    msg.body += "Log in at bastion.cs.fsu.edu.\n"
     msg.body += "\nRegards,\nACM at FSU"
 
     # mail.send(msg)
