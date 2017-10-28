@@ -41,7 +41,7 @@ with open("teams.tsv", "w+") as teams_tsv, \
         accounts_tsv.write(u"\t".join(
           ["team",
            team.teamName.strip('\t'), # So tabs in teamName don't interfere
-           team.teamID,
+           '{0}-{1}'.format('team', team.teamID.split('-')[1].zfill(3)),
            team.domPass,
-           team.teamID.strip("acm-"),  # To only get ID number
+           # team.teamID.strip("acm-"),  # To only get ID number
            '\n']).encode("UTF-8"))
