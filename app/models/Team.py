@@ -41,6 +41,9 @@ if Team.objects.count() < app.config['TEAM_COUNT']:
     Domjudge doesn't support acm-0 (0 is not a valid ID), so
     whenever we start generating acm-x we use +1. Hence, to reach 300
     teams we must generate acm-1 through acm-301. 
+    
+    This still does not solve the issue if a team is removed in the middle.
+    This should be rewritten to start at the largest existing team ID.
     """
 
     for i in range(start, target):
