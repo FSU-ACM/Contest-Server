@@ -7,6 +7,7 @@ from app.models import Account, Team
 from app.util.auth import *
 from app.util.team import leave_team
 
+
 @app.route('/account/team/leave', methods=['POST'])
 def team_leave():
     """

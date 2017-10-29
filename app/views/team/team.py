@@ -9,6 +9,7 @@ from app.util.team import create_team
 
 import bleach
 
+
 @app.route('/account/team', methods=['GET'])
 def team():
     """
@@ -24,7 +25,6 @@ def team():
     action, account = get_account(session)
 
     if not action:
-
         # Let's see if they have a team
         team = account.team
 

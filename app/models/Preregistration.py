@@ -1,5 +1,6 @@
 from app import db
 
+
 class Preregistration(db.Document):
     email = db.StringField(unique=True, required=True)
     name = db.StringField(unique=False, null=True)

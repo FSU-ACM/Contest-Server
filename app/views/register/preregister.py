@@ -8,14 +8,14 @@ from app.util.auth import *
 
 import bleach
 
-@app.route('/preregister', methods=['POST','GET'])
-def preregister():
 
+@app.route('/preregister', methods=['POST', 'GET'])
+def preregister():
     error = None
     success = None
 
-    #Getting information from formi
-    if request.method =='POST':
+    # Getting information from formi
+    if request.method == 'POST':
         name = bleach.clean(request.form['name'])
         email = bleach.clean(request.form['email'])
 
@@ -29,12 +29,13 @@ def preregister():
 
         # Check unique email
         elif not Preregistration.objects(email=email).first():
-            #Creating entry and inserting it into the database
-            prereg = Preregistration(email=email,name=name)
+            # Creating entry and inserting it into the database
+            prereg = Preregistration(email=email, name=name)
             prereg.save()
-            success = """Congratulations, {}, you are now preregistered for the contest! We'll contact you at your email ({}) when full registration opens.""".format(name,email)
+            success = """Congratulations, {}, you are now preregistered for the contest! We'll contact you at your email ({}) when full registration opens.""".format(
+                name, email)
 
         else:
             error = "This email is already registered."
 
-    return render_template('/form/prereg.html',error=error,success=success)
+    return render_template('/form/prereg.html', error=error, success=success)

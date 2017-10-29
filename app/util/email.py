@@ -2,14 +2,15 @@ from flask_mail import Message
 from app import app, mail
 from threading import Thread
 
+
 # Async send message
 def send_async_mail(app, msg):
     with app.app_context():
         mail.send(msg)
 
+
 # Main reset functionality
 def reset_password_email(address, password):
-
     msg = Message("ACM Programming Contest - Password Reset", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
     msg.body = "Here's your new password: %s. " % password
@@ -20,9 +21,9 @@ def reset_password_email(address, password):
     thr = Thread(target=send_async_mail, args=[app, msg])
     thr.start()
 
+
 # Sign in functionality
 def sign_in_email(address, domuser, dompass):
-
     msg = Message("ACM Programming Contest - Domjudge Credentials", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
     msg.body = "Here's your Domjudge credentials: \n\n"
@@ -36,9 +37,9 @@ def sign_in_email(address, domuser, dompass):
     thr = Thread(target=send_async_mail, args=[app, msg])
     thr.start()
 
+
 # Quick registration support
 def quick_register_email(address, password):
-
     msg = Message("ACM Programming Contest - Your Password", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
     msg.body = "Hello! Thanks for registering for the contest.\n\n"

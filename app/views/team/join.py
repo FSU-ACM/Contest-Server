@@ -7,6 +7,7 @@ from app.models import Account, Team
 from app.util.auth import *
 from app.util.team import join_team
 
+
 @app.route('/account/team/join', methods=['POST'])
 def team_join():
     """
@@ -20,7 +21,6 @@ def team_join():
 
     # Perform join if account exists
     if not action:
-
         teamID, teamPass = request.form['teamID'], request.form['teamPasscode']
 
         error, success = join_team(account, teamID=teamID, teamPass=teamPass)

@@ -1,19 +1,20 @@
 # util.views.profile
 
-from datetime import date,datetime
+from datetime import date, datetime
+
 
 def verifyuserdetails(firstname, lastname, dob, major, advProg, ifstudent):
     error = ""
     dob_date = None
     wrong_dob_format = False
-    #dob_date = datetime.strptime(dob,"%Y-%m-%d")
-    #Checking date format
+    # dob_date = datetime.strptime(dob,"%Y-%m-%d")
+    # Checking date format
     try:
-        dob_date = datetime.strptime(dob,"%Y-%m-%d")
+        dob_date = datetime.strptime(dob, "%Y-%m-%d")
     except ValueError as err:
         print(err)
         wrong_dob_format = True
-    if dob_date > datetime(2017,01,01) or dob_date < datetime(1890,01,01):
+    if dob_date > datetime(2017, 01, 01) or dob_date < datetime(1890, 01, 01):
         wrong_dob_format = True
 
     if not firstname:

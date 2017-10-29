@@ -9,6 +9,7 @@ from app.util.auth import verify_email
 
 import datetime, re
 
+
 @app.route('/signin', methods=['POST', 'GET'])
 @basic_auth.required
 def sign_in():

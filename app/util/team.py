@@ -3,8 +3,8 @@
 from app.models import Account, Team
 from app.util.password import make_password
 
-def create_team(account, name):
 
+def create_team(account, name):
     """
     ATTENTION:
     The following code is a workaround for a bug in MongoEngine.
@@ -37,18 +37,19 @@ def create_team(account, name):
 
     return team
 
+
 def set_division(team, division):
     team.division = division
     team.save()
     # TODO make this more...robust
 
-def join_team(account, teamID=None, teamPass=None, team=None):
 
+def join_team(account, teamID=None, teamPass=None, team=None):
     error, success = None, None
 
     # Look up the team if we didn't bring one
     if team is None:
-        team = Team.objects(teamID=teamID,teamPass=teamPass).first()
+        team = Team.objects(teamID=teamID, teamPass=teamPass).first()
 
     # We didn't bring a team nor did we find one
     if team is None:
@@ -58,7 +59,7 @@ def join_team(account, teamID=None, teamPass=None, team=None):
     if team:
         # Max 3 members
         if not team.members:
-            team.members = [account] # See workaround notice above
+            team.members = [account]  # See workaround notice above
             team.save()
             account.team = team
             account.save()
@@ -71,9 +72,10 @@ def join_team(account, teamID=None, teamPass=None, team=None):
             success = "You joined the team!"
         else:
             error = "Team %s already has 3 members." % \
-                team.teamName or team.teamID
+                    team.teamName or team.teamID
 
     return error, success
+
 
 def leave_team(account, team):
     account.team = None
