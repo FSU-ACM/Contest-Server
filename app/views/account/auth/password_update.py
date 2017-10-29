@@ -6,19 +6,18 @@ from app import app
 from app.models import Account
 
 
-@app.route('/account/updatepassword', methods=['POST','GET'])
+@app.route('/account/updatepassword', methods=['POST', 'GET'])
 def updatepassword():
-
     error, success = None, None
 
     # check if the user is logged in. If not, return to the login page
     if 'email' not in session:
         return redirect(url_for('login'))
 
-    if request.method=='POST':
-        email=session['email']
-        currentpassword=request.form['currentpassword']
-        newpassword=request.form['newpassword']
+    if request.method == 'POST':
+        email = session['email']
+        currentpassword = request.form['currentpassword']
+        newpassword = request.form['newpassword']
 
         # Check if the old password is corect
         account = Account.objects(email=email).first()
@@ -31,4 +30,4 @@ def updatepassword():
             account.save()
             success = "Password updated successfully"
 
-    return render_template('/form/updatepassword.html', error=error,success=success)
+    return render_template('/form/updatepassword.html', error=error, success=success)

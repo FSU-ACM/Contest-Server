@@ -9,6 +9,7 @@ from app.util.team import rename_team, set_division
 
 import bleach
 
+
 @app.route('/account/team/rename', methods=['POST'])
 def team_update():
     """

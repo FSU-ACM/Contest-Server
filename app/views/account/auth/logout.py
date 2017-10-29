@@ -3,7 +3,8 @@
 from flask import redirect, url_for, session
 from app import app
 
-@app.route('/logout', methods=['POST','GET'])
+
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
     try:
         del session['email']
@@ -11,4 +12,4 @@ def logout():
     except KeyError:
         pass
 
-    return redirect(url_for('index'),code=302)
+    return redirect(url_for('index'), code=302)

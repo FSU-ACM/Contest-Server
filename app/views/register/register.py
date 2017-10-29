@@ -8,16 +8,15 @@ from app.util.auth import *
 
 import bleach
 
-@app.route('/register', methods=['POST','GET'])
-def register():
 
+@app.route('/register', methods=['POST', 'GET'])
+def register():
     error = request.args.get('error', None)
     success = request.args.get('success', None)
 
     # Disuade from registering twice
     action, account = get_account(session)
-    action = None if not account else redirect(url_for('profile',
-        message="You are already registered!"))
+    action = None if not account else redirect(url_for('profile', message="You are already registered!"))
 
     if not action:
 
@@ -52,13 +51,13 @@ def register():
                 account.save()
 
                 # Set cookie, redirect to profile page.
-                session['email']=email
+                session['email'] = email
                 action = redirect(url_for('profile'), code=302)
 
             else:
                 error = "This email is already linked to an another account."
 
         action = action if action is not None else \
-            render_template('/form/register.html',error=error)
+            render_template('/form/register.html', error=error)
 
     return action

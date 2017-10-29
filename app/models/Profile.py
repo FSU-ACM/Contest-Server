@@ -1,5 +1,6 @@
 from app import db
 
+
 class Profile(db.Document):
     firstname = db.StringField(required=True)
     lastname = db.StringField(required=True)
@@ -17,7 +18,6 @@ class Profile(db.Document):
 
     # Block editing
     shadowban = db.BooleanField()
-
 
     # Extra credit relationship
     courses = db.ListField(db.ReferenceField('Course'), null=True)

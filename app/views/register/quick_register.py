@@ -12,25 +12,25 @@ from app.util.auth import get_account
 
 import bleach
 
+
 @app.route('/quickregister', methods=['GET'])
 def quick_register():
-
     error = request.args.get('error', None)
     success = request.args.get('success', None)
 
     # Disuade double registering
     action, account = get_account(session)
     action = None if not account else redirect(url_for('profile',
-        message="You are already registered!"))
+                                                       message="You are already registered!"))
 
     if not action:
         action = render_template('/form/quick_register.html', error=error, success=success)
 
     return action
 
+
 @app.route('/quickregister', methods=['POST'])
 def quick_register_post():
-
     error, success = None, None
 
     form = request.form.to_dict()

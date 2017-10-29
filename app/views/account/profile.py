@@ -8,9 +8,9 @@ from app.util.auth import *
 
 import bleach
 
-@app.route('/account/profile', methods=['POST','GET'])
-def profile():
 
+@app.route('/account/profile', methods=['POST', 'GET'])
+def profile():
     error = request.args.get('error', None)
     success = request.args.get('success', None)
     message = request.args.get('message', None)
@@ -18,19 +18,19 @@ def profile():
 
     # check if the user is logged in. If not, rturn to the login page
     if 'email' not in session:
-         return redirect(url_for('login', error="You are not logged in."))
+        return redirect(url_for('login', error="You are not logged in."))
     email = session['email']
 
     # Get the account stuff
     account = Account.objects(email=email).first()
     profile = account.profile
 
-    #Getting information from form
-    if request.method =='POST':
+    # Getting information from form
+    if request.method == 'POST':
 
         # Extract important data from form
         data = dict()
-        for k,v in request.form.iteritems():
+        for k, v in request.form.iteritems():
             # add to dict only if there is a values
             v = bleach.clean(v)
             if v:
@@ -43,13 +43,12 @@ def profile():
 
         # Clean empty fields (TODO: make this unnessessary)
         to_delete = []
-        for k,v in data.iteritems():
+        for k, v in data.iteritems():
             if v is None or v == "":
                 to_delete.append(k)
         for k in to_delete:
             print "Removed %s" % k
             del data[k]
-
 
         # Let's save our data.
         if profile:
@@ -66,7 +65,7 @@ def profile():
             success = "Profile updated."
 
         except Exception as e:
-            error =  "Hey, there's been an error! Sorry about that. "
+            error = "Hey, there's been an error! Sorry about that. "
             error += "Please email hello@acmatfsu.org and let us know. "
             error += "We'll try and get it sorted out ASAP."
             print e
@@ -78,5 +77,5 @@ def profile():
         # Set message for non-profile
         message = "Please provide your basic information before you proceed."
 
-    return render_template('/form/profile.html',error=error,success=success,
-        message=message, profile=profile)
+    return render_template('/form/profile.html', error=error, success=success,
+                           message=message, profile=profile)

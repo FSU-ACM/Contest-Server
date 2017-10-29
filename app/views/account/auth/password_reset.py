@@ -11,7 +11,6 @@ from app.util import auth as auth_util
 
 @app.route('/resetpassword', methods=['POST'])
 def reset_password():
-
     error, success = None, None
     error_msg = "No such email on file."
 
