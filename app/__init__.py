@@ -7,7 +7,6 @@ from flask_nav.elements import *
 from flask_mail import Mail
 from flask_basicauth import BasicAuth
 
-
 import random
 import string
 from datetime import timedelta
@@ -17,9 +16,7 @@ import os
 # Init & Config
 app = Flask(__name__)
 app.config.from_envvar('FLASK_CONFIG')
-app.secret_key=''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(30))
-#By default in Flask, permanent_session_lifetime is set to 31 days
-#app.permanent_session_lifetime = timedelta(minutes=30)
+app.secret_key = ''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(30))
 
 # add pugjs support
 app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
@@ -39,6 +36,7 @@ app.url_map.strict_slashes = False
 @app.context_processor
 def override_url_for():
     return dict(url_for=dated_url_for)
+
 
 def dated_url_for(endpoint, **values):
     if endpoint == 'static':
