@@ -2,7 +2,7 @@ version: '2'
 services:
   db:
     extends:
-      file: registration.yml
+      file: ./registration.yml
       service: db
     ports:
       - "8027:27017"
@@ -10,7 +10,7 @@ services:
       - /data/contest:/data/db
   webapp:
     extends:
-      file: registration.yml
+      file: ./registration.yml
       service: webapp
     volumes:
       - ..:/webapp
