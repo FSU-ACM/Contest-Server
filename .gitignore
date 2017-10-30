@@ -18,5 +18,4 @@ app/storage
 config/production.py
 
 # Account files
-teams.tsv
-accounts.tsv
+*.tsv
