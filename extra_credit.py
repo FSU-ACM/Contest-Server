@@ -17,22 +17,26 @@ def extra_credit(results_tsv, courses_csv, output_folder):
 
     # Read the score for each team
     tsv = csv.reader(results_tsv, delimiter='\t')
-    for row in tsv[1:]:  # skip header line
+    next(tsv)
+    for row in tsv:  # skip header line
         teamid, solved = row[0], row[3]
         team_scores[teamid] = solved
 
     # Match competitors with questions solved
     for teamid, score in team_scores.iteritems():
         team = Team.objects(teamID=teamid).first()
+        if not team.members:
+            continue
         for account in team.members:
-            if not account.profile or not account.profile.fsuid:
+            if not account.profile or not account.profile.fsuid or not account.signin:
                 continue
             fsuid = account.profile.fsuid
             user_scores[fsuid] = team_scores[teamid]
 
     # Get student classes
     courses = csv.reader(courses_csv)
-    for row in courses_csv[1:]: # skip header line
+    next(courses)
+    for row in courses: # skip header line
         fsuid, course_list = row[1], row[2]
         fsuid = fsuid.lower().split('@')[0]
         course_list = course_list.split(';')
