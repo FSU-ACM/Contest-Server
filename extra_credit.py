@@ -6,7 +6,7 @@ import csv
 import click
 
 
-@click.command
+@click.command()
 @click.argument('results_tsv', type=click.File('r'))
 @click.argument('courses_csv', type=click.File('r'))
 @click.argument('output_folder', type=str)
