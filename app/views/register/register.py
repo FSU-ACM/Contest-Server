@@ -5,6 +5,7 @@ from flask import redirect, url_for, render_template, request, session, abort
 from app import app, recaptcha
 from app.models import Account, Preregistration, Profile, Team
 from app.util.auth import *
+from app.util.request import get_email, get_password
 
 import bleach
 
@@ -23,8 +24,8 @@ def register():
         if request.method == 'POST':
 
             # Validate login; deny or redirect to profile
-            email = bleach.clean(request.form['email'])
-            password = bleach.clean(request.form['password'])
+            email = get_email()
+            password = get_password()
 
             # Validate email
             if not verify_email(email):
