@@ -18,9 +18,6 @@ app = Flask(__name__)
 app.config.from_envvar('FLASK_CONFIG')
 app.secret_key = ''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(30))
 
-# add pugjs support
-app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
-
 # Init modules
 bootstrap = Bootstrap(app)
 db = MongoEngine(app)
