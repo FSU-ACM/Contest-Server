@@ -7,14 +7,14 @@ from app.models import Account
 from app.util import email as email_util
 from app.util import password as pass_util
 from app.util import auth as auth_util
-
+from app.util import request as request_util
 
 @app.route('/resetpassword', methods=['POST'])
 def reset_password():
     error, success = None, None
     error_msg = "No such email on file."
 
-    email = request.form['email']
+    email = request_util.get_email()
 
     error = None if auth_util.verify_email(email) else error_msg
 

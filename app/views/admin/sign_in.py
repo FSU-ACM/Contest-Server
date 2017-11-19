@@ -6,6 +6,7 @@ from app import app, basic_auth
 from app.models import Account, Profile, Team
 from app.util.email import sign_in_email
 from app.util.auth import verify_email
+from app.util.request import get_email
 
 import datetime, re
 
@@ -19,7 +20,7 @@ def sign_in():
 
     error = request.args.get('error', None)
     success = request.args.get('success', None)
-    email = request.form.get('email', None)
+    email = get_email()
 
     if request.method == 'POST':
 

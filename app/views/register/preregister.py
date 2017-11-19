@@ -5,6 +5,7 @@ from flask import redirect, url_for, render_template, request, session, abort
 from app import app, recaptcha
 from app.models import Preregistration
 from app.util.auth import *
+from app.util.request import get_email
 
 import bleach
 
@@ -17,7 +18,7 @@ def preregister():
     # Getting information from formi
     if request.method == 'POST':
         name = bleach.clean(request.form['name'])
-        email = bleach.clean(request.form['email'])
+        email = get_email()
 
         # Verify recaptcha
         if not recaptcha.verify():
