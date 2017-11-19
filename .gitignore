@@ -5,6 +5,7 @@
 *.afdesign
 node_modules/
 .idea
+.vscode
 
 # Config based
 /instance
@@ -18,5 +19,4 @@ app/storage
 config/production.py
 
 # Account files
-teams.tsv
-accounts.tsv
+*.tsv
