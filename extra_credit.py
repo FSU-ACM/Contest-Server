@@ -14,6 +14,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     team_scores, user_scores = dict(), dict()
     student_classes = dict()
     class_files = dict()
+    names = dict()
 
     # Read the score for each team
     tsv = csv.reader(results_tsv, delimiter='\t')
@@ -32,6 +33,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
                 continue
             fsuid = account.profile.fsuid
             user_scores[fsuid] = team_scores[teamid]
+            names[fsuid] = account.profile.firstname, account.profile.lastname
 
     # Get student classes
     courses = csv.reader(courses_csv)
@@ -57,7 +59,8 @@ def extra_credit(results_tsv, courses_csv, output_folder):
             if course not in class_files.keys():
                 class_files[course] = open_class_file(course)
             if score is not None:
-                class_files[course].writerow([fsuid, score])
+		first, last = names[fsuid]
+                class_files[course].writerow([fsuid, last, first, score])
 
 
 if __name__ == '__main__':
