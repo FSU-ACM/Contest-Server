@@ -25,9 +25,17 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     for teamid, score in team_scores.iteritems():
         team = Team.objects(teamID=teamid).first()
         for account in team.members:
-            if not account.profile or not account.profile.fsuid:
-                continue
-            fsuid = account.profile.fsuid
+            fsuid = account.email   # fallback is email
+            if account.profile and account.profile.fsuid:
+                # try and pull their fsuid from profile
+                fsuid = account.profile.fsuid
+
+            # Handles two situations:
+            #   - no profile, so maybe we can autodetect FSUID from email
+            #   - user is an idiot and put their fsu email in the 'fsuid' field
+            if 'my.fsu.edu' in fsuid:
+                fsuid = fsuid.lower().split('@')[0]
+
             user_scores[fsuid] = team_scores[teamid]
 
     # Get student classes
