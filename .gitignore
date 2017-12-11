@@ -5,6 +5,7 @@
 *.afdesign
 node_modules/
 .idea
+.vscode
 
 # Config based
 /instance
