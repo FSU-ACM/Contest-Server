@@ -5,6 +5,7 @@ from flask import redirect, url_for, render_template, request, session, abort
 from app import app, recaptcha
 from app.models import Account
 from app.util.auth import *
+from app.util.request import get_email, get_password
 
 import bleach
 
@@ -21,8 +22,8 @@ def login():
 
     # Getting information from form
     if request.method == 'POST':
-        email = bleach.clean(request.form['email'])
-        password = bleach.clean(request.form['password'])
+        email = get_email()
+        password = get_password()
 
         # Check valid Email
         if not verify_email(email):
