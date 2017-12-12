@@ -82,10 +82,10 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     # auto-id'ed from a my.fsu.edu email address.
 
     orphans = set(user_scores.keys()) - set(student_classes.keys())
-    with open_class_file('orphans') as orphan_csv:
-        for orphan in list(orphans):
-            score = user_scores.get(orphan, None)
-            orphan_csv.writerow([orphan, score])
+    orphan_csv = open_class_file('orphans')
+    for orphan in list(orphans):
+        score = user_scores.get(orphan, None)
+        orphan_csv.writerow([orphan, score])
 
 
 if __name__ == '__main__':
