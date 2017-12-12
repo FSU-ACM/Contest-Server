@@ -29,7 +29,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         if not team.members:
             continue
         for account in team.members:
-            if not  account.signin:
+            if not account.signin:
                 continue
             
             fsuid = account.email   # fallback is email
@@ -44,7 +44,9 @@ def extra_credit(results_tsv, courses_csv, output_folder):
                 fsuid = fsuid.lower().split('@')[0]
 
             user_scores[fsuid] = team_scores[teamid]
-            names[fsuid] = account.profile.firstname, account.profile.lastname
+            
+            if account.profile:
+                names[fsuid] = account.profile.firstname, account.profile.lastname
 
     # Get student classes
     courses = csv.reader(courses_csv)
@@ -70,7 +72,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
             if course not in class_files.keys():
                 class_files[course] = open_class_file(course)
             if score is not None:
-		first, last = names[fsuid]
+		first, last = names.get(fsuid, (None, None))
                 class_files[course].writerow([fsuid, last, first, score])
 
 
