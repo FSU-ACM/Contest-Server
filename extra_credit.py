@@ -31,7 +31,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         for account in team.members:
             if not account.signin:
                 continue
-            
+
             fsuid = account.email   # fallback is email
             if account.profile and account.profile.fsuid:
                 # try and pull their fsuid from profile
@@ -44,7 +44,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
                 fsuid = fsuid.lower().split('@')[0]
 
             user_scores[fsuid] = team_scores[teamid]
-            
+
             if account.profile:
                 names[fsuid] = account.profile.firstname, account.profile.lastname
 
@@ -65,15 +65,27 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         return csv_writer
 
     for fsuid, course_list in student_classes.iteritems():
-        # FSUIDs from the survey not in the EC data don't appear.
+        # FSUIDs from the survey not in the EC get None
         score = user_scores.get(fsuid, None)
 
         for course in course_list:
             if course not in class_files.keys():
                 class_files[course] = open_class_file(course)
-            if score is not None:
-		first, last = names.get(fsuid, (None, None))
-                class_files[course].writerow([fsuid, last, first, score])
+            first, last = names.get(fsuid, (None, None))
+            class_files[course].writerow([fsuid, last, first, score])
+
+
+    # If you completed the survey but didn't complete the profile, your score is None,
+    # but you appear in the class file. Now we generate a file of identifiers in our
+    # user_score that didn't show up in the survey, which will usually be people's
+    # emails for those who did not complete the profile and didn't get their FSUID
+    # auto-id'ed from a my.fsu.edu email address.
+
+    orphans = set(user_scores.keys()) - set(student_classes.keys())
+    with open_class_file('orphans') as orphan_csv:
+        for orphan in list(orphans):
+            score = user_scores.get(orphan, None)
+            orphan_csv.writerow([orphan, score])
 
 
 if __name__ == '__main__':
