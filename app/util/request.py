@@ -17,4 +17,4 @@ def get_password():
     :return: Normalized password string.
     """
     password = request.form['password']
-    return clean(password).lower()
+    return password
