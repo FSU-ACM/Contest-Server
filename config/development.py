@@ -8,8 +8,8 @@ MONGODB_SETTINGS = {
 	'db': "fpc2017",	# "project"
 	'host': "db", 		# "127.0.0.1"
 	'port': 27017, 		# 27017
-    # 'username': "None", # 'username'
-    # 'password': None, # 'passwd'
+	# 'username': "None", # 'username'
+	# 'password': None, # 'passwd'
 }
 
 # ReCaptcha
@@ -27,5 +27,5 @@ MAIL_USERNAME = 'acm'
 MAIL_PASSWORD = '1017Academic!Way'
 
 # Basic Auth Creds
-# BASIC_AUTH_USERNAME = ''
-# BASIC_AUTH_PASSWORD = ''
+BASIC_AUTH_USERNAME = 'acm'
+BASIC_AUTH_PASSWORD = 'acm'

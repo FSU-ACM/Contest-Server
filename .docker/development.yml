@@ -4,10 +4,8 @@ services:
     extends:
       file: ./registration.yml
       service: db
-    ports:
-      - "8027:27017"
-    volumes:
-      - /data/contest:/data/db
+    # volumes:
+    #   - /data/contest:/data/db
   webapp:
     extends:
       file: ./registration.yml
