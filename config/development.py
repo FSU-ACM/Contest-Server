@@ -24,7 +24,7 @@ MAIL_USE_TLS = True
 MAIL_USE_SSL = False
 MAIL_DEFAULT_SENDER = 'acm@cs.fsu.edu'
 MAIL_USERNAME = 'acm'
-MAIL_PASSWORD = '***REMOVED***'
+MAIL_PASSWORD = ''
 
 # Basic Auth Creds
 BASIC_AUTH_USERNAME = 'acm'
