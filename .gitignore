@@ -1,22 +1,23 @@
+# Compile files
 *.pyc
 *.pem
 *.sassc
 *.sass-cache*
-*.afdesign
-node_modules/
+
+# Dep files
+**/node_modules/
+
+# IDE scraps
 .idea
 .vscode
 
-# Config based
-/instance
-app/storage
-
-# os junk
-*.DS_Store
-
-
 # Configuration
 config/production.py
+**/.env
 
-# Account files
+# OS Specific
+*.DS_Store
+
+# Misc files
 *.tsv
+*.afdesign

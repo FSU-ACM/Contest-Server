@@ -1,0 +1,91 @@
+version: '2'
+services:
+
+  #
+  #   Nginx
+  #
+
+  # Proxy server [entry point]
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      # - "80:80"
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/certs
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  # Proxy server SSL companion
+  nginx-ssl:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    volumes_from:
+      - "nginx-proxy"
+
+  #
+  #   Registration
+  #
+
+  # Registration system database
+  db:
+    image: mongo
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - /data/contest:/data/db
+
+  # Registration system webapp
+  webapp:
+    build: .
+    image: fsu-acm/contest-server
+    environment:
+      - FLASK_CONFIG      = '/webapp/config/production.py'
+      # - VIRTUAL_HOST      = ${VHOST}
+      # - LETSENCRYPT_HOST  = ${VHOST}
+      # - LETSENCRYPT_EMAIL = 'andrew@fsu.acm.org'
+    volumes:
+      - /acm/contest/share:/webapp/share
+
+  #
+  #   Domjudge
+  #
+
+  # Domjudge database
+  domdb:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DOM_PASS}
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./config/domdb:/etc/mysql/conf.d
+      - /private/var/lib/containers/domjudge_db:/var/lib/mysql
+
+  # Domjudge server
+  domserver:
+    image: andrewsosa/domjudge-domserver
+    environment:
+      - DOMJUDGE_DB_HOST          = 'domdb'
+      - DOMJUDGE_DB_PASSWORD      = ${DOM_PASS}
+      - DOMJUDGE_DB_ROOT_PASSWORD = ${DOM_PASS}
+      # - VIRTUAL_HOST              = ${VHOST}
+      # - LETSENCRYPT_HOST          = ${VHOST}
+      # - LETSENCRYPT_EMAIL         = 'andrew@acmatfsu.org'
+    ports:
+      - "8082:80"
+
+  # Judgehost
+  judgehost:
+    image: andrewsosa/domjudge-judgehost
+    privileged: true
+    cap_add:
+        - SYS_ADMIN
+    environment:
+      - DOMSERVER_HOST      = domserver/api
+      - DOMSERVER_USER      = judgehost
+      - DOMSERVER_PASSWORD  = ${DOM_PASS}
+
