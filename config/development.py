@@ -6,7 +6,7 @@ TEAM_COUNT = 20
 # MongoDB
 MONGODB_SETTINGS = {
 	'db': "fpc2017",	# "project"
-	'host': "db", 		# "127.0.0.1"
+	'host': "localhost", 		# "127.0.0.1"
 	'port': 27017, 		# 27017
 	# 'username': "None", # 'username'
 	# 'password': None, # 'passwd'
