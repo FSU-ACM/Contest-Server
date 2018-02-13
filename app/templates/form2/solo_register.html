@@ -1,0 +1,24 @@
+{% extends "form/form.html" %}
+
+{% block form %}
+
+    <div class="form-sheet">
+        <h2>Register</h2>
+
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.email.label }}<br>
+                {{ form.email(class_='form-control') }}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(class_='form-control') }}
+            </p>
+            <p>{{ form.submit(class_='btn btn-primary') }}</p>
+        </form>
+    </div>
+
+
+{% endblock %}
+

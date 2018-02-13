@@ -16,7 +16,7 @@ def page_not_found(e):
 
 
 @app.errorhandler(500)
-def page_not_found(e):
+def page_error(e):
     return render_template('500.html'), 500
 
 
@@ -32,4 +32,13 @@ from . import admin
 from . import nav
 from . import register
 from . import team
-# from . import views
+
+class Route:
+    def __init__(self, url, view):
+        self.url, self.view = url, view
+
+routes = [
+    Route('/register', register.SoloRegisterView.as_view('register'))
+]
+
+[app.add_url_rule(route.url, view_func=route.view) for route in routes]

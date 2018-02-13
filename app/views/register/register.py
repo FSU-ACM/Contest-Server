@@ -1,16 +1,70 @@
 # views.register.register
 
-from flask import redirect, url_for, render_template, request, session, abort
+from flask import (abort, flash, redirect, render_template, request, session,
+    url_for,)
 
 from app import app, recaptcha
-from app.models import Account, Preregistration, Profile, Team
-from app.util.auth import *
+from app.models import Account, Profile, Team
+from app.util.auth import get_account, verify_email
 from app.util.request import get_email, get_password
+from app.util import auth2
+from app.forms import SoloRegister
 
 import bleach
 
+from app.views.generic import FormView
 
-@app.route('/register', methods=['POST', 'GET'])
+class SoloRegisterView(FormView):
+
+    def authorize(self):
+        session.account = auth2.get_account()
+        return session.account is None
+
+    def redirect_unauthorized(self):
+        flash("You are already registered!", 'message')
+        return redirect(url_for('profile'))
+
+    def get_template_name(self):
+        return 'form2/solo_register.html'
+
+    def get_form(self):
+        return SoloRegister()
+
+    def post(self):
+        # Validate login; deny or redirect to profile
+        email, password = get_email(), get_password()
+
+        # Validate email
+        if not verify_email(email):
+            flash("Please submit a valid email.", 'error')
+
+        # Validate password
+        elif not password:
+            flash("Please enter a valid password.", 'error')
+
+        elif not recaptcha.verify():
+            flash("Please complete the ReCaptcha.", 'error')
+
+        # SUCCESS STATE
+        elif not Account.objects(email=email).first():
+            # Create an account for our user
+            account = Account(email=email)
+            account.set_password(password)
+
+            # DB transactions
+            account.save()
+
+            # Set cookie, redirect to profile page.
+            session['email'] = email
+            return redirect(url_for('profile'), code=302)
+
+        else:
+            flash("This email is already linked to an another account.", 'error')
+
+
+
+
+# @app.route('/register', methods=['POST', 'GET'])
 def register():
     error = request.args.get('error', None)
     success = request.args.get('success', None)
@@ -44,10 +98,6 @@ def register():
                 account = Account(email=email)
                 account.set_password(password)
 
-                # Let's see if they preregistered
-                prereg = Preregistration.objects(email=email).first()
-                account.prereg = prereg if prereg else None
-
                 # DB transactions
                 account.save()
 
@@ -59,6 +109,6 @@ def register():
                 error = "This email is already linked to an another account."
 
         action = action if action is not None else \
-            render_template('/form/register.html', error=error)
+            render_template('/form/register.html', success=success, error=error)
 
     return action
