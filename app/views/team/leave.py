@@ -4,8 +4,10 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha, db
 from app.models import Account, Team
-from app.util.auth import *
+from app.util.auth import get_account
 from app.util.team import leave_team
+
+import logging
 
 
 @app.route('/account/team/leave', methods=['POST'])
@@ -29,7 +31,7 @@ def team_leave():
         try:
             success = leave_team(account, team)
         except Exception as e:
-            print e
+            logging.error(e)
             abort(500)
 
         action = redirect(url_for('team', success=success, error=error))

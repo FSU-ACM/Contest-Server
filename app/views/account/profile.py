@@ -4,9 +4,8 @@ from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app
 from app.models import Account, Profile
-from app.util.auth import *
 
-import bleach
+import bleach, logging
 
 
 @app.route('/account/profile', methods=['POST', 'GET'])
@@ -30,7 +29,7 @@ def profile():
 
         # Extract important data from form
         data = dict()
-        for k, v in request.form.iteritems():
+        for k, v in request.form.items():
             # add to dict only if there is a values
             v = bleach.clean(v)
             if v:
@@ -43,11 +42,10 @@ def profile():
 
         # Clean empty fields (TODO: make this unnessessary)
         to_delete = []
-        for k, v in data.iteritems():
+        for k, v in data.items():
             if v is None or v == "":
                 to_delete.append(k)
         for k in to_delete:
-            print "Removed %s" % k
             del data[k]
 
         # Let's save our data.
@@ -68,7 +66,7 @@ def profile():
             error = "Hey, there's been an error! Sorry about that. "
             error += "Please email hello@acmatfsu.org and let us know. "
             error += "We'll try and get it sorted out ASAP."
-            print e
+            logging.error(e)
 
     if profile:
         # If there's a profile at this point, add it to the session
