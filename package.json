@@ -7,6 +7,9 @@
     "url": "git+https://github.com/FSU-ACM/Contest-Server.git"
   },
   "author": "ACM at FSU",
+  "scripts": {
+    "dev": "FLASK_CONFIG=../config/development.py python start.py"
+  },
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.9.1",
