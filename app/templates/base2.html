@@ -1,0 +1,45 @@
+{% block doc %}
+<!DOCTYPE html>
+
+<html{% block htmlattribs %}{% endblock htmlattribs %}>
+{% block html %}
+
+  <head>
+  {% block head %}
+
+    <title>{% block title %}ACM Programming Contest{% endblock title %}</title>
+
+    {% block metas %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock metas %}
+
+    {% block styles %}
+    <link href="{{url_for('static', filename='styles/base.css')}}" rel="stylesheet">
+    {% endblock styles %}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+  {% endblock head %}
+  </head>
+
+  <body{% block bodyattribs %}{% endblock bodyattribs %}>
+  {% block body %}
+
+    {% block navbar %}
+      {% include "common/navbar.html" %}
+      {% include "common/flash.html" %}
+    {% endblock navbar %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+    {% endblock body %}
+  </body>
+
+{% endblock html %}
+</html>
+
+{% endblock doc %}

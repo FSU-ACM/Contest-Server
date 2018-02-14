@@ -1,21 +1,30 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
 
-var src = "app/static/styles/sass/*.sass",
-	dest = "app/static/styles/css",
-	watch = "app/static/styles/sass/**";
+
+let src_old   = "app/static/styles/sass/*.sass",
+	dest_old  = "app/static/styles/css",
+	watch_old = "app/static/styles/sass/**";
 
 // Compiles .sass into .css
-gulp.task('sass', function() {
-	var sass = require('gulp-sass');
-
-	gulp.src(src)
+gulp.task('sass', function () {
+	return gulp.src("app/static/sass/*.sass")
 		.pipe(sass().on('error', sass.logError))
-		.pipe(gulp.dest(dest));
+		.pipe(gulp.dest("app/static/styles"));
+
+});
+
+gulp.task('sass_old', function() {
+
+	return gulp.src(src_old)
+			.pipe(sass().on('error', sass.logError))
+			.pipe(gulp.dest(dest_old));
+
 });
 
 // Monitors and .sass
 gulp.task('watch', ['sass'], function() {
-	gulp.watch(watch, ['sass']);
+	gulp.watch("app/static/sass/**/*.sass", ['sass']);
 });
 
 //

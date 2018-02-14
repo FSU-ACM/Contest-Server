@@ -1,0 +1,29 @@
+/*
+ *  Default brand styles
+ */
+
+.button.acm
+    // @extend .is-rounded
+    // @include Montserrat(700)
+
+    @include Mono(700)
+    text-transform: lowercase
+    padding: 0.2rem 2.5rem
+    height: 44px
+
+    box-sizing: border-box
+
+form .button.acm
+    width: 100%
+    margin-top: 1rem
+
+
+form .field .control
+    input[type=text], input[type=password]
+        height: 42px
+        background-color: $white-ter
+        box-shadow: none
+        // border: none
+
+        padding-left: 1rem
+        padding-right: 1rem
