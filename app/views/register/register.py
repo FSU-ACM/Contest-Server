@@ -10,7 +10,7 @@ from app.util.request import get_email, get_password
 from app.util import auth2
 from app.forms import SoloRegister
 
-import bleach
+import bleach, logging
 
 from app.views.generic import FormView
 
@@ -18,6 +18,7 @@ class SoloRegisterView(FormView):
 
     def authorize(self):
         session.account = auth2.get_account()
+        logging.warn(session.account)
         return session.account is None
 
     def redirect_unauthorized(self):
@@ -31,23 +32,12 @@ class SoloRegisterView(FormView):
         return SoloRegister()
 
     def post(self):
-        # Validate login; deny or redirect to profile
-        email, password = get_email(), get_password()
+        form = SoloRegister(request.form)
 
-        # Validate email
-        if not verify_email(email):
-            flash("Please submit a valid email.", 'error')
+        if form.validate():
 
-        # Validate password
-        elif not password:
-            flash("Please enter a valid password.", 'error')
+            email, password = form.email.data, form.password.data
 
-        elif not recaptcha.verify():
-            flash("Please complete the ReCaptcha.", 'error')
-
-        # SUCCESS STATE
-        elif not Account.objects(email=email).first():
-            # Create an account for our user
             account = Account(email=email)
             account.set_password(password)
 
@@ -58,10 +48,7 @@ class SoloRegisterView(FormView):
             session['email'] = email
             return redirect(url_for('profile'), code=302)
 
-        else:
-            flash("This email is already linked to an another account.", 'error')
-
-
+        return self.render_template(form=form)
 
 
 # @app.route('/register', methods=['POST', 'GET'])

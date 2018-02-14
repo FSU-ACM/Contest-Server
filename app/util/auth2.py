@@ -6,6 +6,7 @@
 
 from flask import session
 from app.models import Account, Profile
+from app.util.errors import UnauthorizedUserError
 import re
 
 # Email validator
@@ -21,8 +22,8 @@ def get_account():
 
     :return: Account if email is present in session, None otherwise.
     """
-    if SESSION_EMAIL not in session:
+
+    try:
+        return Account.objects.get_or_404(email=session['email'])
+    except:
         return None
-    else:
-        account = Account.objects.get_or_404(email=session['email'])
-        return account

@@ -34,10 +34,14 @@ class FormView(MethodView):
 
     def dispatch_request(self, *args, **kwargs):
         try:
-            self.authorize(*args, **kwargs)
+            self.perform_authorization(*args, **kwargs)
             return super().dispatch_request(*args, **kwargs)
         except UnauthorizedUserError as err:
             return self.redirect_unauthorized()
+
+    def perform_authorization(self, *args, **kwargs):
+        if not self.authorize(*args, **kwargs):
+            raise UnauthorizedUserError()
 
     def authorize(self, *args, **kwargs):
         raise NotImplementedError()
@@ -51,12 +55,12 @@ class FormView(MethodView):
     def get_form(self) -> FlaskForm:
         raise NotImplementedError()
 
-
-    def render_template(self):
+    def render_template(self, form=None):
         """
             Renders the view's template with the form.
         """
-        return render_template(self.get_template_name(), form=self.get_form())
+        form = form or self.get_form()
+        return render_template(self.get_template_name(), form=form)
 
     def get(self):
         """

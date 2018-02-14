@@ -1,24 +1,28 @@
-{% extends "form/form.html" %}
+{% extends "form2/base.html" %}
+
+{% block formsize %} is-6 {% endblock %}
 
 {% block form %}
 
-    <div class="form-sheet">
-        <h2>Register</h2>
+    <h1 class="title">
+        Individual Registration
+    </h1>
 
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.email.label }}<br>
-                {{ form.email(class_='form-control') }}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(class_='form-control') }}
-            </p>
-            <p>{{ form.submit(class_='btn btn-primary') }}</p>
-        </form>
-    </div>
+    <p>
+        You still will need to join a team before participating.
+        <!-- <small>(You <strong>will</strong> need to join a team to participate.)</small> -->
+    </p>
+    <br>
 
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        {{ field(form.email) }}
+        {{ field(form.password) }}
+        {{ field(form.first_name) }}
+        {{ field(form.last_name) }}
+        {{ field(form.fsuid) }}
+        {{ button(form.submit) }}
+    </form>
 
 {% endblock %}
 
