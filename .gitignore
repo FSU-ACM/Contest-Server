@@ -4,6 +4,8 @@
 *.sassc
 *.sass-cache*
 
+app/static/styles/**/*.css
+
 # Dep files
 **/node_modules/
 
