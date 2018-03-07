@@ -49,7 +49,9 @@ routes = [
     Route('/account/team', team.TeamView.as_view('team')),
     Route('/account/team/create', team.CreateView.as_view('team_create')),
     Route('/account/team/add', team.AddView.as_view('team_add_member')),
-    Route('/account/team/leave', team.LeaveView.as_view('team_leave'))
+    Route('/account/team/leave', team.LeaveView.as_view('team_leave')),
+    Route('/account/team/remove',
+        team.RemoveView.as_view('team_remove')),
 ]
 
 [app.add_url_rule(route.url, view_func=route.view) for route in routes]

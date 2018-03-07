@@ -10,8 +10,6 @@ from app.forms import (
     )
 from app.models import Account, Team
 from app.util import session as session_util
-from app.util.auth import *
-from app.util.team import create_team
 from app.views.generic import AccountFormView
 
 class TeamView(AccountFormView):

@@ -8,7 +8,6 @@ from app.util import session as session_util
 from app.util.auth import get_account
 from app.util.team import leave_team
 
-
 from .team import TeamView
 
 class LeaveTeamView(TeamView):

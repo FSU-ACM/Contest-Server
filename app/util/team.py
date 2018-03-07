@@ -69,9 +69,7 @@ def join_team(account, teamID=None, teamPass=None, team=None):
             account.save()
             return True
         else:
-            message = "Team %s already has 3 members".format(
-                team.team_name or team.teamID)
-            flash(message, 'error')
+            flash("Team already has 3 members", 'error')
             return False
 
     flash("Error finding team", 'error')
