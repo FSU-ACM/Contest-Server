@@ -29,9 +29,6 @@ def create_team(account, name):
 
     # Set the team name
     rename_team(team, (name or team.teamID))
-    # team.teamName = name or team.teamID
-    # team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
-
     team.save()
     account.save()
 

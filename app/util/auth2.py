@@ -6,24 +6,46 @@
 
 from flask import session
 from app.models import Account, Profile
-from app.util.errors import UnauthorizedUserError
-import re
-
-# Email validator
-EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
 # Session keys
 SESSION_EMAIL = 'email'
 
-def get_account():
+def create_account(email: str, password: str, first_name: str,
+                   last_name: str, fsuid: str):
     """
-    Retrieves account via email in session, otherwise redirects
-    to login page.
+    Creates an account for a single user.
 
+    :email: Required, the email address of the user.
+    :password: Required, user's chosen password.
+    :first_name: Required, user's first name.
+    :last_name: Required, user's last name.
+    :fsuid: Optional, user's FSUID.
+    :return: Account object.
+    """
+
+    account = Account(
+        email=email,
+        first_name=first_name,
+        last_name=last_name,
+        fsuid=fsuid
+    )
+
+    account.set_password(password)
+    account.save()
+
+    return account
+
+def get_account(email: str=None):
+    """
+    Retrieves account via email (defaults to using session), otherwise
+    redirects to login page.
+
+    :email: Optional email string, if not provided will use session['email']
     :return: Account if email is present in session, None otherwise.
     """
 
     try:
-        return Account.objects.get_or_404(email=session['email'])
+        email = email or session['email']
+        return Account.objects.get_or_404(email=email)
     except:
         return None
