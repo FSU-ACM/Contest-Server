@@ -2,6 +2,7 @@ from flask import render_template
 from flask_wtf import FlaskForm
 from flask.views import MethodView
 
+from app.util import session as session_util
 from app.util.errors import UnauthorizedUserError
 
 
@@ -76,3 +77,10 @@ class FormView(MethodView):
             on a per-view basis.
         """
         raise NotImplementedError()
+
+
+
+class AccountFormView(FormView):
+    def render_template(self, **kwargs):
+        account = session_util.get_account()
+        return super().render_template(account=account, **kwargs)

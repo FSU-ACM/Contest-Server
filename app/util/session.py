@@ -6,6 +6,7 @@ from app.util.errors import UnauthorizedUserError
 
 SID = 'email'
 
+
 def login(account: Account):
     """Save relevant account data in session
 
@@ -14,12 +15,14 @@ def login(account: Account):
     session[SID] = account.id
     # app.logger.debug("Added %s to session", account.id)
 
+
 def logout():
     """Erase session data
 
     :return: None
     """
     del session[SID]
+
 
 def is_auth():
     """Checks whether the user is authenticated.
@@ -28,6 +31,7 @@ def is_auth():
     """
     # app.logger.debug("Is auth? %s", session.get(SID, None))
     return SID in session
+
 
 def get_account():
     """Retrieve the account from the session.

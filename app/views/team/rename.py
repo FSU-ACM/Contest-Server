@@ -28,7 +28,7 @@ def team_update():
     # Given account and team, do:
     if not action:
 
-        name = request.form['teamName'] or "Unnamed Team"
+        name = request.form['team_name'] or "Unnamed Team"
         division = request.form['division'] or None
         team = account.team
 

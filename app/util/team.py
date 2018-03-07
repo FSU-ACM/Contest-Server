@@ -1,5 +1,7 @@
 # util.team
 
+from flask import flash
+
 from app.models import Account, Team
 from app.util.password import make_password
 
@@ -42,7 +44,6 @@ def set_division(team, division):
 
 
 def join_team(account, teamID=None, teamPass=None, team=None):
-    error, success = None, None
 
     # Look up the team if we didn't bring one
     if team is None:
@@ -60,18 +61,21 @@ def join_team(account, teamID=None, teamPass=None, team=None):
             team.save()
             account.team = team
             account.save()
-            success = "You joined the team!"
+            return True
         elif len(team.members) < 3:
             team.members.append(account)
             account.team = team
             team.save()
             account.save()
-            success = "You joined the team!"
+            return True
         else:
-            error = "Team %s already has 3 members." % \
-                    team.teamName or team.teamID
+            message = "Team %s already has 3 members".format(
+                team.team_name or team.teamID)
+            flash(message, 'error')
+            return False
 
-    return error, success
+    flash("Error finding team", 'error')
+    return False
 
 
 def leave_team(account, team):
@@ -83,7 +87,7 @@ def leave_team(account, team):
     # Clear name if last member, change teampass
     if len(team.members) is 0:
         team.members = []
-        team.teamName = None
+        team.team_name = None
         team.division = None
         team.teamPass = make_password()
     team.save()
@@ -94,8 +98,8 @@ def leave_team(account, team):
 
 
 def rename_team(team, name):
-    team.teamName = name
-    team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
+    team.team_name = name
+    team.team_name = team.team_name[:Team.MAX_NAME_LENGTH]
     team.save()
 
     success = "Team name updated."

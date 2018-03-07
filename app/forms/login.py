@@ -15,14 +15,8 @@ class Login(FlaskForm):
 
     """
 
-    email = StringField('Email', validators=[
-        Email(),
-    ])
-
-    password = PasswordField('Password', validators=[
-        DataRequired()
-    ])
-
+    email = StringField('Email', validators=[Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
 

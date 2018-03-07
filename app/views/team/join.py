@@ -3,28 +3,31 @@
 from flask import redirect, url_for, render_template, request, session, abort
 
 from app import app, recaptcha, db
+from app.forms import AddTeamMember as AddTeamMemberForm
 from app.models import Account, Team
 from app.util.auth import *
-from app.util.team import join_team
+from app.util import team as team_util, session as session_util
 
+from .team import TeamView
 
-@app.route('/account/team/join', methods=['POST'])
-def team_join():
+class AddTeamMemberView(TeamView):
+    """Add a member to a team
+
     """
-    This route allows a user to join a team.
-    """
 
-    error, success = None, None
+    def get_form(self):
+        return AddTeamMemberForm()
 
-    # Access account (n/a throws 404)
-    action, account = get_account(session)
+    def post(self):
+        add_form = AddTeamMemberForm(request.form)
 
-    # Perform join if account exists
-    if not action:
-        teamID, teamPass = request.form['teamID'], request.form['teamPasscode']
+        if add_form.validate():
+            add_account = add_form.account
+            user_account = session_util.get_account()
+            team_util.join_team(add_account, team=user_account.team)
+            return redirect(url_for('team'))
 
-        error, success = join_team(account, teamID=teamID, teamPass=teamPass)
+        return self.render_template(add_form=add_form)
 
-        action = redirect(url_for('team', success=success, error=error))
-
-    return action
+    def get(self):
+        return redirect(url_for('team'))

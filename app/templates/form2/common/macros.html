@@ -4,9 +4,11 @@
 {% endmacro %}
 
 
-{% macro field(element) %}
+{% macro field(element, show_label=true) %}
     <div class="field">
-        {{ label(element) }}
+        {% if show_label %}
+            {{ label(element) }}
+        {% endif %}
         <div class="control">
             {{ element(class_='input') | safe }}
         </div>
@@ -44,3 +46,19 @@
         </div>
     </div>
 {% endmacro %}
+
+{% macro radio(element) %}
+    <div classs="field">
+        {{ label(element) }}
+        <div class="control">
+
+            {% for subfield in element %}
+                    <label class="radio">
+                        {{ subfield }}
+                        {{ subfield.label }}
+                    </label>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
+

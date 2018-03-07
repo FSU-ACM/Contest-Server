@@ -22,7 +22,7 @@ def page_error(e):
 
 @app.route('/allteams')
 def allteams():
-    teams = Team.objects.filter(teamName__exists=True)
+    teams = Team.objects.filter(team_name__exists=True)
     teams = [t for t in teams if any(member.profile for member in t.members)]
     return render_template('allteams.html', teams=teams)
 
@@ -47,6 +47,9 @@ routes = [
 
     Route('/account/profile', account.ProfileView.as_view('profile')),
     Route('/account/team', team.TeamView.as_view('team')),
+    Route('/account/team/create', team.CreateView.as_view('team_create')),
+    Route('/account/team/add', team.AddView.as_view('team_add_member')),
+    Route('/account/team/leave', team.LeaveView.as_view('team_leave'))
 ]
 
 [app.add_url_rule(route.url, view_func=route.view) for route in routes]

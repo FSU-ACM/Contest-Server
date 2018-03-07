@@ -10,20 +10,69 @@
 
     <h3>Create a team</h3>
 
-    <form action="" method="post">
-      {{ form.hidden_tag() }}
-      {{ field(form.team_name) }}
-      {{ button(form.submit) }}
+    <form action="{{ url_for('team_create') }}" method="post">
+      {{ create_form.hidden_tag() }}
+      {{ field(create_form.team_name) }}
+      {{ radio(create_form.division) }}
+      {{ button(create_form.submit) }}
     </form>
 
   {% else %}
 
-    <h3>Rename Team</h3>
+    <h3>Edit Team Details</h3>
     <form action="{{ url_for('team_update') }}" method="post">
-        {{ form.hidden_tag() }}
-        {{ field(form.team_name) }}
-        {{ button(form.submit) }}
+        {{ edit_form.hidden_tag() }}
+        {{ field(edit_form.team_name) }}
+        {{ radio(edit_form.division) }}
+        {{ button(edit_form.submit) }}
     </form>
+
+    <hr>
+
+    <h3>Add Team Members</h3>
+
+    <h5>Current Members</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Remove</td>
+        </tr>
+      </thead>
+      <tbody>
+          {% for member in account.team.members %}
+          <tr>
+            <td>{{member.first_name}} {{member.last_name}}</td>
+            <td>{{member.email}}</td>
+            <td>
+              {% if member != account %}
+                <a class="delete"/>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+
+    <p>
+      Enter a registered email to add a member to your team.
+    </p>
+
+    <form action="{{ url_for('team_add_member') }}" method="post">
+      {{ add_form.hidden_tag() }}
+      {{ field(add_form.email, false) }}
+      {{ button(add_form.submit) }}
+    </form>
+
+    <hr>
+
+    <h3>Leave Team</h3>
+    <p>
+      If you are the last member of your team, your team will
+      be disbanded.
+    </p>
+    <a class="button acm is-danger" href="{{url_for('team_leave')}}">Leave Team</a>
 
   {% endif %}
 

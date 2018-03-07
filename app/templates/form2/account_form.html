@@ -9,7 +9,11 @@
                     {{ account.first_name }} {{ account.last_name}}
                 </h1>
                 <h2 class="subtitle">
-                    {{ account.fsuid }} | {{ account.email }}</h2>
+                    {% if account.fsuid %}
+                        {{ account.fsuid }} |
+                    {% endif %}
+                    {{ account.email }}
+                </h2>
             </div>
         </div>
         <div class="hero-foot">

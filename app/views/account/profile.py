@@ -6,13 +6,13 @@ from app import app
 from app.forms import Profile as ProfileForm
 from app.models import Account, Profile
 from app.util import session as session_util
-from app.views.generic import FormView
+from app.views.generic import FormView, AccountFormView
 
 
 import bleach, logging
 
 
-class ProfileView(FormView):
+class ProfileView(AccountFormView):
     """Collects extra data from user.
 
     Unauth'd users redirected to login.
