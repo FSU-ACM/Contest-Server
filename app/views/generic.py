@@ -55,12 +55,12 @@ class FormView(MethodView):
     def get_form(self) -> FlaskForm:
         raise NotImplementedError()
 
-    def render_template(self, form=None):
+    def render_template(self, form=None, **kwargs):
         """
             Renders the view's template with the form.
         """
         form = form or self.get_form()
-        return render_template(self.get_template_name(), form=form)
+        return render_template(self.get_template_name(), form=form, **kwargs)
 
     def get(self):
         """

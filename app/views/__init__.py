@@ -29,6 +29,7 @@ def allteams():
 
 from . import account
 from . import admin
+from . import auth
 from . import nav
 from . import register
 from . import team
@@ -38,7 +39,14 @@ class Route:
         self.url, self.view = url, view
 
 routes = [
-    Route('/register', register.SoloRegisterView.as_view('register'))
+    Route('/register', register.SoloRegisterView.as_view('register')),
+
+    Route('/login', auth.LoginView.as_view('login')),
+    Route('/logout', auth.LogoutView.as_view('logout')),
+    Route('/reset_password', auth.ResetPasswordView.as_view('reset_password')),
+
+    Route('/account/profile', account.ProfileView.as_view('profile')),
+    Route('/account/team', team.TeamView.as_view('team')),
 ]
 
 [app.add_url_rule(route.url, view_func=route.view) for route in routes]

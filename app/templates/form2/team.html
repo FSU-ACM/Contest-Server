@@ -1,0 +1,32 @@
+{% extends "form2/account_form.html" %}
+
+{% block formsize %} is-8 {% endblock %}
+
+{% block form %}
+
+  <!-- <h1 class="title">Profile</h1> -->
+
+  {% if not account.team %}
+
+    <h3>Create a team</h3>
+
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+      {{ field(form.team_name) }}
+      {{ button(form.submit) }}
+    </form>
+
+  {% else %}
+
+    <h3>Rename Team</h3>
+    <form action="{{ url_for('team_update') }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ field(form.team_name) }}
+        {{ button(form.submit) }}
+    </form>
+
+  {% endif %}
+
+
+
+{% endblock %}

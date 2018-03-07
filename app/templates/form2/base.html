@@ -1,6 +1,7 @@
 {% extends "base2.html" %}
 
-{% from 'form2/macros.html' import button, field with context %}
+{% from 'form2/common/macros.html'
+    import button, field, label, select with context %}
 
 {% block styles %}
     <link href="{{url_for('static', filename='styles/form.css')}}" rel="stylesheet">
@@ -11,12 +12,10 @@
     <section class="section form">
         <div class="container">
             <div class="columns is-centered">
-
-                <div class="column box {% block formsize %}{% endblock formsize %}">
+                <div class="column {% block formsize %}is-12{% endblock formsize %}">
                     {% block form %}
                     {% endblock %}
                 </div>
-
             </div>
         </div>
     </section>

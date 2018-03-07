@@ -1,7 +1,12 @@
 
+{% macro label(element) %}
+    {{ element.label(class_='label') }}
+{% endmacro %}
+
+
 {% macro field(element) %}
     <div class="field">
-        {{ element.label(class_='label') }}
+        {{ label(element) }}
         <div class="control">
             {{ element(class_='input') | safe }}
         </div>
@@ -20,6 +25,22 @@
     <div class="field">
         <div class="control">
             {{ element(class_="button acm is-primary")}}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro select(element) %}
+    <div class="field">
+        {{ label(element) }}
+
+        <div class="control">
+            <div class="select">
+                <select>
+                    {% for option in element%}
+                        {{ option }}
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     </div>
 {% endmacro %}

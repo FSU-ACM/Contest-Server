@@ -1,0 +1,33 @@
+{% extends "form2/account_form.html" %}
+
+{% block formsize %} is-8 {% endblock %}
+
+{% block form %}
+
+  <!-- <h1 class="title">Profile</h1> -->
+    <p>
+      The profile is optional. We use this demographic data to learn more about
+        who is competing in the contest.
+    </p>
+
+
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+
+      <h3>Personal details</h3>
+      {{ field(form.age) }}
+      {{ select(form.gender) }}
+      {{ select(form.race) }}
+      <!-- {{ field(form.food_allergies) }} -->
+
+      <h3>School information</h3>
+      {{ field(form.major) }}
+      {{ field(form.grad_year) }}
+      {{ select(form.grad_term) }}
+      {{ select(form.adv_course) }}
+      {{ select(form.student_status) }}
+
+    </form>
+
+
+{% endblock %}
