@@ -40,6 +40,7 @@ class Route:
 
 routes = [
     Route('/register', register.SoloRegisterView.as_view('register')),
+    Route('/quickregister', register.QuickRegisterView.as_view('quick_register')),
 
     Route('/login', auth.LoginView.as_view('login')),
     Route('/logout', auth.LogoutView.as_view('logout')),
@@ -50,8 +51,7 @@ routes = [
     Route('/account/team/create', team.CreateView.as_view('team_create')),
     Route('/account/team/add', team.AddView.as_view('team_add_member')),
     Route('/account/team/leave', team.LeaveView.as_view('team_leave')),
-    Route('/account/team/remove',
-        team.RemoveView.as_view('team_remove')),
+    Route('/account/team/remove', team.RemoveView.as_view('team_remove')),
 ]
 
 [app.add_url_rule(route.url, view_func=route.view) for route in routes]

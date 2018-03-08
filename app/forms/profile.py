@@ -1,8 +1,8 @@
 from flask_mongoengine.wtf import model_form
-from wtforms import widgets
+from wtforms import widgets, SubmitField
 from app.models import Profile as ProfileModel
 
-Profile = model_form(
+Profile_ = model_form(
     ProfileModel,
     field_args={
         # 'dob': {
@@ -13,11 +13,13 @@ Profile = model_form(
         },
         'gender': {
             'label': 'Gender',
-            'widget': widgets.Select()
+            'widget': widgets.Select(),
+            'default': ''
         },
         'race': {
             'label': 'Race',
-            'widget': widgets.Select()
+            'widget': widgets.Select(),
+            'default': ''
         },
         'food_allergies': {
             'label': 'Food Allergies?',
@@ -32,15 +34,21 @@ Profile = model_form(
         },
         'grad_term': {
             'label': 'Graduation Term',
-            'widget': widgets.Select()
+            'widget': widgets.Select(),
+            'default': ''
         },
         'adv_course': {
             'label': 'Furthest Core Course Taken',
-            'widget': widgets.Select()
+            'widget': widgets.Select(),
+            'default': ''
         },
         'student_status': {
             'label': 'Student Status',
-            'widget': widgets.Select()
-        },
+            'widget': widgets.Select(),
+            'default': ''
+        }
     }
 )
+
+class Profile(Profile_):
+    submit = SubmitField('Save')

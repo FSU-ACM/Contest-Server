@@ -5,12 +5,15 @@ class UnusedEmail(object):
     """
     Validate that the email is not linked to an account already.
     """
-    def __init__(self, message=None):
+    def __init__(self, message=None, optional=False):
         if not message:
             message = u'This email is already linked to an account.'
         self.message = message
+        self.optional = optional
 
     def __call__(self, form, field):
+        if self.optional and field.data == "":
+            return
         if Account.objects(email=field.data).first():
             raise ValidationError(self.message)
 

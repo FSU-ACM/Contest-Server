@@ -24,11 +24,13 @@
 
   </form>
 
-  <a href="{{url_for('reset_password')}}">Forgot your password?</button>
+  <div id="forgot-password-container" >
+    <a href="{{url_for('reset_password')}}">Forgot your password?</a>
+  </div>
 
   <hr />
 
-  <a class="button is-outline" href="{{url_for('register')}}">Register</a>
+  <a class="button acm is-fullwidth is-outline" href="{{url_for('register')}}">Register</a>
 
 
 {% endblock %}

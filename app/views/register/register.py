@@ -3,9 +3,8 @@
 from flask import (redirect, render_template, request, url_for,)
 
 from app import app, recaptcha
-from app.util import auth2
 from app.forms import SoloRegister
-from app.util import session as session_util
+from app.util import auth2, session as session_util
 from app.views.generic import FormView
 
 class SoloRegisterView(FormView):

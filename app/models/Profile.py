@@ -4,34 +4,42 @@ from app import db
 class Profile(db.Document):
 
     RACE = (
-        ('AI', 'American Indian or Native Alaskan'),
-        ('A', 'Asian'),
-        ('B', 'Black or African American'),
-        ('H', 'Hispanic'),
-        ('PI', 'Native Hawaiian or other Pacific Islander'),
-        ('W', 'White'),
+        ('', ''),
+        ('American Indian or Native Alaskan',
+            'American Indian or Native Alaskan'),
+        ('Asian', 'Asian'),
+        ('Black or African American',
+            'Black or African American'),
+        ('Hispanic', 'Hispanic'),
+        ('Native Hawaiian or other Pacific Islander',
+            'Native Hawaiian or other Pacific Islander'),
+        ('White', 'White'),
     )
 
     GENDER = (
-        ('M', 'Male',),
-        ('F', 'Female',),
-        ('N', 'Non-Binary',),
+        ('', ''),
+        ('Male', 'Male',),
+        ('Female', 'Female',),
+        ('Non-Binary', 'Non-Binary',),
     )
 
     GRAD_TERM = (
-        ('SP', 'Spring'),
-        ('SM', 'Summer'),
-        ('FA', 'Fall'),
+        ('', ''),
+        ('Spring', 'Spring'),
+        ('Summer', 'Summer'),
+        ('Fall', 'Fall'),
     )
 
     STUDENT_STATUS = (
-        ('U', 'Undergraduate'),
-        ('G', 'Graduate'),
-        ('HS', 'High School'),
-        ('NS', 'Non-degree Seeking'),
+        ('', ''),
+        ('Undergraduate', 'Undergraduate'),
+        ('Graduate', 'Graduate'),
+        ('High School', 'High School'),
+        ('Non-degree Seeking', 'Non-degree Seeking'),
     )
 
     ADV_COURSE = (
+        ('', ''),
         ('COP3014', 'COP3014'),
         ('COP3330', 'COP3330'),
         ('COP4530', 'COP4530'),
@@ -41,7 +49,8 @@ class Profile(db.Document):
     # dob = db.DateTimeField(null=True)
     age = db.IntField()
     gender = db.StringField(choices=GENDER)
-    race = db.ListField(db.StringField(choices=RACE))
+    # race = db.ListField(db.StringField(choices=RACE))
+    race = db.StringField(choices=RACE)
     food_allergies = db.StringField()
     major = db.StringField()
     grad_year = db.IntField()

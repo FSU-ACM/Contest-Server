@@ -1,6 +1,6 @@
 # views.account.profile
 
-from flask import redirect, url_for, render_template, request, session, abort
+from flask import flash, redirect, url_for, render_template, request, session, abort
 
 from app import app
 from app.forms import Profile as ProfileForm
@@ -29,13 +29,33 @@ class ProfileView(AccountFormView):
         return 'form2/profile.html'
 
     def get_form(self):
-        return ProfileForm()
+        account = session_util.get_account()
+        if account.profile:
+            return ProfileForm(obj=account.profile)
+        else:
+            return ProfileForm()
 
     def post(self):
         form = ProfileForm(request.form)
 
         if form.validate():
-            pass
+            account = session_util.get_account()
+            data = {field.name: field.data for field in form}
+            for k,v in data.items():
+                app.logger.debug("{} {}".format(k, v))
+            del data['csrf_token']
+            del data['submit']
+
+
+            if not account.profile:
+                account.profile = Profile(**data)
+            else:
+                account.profile.update(**data)
+
+            account.profile.save()
+            account.save()
+
+            flash('Profile updated')
 
         return self.render_template(form=form)
 

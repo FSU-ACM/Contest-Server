@@ -1,6 +1,6 @@
 {% extends "form2/base.html" %}
 
-{% block formsize %} is-6 {% endblock %}
+{% block formsize %} is-half {% endblock %}
 
 {% block form %}
 
@@ -21,6 +21,10 @@
         {{ field(form.first_name) }}
         {{ field(form.last_name) }}
         {{ field(form.fsuid) }}
+        <p class="help is-danger">
+            <!-- <i class="fas fa-exclamation-circle"></i> -->
+            If you do not provide an FSUID you can not receive extra credit.
+        </p>
         {{ button(form.submit) }}
     </form>
 
