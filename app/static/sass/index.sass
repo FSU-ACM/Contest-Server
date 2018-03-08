@@ -1,0 +1,48 @@
+@import "base"
+
+section.hero.header
+    background-color: $primary
+
+    .hero-body > .container
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+        h1
+            color: $white
+            transform-origin: center
+            transform: scale(1.4)
+
+
+        img
+            max-width: 400px
+
+        span
+            color: $accent
+            @include Mono
+            margin-bottom: 0
+            margin-top: 2rem
+            letter-spacing: 1.1px
+
+        .buttons
+            margin-top: 2rem
+
+    .button.acm
+        min-width: 220px
+        // border: none
+        color: $accent
+        border-color: $accent
+
+
+
+.red
+    color: $red !important
+.green
+    color: $green !important
+// .brown
+//     color: $brown
+.gray
+    color: $grey !important
+.white
+    color: $white !important

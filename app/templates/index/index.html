@@ -1,35 +1,47 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% block styles %}
-	{{ super() }}
-	<link rel="stylesheet" href="{{url_for('static', filename='styles/css/index.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='styles/index.css')}}">
 {% endblock %}
 
 <!-- Content in here -->
 {% block content %}
 
-	<div class="container banner">
+	<section class="hero is-fullheight header">
 
-			<h1 class="green">/* acm at fsu */</h1>
-			<h1>
-				<span class="red">[fall]</span>
-				<span class="white">programming</span>
-				<span class="brown">contest</span>
-			</h1>
-			<h1 class="gray">October 28th 8AM – 4PM</h2>
+		<div class="hero-head">
+		</div>
 
-			<br />
+		<div class="hero-body content">
+			<div class="container">
+				<!-- <h1 class="">/* acm at fsu */</h1>
+				<h1>
+					<span class="">[fall]</span>
+					<span class="">programming</span>
+					<span class="">contest</span>
+				</h1>
+				<h1 class="">October 28th 8AM – 4PM</h2> -->
+				<img src="{{url_for('static', filename='assets/spc2018crop.png')}}"/>
 
-			<div class="btn-wrapper">
-				<input class="btn btn-full-color" type="button" onclick="location.href='/quickregister'"   value="Quick Register">
-				<input class="btn btn-outline" type="button" onclick="location.href='mailto:hello@acmatfsu.org';" value="Contact Us">
+				<span class="title is-5">March 31st 8AM - 4PM | Love Bldg. FSU</span>
+
+				<div class="buttons">
+					<input class="button acm is-outlined" type="button" onclick="location.href='/quickregister'"   value="Quick Register">
+					<input class="button acm is-outlined" type="button" onclick="location.href='mailto:hello@acmatfsu.org';" value="Contact Us">
+				</div>
+
 			</div>
+		</div>
 
-			<div class="down-indicator">
+		<!-- <div classs="hero-foot">
 				<i class="fa fa-chevron-down fa-lg" aria-hidden="true"></i>
-			</div>
+		</div> -->
 
-	</div>
+
+
+
+	</section>
+
 
 	{% include 'index/about.html' %}
 	{% include 'index/faqs.html' %}

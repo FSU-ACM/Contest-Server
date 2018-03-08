@@ -14,13 +14,13 @@ gulp.task('sass', function () {
 
 });
 
-gulp.task('sass_old', function() {
+// gulp.task('sass_old', function() {
 
-	return gulp.src(src_old)
-			.pipe(sass().on('error', sass.logError))
-			.pipe(gulp.dest(dest_old));
+// 	return gulp.src(src_old)
+// 			.pipe(sass().on('error', sass.logError))
+// 			.pipe(gulp.dest(dest_old));
 
-});
+// });
 
 // Monitors and .sass
 gulp.task('watch', ['sass'], function() {
