@@ -19,12 +19,6 @@ class ProfileView(AccountFormView):
 
     """
 
-    def authorize(self):
-        return session_util.is_auth()
-
-    def redirect_unauthorized(self):
-        return redirect(url_for('login'))
-
     def get_template_name(self):
         return 'form2/profile.html'
 

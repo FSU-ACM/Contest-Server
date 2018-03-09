@@ -4,6 +4,8 @@
 	<link rel="stylesheet" href="{{url_for('static', filename='styles/index.css')}}">
 {% endblock %}
 
+{% block bodyattribs %} {% endblock bodyattribs %}
+
 <!-- Content in here -->
 {% block content %}
 
@@ -21,12 +23,13 @@
 					<span class="">contest</span>
 				</h1>
 				<h1 class="">October 28th 8AM – 4PM</h2> -->
-				<img src="{{url_for('static', filename='assets/spc2018crop.png')}}"/>
+				<img src="{{url_for('static', filename='assets/spc2018.svg')}}"/>
 
 				<span class="title is-5">March 31st 8AM - 4PM | Love Bldg. FSU</span>
 
 				<div class="buttons">
-					<input class="button acm is-outlined" type="button" onclick="location.href='/quickregister'"   value="Quick Register">
+					{% include "common/register-button.html" %}
+					<!-- <input class="button acm is-outlined" type="button" onclick="location.href='/quickregister'"   value="Quick Register"> -->
 					<input class="button acm is-outlined" type="button" onclick="location.href='mailto:hello@acmatfsu.org';" value="Contact Us">
 				</div>
 

@@ -18,7 +18,7 @@ section.hero.header
         img
             max-width: 400px
 
-        span
+        span.title
             color: $accent
             @include Mono
             margin-bottom: 0
@@ -28,6 +28,10 @@ section.hero.header
         .buttons
             margin-top: 2rem
 
+            > *
+                margin-left: 4px
+                margin-right: 4px
+
     .button.acm
         min-width: 220px
         // border: none
@@ -35,14 +39,11 @@ section.hero.header
         border-color: $accent
 
 
+section.section#sponsors
+    .column
+        display: flex
+        align-items: center
 
-.red
-    color: $red !important
-.green
-    color: $green !important
-// .brown
-//     color: $brown
-.gray
-    color: $grey !important
-.white
-    color: $white !important
+    #appriver
+        transform-origin: center
+        transform: scale(0.8)

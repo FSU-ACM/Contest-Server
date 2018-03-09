@@ -9,8 +9,25 @@
             <li id="nav-team">
                 <a href="{{ url_for('team') }}">Team</a>
             </li>
+            <li id="nav-password">
+                    <a href="{{ url_for('update_password') }}">Change Password</a>
+                </li>
             <li>
                 <a href="{{ url_for('logout') }}">Logout</a>
             </li>
         </ul>
+
+
+        <script>
+                var navs = {
+                "/account": "#nav-account",
+                "{{ url_for('profile') }}": "#nav-profile",
+                "{{ url_for('team') }}": "#nav-team",
+                "{{ url_for('update_password') }}": "#nav-password"
+                };
+
+                $(navs[window.location.pathname]).toggleClass('is-active');
+        </script>
+
 </div>
+

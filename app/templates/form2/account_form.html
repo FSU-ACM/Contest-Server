@@ -34,14 +34,4 @@
         </div>
     </section>
 
-    <script>
-      var navs = {
-        "/account": "#nav-account",
-        "{{ url_for('profile') }}": "#nav-profile",
-        "{{ url_for('team') }}": "#nav-team"
-      };
-
-      $(navs[window.location.pathname]).toggleClass('is-active');
-    </script>
-
 {% endblock %}

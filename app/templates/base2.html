@@ -1,7 +1,7 @@
 {% block doc %}
 <!DOCTYPE html>
 
-<html class="has-navbar-fixed-top" {% block htmlattribs %}{% endblock htmlattribs %}>
+<html {% block htmlattribs %}{% endblock htmlattribs %}>
 {% block html %}
 
   <head>
@@ -25,7 +25,7 @@
   {% endblock head %}
   </head>
 
-  <body{% block bodyattribs %}{% endblock bodyattribs %}>
+  <body  {% block bodyattribs %} class="has-navbar-fixed-top" {% endblock bodyattribs %}>
   {% block body %}
 
     {% block navbar %}
@@ -36,10 +36,14 @@
     {% block content %}
     {% endblock content %}
 
+    {% block footer %}
+      {% include "common/footer.html" %}
+    {% endblock footer %}
+
     {% block scripts %}
     {% endblock scripts %}
 
-    {% endblock body %}
+  {% endblock body %}
   </body>
 
 {% endblock html %}

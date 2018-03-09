@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from flask.views import MethodView
 
@@ -81,6 +81,13 @@ class FormView(MethodView):
 
 
 class AccountFormView(FormView):
+
+    def authorize(self):
+        return session_util.is_auth()
+
+    def redirect_unauthorized(self):
+        return redirect(url_for('login'))
+
     def render_template(self, **kwargs):
         account = session_util.get_account()
         return super().render_template(account=account, **kwargs)

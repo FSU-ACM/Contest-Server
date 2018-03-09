@@ -45,6 +45,7 @@ routes = [
     Route('/login', auth.LoginView.as_view('login')),
     Route('/logout', auth.LogoutView.as_view('logout')),
     Route('/reset_password', auth.ResetPasswordView.as_view('reset_password')),
+    Route('/account/updatepassword', auth.UpdatePasswordView.as_view('update_password')),
 
     Route('/account/profile', account.ProfileView.as_view('profile')),
     Route('/account/team', team.TeamView.as_view('team')),

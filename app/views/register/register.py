@@ -1,6 +1,6 @@
 # views.register.register
 
-from flask import (redirect, render_template, request, url_for,)
+from flask import (flash, redirect, render_template, request, url_for,)
 
 from app import app, recaptcha
 from app.forms import SoloRegister
