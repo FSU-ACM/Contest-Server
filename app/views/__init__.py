@@ -16,20 +16,42 @@ def page_not_found(e):
 
 
 @app.errorhandler(500)
-def page_not_found(e):
+def page_error(e):
     return render_template('500.html'), 500
 
 
-@app.route('/allteams')
-def allteams():
-    teams = Team.objects.filter(teamName__exists=True)
-    teams = [t for t in teams if any(member.profile for member in t.members)]
-    return render_template('allteams.html', teams=teams)
+# @app.route('/allteams')
+# def allteams():
+#     teams = Team.objects.filter(team_name__exists=True)
+#     teams = [t for t in teams if any(member.profile for member in t.members)]
+#     return render_template('allteams.html', teams=teams)
 
 
 from . import account
 from . import admin
-from . import nav
+from . import auth
 from . import register
 from . import team
-# from . import views
+
+class Route:
+    def __init__(self, url, view):
+        self.url, self.view = url, view
+
+routes = [
+    Route('/register', register.SoloRegisterView.as_view('register')),
+    Route('/quickregister', register.QuickRegisterView.as_view('quick_register')),
+
+    Route('/login', auth.LoginView.as_view('login')),
+    Route('/logout', auth.LogoutView.as_view('logout')),
+    Route('/reset_password', auth.ResetPasswordView.as_view('reset_password')),
+    Route('/account/updatepassword', auth.UpdatePasswordView.as_view('update_password')),
+
+    Route('/account/profile', account.ProfileView.as_view('profile')),
+    Route('/account/team', team.TeamView.as_view('team')),
+    Route('/account/team/create', team.CreateView.as_view('team_create')),
+    Route('/account/team/add', team.AddView.as_view('team_add_member')),
+    Route('/account/team/leave', team.LeaveView.as_view('team_leave')),
+    Route('/account/team/remove', team.RemoveView.as_view('team_remove')),
+]
+
+[app.add_url_rule(route.url, view_func=route.view) for route in routes]

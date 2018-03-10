@@ -1,0 +1,65 @@
+
+{% macro label(element) %}
+    {{ element.label(class_='label') }}
+{% endmacro %}
+
+
+{% macro field(element, show_label=true) %}
+    <div class="field">
+        {% if show_label %}
+            {{ label(element) }}
+        {% endif %}
+        <div class="control">
+            {{ element(class_='input') | safe }}
+        </div>
+        {% if element.errors %}
+            {% for error in element.errors %}
+            <p class="help is-danger">
+                <i class="fas fa-exclamation-circle"></i>
+                {{ error }}
+            </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro button(element) %}
+    <div class="field">
+        <div class="control">
+            {{ element(class_="button acm is-primary")}}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro select(element) %}
+    <div class="field">
+        {{ label(element) }}
+
+        <div class="control">
+            <div class="select">
+                {{ element }}
+                <!-- <select>
+                    {% for option in element%}
+                        {{ option }}
+                    {% endfor %}
+                </select> -->
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro radio(element) %}
+    <div classs="field">
+        {{ label(element) }}
+        <div class="control">
+
+            {% for subfield in element %}
+                    <label class="radio">
+                        {{ subfield }}
+                        {{ subfield.label }}
+                    </label>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
+

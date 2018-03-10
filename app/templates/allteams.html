@@ -20,7 +20,7 @@
     <tbody>
       {% for team in teams %}
         <tr>
-          <td>{{team.teamName}}</td>
+          <td>{{team.team_name}}</td>
           {% for member in team.members %}
             {% if member.profile %}
             <td>{{member.profile.firstname}} {{member.profile.lastname}}</td>

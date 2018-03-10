@@ -24,7 +24,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         team_scores[teamid] = solved
 
     # Match competitors with questions solved
-    for teamid, score in team_scores.iteritems():
+    for teamid, score in team_scores.items():
         team = Team.objects(teamID=teamid).first()
         if not team.members:
             continue
@@ -64,7 +64,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         csv_writer = csv.writer(fd)
         return csv_writer
 
-    for fsuid, course_list in student_classes.iteritems():
+    for fsuid, course_list in student_classes.items():
         # FSUIDs from the survey not in the EC get None
         score = user_scores.get(fsuid, None)
 
@@ -89,4 +89,4 @@ def extra_credit(results_tsv, courses_csv, output_folder):
 
 
 if __name__ == '__main__':
-    extra_credit()
+    extra_credit() #pylint: disable=E1120

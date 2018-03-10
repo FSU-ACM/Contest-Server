@@ -1,0 +1,52 @@
+{% block doc %}
+<!DOCTYPE html>
+
+<html {% block htmlattribs %}{% endblock htmlattribs %}>
+{% block html %}
+
+  <head>
+  {% block head %}
+
+    <title>{% block title %}ACM Programming Contest{% endblock title %}</title>
+
+    {% block metas %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock metas %}
+
+    {% block styles %}
+    <link href="{{url_for('static', filename='styles/base.css')}}" rel="stylesheet">
+    {% endblock styles %}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+
+  {% endblock head %}
+  </head>
+
+  <body  {% block bodyattribs %} class="has-navbar-fixed-top" {% endblock bodyattribs %}>
+  {% block body %}
+
+    {% block navbar %}
+      {% include "common/navbar.html" %}
+      {% include "common/flash.html" %}
+    {% endblock navbar %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+      {% include "common/footer.html" %}
+    {% endblock footer %}
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+  {% endblock body %}
+  </body>
+
+{% endblock html %}
+</html>
+
+{% endblock doc %}

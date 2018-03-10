@@ -1,0 +1,85 @@
+{% extends "form2/base.html" %}
+
+{% block formsize %} is-half {% endblock %}
+
+{% block form %}
+
+    <h1 class="title">
+        Quick (Team) Registration
+    </h1>
+
+    <p>
+        You will receive emails with your passwords.
+        Please log in and change them immediately.
+        <!-- <small>(You <strong>will</strong> need to join a team to participate.)</small> -->
+    </p>
+    <br>
+
+    <form class="content" action="" method="post">
+        {{ form.hidden_tag() }}
+
+        {{ field(form.team_name) }}
+        {{ radio(form.division) }}
+        <p class="help is-info">
+            <a href="/#divisions">Learn More</a>
+        </p>
+
+        <!-- Team Member 1 -->
+        <h3>Team Member 1</h3>
+        {{ field(form.email1) }}
+        <div class="columns">
+            <div class="column is-half">
+                {{ field(form.first_name1) }}
+            </div>
+            <div class="column is-half">
+                {{ field(form.last_name1) }}
+            </div>
+        </div>
+        {{ field(form.fsuid1) }}
+        <p class="help is-danger">
+            <!-- <i class="fas fa-exclamation-circle"></i> -->
+            If you do not provide an FSUID you can not receive extra credit.
+        </p>
+
+        <p>You can create your team or add more members.</p>
+        {{ button(form.submit) }}
+
+        <!-- Team Member 2 -->
+        <h3>Team Member 2</h3>
+        {{ field(form.email2) }}
+        <div class="columns">
+            <div class="column is-half">
+                {{ field(form.first_name2) }}
+            </div>
+            <div class="column is-half">
+                {{ field(form.last_name2) }}
+            </div>
+        </div>
+        {{ field(form.fsuid2) }}
+        <p class="help is-danger">
+            <!-- <i class="fas fa-exclamation-circle"></i> -->
+            If you do not provide an FSUID you can not receive extra credit.
+        </p>
+
+        <!-- Team Member 3 -->
+        <h3>Team Member 3</h3>
+        {{ field(form.email3) }}
+        <div class="columns">
+            <div class="column is-half">
+                {{ field(form.first_name3) }}
+            </div>
+            <div class="column is-half">
+                {{ field(form.last_name3) }}
+            </div>
+        </div>
+        {{ field(form.fsuid3) }}
+        <p class="help is-danger">
+            <!-- <i class="fas fa-exclamation-circle"></i> -->
+            If you do not provide an FSUID you can not receive extra credit.
+        </p>
+
+        {{ button(form.submit) }}
+    </form>
+
+{% endblock %}
+

@@ -1,64 +1,45 @@
 # views.register.register
 
-from flask import redirect, url_for, render_template, request, session, abort
+from flask import (flash, redirect, render_template, request, url_for,)
 
 from app import app, recaptcha
-from app.models import Account, Preregistration, Profile, Team
-from app.util.auth import *
-from app.util.request import get_email, get_password
+from app.forms import SoloRegister
+from app.util import auth2, session as session_util
+from app.views.generic import FormView
 
-import bleach
+class SoloRegisterView(FormView):
+    """View for a user to register w/o team or teammates.
 
+    """
 
-@app.route('/register', methods=['POST', 'GET'])
-def register():
-    error = request.args.get('error', None)
-    success = request.args.get('success', None)
+    def authorize(self):
+        return not session_util.is_auth()
 
-    # Disuade from registering twice
-    action, account = get_account(session)
-    action = None if not account else redirect(url_for('profile', message="You are already registered!"))
+    def redirect_unauthorized(self):
+        flash("You are already registered!", 'message')
+        return redirect(url_for('profile'))
 
-    if not action:
+    def get_template_name(self):
+        return 'form2/solo_register.html'
 
-        if request.method == 'POST':
+    def get_form(self):
+        return SoloRegister()
 
-            # Validate login; deny or redirect to profile
-            email = get_email()
-            password = get_password()
+    def post(self):
+        form = SoloRegister(request.form)
 
-            # Validate email
-            if not verify_email(email):
-                error = "Please submit a valid email."
+        if form.validate():
 
-            # Validate password
-            elif not password:
-                error = "Please enter a valid password."
+            account = auth2.create_account(
+                email=form.email.data,
+                password=form.password.data,
+                first_name=form.first_name.data,
+                last_name=form.last_name.data,
+                fsuid=form.fsuid.data
+            )
 
-            elif not recaptcha.verify():
-                error = "Please complete the ReCaptcha."
+            # Set cookie, redirect to profile page.
+            session_util.login(account)
+            return redirect(url_for('profile'), code=302)
 
-            # SUCCESS STATE
-            elif not Account.objects(email=email).first():
-                # Create an account for our user
-                account = Account(email=email)
-                account.set_password(password)
-
-                # Let's see if they preregistered
-                prereg = Preregistration.objects(email=email).first()
-                account.prereg = prereg if prereg else None
-
-                # DB transactions
-                account.save()
-
-                # Set cookie, redirect to profile page.
-                session['email'] = email
-                action = redirect(url_for('profile'), code=302)
-
-            else:
-                error = "This email is already linked to an another account."
-
-        action = action if action is not None else \
-            render_template('/form/register.html', error=error)
-
-    return action
+        return self.render_template(form=form)

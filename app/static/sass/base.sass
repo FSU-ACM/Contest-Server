@@ -1,0 +1,49 @@
+//
+//  Import Bulma base
+//
+
+@import "../../../node_modules/bulma/sass/utilities/initial-variables"
+@import "../../../node_modules/bulma/sass/utilities/functions"
+
+
+//
+//  Override Bulma styles
+//
+
+$transparent: rgba(0,0,0,0)
+
+// $pink: #E00051
+$primary: #665FC3
+$accent: #EADDFB
+
+
+//
+//  Import rest of Bulma either all-together
+//  or as-needed.
+//
+
+// @import "../../../node_modules/bulma/bulma"
+@import "../../../../../bulma/bulma"
+
+
+//
+//  Import remaining customizations
+//
+
+body, html
+  min-height: 100vh
+  position: relative
+
+body
+  display: flex
+  flex-direction: column
+
+
+@import "common/type"
+@import "common/compat"
+@import "common/flash"
+@import "common/overrides"
+
+@import "common/acm"
+
+

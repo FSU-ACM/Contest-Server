@@ -1,5 +1,8 @@
 # util.team
 
+from flask import flash
+
+from app import app
 from app.models import Account, Team
 from app.util.password import make_password
 
@@ -29,9 +32,6 @@ def create_team(account, name):
 
     # Set the team name
     rename_team(team, (name or team.teamID))
-    # team.teamName = name or team.teamID
-    # team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
-
     team.save()
     account.save()
 
@@ -39,13 +39,24 @@ def create_team(account, name):
 
 
 def set_division(team, division):
+    """Set team's division
+
+    This is called three times:
+        1. When a team is created from a registed solo user
+        2. When a team is quick registered
+        3. When a team is updated/renamed
+
+    1 and 2 are part of a creation process, but are called separately
+    from the create_team method.
+
+    """
     team.division = division
+    validate_division(team)
     team.save()
     # TODO make this more...robust
 
 
 def join_team(account, teamID=None, teamPass=None, team=None):
-    error, success = None, None
 
     # Look up the team if we didn't bring one
     if team is None:
@@ -57,24 +68,19 @@ def join_team(account, teamID=None, teamPass=None, team=None):
 
     # We have our team, let's try joining
     if team:
-        # Max 3 members
-        if not team.members:
-            team.members = [account]  # See workaround notice above
-            team.save()
-            account.team = team
-            account.save()
-            success = "You joined the team!"
-        elif len(team.members) < 3:
+        if len(team.members) < 3:
             team.members.append(account)
             account.team = team
+            validate_division(team)
             team.save()
             account.save()
-            success = "You joined the team!"
+            return True
         else:
-            error = "Team %s already has 3 members." % \
-                    team.teamName or team.teamID
+            flash("Team already has 3 members", 'danger')
+            return False
 
-    return error, success
+    flash("Error finding team", 'danger')
+    return False
 
 
 def leave_team(account, team):
@@ -86,7 +92,7 @@ def leave_team(account, team):
     # Clear name if last member, change teampass
     if len(team.members) is 0:
         team.members = []
-        team.teamName = None
+        team.team_name = None
         team.division = None
         team.teamPass = make_password()
     team.save()
@@ -97,10 +103,35 @@ def leave_team(account, team):
 
 
 def rename_team(team, name):
-    team.teamName = name
-    team.teamName = team.teamName[:Team.MAX_NAME_LENGTH]
+    team.team_name = name
+    team.team_name = team.team_name[:Team.MAX_NAME_LENGTH]
     team.save()
 
     success = "Team name updated."
 
     return success
+
+
+def validate_division(team):
+    """Validates that all team members qualify for the
+    marked division.
+
+    This is called three times:
+        1. From set_division (see method comment)
+        2. From join_team.
+        3. From a profile update.
+
+    Both times we make sure a team is not formed/updated against the rules.
+
+    """
+
+    division = int(team.division)
+
+    if division is 2:
+        app.logger.debug("????")
+        for member in team.members:
+            if member.profile:
+                if member.profile.adv_course is 'COP4530' or member.profile.adv_course is 'COP4531':
+                    team.division = 1
+                    flash("Based a team member's furthest course, we've automatically promoted your team to Upper Division", 'info')
+                    return

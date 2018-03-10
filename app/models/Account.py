@@ -1,19 +1,23 @@
-from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from app import db
 
 class Account(db.Document):
-    email = db.EmailField(required=True)
-    password = db.StringField(required=True)
-    profile = db.ReferenceField('Profile')
-    prereg = db.ReferenceField('Preregistration')
 
+    # Sign-in
+    email = db.EmailField(required=True, primary_key=True)
+    password = db.StringField(required=True)
+
+    # Relationships
+    team = db.ReferenceField('Team')
+    profile = db.ReferenceField('Profile')
+
+    # Core Info (Extra Credit)
+    first_name = db.StringField(required=True)
+    last_name = db.StringField(required=True)
+    fsuid = db.StringField()
     signin = db.DateTimeField(null=True)
 
-    # Teams relationship
-    team = db.ReferenceField('Team')
-
-    # Handles password-things
     def set_password(self, password):
         self.password = generate_password_hash(password)
 

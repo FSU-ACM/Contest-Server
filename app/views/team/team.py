@@ -1,65 +1,62 @@
 # views.team.team
 
-from flask import redirect, url_for, render_template, request, session, abort
+from flask import redirect, url_for, render_template, request, session, abort, flash
 
 from app import app, recaptcha, db
+from app.forms import (
+        CreateTeam as CreateTeamForm,
+        UpdateTeam as UpdateTeamForm,
+        AddTeamMember as AddMemberForm,
+    )
 from app.models import Account, Team
-from app.util.auth import *
-from app.util.team import create_team
+from app.util import session as session_util
+from app.views.generic import AccountFormView
 
-import bleach
+class TeamView(AccountFormView):
+    """View for Team management.
 
+    This view displays forms for creating, updating, leaving, and adding
+    members to a team. However, we don't accept POSTs for any of thoses
+    here, thoses are in different subclasssed views.
 
-@app.route('/account/team', methods=['GET'])
-def team():
-    """
-    Here a user can either view their team details if
-    on a team, otherwise have the options to create
-    or join a team.
     """
 
-    error = request.args.get('error', None)
-    success = request.args.get('success', None)
+    def get_template_name(self):
+        return 'form2/team.html'
 
-    # Access account (throws 404)
-    action, account = get_account(session)
+    def get_form(self):
+        return CreateTeamForm()
 
-    if not action:
-        # Let's see if they have a team
-        team = account.team
+    def post(self):
+        return redirect(url_for('team'))
 
-        action = render_template('/form/profile_team.html', team=team,
-            account=account, error=error, success=success)
+    def render_template(self, **kwargs):
+        """
+        We need to render a different form based on whether the user
+        is on a team or not.
 
-    return action
+        If account.team is None, we should let them create a new team
+        using CreateTeamForm. Otherwise, we show all the options available
+        to existing teams: Editing team details, adding/removing team
+        members, or leaving the team.
+        """
+        account = session_util.get_account()
 
+        if not account.profile:
+            flash('Please complete your profile before editing your team.', 'danger')
+            return redirect(url_for('profile'))
 
-@app.route('/account/team', methods=['POST'])
-def team_create():
-    """
-    This route is for creating a new team.
-    """
+        if not account.team:
+            create_form = kwargs.get('create_form', None) or self.get_form()
+            return super().render_template(create_form=create_form)
+        else:
+            updateTeamForm = kwargs.get('update_form', None) \
+                or UpdateTeamForm(team_name=account.team.team_name,
+                                  division=account.team.division)
 
-    error, success = None, None
+            addMemberForm = kwargs.get('add_form', None) \
+                or AddMemberForm()
 
-    # Access the account (n/a throws 404)
-    action, account = get_account(session)
+            return super().render_template(edit_form=updateTeamForm,
+                                           add_form=addMemberForm)
 
-    # Make sure they're not already on a team
-    action = None if (action is None and not account.team) else action or \
-        redirect(url_for('team', error="You're already on a team!"))
-
-    # Given account and no team:
-    if not action:
-
-        name = request.form['teamName']
-
-        # Safety first!
-        try:
-            team = create_team(account, name)
-        except:
-            abort(500)
-
-        action = redirect(url_for('team'))
-
-    return action

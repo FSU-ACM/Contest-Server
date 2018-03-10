@@ -1,4 +1,2 @@
-from . import register
-from . import quick_register
-# Route disabled
-# from . import preregister
+from .register import SoloRegisterView
+from .quick_register import QuickRegisterView

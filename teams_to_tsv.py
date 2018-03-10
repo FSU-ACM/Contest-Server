@@ -21,12 +21,12 @@ with open("teams.tsv", "w+") as teams_tsv, \
         if walkin_counter > 101:
             break;
         # Accounts that are not in use are assigned to walk-ins
-        if team.teamName is None:
-            team.teamName = "".join(("Walk-in-", str(walkin_counter)))
+        if team.team_name is None:
+            team.team_name = "".join(("Walk-in-", str(walkin_counter)))
             walkin_counter += 1
         # Empty team names are assign a dummy value
-        if team.teamName.isspace():
-            team.teamName = "UnnamedTeam"
+        if team.team_name.isspace():
+            team.team_name = "UnnamedTeam"
         # Avoiding team number 0, refer to NOTE 1 in the header
         if team.teamID == "acm-0":
             continue
@@ -35,12 +35,12 @@ with open("teams.tsv", "w+") as teams_tsv, \
           [team.teamID.strip("acm-"),  # To only get ID number
            team.teamID,  # Set to external ID for exporting
            "3",  # Category ID of Participants Category
-           team.teamName.strip('\t'), # So tabs in teamName don't interfere
+           team.team_name.strip('\t'), # So tabs in team_name don't interfere
            '\n']).encode("UTF-8"))
 
         accounts_tsv.write(u"\t".join(
           ["team",
-           team.teamName.strip('\t'), # So tabs in teamName don't interfere
+           team.team_name.strip('\t'), # So tabs in team_name don't interfere
            '{0}-{1}'.format('team', team.teamID.split('-')[1].zfill(3)),
            team.domPass,
            # team.teamID.strip("acm-"),  # To only get ID number

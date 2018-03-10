@@ -1,0 +1,44 @@
+/*
+ *  Default brand styles
+ */
+
+.button.acm
+    // @extend .is-rounded
+    // @include Montserrat(700)
+
+    @include Mono(700)
+    text-transform: lowercase
+    height: 44px
+    padding: 0.2rem 2.5rem
+
+
+    box-sizing: border-box
+
+    &.is-fullwidth
+        width: 100%
+
+    &.is-outlined
+        background-color: $transparent
+
+.is-half .button.acm
+    width: 100%
+
+.navbar-item > .button.acm
+    height: 36px
+    padding: 0.2rem 1.5rem
+    // font-weight: 400 !important
+
+
+form .button.acm
+    margin-top: 1rem
+
+
+form .field .control
+    input[type=text], input[type=password]
+        // height: 42px
+        // background-color: $white-ter
+        box-shadow: none
+        // border: none
+
+        padding-left: 1rem
+        padding-right: 1rem

@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_mongoengine import MongoEngine
+from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask_bootstrap import Bootstrap
 from flask_recaptcha import ReCaptcha
 from flask_nav import Nav
@@ -7,11 +7,8 @@ from flask_nav.elements import *
 from flask_mail import Mail
 from flask_basicauth import BasicAuth
 
-import random
-import string
+import random, string, logging, os
 from datetime import timedelta
-
-import os
 
 # Init & Config
 app = Flask(__name__)
@@ -27,7 +24,8 @@ basic_auth = BasicAuth(app)
 
 # Other Config
 app.url_map.strict_slashes = False
-
+app.session_interface = MongoEngineSessionInterface(db)
+# app.logger.setLevel(logging.DEBUG)
 
 # Cache busting
 @app.context_processor

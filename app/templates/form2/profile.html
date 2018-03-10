@@ -1,0 +1,41 @@
+{% extends "form2/account_form.html" %}
+
+{% block formsize %} is-8 {% endblock %}
+
+{% block form %}
+
+    <p>
+      Please complete your profile before editing your team.
+    </p>
+
+
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+
+      <h3>Personal details</h3>
+      {{ field(form.age) }}
+      {{ select(form.gender) }}
+      {{ select(form.race) }}
+      <!-- {{ field(form.food_allergies) }} -->
+
+      <h3>School information</h3>
+      {{ field(form.major) }}
+      {{ field(form.grad_year) }}
+      {{ select(form.grad_term) }}
+
+      {% if account and account.profile and account.profile.adv_course %}
+        {{ label(form.adv_course) }}
+        <p>{{account.profile.adv_course}}</p>
+      {% else %}
+        {{ select(form.adv_course) }}
+      {% endif %}
+
+
+      {{ select(form.student_status) }}
+
+      {{ button(form.submit) }}
+
+    </form>
+
+
+{% endblock %}

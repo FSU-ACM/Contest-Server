@@ -1,0 +1,37 @@
+{% extends "form2/base.html" %}
+
+{% block content %}
+
+    <section class="hero form is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    {{ account.first_name }} {{ account.last_name}}
+                </h1>
+                <h2 class="subtitle">
+                    {% if account.fsuid %}
+                        {{ account.fsuid }} |
+                    {% endif %}
+                    {{ account.email }}
+                </h2>
+            </div>
+        </div>
+        <div class="hero-foot">
+            <div class="container">
+                {% include "form2/common/profile_nav.html" %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section form content">
+        <div class="container">
+            <div class="columns">
+                <div class="column {% block formsize %}{% endblock formsize %}">
+                    {% block form %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

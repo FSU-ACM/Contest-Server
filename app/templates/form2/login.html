@@ -1,0 +1,36 @@
+{% extends "form2/base.html" %}
+
+{% block formsize %} is-half {% endblock %}
+
+{% block form %}
+
+
+
+  <h1 class="title">Login</h1>
+
+
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    {{ field(form.email) }}
+    {{ field(form.password) }}
+
+    {% if insertrecaptcha %}
+    <br />
+    {{ recaptcha }}
+    <br />
+    {% endif %}
+
+    {{ button(form.submit) }}
+
+  </form>
+
+  <div id="forgot-password-container" >
+    <a href="{{url_for('reset_password')}}">Forgot your password?</a>
+  </div>
+
+  <hr />
+
+  <a class="button acm is-fullwidth is-outline" href="{{url_for('register')}}">Register</a>
+
+
+{% endblock %}

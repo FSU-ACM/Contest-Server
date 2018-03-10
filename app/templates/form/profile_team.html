@@ -47,11 +47,11 @@
 
 		<div class="col-md-6">
 			<form action="{{url_for('team')}}" method=post>
-	      <label for="teamName">Create New Team</label>
+	      <label for="team_name">Create New Team</label>
 	      <input type="text"
           class="form-control"
-          id="teamName"
-          name=teamName
+          id="team_name"
+          name=team_name
           placeholder="Enter team name">
 	      <br/>
 	      <input class="btn btn-primary" type=submit value="Create Team">
@@ -67,16 +67,15 @@
   <row>
     <div class="col-md-6">
       <form action="{{url_for('team_update')}}" method=post>
-        <label for="teamName">Team Name</label>
+        <label for="team_name">Team Name</label>
         <input type="text"
           class="form-control"
-          id="teamName"
-          name=teamName
+          id="team_name"
+          name=team_name
           placeholder="Enter a team name"
-          value="{{team.teamName}}">
+          value="{{team.team_name}}">
           <br />
 
-        {% include "form/division.html" %}
         <br />
 
         <input class="btn btn-primary" type=submit value="Update">
@@ -115,19 +114,6 @@
 
   {% endif %}
 
-    <!-- <form action="{{ url_for('updatepassword') }}" method=post class='form-horizontal'>
-
-      <label for="register-currentpassword">Current Password*</label>
-      <input type="password" class="form-control" id="register-currentpassword" name=currentpassword required>
-
-      <br/>
-
-      <label for="register-newpassword">New Password*</label>
-      <input type="password" class="form-control" id="register-newpassword" name=newpassword required>
-      <br/>
-
-      <input class="btn btn-primary" type=submit value="Save password">
-    </form> -->
 </div>
 
 {% endblock %}
