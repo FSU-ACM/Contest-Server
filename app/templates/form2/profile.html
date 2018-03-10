@@ -22,7 +22,15 @@
       {{ field(form.major) }}
       {{ field(form.grad_year) }}
       {{ select(form.grad_term) }}
-      {{ select(form.adv_course) }}
+
+      {% if account and account.profile and account.profile.adv_course %}
+        {{ label(form.adv_course) }}
+        <p>{{account.profile.adv_course}}</p>
+      {% else %}
+        {{ select(form.adv_course) }}
+      {% endif %}
+
+
       {{ select(form.student_status) }}
 
       {{ button(form.submit) }}
