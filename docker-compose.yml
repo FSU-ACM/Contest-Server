@@ -43,10 +43,10 @@ services:
     build: .
     image: fsu-acm/contest-server
     environment:
-      - FLASK_CONFIG      = '/webapp/config/production.py'
-      # - VIRTUAL_HOST      = ${VHOST}
-      # - LETSENCRYPT_HOST  = ${VHOST}
-      # - LETSENCRYPT_EMAIL = 'andrew@fsu.acm.org'
+      - FLASK_CONFIG=/webapp/config/production.py
+      - VIRTUAL_HOST=${VHOST}
+      - LETSENCRYPT_HOST=${VHOST}
+      - LETSENCRYPT_EMAIL=andrew@fsu.acm.org
     volumes:
       - /acm/contest/share:/webapp/share
 
@@ -69,9 +69,9 @@ services:
   domserver:
     image: andrewsosa/domjudge-domserver
     environment:
-      - DOMJUDGE_DB_HOST          = 'domdb'
-      - DOMJUDGE_DB_PASSWORD      = ${DOM_PASS}
-      - DOMJUDGE_DB_ROOT_PASSWORD = ${DOM_PASS}
+      - DOMJUDGE_DB_HOST='domdb'
+      - DOMJUDGE_DB_PASSWORD=${DOM_PASS}
+      - DOMJUDGE_DB_ROOT_PASSWORD=${DOM_PASS}
       # - VIRTUAL_HOST              = ${VHOST}
       # - LETSENCRYPT_HOST          = ${VHOST}
       # - LETSENCRYPT_EMAIL         = 'andrew@acmatfsu.org'

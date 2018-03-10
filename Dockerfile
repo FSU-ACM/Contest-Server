@@ -1,4 +1,4 @@
-FROM tiangolo/uwsgi-nginx-flask:python2.7
+FROM tiangolo/uwsgi-nginx-flask:python3.6
 
 ENV UWSGI_INI /webapp/uwsgi.ini
 ENV STATIC_PATH /webapp/app/static
