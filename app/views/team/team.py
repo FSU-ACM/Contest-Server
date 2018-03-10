@@ -42,6 +42,10 @@ class TeamView(AccountFormView):
         """
         account = session_util.get_account()
 
+        if not account.profile:
+            flash('Please complete your profile before editing your team.', 'danger')
+            return redirect(url_for('profile'))
+
         if not account.team:
             create_form = kwargs.get('create_form', None) or self.get_form()
             return super().render_template(create_form=create_form)

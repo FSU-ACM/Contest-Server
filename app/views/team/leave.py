@@ -26,30 +26,3 @@ class LeaveTeamView(TeamView):
 
     def post(self):
         return self.get()
-
-# @app.route('/account/team/leave', methods=['POST'])
-# def team_leave():
-#     """
-#     This route allows a user to leave their team.
-#     """
-
-#     error, success = None, None
-
-#     # Access account (n/a throws 404)
-#     action, account = get_account(session)
-
-#     # Green means go
-#     if not action:
-
-#         # Retrieve team
-#         team = account.team
-
-#         # Attempt to leave
-#         try:
-#             success = leave_team(account, team)
-#         except Exception as e:
-#             abort(500)
-
-#         action = redirect(url_for('team', success=success, error=error))
-
-#     return action

@@ -21,7 +21,7 @@ class ResetPassword(FlaskForm):
         Email(),
     ])
 
-    submit = SubmitField('Login')
+    submit = SubmitField('Submit')
 
 
     def __init__(self, *args, **kwargs):

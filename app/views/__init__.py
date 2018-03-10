@@ -20,17 +20,16 @@ def page_error(e):
     return render_template('500.html'), 500
 
 
-@app.route('/allteams')
-def allteams():
-    teams = Team.objects.filter(team_name__exists=True)
-    teams = [t for t in teams if any(member.profile for member in t.members)]
-    return render_template('allteams.html', teams=teams)
+# @app.route('/allteams')
+# def allteams():
+#     teams = Team.objects.filter(team_name__exists=True)
+#     teams = [t for t in teams if any(member.profile for member in t.members)]
+#     return render_template('allteams.html', teams=teams)
 
 
 from . import account
 from . import admin
 from . import auth
-from . import nav
 from . import register
 from . import team
 
