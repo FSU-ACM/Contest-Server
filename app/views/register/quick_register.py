@@ -70,7 +70,7 @@ class QuickRegisterView(FormView):
             if form.account3:
                 pass3 = make_password()
                 account3 = auth2.create_account(
-                    email=form.email2.data,
+                    email=form.email3.data,
                     password=pass3,
                     first_name=form.first_name3.data,
                     last_name=form.last_name3.data,
