@@ -76,7 +76,7 @@ class QuickRegisterView(FormView):
                     last_name=form.last_name3.data,
                     fsuid=form.fsuid3.data
                 )
-                quick_register_email(account3, pass3)
+                quick_register_email(account3.email, pass3)
                 accounts.append(account3)
 
             # Create team
