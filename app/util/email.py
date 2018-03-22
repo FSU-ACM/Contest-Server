@@ -43,7 +43,7 @@ def quick_register_email(address, password):
     msg = Message("ACM Programming Contest - Your Password", sender="acm@cs.fsu.edu")
     msg.add_recipient(address)
     msg.body = "Hello! Thanks for registering for the contest.\n\n"
-    msg.body += "You can log in at contest.acmatfsu.org/login. "
+    msg.body += "You can log in at bastion.cs.fsu.edu/login. "
     msg.body += "Here's your password: %s. " % password
     msg.body += "Please consider setting a new password once you log. \n\n"
     msg.body += "Once you log in, you can edit your profile and modify your team. You will need to remember your email so you can use it to sign in on the day of the contest.\n\n"
