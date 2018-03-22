@@ -72,9 +72,6 @@ services:
       - DOMJUDGE_DB_HOST=domdb
       - DOMJUDGE_DB_PASSWORD=${DOM_PASS}
       - DOMJUDGE_DB_ROOT_PASSWORD=${DOM_PASS}
-      # - VIRTUAL_HOST              = ${VHOST}
-      # - LETSENCRYPT_HOST          = ${VHOST}
-      # - LETSENCRYPT_EMAIL         = 'andrew@acmatfsu.org'
     ports:
       - "8182:80"
 
@@ -85,7 +82,7 @@ services:
     cap_add:
         - SYS_ADMIN
     environment:
-      - DOMSERVER_HOST      = domserver/api
-      - DOMSERVER_USER      = judgehost
-      - DOMSERVER_PASSWORD  = ${DOM_PASS}
+      - DOMSERVER_HOST=domserver/api
+      - DOMSERVER_USER=judgehost
+      - DOMSERVER_PASSWORD=${DOM_PASS}
 
