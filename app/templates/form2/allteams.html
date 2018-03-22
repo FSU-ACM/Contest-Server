@@ -1,49 +1,56 @@
 {% extends "form2/base.html" %}
 {% block form %}
 
-<div class="container form-container form-sheet">
+  <div class="content">
+    <h1>Teams and Members</h1>
 
-  <h1>Teams and Members</h1>
-  <p>
-      Only teams where at least one teammate's profile is completed will be shown.
-  </p>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Team Name</th>
-        <th>Team Members</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
+    <div class="field is-grouped is-grouped-multiline">
+        <div class="control">
+          <div class="tags has-addons">
+            <span class="tag is-dark">Teams</span>
+            <span class="tag is-primary">{{teams|length}}</span>
+          </div>
+        </div>
 
-    <tbody>
-      {% for team in teams %}
-        <tr>
-          <td>{{team.team_name}}</td>
-          {% for member in team.members %}
-            {% if member.profile %}
-            <td>{{member.profile.firstname}} {{member.profile.lastname}}</td>
-            {% else %}
-            <td></td>
-            {% endif %}
-          {% endfor %}
+        <div class="control">
+          <div class="tags has-addons">
+            <span class="tag is-dark">Participants</span>
+            <span class="tag is-primary">{{num_members}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          {% if team.members|length < 2 %}
-            <td></td>
-          {% endif %}
+    <div class="box table-box">
+      <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Division</th>
+              <th>Team Name</th>
+              <th>Team Members</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for team in teams|sort(attribute='division') %}
+            <tr>
+              <th>{{team.division}}</th>
+              <td>{{team.team_name}}</td>
+              {% for member in team.members %}
+                <td>{{member.first_name}} {{member.last_name}}</td>
+              {% endfor %}
 
-          {% if team.members|length < 3 %}
-            <td></td>
-          {% endif %}
+              {% set pad = 3 - team.members|length %}
+              {% for i in range(pad) %}
+                <td></td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
 
-        </tr>
-      {% endfor %}
-
-    </tbody>
-
-  </table>
-
-</div>
+  </div>
 
 {% endblock %}

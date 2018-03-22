@@ -20,11 +20,12 @@ def page_error(e):
     return render_template('common/500.html'), 500
 
 
-# @app.route('/allteams')
-# def allteams():
-#     teams = Team.objects.filter(team_name__exists=True)
-#     teams = [t for t in teams if any(member.profile for member in t.members)]
-#     return render_template('allteams.html', teams=teams)
+@app.route('/teams')
+def teams():
+    teams = Team.objects.filter(team_name__exists=True)
+    num_members = sum([len(team.members) for team in teams])
+    return render_template('form2/allteams.html', teams=teams,
+                            num_members=num_members)
 
 
 from . import account

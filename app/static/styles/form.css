@@ -6573,8 +6573,10 @@ form .field .control input[type=text], form .field .control input[type=password]
   padding-left: 1rem;
   padding-right: 1rem; }
 
-section.form .box {
-  padding: 3rem; }
+section.form .box.table-box {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: none; }
 
 #forgot-password-container {
   margin-top: 1.5rem;

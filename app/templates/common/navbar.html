@@ -18,14 +18,14 @@
                         <a class="navbar-item" href="/#about">About</a>
                         <a class="navbar-item" href="/#faq">FAQs</a>
                         <a class="navbar-item" href="/#sponsors">Sponsors</a>
+                        <a class="navbar-item" href="{{url_for('teams')}}">Teams</a>
                         <a class="navbar-item" href="/login">
-
-                        {% if 'email' in session %}
-                            <div class="button acm is-primary" >Profile</div>
-                        {% else %}
-                            <div class="button acm is-primary" >Log In</div>
-                        {% endif %}
-                    </a>
+                            {% if 'email' in session %}
+                                <div class="button acm is-primary" >Profile</div>
+                            {% else %}
+                                <div class="button acm is-primary" >Log In</div>
+                            {% endif %}
+                        </a>
                 </div>
         </div>
 
