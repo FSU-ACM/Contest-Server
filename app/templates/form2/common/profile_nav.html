@@ -1,8 +1,8 @@
 <div class="tabs is-boxed">
         <ul>
-            <!-- <li id="nav-account">
-                <a href="">Account</a>
-            </li> -->
+            <li id="nav-account">
+                <a href="{{ url_for('account') }}">Account</a>
+            </li>
             <li id="nav-profile">
                 <a href="{{ url_for('profile') }}">Profile</a>
             </li>
@@ -10,8 +10,8 @@
                 <a href="{{ url_for('team') }}">Team</a>
             </li>
             <li id="nav-password">
-                    <a href="{{ url_for('update_password') }}">Change Password</a>
-                </li>
+                <a href="{{ url_for('update_password') }}">Change Password</a>
+            </li>
             <li>
                 <a href="{{ url_for('logout') }}">Logout</a>
             </li>
@@ -19,14 +19,14 @@
 
 
         <script>
-                var navs = {
-                "/account": "#nav-account",
+            var navs = {
+                "{{ url_for('account') }}": "#nav-account",
                 "{{ url_for('profile') }}": "#nav-profile",
                 "{{ url_for('team') }}": "#nav-team",
                 "{{ url_for('update_password') }}": "#nav-password"
-                };
+            };
 
-                $(navs[window.location.pathname]).toggleClass('is-active');
+            $(navs[window.location.pathname]).toggleClass('is-active');
         </script>
 
 </div>

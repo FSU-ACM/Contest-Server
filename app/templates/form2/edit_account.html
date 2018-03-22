@@ -1,0 +1,20 @@
+{% extends "form2/account_form.html" %}
+
+{% block formsize %} is-8 {% endblock %}
+
+{% block form %}
+
+    <form action="" method="post">
+      {{ form.hidden_tag() }}
+
+      <h3>Editable Account Details</h3>
+      {{ field(form.first_name) }}
+      {{ field(form.last_name) }}
+      {{ field(form.fsuid) }}
+
+      {{ button(form.submit) }}
+
+    </form>
+
+
+{% endblock %}
