@@ -6568,6 +6568,10 @@ span.icon {
 form .button.acm {
   margin-top: 1rem; }
 
+footer .button.acm {
+  margin-left: 4px;
+  margin-right: 4px; }
+
 form .field .control input[type=text], form .field .control input[type=password] {
   box-shadow: none;
   padding-left: 1rem;
