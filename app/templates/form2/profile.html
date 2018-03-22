@@ -26,6 +26,9 @@
       {% if account and account.profile and account.profile.adv_course %}
         {{ label(form.adv_course) }}
         <p>{{account.profile.adv_course}}</p>
+        <div style="display:none;">
+          {{ select(form.adv_course) }}
+        </div>
       {% else %}
         {{ select(form.adv_course) }}
       {% endif %}
