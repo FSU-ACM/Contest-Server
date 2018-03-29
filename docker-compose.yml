@@ -30,6 +30,7 @@ services:
   nginx-splitter:
     image: nginx
     volumes:
+      - ./config/nginx/proxy_params:/etc/nginx/proxy_params
       - ./config/nginx/proxy-split.conf:/etc/nginx/conf.d/proxy-split.conf
     environment:
       - VIRTUAL_HOST=${VHOST}
