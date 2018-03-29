@@ -26,6 +26,17 @@ services:
     volumes_from:
       - "nginx-proxy"
 
+  # Split / and /domjudge
+  nginx-splitter:
+    image: nginx
+    volumes:
+      - ./config/nginx/proxy-split.conf:/etc/nginx/conf.d/proxy-split.conf
+    environment:
+      - VIRTUAL_HOST=${VHOST}
+      - LETSENCRYPT_HOST=${VHOST}
+      - LETSENCRYPT_EMAIL=andrew@fsu.acm.org
+
+
   #
   #   Registration
   #
@@ -44,9 +55,7 @@ services:
     image: fsu-acm/contest-server
     environment:
       - FLASK_CONFIG=/webapp/config/production.py
-      - VIRTUAL_HOST=${VHOST}
-      - LETSENCRYPT_HOST=${VHOST}
-      - LETSENCRYPT_EMAIL=andrew@fsu.acm.org
+
     volumes:
       - /acm/contest/share:/webapp/share
 
@@ -85,4 +94,3 @@ services:
       - DOMSERVER_HOST=domserver/api
       - DOMSERVER_USER=judgehost
       - DOMSERVER_PASSWORD=${DOM_PASS}
-
