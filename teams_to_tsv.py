@@ -5,6 +5,9 @@
 #       <team_id(int)> <external_id> <category_id> <team_name>
 #  Account info gets stored inside acccounts.tsv in the following format
 #       team <team-name> <user-name> <password> <teamid>
+#
+#   Import teams.tsv first, then accounts.tsv
+#
 
 # NOTE 1 : Domjudge doesn't insert teams with ID < 1
 
@@ -34,9 +37,9 @@ with open("teams.tsv", "w+") as teams_tsv, \
         teams_tsv.write(u"\t".join(
           [team.teamID.strip("acm-"),  # To only get ID number
            team.teamID,  # Set to external ID for exporting
-           "3",  # Category ID of Participants Category
+           "2",  # Category ID of Participants Category - See footnote
            team.team_name.strip('\t'), # So tabs in team_name don't interfere
-           '\n']).encode("UTF-8"))
+           '\n']))
 
         accounts_tsv.write(u"\t".join(
           ["team",
@@ -44,4 +47,17 @@ with open("teams.tsv", "w+") as teams_tsv, \
            '{0}-{1}'.format('team', team.teamID.split('-')[1].zfill(3)),
            team.domPass,
            # team.teamID.strip("acm-"),  # To only get ID number
-           '\n']).encode("UTF-8"))
+           '\n']))
+
+#
+#   FOOTNOTE: Team Category
+#
+#   This value determines the team_category. Domjudge's defaults are:
+#       1 -> System
+#       2 -> Self-Registered
+#       3 -> Jury
+#
+#   Since System and Jury are meant for admin, we assign teams to being
+#   "self-registered" because you can't self-register for our contests
+#   anyway, and this is easier than making you create a new category first.
+#
