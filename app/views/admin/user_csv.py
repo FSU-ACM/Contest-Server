@@ -28,6 +28,7 @@ def user_csv():
         account.fsuid,
         ((account.team and account.team.team_name) or ''),
         ((account.team and account.team.teamID) or ''),
+        (account.signin is not None)
     ) for account in Account.objects.all()]
 
     # Add CSV header
@@ -37,7 +38,8 @@ def user_csv():
         'Last Name',
         'FSUID',
         'Team Name',
-        'Team ID'
+        'Team ID',
+        'Checked In'
     ))
 
     si = StringIO()
