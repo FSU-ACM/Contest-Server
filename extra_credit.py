@@ -1,5 +1,19 @@
 #!/usr/bin/env python
-# Usage: python extra_credit.py <results.tsv>
+# Usage: python extra_credit.py <results.tsv> <courses.csv>
+
+"""
+Output files explained:
+
+-   If a student has a number at the end of their line, it means they
+    competed in this division, and earned that score.
+-   If a student has 0, it means they either didn’t compete in that
+    division, or didn’t solve any questions.
+-   If an fsuid doesn’t have a score, firstname, or last name, it
+    means they completed the survey but did not show up to the contest
+    (or made some sort of mistake while registering)
+
+orphans.csv explained at the bottom.
+"""
 
 from app.models import Team
 import csv
@@ -17,6 +31,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     names = dict()
 
     # Read the score for each team
+    print("Reading results_tsv...")
     tsv = csv.reader(results_tsv, delimiter='\t')
     next(tsv)
     for row in tsv:  # skip header line
@@ -24,6 +39,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         team_scores[teamid] = solved
 
     # Match competitors with questions solved
+    print("Matching teams to scores...")
     for teamid, score in team_scores.items():
         team = Team.objects(teamID=teamid).first()
         if not team.members:
@@ -32,29 +48,25 @@ def extra_credit(results_tsv, courses_csv, output_folder):
             if not account.signin:
                 continue
 
-            fsuid = account.email   # fallback is email
-            if account.profile and account.profile.fsuid:
-                # try and pull their fsuid from profile
-                fsuid = account.profile.fsuid
+            # Try and grab fsuid or email
+            fsuid = account.fsuid or account.email
 
-            # Handles two situations:
-            #   - no profile, so maybe we can autodetect FSUID from email
-            #   - user is an idiot and put their fsu email in the 'fsuid' field
+            #  See if user is an idiot and put their fsu email in the 'fsuid' field
             if 'my.fsu.edu' in fsuid:
                 fsuid = fsuid.lower().split('@')[0]
 
             user_scores[fsuid] = team_scores[teamid]
 
-            if account.profile:
-                names[fsuid] = account.profile.firstname, account.profile.lastname
+            names[fsuid] = account.first_name, account.last_name
 
     # Get student classes
+    print("Reading extra credit survey...")
     courses = csv.reader(courses_csv)
     next(courses)
     for row in courses: # skip header line
         fsuid, course_list = row[1], row[2]
         fsuid = fsuid.lower().split('@')[0]
-        course_list = course_list.split(';')
+        course_list = course_list.split(',')
         student_classes[fsuid] = course_list
 
     # Iterate over all students, retrieving their score from the
@@ -64,6 +76,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
         csv_writer = csv.writer(fd)
         return csv_writer
 
+    print("Writing class files...")
     for fsuid, course_list in student_classes.items():
         # FSUIDs from the survey not in the EC get None
         score = user_scores.get(fsuid, None)
@@ -81,6 +94,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     # emails for those who did not complete the profile and didn't get their FSUID
     # auto-id'ed from a my.fsu.edu email address.
 
+    print("Processing orphan scores...")
     orphans = set(user_scores.keys()) - set(student_classes.keys())
     orphan_csv = open_class_file('orphans')
     for orphan in list(orphans):
