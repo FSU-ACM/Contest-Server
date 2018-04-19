@@ -23,3 +23,6 @@ config/production.py
 # Misc files
 *.tsv
 *.afdesign
+
+# Other
+/credit

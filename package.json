@@ -1,6 +1,6 @@
 {
   "name": "acm-contest",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Flask App for FSU ACM Programming Contest",
   "repository": {
     "type": "git",
