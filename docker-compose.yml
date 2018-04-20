@@ -49,6 +49,8 @@ services:
       - LETSENCRYPT_EMAIL=andrew@fsu.acm.org
     volumes:
       - /acm/contest/share:/webapp/share
+    depends_on:
+      - db
 
   #
   #   Domjudge
@@ -77,6 +79,8 @@ services:
       - DOMJUDGE_DB_ROOT_PASSWORD=${DOM_PASS}
     ports:
       - "8182:80"
+    depends_on:
+     - domdb
 
   # Judgehost
   judgehost:

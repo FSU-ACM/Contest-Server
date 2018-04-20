@@ -3,6 +3,7 @@
 *.pem
 *.sassc
 *.sass-cache*
+/docs/.vuepress/dist
 
 # app/static/styles/**/*.css
 
