@@ -8,4 +8,4 @@ deploy:
   keep-history: false
   local-dir: /docs/.vuepress/dist/
   on:
-    branch: gh-pages
+    branch: master
