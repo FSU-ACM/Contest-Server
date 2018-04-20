@@ -9,6 +9,10 @@ The registration webapp uses [MongoDB](https://www.mongodb.com/) as the database
 This project also has some dependency on [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/)/[Yarn](https://yarnpkg.com/), [Gulp](https://gulpjs.com/), and [Sass](http://sass-lang.com/) for managing/building styles. Currently the project includes pre-built stylesheets, but if you wish to recomplile them you will need these dependencies.
 
 ## Installation
+:::tip
+ If you choose to install the webapp on your host system, follow these steps to setup the webapp. If using Docker for webapp development, you can skip this.
+:::
+
 #### Python Dependencies
 To manage the dependencies of the webapp, we _strongly recommend_ using a [virtualenv](https://virtualenv.pypa.io/en/stable/). You may also be interested in [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/).
 
@@ -33,7 +37,17 @@ We recommend Yarn over npm (it's faster!).
 
 
 ## Running the webapp
-Once everything is installed (and your MongoDB instance is running), you must specify a config via environmental variable to launch the server. The config path is relative to the main `__init__.py`.
+::: tip
+This section is for running the webapp on your host system (not using Docker)
+:::
+
+Once everything is installed, make sure your MongoDB instance is running. Here's out to launch the Dockerized MongoDB instance:
+
+``` bash
+docker-compose up -d db
+```
+
+You must specify a config via environmental variable to launch the server. The config path is relative to the main `__init__.py`.
 
 Specify config and launch in one line:
 ``` bash
