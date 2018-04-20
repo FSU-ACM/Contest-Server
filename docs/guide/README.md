@@ -73,5 +73,5 @@ Those image names are also links.
 
 
 ## To Do
-A comprehensive list of to-do items is available on this project's [Github Issues page](https://github.com/fsu-acm/contest-server/issues).
+A comprehensive list of to-do items is available on this project's [Github Issues page](https://github.com/fsu-acm/Contest-Server/issues).
 

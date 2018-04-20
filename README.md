@@ -24,7 +24,7 @@ https://fsu-acm.github.io/Contest-Server
   - Nginx – Reverse proxy server.
 
 ## Contributing
-Contributions are welcome! Please read both the [Getting Started](https://fsu-acm.github.io/contest-server/guide/getting_started.html) guide and the [Contributing Guidelines](https://fsu-acm.github.io/contest-server/contributing) before submitting changes.
+Contributions are welcome! Please read both the [Getting Started](https://fsu-acm.github.io/Contest-Server/guide/getting_started.html) guide and the [Contributing Guidelines](https://fsu-acm.github.io/Contest-Server/contributing) before submitting changes.
 
 ## Versioning
 We use something similar to [SemVer](https://semver.org/). Incrementation is not derived from API changes, but from significant adjustment to codebase:
@@ -36,7 +36,7 @@ We use something similar to [SemVer](https://semver.org/). Incrementation is not
 ## Authors
   - Andrew Sosa – _Initial work_ – [andrewsosa](https://github.com/andrewsosa)
 
-See also the list of [contributors](https://github.com/fsu-acm/contest-server/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/fsu-acm/Contest-Server/contributors) who participated in this project.
 
 ## License
 MIT
