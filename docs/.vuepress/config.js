@@ -1,6 +1,7 @@
 module.exports = {
     title: 'Contest Server Suite',
     description: "For running Fall & Spring Programming Contests",
+    base: "/Contest-Server/",
     themeConfig: {
         repo: 'fsu-acm/contest-server',
         docsDir: 'docs',
