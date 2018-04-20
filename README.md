@@ -1,7 +1,7 @@
 # Contest Server Suite
 > All-inclusive suite for running ACM at FSU's Fall/Spring Programming Contests
 
-https://fsu-acm.github.io/contest-server
+https://fsu-acm.github.io/Contest-Server
 
 ## Features
   - User & Team Registration
