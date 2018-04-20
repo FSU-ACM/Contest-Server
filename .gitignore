@@ -3,9 +3,10 @@
 *.pem
 *.sassc
 *.sass-cache*
-/docs/.vuepress/dist
-
 # app/static/styles/**/*.css
+
+# Docs dist
+/docs/.vuepress/dist
 
 # Dep files
 **/node_modules/
