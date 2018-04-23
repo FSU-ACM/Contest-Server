@@ -42,7 +42,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     print("Matching teams to scores...")
     for teamid, score in team_scores.items():
         team = Team.objects(teamID=teamid).first()
-        if not team.members:
+        if not (team and team.members):
             continue
         for account in team.members:
             if not account.signin:
@@ -66,7 +66,7 @@ def extra_credit(results_tsv, courses_csv, output_folder):
     for row in courses: # skip header line
         fsuid, course_list = row[1], row[2]
         fsuid = fsuid.lower().split('@')[0]
-        course_list = course_list.split(',')
+        course_list = course_list.split(', ')
         student_classes[fsuid] = course_list
 
     # Iterate over all students, retrieving their score from the
