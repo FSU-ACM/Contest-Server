@@ -55,6 +55,9 @@ def extra_credit(results_tsv, courses_csv, output_folder):
             if 'my.fsu.edu' in fsuid:
                 fsuid = fsuid.lower().split('@')[0]
 
+            # Make extra sure fsuids from accounts are lower case (see issue #37)
+            fsuid = fsuid.lower()
+
             user_scores[fsuid] = team_scores[teamid]
 
             names[fsuid] = account.first_name, account.last_name

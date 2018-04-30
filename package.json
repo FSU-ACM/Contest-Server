@@ -10,7 +10,11 @@
   "scripts": {
     "dev": "FLASK_CONFIG=../config/development.py python start.py",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "credit:upper": "FLASK_CONFIG=../config/development.py python extra_credit.py credit/results_upper.tsv credit/spc2018ec.csv credit/upper_division",
+    "credit:lower": "FLASK_CONFIG=../config/development.py python extra_credit.py credit/results_lower.tsv credit/spc2018ec.csv credit/lower_division",
+    "credit:clean": "rm -f credit/lower_division/* credit/upper_division/* credit/*.tar",
+    "credit:tar": "tar -cf credit/upper_division.tar credit/upper_division/* && tar -cf credit/lower_division.tar credit/lower_division/*"
   },
   "license": "ISC",
   "devDependencies": {
