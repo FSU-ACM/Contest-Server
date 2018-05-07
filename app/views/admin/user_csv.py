@@ -1,10 +1,9 @@
 # views.admin.emails
 
-from io import StringIO
 import csv
-
 from flask import make_response, redirect, url_for
 from flask.views import View
+from io import StringIO
 
 from app.models import Account
 from app.util import session as session_util

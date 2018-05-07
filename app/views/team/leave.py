@@ -1,14 +1,11 @@
 # views.team.leave
 
-from flask import redirect, url_for, render_template, request, session, abort
+from flask import redirect, url_for
 
-from app import app, recaptcha, db
-from app.models import Account, Team
 from app.util import session as session_util
-from app.util.auth import get_account
 from app.util.team import leave_team
-
 from .team import TeamView
+
 
 class LeaveTeamView(TeamView):
     """Leave a team.

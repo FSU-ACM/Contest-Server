@@ -1,11 +1,11 @@
 # views.team.team
 
-from flask import redirect, url_for, render_template, request, session, abort, flash
+from flask import redirect, url_for, request, flash
 
 from app.forms import CreateTeam as CreateTeamForm
 from app.util import session as session_util, team as team_util
-
 from .team import TeamView
+
 
 class CreateTeamView(TeamView):
     """Create a team.

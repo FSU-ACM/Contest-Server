@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
-from flask_wtf import FlaskForm
 from flask.views import MethodView
+from flask_wtf import FlaskForm
 
 from app.util import session as session_util
 from app.util.errors import UnauthorizedUserError

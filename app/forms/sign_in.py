@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, SubmitField
+from wtforms.validators import Email
 
 from app.util.auth2 import get_account
+
 
 class SignIn(FlaskForm):
     """SignIn Form

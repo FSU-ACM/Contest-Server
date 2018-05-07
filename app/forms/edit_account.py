@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, Optional
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Optional
 
 class EditAccount(FlaskForm):
     """EditAccount

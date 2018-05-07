@@ -2,13 +2,9 @@
 
 from flask import redirect, url_for, request, flash
 
-from app import app
-from app.models import Account
 from app.forms import ResetPassword as ResetPasswordForm
 from app.util import email as email_util
 from app.util import password as pass_util
-from app.util import auth as auth_util
-from app.util import request as request_util
 from app.util.auth2 import get_account
 from app.views.generic import FormView
 

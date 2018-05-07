@@ -1,13 +1,11 @@
 # views.account.update_password
 
-from flask import (abort, flash, redirect, request, render_template,
-    url_for,)
+from flask import (flash, request, )
 
-from app import app, recaptcha
 from app.forms import ChangePassword as UpdatePasswordForm
 from app.util import session as session_util
-from app.util.auth2 import get_account
 from app.views.generic import AccountFormView
+
 
 class UpdatePasswordView(AccountFormView):
     """Update a logged in user's password

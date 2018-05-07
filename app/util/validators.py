@@ -1,5 +1,7 @@
 from wtforms.validators import ValidationError
+
 from app.models import Account
+
 
 class UnusedEmail(object):
     """

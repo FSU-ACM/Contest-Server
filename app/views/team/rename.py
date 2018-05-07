@@ -1,13 +1,10 @@
 # views.team.rename
 
-from flask import redirect, url_for, render_template, request, session, abort
+from flask import redirect, url_for, request, session, abort
 
 from app import app
-from app.models import Team, Account
 from app.util.auth import get_account
 from app.util.team import rename_team, set_division
-
-import bleach
 
 
 @app.route('/account/team/rename', methods=['POST'])

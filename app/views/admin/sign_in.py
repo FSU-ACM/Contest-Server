@@ -1,17 +1,12 @@
 # views.admin.sign_in
 
-from flask import flash, redirect, url_for, render_template, request, session
+import datetime
+from flask import flash, redirect, url_for, request
 
-from app import app, basic_auth
 from app.forms import SignIn as SignInForm
-from app.models import Account, Profile, Team
 from app.util import session as session_util
 from app.util.email import sign_in_email
-from app.util.auth import verify_email
-from app.util.request import get_email
 from app.views.generic import FormView
-
-import datetime, re
 
 
 class SignInView(FormView):

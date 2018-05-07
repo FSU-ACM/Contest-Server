@@ -74,12 +74,9 @@ import re
 
 #### Example 2
 ```python
-# from views.admin.sign_in
-
 from flask import (redirect, render_template, request, session,
 	url_for, )
 
-from app import app, basic_auth
 from app.email import sign_in_email
 from app.models import Account, Profile, Team
 from app.util.auth import verify_email

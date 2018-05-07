@@ -1,9 +1,10 @@
 # views.account.auth.logout
 
-from flask import redirect, url_for, session
+from flask import redirect, url_for
 from flask.views import View
-from app import app
+
 from app.util import session as session_util
+
 
 class LogoutView(View):
 

@@ -1,13 +1,11 @@
 # views.account.auth.login
 
-from flask import (abort, redirect, request, render_template,
-    url_for,)
+from flask import (redirect, request, url_for, )
 
-from app import app, recaptcha
 from app.forms import Login as LoginForm
 from app.util import session as session_util
-from app.util.auth2 import get_account
 from app.views.generic import FormView
+
 
 class LoginView(FormView):
     """View to authenicate user.

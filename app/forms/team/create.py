@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Length
 
 from app.models import Team
 
+
 class CreateTeam(FlaskForm):
     """Create a new team.
 
