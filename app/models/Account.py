@@ -3,7 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 class Account(db.Document):
-
     # Sign-in
     email = db.EmailField(required=True, primary_key=True)
     password = db.StringField(required=True)
@@ -17,6 +16,9 @@ class Account(db.Document):
     last_name = db.StringField(required=True)
     fsuid = db.StringField()
     signin = db.DateTimeField(null=True)
+
+    # Admin status
+    is_admin = db.BooleanField(null=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
