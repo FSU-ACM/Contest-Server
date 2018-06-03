@@ -1,16 +1,15 @@
 # views.team.team
 
-from flask import redirect, url_for, render_template, request, session, abort, flash
+from flask import redirect, url_for, flash
 
-from app import app, recaptcha, db
 from app.forms import (
-        CreateTeam as CreateTeamForm,
-        UpdateTeam as UpdateTeamForm,
-        AddTeamMember as AddMemberForm,
-    )
-from app.models import Account, Team
+    CreateTeam as CreateTeamForm,
+    UpdateTeam as UpdateTeamForm,
+    AddTeamMember as AddMemberForm,
+)
 from app.util import session as session_util
 from app.views.generic import AccountFormView
+
 
 class TeamView(AccountFormView):
     """View for Team management.

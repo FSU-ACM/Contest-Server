@@ -1,2 +1,2 @@
-from .profile import ProfileView
 from .account import EditAccountView
+from .profile import ProfileView

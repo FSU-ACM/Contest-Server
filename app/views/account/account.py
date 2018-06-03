@@ -1,9 +1,7 @@
-from flask import (abort, flash, redirect, render_template, request, url_for)
+from flask import (flash, request)
 
-from app import app
 from app.forms import EditAccount as EditAccountForm
-from app.models import Account
-from app.util import session as session_util, team as team_util
+from app.util import session as session_util
 from app.views.generic import AccountFormView
 
 

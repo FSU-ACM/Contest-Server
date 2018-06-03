@@ -5,7 +5,8 @@
 """
 
 from flask import session
-from app.models import Account, Profile
+
+from app.models import Account
 
 # Session keys
 SESSION_EMAIL = 'email'

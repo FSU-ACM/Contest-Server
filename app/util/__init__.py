@@ -1,8 +1,7 @@
 from . import auth
 from . import email
-from . import password
-from . import team
-from . import request
-
 from . import filters
+from . import password
+from . import request
 from . import session
+from . import team

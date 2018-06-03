@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, Optional
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Email, Optional
 
 from app.util.validators import UnusedEmail
+
 
 class SoloRegister(FlaskForm):
     """SoloRegister

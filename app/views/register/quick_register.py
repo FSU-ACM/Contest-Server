@@ -1,19 +1,13 @@
 # views.register.quick_register
 
-from flask import redirect, url_for, render_template, request, session
+from flask import redirect, url_for, request
 
-from app import app, recaptcha
 from app.forms import QuickRegister as QuickRegisterForm
-from app.models import Account, Team
 from app.util import auth2, session as session_util
-from app.util.auth import verify_email
-from app.util.team import *
-from app.util.password import make_password
 from app.util.email import quick_register_email
-from app.util.auth import get_account
+from app.util.password import make_password
+from app.util.team import *
 from app.views.generic import FormView
-
-import bleach
 
 
 class QuickRegisterView(FormView):

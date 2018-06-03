@@ -1,15 +1,11 @@
 # views.account.profile
 
-from flask import flash, redirect, url_for, render_template, request, session, abort
+from flask import flash, request
 
-from app import app
 from app.forms import Profile as ProfileForm
-from app.models import Account, Profile
+from app.models import Profile
 from app.util import session as session_util, team as team_util
-from app.views.generic import FormView, AccountFormView
-
-
-import bleach, logging
+from app.views.generic import AccountFormView
 
 
 class ProfileView(AccountFormView):

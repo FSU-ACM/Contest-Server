@@ -1,5 +1,7 @@
 from wtforms import SubmitField
+
 from .create import CreateTeam
+
 
 class UpdateTeam(CreateTeam):
     """Update a team's info.

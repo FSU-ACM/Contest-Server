@@ -1,5 +1,6 @@
 from flask_mongoengine.wtf import model_form
 from wtforms import widgets, SubmitField
+
 from app.models import Profile as ProfileModel
 
 Profile_ = model_form(

@@ -1,11 +1,11 @@
 # views.register.register
 
-from flask import (flash, redirect, render_template, request, url_for,)
+from flask import (flash, redirect, request, url_for, )
 
-from app import app, recaptcha
 from app.forms import SoloRegister
 from app.util import auth2, session as session_util
 from app.views.generic import FormView
+
 
 class SoloRegisterView(FormView):
     """View for a user to register w/o team or teammates.

@@ -1,12 +1,10 @@
 from flask import flash, redirect, request, url_for
-from flask.views import View
 
-from app import app
-from app.util import team as team_util
 from app.util import auth2 as auth_util
 from app.util import session as session_util
-
+from app.util import team as team_util
 from .team import TeamView
+
 
 class RemoveTeamMemberView(TeamView):
     """Remove a member from the user's team.

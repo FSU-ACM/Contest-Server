@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import ( StringField, PasswordField, BooleanField, SubmitField,
-    RadioField )
+from wtforms import (StringField, SubmitField,
+                     RadioField)
 from wtforms.validators import DataRequired, Length, Email, Optional
 
 from app.models import Team
 from app.util.validators import UnusedEmail
+
 
 class QuickRegister(FlaskForm):
     """Quick Register

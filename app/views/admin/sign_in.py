@@ -1,28 +1,34 @@
 # views.admin.sign_in
 
-from flask import flash, redirect, url_for, render_template, request, session
+import datetime
+from flask import flash, redirect, url_for, request
 
-from app import app, basic_auth
 from app.forms import SignIn as SignInForm
-from app.models import Account, Profile, Team
 from app.util import session as session_util
 from app.util.email import sign_in_email
-from app.util.auth import verify_email
-from app.util.request import get_email
 from app.views.generic import FormView
 
-import datetime, re
 
 class SignInView(FormView):
-    """
+    """SignInView: For checking in contest attendees.
 
+    This is *not* LoginView, where users can log in to the system
+    in order to edit their information.
+
+    SignInView is only accessible for accounts with the is_admin flag
+    toggled. Everyone else gets redirected to the /login page.
+
+    As of 5/2018, the profile is required to be complete before login.
+    There is an outstanding issue to remove the profile from the site.
+    You'll still need to be a member of a team to sign in though.
+
+    Successfully signing in will toggle an email to be sent, see
+    sign_in_email.
     """
 
     def authorize(self):
-        # Only Andrew
-        # TODO fix this
         account = session_util.get_account()
-        return account.email == "andrewsosa001@gmail.com"
+        return account.is_admin is True
 
     def redirect_unauthorized(self):
         return redirect(url_for('login'))

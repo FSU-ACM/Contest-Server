@@ -1,6 +1,5 @@
 from flask import session
 
-from app import app
 from app.models import Account
 from app.util.errors import UnauthorizedUserError
 
