@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, Optional
 
+from app.util.fields import EmailField
 from app.util.validators import UnusedEmail
 
 
@@ -14,7 +15,7 @@ class SoloRegister(FlaskForm):
 
     """
 
-    email = StringField('Email', validators=[
+    email = EmailField('Email', validators=[
         Email(),
         UnusedEmail()
     ])

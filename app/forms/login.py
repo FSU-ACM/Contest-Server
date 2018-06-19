@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email
 
 from app.util.auth2 import get_account
+from app.util.fields import EmailField
 
 
 class Login(FlaskForm):
@@ -15,7 +16,7 @@ class Login(FlaskForm):
 
     """
 
-    email = StringField('Email', validators=[Email()])
+    email = EmailField('Email', validators=[Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 

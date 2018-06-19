@@ -4,6 +4,7 @@ from wtforms import (StringField, SubmitField,
 from wtforms.validators import DataRequired, Length, Email, Optional
 
 from app.models import Team
+from app.util.fields import EmailField
 from app.util.validators import UnusedEmail
 
 
@@ -18,12 +19,12 @@ class QuickRegister(FlaskForm):
 
 
 
-    email1 = StringField('Email',
+    email1 = EmailField('Email',
                          validators=[Email(), UnusedEmail()])
-    email2 = StringField('Email',
+    email2 = EmailField('Email',
                          validators=[],
                          filters=[lambda x: x or None])
-    email3 = StringField('Email',
+    email3 = EmailField('Email',
                          validators=[],
                          filters=[lambda x: x or None])
 
