@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Optional
+from app.util.fields import FSUIDField
 
 class EditAccount(FlaskForm):
     """EditAccount
@@ -18,7 +19,7 @@ class EditAccount(FlaskForm):
         DataRequired()
     ])
 
-    fsuid = StringField('FSUID', validators=[
+    fsuid = FSUIDField('FSUID', validators=[
         Optional(strip_whitespace=True)
     ])
 

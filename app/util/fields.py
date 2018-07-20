@@ -28,7 +28,7 @@ class FSUIDField(wtf_StringField):
     """
 
     def __init__(self, *args, **kwargs):
-        wtf_StringField.__init(self, *args, **kwargs)
+        wtf_StringField.__init__(self, *args, **kwargs)
 
     def process_formdata(self, valuelist):
         super(wtf_StringField, self).process_formdata(valuelist)

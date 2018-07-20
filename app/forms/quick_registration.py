@@ -4,7 +4,7 @@ from wtforms import (StringField, SubmitField,
 from wtforms.validators import DataRequired, Length, Email, Optional
 
 from app.models import Team
-from app.util.fields import EmailField
+from app.util.fields import EmailField, FSUIDField
 from app.util.validators import UnusedEmail
 
 
@@ -36,9 +36,9 @@ class QuickRegister(FlaskForm):
     last_name2 = StringField('Last Name', validators=[])
     last_name3 = StringField('Last Name', validators=[])
 
-    fsuid1 = StringField('FSUID', validators=[Optional(strip_whitespace=True)])
-    fsuid2 = StringField('FSUID', validators=[Optional(strip_whitespace=True)])
-    fsuid3 = StringField('FSUID', validators=[Optional(strip_whitespace=True)])
+    fsuid1 = FSUIDField('FSUID', validators=[Optional(strip_whitespace=True)])
+    fsuid2 = FSUIDField('FSUID', validators=[Optional(strip_whitespace=True)])
+    fsuid3 = FSUIDField('FSUID', validators=[Optional(strip_whitespace=True)])
 
     submit = SubmitField('Register')
 
