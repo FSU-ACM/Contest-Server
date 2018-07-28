@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import SubmitField
 from wtforms.validators import Email
 
 from app.util.auth2 import get_account
+from app.util.fields import EmailField
 
 
 class ResetPassword(FlaskForm):
@@ -16,7 +17,7 @@ class ResetPassword(FlaskForm):
 
     """
 
-    email = StringField('Email', validators=[
+    email = EmailField('Email', validators=[
         Email(),
     ])
 

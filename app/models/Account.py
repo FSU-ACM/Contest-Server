@@ -29,3 +29,10 @@ class Account(db.Document):
 
     def __repr__(self):
         return '<Account %r>' % self.email
+
+    def clean(self):
+        """
+        Make sure self.email is always lowercase. This function is
+        automatically called on self.save()
+        """
+        self.email = self.email.lower()
