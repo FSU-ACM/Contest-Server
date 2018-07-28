@@ -2,31 +2,6 @@ version: '2'
 services:
 
   #
-  #   Nginx
-  #
-
-  # Proxy server [entry point]
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      # - "80:80"
-      - "8080:80"
-      - "443:443"
-    volumes:
-      - /etc/nginx/certs
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-
-  # Proxy server SSL companion
-  nginx-ssl:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    volumes_from:
-      - "nginx-proxy"
-
-  #
   #   Registration
   #
 
