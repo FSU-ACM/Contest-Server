@@ -20,7 +20,7 @@ services:
     environment:
       - FLASK_CONFIG=/webapp/config/production.py
     ports:
-      - "8181:80"
+      - "8080:80"
     volumes:
       - /acm/contest/share:/webapp/share
     depends_on:
@@ -49,7 +49,7 @@ services:
       - DOMJUDGE_DB_PASSWORD=${DOM_PASS}
       - DOMJUDGE_DB_ROOT_PASSWORD=${DOM_PASS}
     ports:
-      - "8182:80"
+      - "8081:80"
     depends_on:
      - domdb
 
