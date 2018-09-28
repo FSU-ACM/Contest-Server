@@ -16,7 +16,7 @@
     "credit:clean": "rm -f credit/lower_division/* credit/upper_division/* credit/*.tar",
     "credit:tar": "tar -cf credit/upper_division.tar credit/upper_division/* && tar -cf credit/lower_division.tar credit/lower_division/*"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
