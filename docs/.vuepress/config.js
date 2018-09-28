@@ -20,9 +20,8 @@ module.exports = {
                     children: [
                         '',
                         'getting_started',
-                        'deployment',
                         'configuration',
-                        'stylings',
+                        'deployment',
                     ]
                 },
             ],
