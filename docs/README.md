@@ -29,5 +29,5 @@ docker-compose build
 docker-compose up -d
 ```
 ::: tip WELL, NOT SO FAST...
-See the [deployment guide](/guide/deployment) for more details on deploying to Bastion.
+See the [deployment guide](/guide/deployment.html) for more details on deploying to Bastion.
 :::
