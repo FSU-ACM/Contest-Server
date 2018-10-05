@@ -1,7 +1,11 @@
+// URLBASE needs to be set for the push to Github Pages, but otherwise
+// it can be empty for local, now.sh, or netlify.
+const urlBase = process.env.URLBASE || "/";
+
 module.exports = {
     title: 'Contest Server Suite',
     description: "For running Fall & Spring Programming Contests",
-    base: "/Contest-Server/",
+    base: urlBase,
     themeConfig: {
         repo: 'fsu-acm/contest-server',
         docsDir: 'docs',
