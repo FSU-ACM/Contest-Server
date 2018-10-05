@@ -6,7 +6,6 @@ This project consists of several discrete software components, which are as foll
   - Domjudge Contest Server
   - Domjudge Judgehosts
   - MongoDB & MariaDB databases
-  - Nginx Reverse Proxies
 
 All of the components of the project are deployed using Docker. Docker is a tool which containerizes software into small, light-weight virtual machines. Each of our primary components are deployed in their own Docker container.
 
@@ -22,13 +21,6 @@ Theses docs focus primarily on the Flask webapp for User/Team Registration, but 
   - Domjudge Integration
     - Simple deployment of Domserver & Judgehosts with Docker
     - Easy scaling of Judgehost instances
-  - Networking
-    - Simple domain/subdomain support via `jwilder/nginx-proxy` imagej
-    - Automatic free SSL certificates from LetsEncrypt
-
-::: tip
-See the `docker-compose.yml` for the environmental variables related to the [nginx-proxy image](https://github.com/jwilder/nginx-proxy).
-:::
 
 
 ## How it Works
@@ -59,7 +51,7 @@ docker-compose scale judgehost=4
 
 The Domsserver depends on the `domdb` service in the Docker Compose config which runs the MariaDB database.
 
-### Nginx
+<!-- ### Nginx
 To provide networking to Domserver and the Registration webapp, we employ a few instances of Nginx.
 
 The first is the publicly available image [`jwilder/nginx-proxy`](https://github.com/jwilder/nginx-proxy). This image can forward traffic for different domains and subdomains to other containers on the same Docker Compose project network by setting environmental variables for those services in the Docker Compose configuration file.
@@ -68,7 +60,7 @@ The [`jwilder/nginx-proxy`](https://github.com/jwilder/nginx-proxy) image has a 
 
 ::: tip
 Those image names are also links.
-:::
+::: -->
 
 
 

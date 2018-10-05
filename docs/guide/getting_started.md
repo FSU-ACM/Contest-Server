@@ -52,21 +52,15 @@ You must specify a config via environmental variable to launch the server. The c
 Specify config and launch in one line:
 ``` bash
 FLASK_CONFIG=../config/development.py python start.py
+
+# Alternatively, use the npm script
+npm run dev
 ```
 
 ::: tip
 Be sure your config is right before launching. You can the config docs [here](/guide/configuration.html).
 :::
 
-
-If you have the Node.js deps installed, you can:
-``` bash
-# Yarn method
-yarn dev
-
-# npm method
-npm run dev
-```
 
 ## Contributing
 Before making changes, be sure to read our [Contributing Guidelines](/contributing/) to make sure your changes stay within our recommended practices.

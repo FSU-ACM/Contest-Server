@@ -44,6 +44,30 @@ We use something similar to [SemVer](https://semver.org/). Incrementation is not
   - Making unintentional changes to dependencies lists such as `requirements.txt` or `package.json`.
   - Updating files not explicitly related to your changes.
 
+## Updating Webapp Styles
+
+This project uses Sass to define the styles. Sass needs to be pre-compiled into CSS before the image is built. In Development mode, when Sass rebuilds the changes are automatically updated in the app. However, if you are making changes outside of development mode, run `gulp` to rebuild the Sass styles.
+
+For setting up Gulp and Sass:
+``` bash
+# Install project deps
+npm install
+
+# Globally install gulp
+npm install -g gulp
+```
+
+Alternatively, you can run a local version of `gulp` using `npx` instead of globally installing Gulp.
+
+``` bash
+# Uses gulp from node_modules
+npx gulp
+```
+
+::: warning
+Be sure to install `npm` beforehand.
+:::
+
 
 ## Code Guidelines
 
@@ -84,6 +108,6 @@ from app.util.auth import verify_email
 import datetime, re
 ```
 
-### View Controllers
+<!-- ### View Controllers
 
-### Common Functionality
+### Common Functionality -->
