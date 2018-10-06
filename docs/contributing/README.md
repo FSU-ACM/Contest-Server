@@ -21,7 +21,7 @@ We prefer to use a lightweight version of the Git Flow paradigm. To contribute c
 6. Once accepted, repeat from step s1.
 
 ::: tip
-You can read about the fully-featured Git Flow paradigm [here](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
+You can read a more detailed description of the Git Flow paradigm [here](https://gist.github.com/andrewsosa/77090b96d61b849c3fc3ecb974b6a568).
 :::
 
 ### Git Commit Messages
