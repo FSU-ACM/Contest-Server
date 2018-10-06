@@ -6,7 +6,7 @@ This project relies heavily on [Docker](https://docs.docker.com/) and [Docker Co
 
 The registration webapp uses [MongoDB](https://www.mongodb.com/) as the database. You can either [install MongoDB](https://docs.mongodb.com/manual/installation/) on your host machine or deploy a MongoDB container inside Docker using this project's Docker Compose config.
 
-This project also has some dependency on [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/)/[Yarn](https://yarnpkg.com/), [Gulp](https://gulpjs.com/), and [Sass](http://sass-lang.com/) for managing/building styles. Currently the project includes pre-built stylesheets, but if you wish to recomplile them you will need these dependencies.
+This project also has some dependency on [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [Gulp](https://gulpjs.com/), and [Sass](http://sass-lang.com/) for managing/building styles. Currently the project includes pre-built stylesheets, but if you wish to recomplile them you will need these dependencies.
 
 ## Installation
 :::tip
@@ -24,17 +24,8 @@ pip install -r requirements.txt
 #### Node.js Dependencies
 For building the Sass, install the dependencies from `package.json`:
 ``` bash
-# Yarn method
-yarn    # install arg not required
-
-# npm method
-npm i	# i === install
+npm install
 ```
-
-::: tip
-We recommend Yarn over npm (it's faster!).
-:::
-
 
 ## Running the webapp
 ::: tip

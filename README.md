@@ -19,7 +19,7 @@ https://fsu-acm.github.io/Contest-Server
   - [Flask](http://flask.pocoo.org/) – Python webapp framework.
   - [Bulma](https://bulma.io/) – CSS Flexbox framework.
   - [Sass](https://sass-lang.com/) – Preprocessed CSS stylesheet.
-  - [Yarn](https://yarnpkg.com) – Better dependency management.
+  - [npm](https://npmjs.com) – The package manager for javascript.
   - Docker – Software containerization.
   - Nginx – Reverse proxy server.
 
