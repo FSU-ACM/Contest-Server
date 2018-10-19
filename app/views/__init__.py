@@ -65,7 +65,6 @@ routes = [
     Route('/account/team/add', team.AddView.as_view('team_add_member')),
     Route('/account/team/leave', team.LeaveView.as_view('team_leave')),
     Route('/account/team/remove', team.RemoveView.as_view('team_remove')),
-    Route('/account/team/rename', team.RenameView.as_view('team_rename')),
 
     Route('/admin/signin', admin.SignInView.as_view('sign_in')),
 ]

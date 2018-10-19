@@ -1,4 +1,3 @@
-from .rename import RenameTeamView as RenameView
 from .create import CreateTeamView as CreateView
 from .update import UpdateTeamView as UpdateView
 from .join import AddTeamMemberView as AddView
