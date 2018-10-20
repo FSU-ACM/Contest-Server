@@ -1,15 +1,29 @@
 # app.views
 
 from flask import render_template
+from flask.views import View
 
 from app import app
 from app.models import Team
 
+class IndexView(View):
+    """Main index view
 
-@app.route('/')
-def index():
-    return render_template('index/index.html')
+    """
 
+    def dispatch_request(self):
+        return render_template('index/index.html')
+
+class TeamListView(View):
+    """View listing all registered teams
+
+    """
+
+    def dispatch_request(self):
+        teams = Team.objects.filter(team_name__exists=True)
+        num_members = sum([len(team.members) for team in teams])
+        return render_template('form2/allteams.html', teams=teams,
+                                num_members=num_members)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -19,14 +33,6 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_error(e):
     return render_template('common/500.html'), 500
-
-
-@app.route('/teams')
-def teams():
-    teams = Team.objects.filter(team_name__exists=True)
-    num_members = sum([len(team.members) for team in teams])
-    return render_template('form2/allteams.html', teams=teams,
-                            num_members=num_members)
 
 
 from . import account
@@ -40,6 +46,9 @@ class Route:
         self.url, self.view = url, view
 
 routes = [
+    Route('/', IndexView.as_view('index')),
+    Route('/teams', TeamListView.as_view('teams')),
+    
     Route('/register', register.SoloRegisterView.as_view('register')),
     Route('/quickregister', register.QuickRegisterView.as_view('quick_register')),
 
@@ -51,6 +60,7 @@ routes = [
     Route('/account', account.EditAccountView.as_view('account')),
     Route('/account/profile', account.ProfileView.as_view('profile')),
     Route('/account/team', team.TeamView.as_view('team')),
+    Route('/account/team/update', team.UpdateView.as_view('team_update')),
     Route('/account/team/create', team.CreateView.as_view('team_create')),
     Route('/account/team/add', team.AddView.as_view('team_add_member')),
     Route('/account/team/leave', team.LeaveView.as_view('team_leave')),
