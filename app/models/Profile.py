@@ -66,3 +66,6 @@ class Profile(db.Document):
             return '<Profile %r>' % (self.firstname + ' ' + self.lastname)
         else:
             return super(Profile, self).__repr__()
+
+    def __str__(self):
+        return str(self.id)

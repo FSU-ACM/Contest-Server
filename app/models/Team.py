@@ -33,6 +33,11 @@ class Team(db.Document):
         else:
             return super(Team, self).__repr__()
 
+    def __str__(self):
+        if self.team_name:
+            return self.team_name
+        else:
+            return ""
 
 # Pre-generate teams
 if Team.objects.count() < app.config['TEAM_COUNT']:
