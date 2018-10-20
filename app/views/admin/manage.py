@@ -58,8 +58,8 @@ class AccountManageView(BaseManageView):
     column_exclude_list = ('password',)
 
     column_formatters = dict(
-        profile=lambda v, c, m, n: Markup("<a href='" + url_for('profile.edit_view', id=m.profile.id) + "'>Profile</a>"),
-        team=lambda v, c, m, n: Markup("<a href='" + url_for('team.edit_view', id=m.team.id) + "'>" + str(m.team) + "</a>"),
+        profile=lambda v, c, m, n: Markup("<a href='" + url_for('profile.edit_view', id=m.profile.id) + "'>Profile</a>") if m.profile else "",
+        team=lambda v, c, m, n: Markup("<a href='" + url_for('team.edit_view', id=m.team.id) + "'>" + str(m.team) + "</a>") if m.team else "",
     )
 
     def on_model_change(self, form, model, is_created):
