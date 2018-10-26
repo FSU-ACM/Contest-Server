@@ -126,12 +126,10 @@ def validate_division(team):
     """
 
     division = int(team.division)
-
     if division is 2:
-        app.logger.debug("????")
         for member in team.members:
             if member.profile:
-                if member.profile.adv_course is 'COP4530' or member.profile.adv_course is 'COP4531':
+                if member.profile.adv_course == 'COP4530' or member.profile.adv_course == 'COP4531':
                     team.division = 1
                     flash("Based a team member's furthest course, we've automatically promoted your team to Upper Division", 'info')
                     return

@@ -34,20 +34,18 @@ class ProfileView(AccountFormView):
             del data['csrf_token']
             del data['submit']
 
-
             if not account.profile:
                 account.profile = Profile(**data)
             else:
                 account.profile.update(**data)
 
-            account.profile.save()
-            account.save()
-
             if account.team:
                 team_util.validate_division(account.team)
+
+            account.profile.save()
+            account.team.save()
+            account.save()
 
             flash('Profile updated')
 
         return self.render_template(form=form)
-
-
