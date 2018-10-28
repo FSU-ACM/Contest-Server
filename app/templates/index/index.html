@@ -10,44 +10,174 @@
 {% block content %}
 
 	<section class="hero is-fullheight header">
-
-		<div class="hero-head">
-		</div>
+		<div class="hero-head"></div>
 
 		<div class="hero-body content">
 			<div class="container">
-				<!-- <h1 class="">/* acm at fsu */</h1>
+				<h1>
+					<span class="">Fall</span>
+					<span class="">Programming</span>
+					<span class="">Contest</span>
+					<span class="">2018</span>
+				</h1>
+
+				{# <h1 class="">/* acm at fsu */</h1>
 				<h1>
 					<span class="">[fall]</span>
 					<span class="">programming</span>
 					<span class="">contest</span>
 				</h1>
-				<h1 class="">October 28th 8AM – 4PM</h2> -->
-				<img src="{{url_for('static', filename='assets/spc2018.svg')}}"/>
+				<h1 class="">October 28th 8AM – 4PM</h2> #}
+				<!-- <img src="{{url_for('static', filename='assets/spc2018.svg')}}"/> -->
 
-				<span class="title is-5">March 31st 8AM - 4PM | Love Bldg. FSU</span>
+				{# <span class="title is-5">March 31st 8AM - 4PM | Love Bldg. FSU</span> #}
 
 				<div class="buttons">
 					{% include "common/register-button.html" %}
-					<!-- <input class="button acm is-outlined" type="button" onclick="location.href='/quickregister'"   value="Quick Register"> -->
-					<input class="button acm is-outlined" type="button" onclick="location.href='mailto:hello@acmatfsu.org';" value="Contact Us">
+					{% include "common/contact-button.html" %}
 				</div>
 
 			</div>
 		</div>
 
-		<!-- <div classs="hero-foot">
+		<div classs="hero-foot" style="margin: 0 auto 24px; color: white">
 				<i class="fa fa-chevron-down fa-lg" aria-hidden="true"></i>
-		</div> -->
-
-
-
-
+		</div>
 	</section>
 
+	<section id="about" class="about section content">
+		<div class="container">
 
-	{% include 'index/about.html' %}
-	{% include 'index/faqs.html' %}
+			<h1>About</h1>
+			<h3>ACM's Programming Contest </h3>
+			<p>
+				The Spring Programming Contest is a coding competition that emphasizes
+				problem solving executed in code. Students, faculty, and staff from all
+				majors and colleges are welcome. The problems are ICPC style coding
+				questions which are similar to questions asked by recruiters during
+				technical interviews.
+
+				<br />
+				<br />
+
+				The competition lasts 5 hours, and teams are limited to 3 members. The
+				top teams from each division receive prizes, which have previously included
+				things like Google Home Minis, Amazon Echoes, Raspberry Pies, Chromecasts,
+				and ACM chapter t-shirts.
+			</p>
+
+			<h1 class="post-title">FAQs</h1>
+			<div class="columns is-multiline">
+				<div class="column is-12">
+					<h3>So how does this contest thing work?</h1>
+					<p>
+						The contest is a series of challenging coding questions
+						that require critical thinking and coding know-how.
+						<br />
+						<br />
+						Each question has a prompt consisting of flavor text and a
+						description of the challenge. You'll get the some
+						constraints on the input, as well as some sample input and
+						corresponding output. From there, your team will need to
+						work together to write code that will produce the correct
+						output for any input we could throw at you.
+						<br />
+						<br />
+						Responses are scored on how quickly you solved the problem
+						relative to the contest with points deducted for each
+						incorrect submission.
+					</p>
+				</div>
+
+				<div id="divisions" class="column is-12">
+					<h3>How do these divisions work?</h3>
+					<p>
+						As our contest has grown almost ten-fold over the past
+						five years, we want to allow less experienced participants
+						to still be competitive.
+					</p>
+					<p>
+						If you are currently enrolled in COP3014 (Intro to C++) or
+						COP3330 (Object Oriented Programming), you qualify to
+						register for the Lower Division. The Lower Division will
+						have easier questions better suited for less experienced
+						programmers. The Upper Division will cater to the highest
+						levels of technincal talent; participants include
+						undergraduate seniors, Ph.D students, and even department
+						faculty.
+					</p>
+				</div>
+
+				<!-- <div class="column is-half">
+					<h3>When and where?</h1>
+						<p>
+							March 31st, 8AM. This spring's venue will be the Love Building, FSU.
+						</p>
+				</div> -->
+
+				<div class="column is-half">
+					<h3>Who can come?</h1>
+					<p>
+						Everyone is welcome! Students, teachers, staff from both
+						high-schools and colleges are welcome, as well as those
+						not in those categories.
+					</p>
+				</div>
+
+				<div class="column is-half">
+					<h3>How much does it cost?</h1>
+					<p>
+						Absolutely nothing. Admission is free, and so is the food.
+						Breakfast starts at 8AM, and lunch will be served close to noon.
+					</p>
+				</div>
+
+				<div class="column is-half">
+					<h3>What do I need to bring?</h1>
+					<p>
+						A laptop and your charger for sure. We totally recommend some
+						pens or pencils to jot down your thoughts as you work to solve
+						the questions.
+					</p>
+				</div>
+
+				<div class="column is-half">
+					<h3>What about these teams?</h1>
+					<p>
+						Teams consist of up to three people. You can work together on a
+						single computer. This is the registration site!
+					</p>
+				</div>
+
+				<div class="column is-half">
+					<h3 id="team-faq">How will I register my team?</h1>
+					<p>
+						You can register as a preformed team, or join one after registering
+						alone. Visit the team page after you log in to see more.
+					</p>
+				</div>
+
+				<div class="column is-half">
+					<h3>How much experience do I need?</h1>
+					<p>
+						We recommend some early programming experience in one of our
+						supported languages: C/C++, Java, Python, Perl, C#, and Javascript.
+						You'll have access to official language documentation, but that's it.
+						No Google, no StackOverflow.
+					</p>
+				</div>
+
+				<!-- <div class="column is-half">
+					<h3>Wait, what about...?</h1>
+					<p>
+						If you have any other questions, just let us know! <a href="mailto:hello@acmatfsu.org">Email us.</a>
+					</p>
+				</div> -->
+
+			</div>
+		</div>
+	</section>
+
 	{% include 'index/sponsors.html' %}
 
 

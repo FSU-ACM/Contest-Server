@@ -9,6 +9,7 @@
   "author": "ACM at FSU",
   "scripts": {
     "dev": "FLASK_CONFIG=../config/development.py python start.py",
+    "styles": "gulp sass",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "credit:upper": "FLASK_CONFIG=../config/development.py python extra_credit.py credit/results_upper.tsv credit/spc2018ec.csv credit/upper_division",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
+    "node-sass": "^4.9.4",
     "vuepress": "^0.14.4"
   },
   "dependencies": {
