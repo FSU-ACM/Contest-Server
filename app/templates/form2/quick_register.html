@@ -5,7 +5,7 @@
 {% block form %}
 
     <h1 class="title">
-        Quick (Team) Registration
+        Team Registration
     </h1>
 
     <p>
@@ -13,7 +13,14 @@
         Please log in and change them immediately.
         <!-- <small>(You <strong>will</strong> need to join a team to participate.)</small> -->
     </p>
-    <br>
+    <br />
+    <p>
+        Looking to join an existing team?
+        <a href="{{url_for('register')}}">
+            Click here for solo registration!
+        </a>
+    </p>
+    <br />
 
     <form class="content" action="" method="post">
         {{ form.hidden_tag() }}
@@ -41,8 +48,8 @@
             If you do not provide an FSUID you can not receive extra credit.
         </p>
 
-        <p>You can create your team or add more members.</p>
-        {{ button(form.submit) }}
+        <!-- <p>You can create your team or add more members.</p>
+        {{ button(form.submit) }} -->
 
         <!-- Team Member 2 -->
         <h3>Team Member 2</h3>
