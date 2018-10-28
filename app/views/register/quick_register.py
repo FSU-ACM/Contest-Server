@@ -20,7 +20,7 @@ class QuickRegisterView(FormView):
 
     def redirect_unauthorized(self):
         flash("You are already registered!", 'message')
-        return redirect(url_for('profile'))
+        return redirect(url_for('login'))
 
     def get_template_name(self):
         return 'form2/quick_register.html'

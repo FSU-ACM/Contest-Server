@@ -10,7 +10,6 @@ class Account(db.Document):
 
     # Relationships
     team = db.ReferenceField('Team')
-    profile = db.ReferenceField('Profile')
 
     # Core Info (Extra Credit)
     first_name = db.StringField(required=True)

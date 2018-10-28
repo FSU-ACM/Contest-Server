@@ -91,10 +91,10 @@ def extra_credit(results_tsv, courses_csv, output_folder):
             class_files[course].writerow([fsuid, last, first, score])
 
 
-    # If you completed the survey but didn't complete the profile, your score is None,
+    # If you completed the survey but didn't provide FSUID, your score is None,
     # but you appear in the class file. Now we generate a file of identifiers in our
     # user_score that didn't show up in the survey, which will usually be people's
-    # emails for those who did not complete the profile and didn't get their FSUID
+    # emails for those who did not provide FSUID and didn't get their FSUID
     # auto-id'ed from a my.fsu.edu email address.
 
     print("Processing orphan scores...")

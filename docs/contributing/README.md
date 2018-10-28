@@ -92,7 +92,7 @@ If there are multiple lines of imports from a section, there should be empty lin
 # from views._util.auth
 
 from flask import redirect, url_for
-from app.models import Profile
+from app.models import Team
 import re
 ```
 
@@ -102,8 +102,7 @@ from flask import (redirect, render_template, request, session,
 	url_for, )
 
 from app.email import sign_in_email
-from app.models import Account, Profile, Team
-from app.util.auth import verify_email
+from app.models import Account, Team
 
 import datetime, re
 ```

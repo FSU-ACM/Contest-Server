@@ -17,7 +17,7 @@ class SoloRegisterView(FormView):
 
     def redirect_unauthorized(self):
         flash("You are already registered!", 'message')
-        return redirect(url_for('profile'))
+        return redirect(url_for('login'))
 
     def get_template_name(self):
         return 'form2/solo_register.html'
@@ -38,8 +38,8 @@ class SoloRegisterView(FormView):
                 fsuid=form.fsuid.data
             )
 
-            # Set cookie, redirect to profile page.
+            # Set cookie, redirect to login page (which will forward to team page).
             session_util.login(account)
-            return redirect(url_for('profile'), code=302)
+            return redirect(url_for('login'), code=302)
 
         return self.render_template(form=form)

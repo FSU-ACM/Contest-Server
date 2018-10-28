@@ -18,10 +18,6 @@ class SignInView(FormView):
     SignInView is only accessible for accounts with the is_admin flag
     toggled. Everyone else gets redirected to the /login page.
 
-    As of 5/2018, the profile is required to be complete before login.
-    There is an outstanding issue to remove the profile from the site.
-    You'll still need to be a member of a team to sign in though.
-
     Successfully signing in will toggle an email to be sent, see
     sign_in_email.
     """
@@ -45,9 +41,7 @@ class SignInView(FormView):
         if form.validate():
             account = form.account
 
-            if not account.profile:
-                flash("You need to complete your profile first.", 'danger')
-            elif not account.team:
+            if not account.team:
                 flash("You're not on a team!", 'danger')
             else:
                 try:
