@@ -11,7 +11,7 @@ class LoginView(FormView):
     """View to authenicate user.
 
     Checks username/password, adds account to session. Redirects already
-    auth'd users to profile.
+    auth'd users to team.
 
     """
 
@@ -19,7 +19,7 @@ class LoginView(FormView):
         return not session_util.is_auth()
 
     def redirect_unauthorized(self):
-        return redirect(url_for('profile'))
+        return redirect(url_for('team'))
 
     def get_template_name(self):
         return 'form2/login.html'
@@ -32,7 +32,7 @@ class LoginView(FormView):
 
         if form.validate():
             session_util.login(form.account)
-            return redirect(url_for('profile'))
+            return redirect(url_for('team'))
 
         return self.render_template(form=form)
 

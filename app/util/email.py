@@ -47,7 +47,7 @@ def quick_register_email(address, password):
     msg.body += "You can log in at bastion.cs.fsu.edu/login. "
     msg.body += "Here's your password: %s. " % password
     msg.body += "Please consider setting a new password once you log. \n\n"
-    msg.body += "Once you log in, you can edit your profile and modify your team. You will need to remember your email so you can use it to sign in on the day of the contest.\n\n"
+    msg.body += "Once you log in, you can update your team. You will need to remember your email so you can use it to sign in on the day of the contest.\n\n"
     msg.body += "If you think you're getting this email as an error, let us know at hello@acmatsfu.org.\n\n"
     msg.body += "Regards,\nACM at FSU"
 

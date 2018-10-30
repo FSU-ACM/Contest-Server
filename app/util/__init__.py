@@ -1,4 +1,3 @@
-from . import auth
 from . import email
 from . import fields
 from . import filters

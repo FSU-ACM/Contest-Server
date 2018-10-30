@@ -51,7 +51,6 @@ def set_division(team, division):
 
     """
     team.division = division
-    validate_division(team)
     team.save()
     # TODO make this more...robust
 
@@ -71,7 +70,6 @@ def join_team(account, teamID=None, teamPass=None, team=None):
         if len(team.members) < 3:
             team.members.append(account)
             account.team = team
-            validate_division(team)
             team.save()
             account.save()
             return True
@@ -111,25 +109,3 @@ def rename_team(team, name):
 
     return success
 
-
-def validate_division(team):
-    """Validates that all team members qualify for the
-    marked division.
-
-    This is called three times:
-        1. From set_division (see method comment)
-        2. From join_team.
-        3. From a profile update.
-
-    Both times we make sure a team is not formed/updated against the rules.
-
-    """
-
-    division = int(team.division)
-    if division is 2:
-        for member in team.members:
-            if member.profile:
-                if member.profile.adv_course == 'COP4530' or member.profile.adv_course == 'COP4531':
-                    team.division = 1
-                    flash("Based a team member's furthest course, we've automatically promoted your team to Upper Division", 'info')
-                    return

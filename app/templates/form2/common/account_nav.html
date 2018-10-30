@@ -3,9 +3,6 @@
             <li id="nav-account">
                 <a href="{{ url_for('account') }}">Account</a>
             </li>
-            <li id="nav-profile">
-                <a href="{{ url_for('profile') }}">Profile</a>
-            </li>
             <li id="nav-team">
                 <a href="{{ url_for('team') }}">Team</a>
             </li>
@@ -24,7 +21,6 @@
         <script>
             var navs = {
                 "{{ url_for('account') }}": "#nav-account",
-                "{{ url_for('profile') }}": "#nav-profile",
                 "{{ url_for('team') }}": "#nav-team",
                 "{{ url_for('update_password') }}": "#nav-password"
             };

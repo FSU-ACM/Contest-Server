@@ -15,7 +15,7 @@ class ResetPasswordView(FormView):
         return get_account() is None
 
     def redirect_unauthorized(self):
-        return redirect(url_for('profile'))
+        return redirect(url_for('login'))
 
     def get_template_name(self):
         return 'form2/reset_password.html'

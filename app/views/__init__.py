@@ -48,7 +48,7 @@ class Route:
 routes = [
     Route('/', IndexView.as_view('index')),
     Route('/teams', TeamListView.as_view('teams')),
-    
+
     Route('/register', register.SoloRegisterView.as_view('register')),
     Route('/quickregister', register.QuickRegisterView.as_view('quick_register')),
 
@@ -58,7 +58,6 @@ routes = [
     Route('/account/updatepassword', auth.UpdatePasswordView.as_view('update_password')),
 
     Route('/account', account.EditAccountView.as_view('account')),
-    Route('/account/profile', account.ProfileView.as_view('profile')),
     Route('/account/team', team.TeamView.as_view('team')),
     Route('/account/team/update', team.UpdateView.as_view('team_update')),
     Route('/account/team/create', team.CreateView.as_view('team_create')),

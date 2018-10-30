@@ -1,10 +1,9 @@
 # views.team.join
 
-from flask import flash, request
+from flask import (flash, request, redirect, url_for, )
 
 from app.forms import AddTeamMember as AddTeamMemberForm
 from app.util import team as team_util, session as session_util
-from app.util.auth import *
 from .team import TeamView
 
 
