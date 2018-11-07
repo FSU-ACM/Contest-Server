@@ -28,7 +28,7 @@ class HomeView(AdminIndexView):
     def is_accessible(self):
         try:
             account = session_util.get_account()
-            return account.is_admin is True
+            return account.is_admin == True
         except:
             return False
 
@@ -43,7 +43,7 @@ class BaseManageView(ModelView):
     def is_accessible(self):
         try:
             account = session_util.get_account()
-            return account.is_admin is True
+            return account.is_admin == True
         except:
             return False
 
@@ -58,7 +58,6 @@ class AccountManageView(BaseManageView):
     column_exclude_list = ('password',)
 
     column_formatters = dict(
-        profile=lambda v, c, m, n: Markup("<a href='" + url_for('profile.edit_view', id=m.profile.id) + "'>Profile</a>") if m.profile else "",
         team=lambda v, c, m, n: Markup("<a href='" + url_for('team.edit_view', id=m.team.id) + "'>" + str(m.team) + "</a>") if m.team else "",
     )
 
@@ -68,12 +67,6 @@ class AccountManageView(BaseManageView):
         """
         if form.password.data[:6] != "pbkdf2":
             model.set_password(form.password.data)
-
-class ProfileManageView(BaseManageView):
-    """Admin view used to view and edit Profile.
-
-    """
-    pass
 
 class TeamManageView(BaseManageView):
     """Admin view used to view and edit Teams.

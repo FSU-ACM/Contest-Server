@@ -46,5 +46,4 @@ from . import util, views, models
 admin = Admin(app, name='Admin Interface', template_mode='bootstrap3', index_view=views.admin.HomeView())
 
 admin.add_view(views.admin.AccountManageView(models.Account))
-admin.add_view(views.admin.ProfileManageView(models.Profile))
 admin.add_view(views.admin.TeamManageView(models.Team))
