@@ -20,7 +20,7 @@ class TeamListView(View):
     """
 
     def dispatch_request(self):
-        teams = Team.objects.filter(team_name__exists=True)
+        teams = Team.objects.filter(team_name__exists=True, members__exists=True, division__exists=True)
         num_members = sum([len(team.members) for team in teams])
         return render_template('form2/allteams.html', teams=teams,
                                 num_members=num_members)
