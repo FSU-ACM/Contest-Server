@@ -7,6 +7,7 @@ from flask_mail import Mail
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask_nav.elements import *
 from flask_recaptcha import ReCaptcha
+from flask_admin import Admin
 
 # Init & Config
 app = Flask(__name__)
@@ -39,4 +40,10 @@ def dated_url_for(endpoint, **values):
     return url_for(endpoint, **values)
 
 
-from . import util, views
+from . import util, views, models
+
+# Admin interface
+admin = Admin(app, name='Admin Interface', template_mode='bootstrap3', index_view=views.admin.HomeView())
+
+admin.add_view(views.admin.AccountManageView(models.Account))
+admin.add_view(views.admin.TeamManageView(models.Team))

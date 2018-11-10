@@ -29,6 +29,9 @@ class Account(db.Document):
     def __repr__(self):
         return '<Account %r>' % self.email
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
     def clean(self):
         """
         Make sure self.email is always lowercase. This function is
