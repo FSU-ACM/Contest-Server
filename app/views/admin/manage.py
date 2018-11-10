@@ -56,6 +56,9 @@ class AccountManageView(BaseManageView):
     """
 
     column_exclude_list = ('password',)
+    column_searchable_list = ('email', 'fsuid', 'first_name', 'last_name',)
+    column_default_sort = ('email', False)
+    column_filters = ('signin',)
 
     column_formatters = dict(
         team=lambda v, c, m, n: Markup("<a href='" + url_for('team.edit_view', id=m.team.id) + "'>" + str(m.team) + "</a>") if m.team else "",
@@ -72,6 +75,11 @@ class TeamManageView(BaseManageView):
     """Admin view used to view and edit Teams.
 
     """
+
+    column_searchable_list = ('team_name',)
+    column_default_sort = ('team_name', False)
+    column_filters = ('division',)
+
     column_formatters = dict(
         members=get_team_members
     )
