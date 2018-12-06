@@ -13,7 +13,7 @@ First, get a copy of the extra credit survey results. This should be a CSV where
 
 Next, download a copy of each division's results. You can find this under "Import/Export", then click the "results.tsv" link to download. Use the dropdown in the top right to switch between divisions.
 
-Put these files somewhere the script can read them, i.e. if you're executing in the Docker container these need to be readable inside the container. Coping through the `share/` volume from the `docker-compose.yml` is a good way to transfer them. Consider storing them in the project root's `credit/` folder, as this path is ignored in the `.gitignore`. Remember, **do not commit these files**.
+Put these files somewhere the script can read them, i.e. if you're executing in the Docker container these need to be readable inside the container. Coping through the `share/` volume from the `docker-compose.yml` is a good way to transfer them. Consider storing them in the project root's `credit/` folder, as this path is ignored in the `.gitignore`. Furthermore, the script expects the survey CSV file to be stored as `credit/survey.csv`.  Remember, **do not commit these files**.
 
 ### 2. Optional: Get inside the container
 If you're running the script from inside the container, you can enter the container using `docker-compose exec webapp bash` to create a bash terminal inside the container.
