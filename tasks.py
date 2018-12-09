@@ -7,7 +7,7 @@ def extracredit(
     division,
     results,
     survey=path.join('credit', 'survey.csv'),
-    config=path.join('..', 'config', 'development.py'),
+    config=path.join('..', 'config', 'production.py'),
 ):
 
     output_folder = path.join(getcwd(), 'credit', division)
