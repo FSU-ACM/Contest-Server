@@ -26,6 +26,7 @@ module.exports = {
                         'getting_started',
                         'configuration',
                         'deployment',
+                        'extra_credit',
                     ]
                 },
             ],
