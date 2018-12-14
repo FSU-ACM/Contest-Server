@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 invoke = "*"
+pytest = "*"
 
 [packages]
 # amqp = "==2.1.4"
