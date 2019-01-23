@@ -1,0 +1,9 @@
+- repo: local
+  hooks:
+  - id: pylint
+    name: pylint
+    entry: python -m pylint.__main__
+    language: system
+    types: [python]
+    args: [app/]
+    additional_dependencies: []
