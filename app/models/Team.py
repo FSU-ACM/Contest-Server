@@ -40,25 +40,27 @@ class Team(db.Document):
             return ""
 
 # Pre-generate teams
-if Team.objects.count() < app.config['TEAM_COUNT']:
-    from app.util.password import make_password
+@app.before_first_request
+def generate_teams():
+    if Team.objects.count() < app.config['TEAM_COUNT']:
+        from app.util.password import make_password
 
-    # Don't overwrite teams
-    start = 1 + Team.objects.count()
-    target = 1 + app.config['TEAM_COUNT']
+        # Don't overwrite teams
+        start = 1 + Team.objects.count()
+        target = 1 + app.config['TEAM_COUNT']
 
-    """
-    Domjudge doesn't support acm-0 (0 is not a valid ID), so
-    whenever we start generating acm-x we use +1. Hence, to reach 300
-    teams we must generate acm-1 through acm-301.
+        """
+        Domjudge doesn't support acm-0 (0 is not a valid ID), so
+        whenever we start generating acm-x we use +1. Hence, to reach 300
+        teams we must generate acm-1 through acm-301.
 
-    This still does not solve the issue if a team is removed in the middle.
-    This should be rewritten to start at the largest existing team ID.
-    """
+        This still does not solve the issue if a team is removed in the middle.
+        This should be rewritten to start at the largest existing team ID.
+        """
 
-    for i in range(start, target):
-        teamID = "acm-%i" % i
-        teamPass = make_password()
-        domPass = make_password()
+        for i in range(start, target):
+            teamID = "acm-%i" % i
+            teamPass = make_password()
+            domPass = make_password()
 
-        Team(teamID=teamID, teamPass=teamPass, domPass=domPass).save()
+            Team(teamID=teamID, teamPass=teamPass, domPass=domPass).save()

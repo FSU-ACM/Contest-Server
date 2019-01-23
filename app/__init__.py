@@ -11,7 +11,7 @@ from flask_admin import Admin
 
 # Init & Config
 app = Flask(__name__)
-app.config.from_envvar('FLASK_CONFIG')
+app.config.from_object(os.getenv('FLASK_CONFIG'))
 app.secret_key = ''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(30))
 
 # Init modules
