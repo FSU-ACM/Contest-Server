@@ -5,6 +5,9 @@ load-plugins=
 [MESSAGE-CONTROL]
 disable=
     C0111,  # missing function docstring
+    C0103,  # globals not uppercase
+    R0201,  # method could be function
+    R0903,  # too few public methods
 
 [TYPECHECK]
-ignored-classes=MongoEngine
+ignored-classes=MongoEngine,QuerySet

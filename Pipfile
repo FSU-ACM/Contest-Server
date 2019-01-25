@@ -7,9 +7,9 @@ verify_ssl = true
 invoke = "*"
 pytest = "*"
 black = "*"
-pylint-mongoengine = "*"
 pre-commit = "*"
 pylint = "==1.9.2"
+pytest-flask = "*"
 
 [packages]
 bleach = "==1.5.0"
