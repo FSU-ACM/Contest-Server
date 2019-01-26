@@ -1,7 +1,8 @@
-from flask_mail import Message
+from flask import current_app
+from flask_mail import Mail, Message
 from threading import Thread
 
-from app import app, mail
+mail = Mail()
 
 
 # Async send message
@@ -19,7 +20,7 @@ def reset_password_email(address, password):
     msg.body += "\n\nRegards,\nACM at FSU"
 
     # mail.send(msg)
-    thr = Thread(target=send_async_mail, args=[app, msg])
+    thr = Thread(target=send_async_mail, args=[current_app, msg])
     thr.start()
 
 
@@ -35,7 +36,7 @@ def sign_in_email(address, domuser, dompass):
     msg.body += "\nRegards,\nACM at FSU"
 
     # mail.send(msg)
-    thr = Thread(target=send_async_mail, args=[app, msg])
+    thr = Thread(target=send_async_mail, args=[current_app, msg])
     thr.start()
 
 
@@ -52,5 +53,5 @@ def quick_register_email(address, password):
     msg.body += "Regards,\nACM at FSU"
 
     # mail.send(msg)
-    thr = Thread(target=send_async_mail, args=[app, msg])
+    thr = Thread(target=send_async_mail, args=[current_app, msg])
     thr.start()

@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db
-
+# from app import db
+from . import db
 
 class Account(db.Document):
     # Sign-in
@@ -9,7 +9,7 @@ class Account(db.Document):
     password = db.StringField(required=True)
 
     # Relationships
-    team = db.ReferenceField('Team')
+    team = db.ReferenceField("Team")
 
     # Core Info (Extra Credit)
     first_name = db.StringField(required=True)
@@ -27,7 +27,7 @@ class Account(db.Document):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return '<Account %r>' % self.email
+        return "<Account %r>" % self.email
 
     def __str__(self):
         return self.first_name + " " + self.last_name

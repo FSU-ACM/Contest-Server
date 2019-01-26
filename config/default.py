@@ -5,10 +5,15 @@
 import random
 import string
 
+class Config:
+    """ Base configuration class. Exists because type-hinting DefaultConfig in the
+        app factory method seemed weird. """
 
-class DefaultConfig:
-    """ Base configuration for the project. Extend and override values from
+
+class DefaultConfig(Config):
+    """ Default configuration for the project. Extend and override values from
         this config depending on your use-case. """
+
     DEBUG = False
     SECRET_KEY = ''.join(random.SystemRandom().choice(string.hexdigits) for _ in range(30))
 
@@ -55,6 +60,7 @@ class DevConfig(DefaultConfig):
 class TestConfig(DefaultConfig):
     """ Testing configuration. """
 
+    TEST = True
     DEBUG = True
     TEAM_COUNT = 5
     MONGODB_HOST = 'mongodb://localhost/contest-server-test'

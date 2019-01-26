@@ -7,7 +7,6 @@ from app.util.errors import UnauthorizedUserError
 
 
 class FormView(MethodView):
-
     """Abstract parent class to all form-based views.
 
     Most of this project consist of forms for users (contest participants) to
@@ -37,7 +36,7 @@ class FormView(MethodView):
         try:
             self.perform_authorization(*args, **kwargs)
             return super().dispatch_request(*args, **kwargs)
-        except UnauthorizedUserError as err:
+        except UnauthorizedUserError:
             return self.redirect_unauthorized()
 
     def perform_authorization(self, *args, **kwargs):
@@ -56,37 +55,30 @@ class FormView(MethodView):
     def get_form(self) -> FlaskForm:
         raise NotImplementedError()
 
-    def render_template(self, form=None, **kwargs):
-        """
-            Renders the view's template with the form.
-        """
-        form = form or self.get_form()
+    def render_template(self, **kwargs):
+        """ Renders the view's template with the form. """
+        form = kwargs.get('form') or self.get_form()
         return render_template(self.get_template_name(), form=form, **kwargs)
 
     def get(self):
-        """
-            Default behavior is just to render the form. This method can be
+        """ Default behavior is just to render the form. This method can be
             overwritten for additional behavior which can then call super(),
-            or can juse call the self.render_template method.
-        """
+            or can juse call the self.render_template method. """
         return self.render_template()
 
     def post(self):
-        """
-            This method should be overwritten to handle form-parsing logic
-            on a per-view basis.
-        """
+        """ This method should be overwritten to handle form-parsing logic
+            on a per-view basis. """
         raise NotImplementedError()
 
 
-
+# pylint: disable=W0223
 class AccountFormView(FormView):
-
-    def authorize(self):
+    def authorize(self, *args, **kwargs):
         return session_util.is_auth()
 
     def redirect_unauthorized(self):
-        return redirect(url_for('login'))
+        return redirect(url_for("login"))
 
     def render_template(self, **kwargs):
         account = session_util.get_account()

@@ -1,8 +1,7 @@
-# util.team
+""" Team model controllers """
 
 from flask import flash
 
-from app import app
 from app.models import Team
 from app.util.password import make_password
 

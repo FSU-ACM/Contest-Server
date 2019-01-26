@@ -1,49 +1,52 @@
-from app import db
-
+# from app import db
+from . import db
 
 class Profile(db.Document):
 
     RACE = (
-        ('', ''),
-        ('American Indian or Native Alaskan',
-            'American Indian or Native Alaskan'),
-        ('Asian', 'Asian'),
-        ('Black or African American',
-            'Black or African American'),
-        ('Hispanic', 'Hispanic'),
-        ('Native Hawaiian or other Pacific Islander',
-            'Native Hawaiian or other Pacific Islander'),
-        ('White', 'White'),
+        ("", ""),
+        (
+            "American Indian or Native Alaskan",
+            "American Indian or Native Alaskan",
+        ),
+        ("Asian", "Asian"),
+        ("Black or African American", "Black or African American"),
+        ("Hispanic", "Hispanic"),
+        (
+            "Native Hawaiian or other Pacific Islander",
+            "Native Hawaiian or other Pacific Islander",
+        ),
+        ("White", "White"),
     )
 
     GENDER = (
-        ('', ''),
-        ('Male', 'Male',),
-        ('Female', 'Female',),
-        ('Non-Binary', 'Non-Binary',),
+        ("", ""),
+        ("Male", "Male"),
+        ("Female", "Female"),
+        ("Non-Binary", "Non-Binary"),
     )
 
     GRAD_TERM = (
-        ('', ''),
-        ('Spring', 'Spring'),
-        ('Summer', 'Summer'),
-        ('Fall', 'Fall'),
+        ("", ""),
+        ("Spring", "Spring"),
+        ("Summer", "Summer"),
+        ("Fall", "Fall"),
     )
 
     STUDENT_STATUS = (
-        ('', ''),
-        ('Undergraduate', 'Undergraduate'),
-        ('Graduate', 'Graduate'),
-        ('High School', 'High School'),
-        ('Non-degree Seeking', 'Non-degree Seeking'),
+        ("", ""),
+        ("Undergraduate", "Undergraduate"),
+        ("Graduate", "Graduate"),
+        ("High School", "High School"),
+        ("Non-degree Seeking", "Non-degree Seeking"),
     )
 
     ADV_COURSE = (
-        ('', ''),
-        ('COP3014', 'COP3014'),
-        ('COP3330', 'COP3330'),
-        ('COP4530', 'COP4530'),
-        ('COP4531', 'COP4531'),
+        ("", ""),
+        ("COP3014", "COP3014"),
+        ("COP3330", "COP3330"),
+        ("COP4530", "COP4530"),
+        ("COP4531", "COP4531"),
     )
 
     # dob = db.DateTimeField(null=True)
@@ -63,7 +66,7 @@ class Profile(db.Document):
 
     def __repr__(self):
         if self.fsuid is not None:
-            return '<Profile %r>' % (self.firstname + ' ' + self.lastname)
+            return "<Profile %r>" % (self.firstname + " " + self.lastname)
         else:
             return super(Profile, self).__repr__()
 
