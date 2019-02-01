@@ -30,8 +30,11 @@
 
     {% block navbar %}
       {% include "common/navbar.html" %}
-      {% include "common/flash.html" %}
     {% endblock navbar %}
+
+    {% block flash %}
+      {% include "common/flash.html" %}
+    {% endblock flash %}
 
     {% block content %}
     {% endblock content %}
