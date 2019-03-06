@@ -47,3 +47,4 @@ admin = Admin(app, name='Admin Interface', template_mode='bootstrap3', index_vie
 
 admin.add_view(views.admin.AccountManageView(models.Account))
 admin.add_view(views.admin.TeamManageView(models.Team))
+admin.add_view(views.admin.CourseManageView(models.Course))

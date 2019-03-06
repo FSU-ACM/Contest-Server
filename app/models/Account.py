@@ -16,6 +16,7 @@ class Account(db.Document):
     last_name = db.StringField(required=True)
     fsuid = db.StringField()
     signin = db.DateTimeField(null=True)
+    courses = db.ListField(db.ReferenceField('Course'))
 
     # Admin status
     is_admin = db.BooleanField(null=True)

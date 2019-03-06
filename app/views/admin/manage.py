@@ -3,6 +3,7 @@ from flask import flash, redirect, url_for, request, Markup
 from flask_admin import AdminIndexView
 from flask_admin.contrib.mongoengine import ModelView
 
+from app.models.Account import Account
 from app.util import session as session_util
 
 def get_team_members(view, context, model, name):
@@ -83,3 +84,22 @@ class TeamManageView(BaseManageView):
     column_formatters = dict(
         members=get_team_members
     )
+
+class CourseManageView(BaseManageView):
+    """Admin view used to add and edit extra credit Courses.
+
+    """
+
+    column_list = ('name', 'professor_name', 'professor_email', 'division', 'num_students',)
+    column_default_sort = ('name', False)
+    column_searchable_list = ('name', 'professor_name', 'professor_email',)
+    column_editable_list = ('name', 'professor_name', 'division')
+    column_display_pk = True
+
+    def on_model_delete(self, model):
+        """Removes all references to deleted course to avoid dangling
+        references.
+
+        """
+
+        Account.objects(courses=model).update(pull__courses=model)
