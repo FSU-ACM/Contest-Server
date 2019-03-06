@@ -21,6 +21,16 @@
         {{ field(form.first_name) }}
         {{ field(form.last_name) }}
         {{ field(form.fsuid) }}
+
+        <h4>Extra Credit Courses</h4>
+
+        <table class="table is-fullwidth">
+            <tbody>
+                {{ form.courses }}
+            </tbody>
+        </table>
+  
+        
         <p class="help is-danger">
             <!-- <i class="fas fa-exclamation-circle"></i> -->
             If you do not provide an FSUID you can not receive extra credit.

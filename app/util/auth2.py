@@ -7,12 +7,13 @@
 from flask import session
 
 from app.models import Account
+from app.util import course as course_util
 
 # Session keys
 SESSION_EMAIL = 'email'
 
 def create_account(email: str, password: str, first_name: str,
-                   last_name: str, fsuid: str):
+                   last_name: str, fsuid: str, course_list: list = []):
     """
     Creates an account for a single user.
 
@@ -21,6 +22,7 @@ def create_account(email: str, password: str, first_name: str,
     :first_name: Required, user's first name.
     :last_name: Required, user's last name.
     :fsuid: Optional, user's FSUID.
+    :course_list: Optional, courses being taken by user
     :return: Account object.
     """
 
@@ -30,6 +32,9 @@ def create_account(email: str, password: str, first_name: str,
         last_name=last_name,
         fsuid=fsuid
     )
+
+    # Set user's extra credit courses
+    course_util.set_courses(account, course_list)
 
     account.set_password(password)
     account.save()
