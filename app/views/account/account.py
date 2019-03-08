@@ -1,8 +1,11 @@
 from flask import (flash, request)
 
 from app.forms import EditAccount as EditAccountForm
+
 from app.util import session as session_util
 from app.util import course as course_util
+from app.util import team as team_util
+
 from app.views.generic import AccountFormView
 
 from app.util.fields import CoursesField
@@ -46,6 +49,11 @@ class EditAccountView(AccountFormView):
 
             account.update(**data)
             account.save()
+
+            # Check if team must be moved to upper division
+            if account.team:
+                if account.team.division == 2:
+                    team_util.set_division(account.team, account.team.division)
 
             flash('Account updated')
 
