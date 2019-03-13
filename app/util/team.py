@@ -3,7 +3,7 @@
 from flask import flash
 
 from app import app
-from app.models import Team
+from app.models import Team, Course
 from app.util.password import make_password
 
 
@@ -41,18 +41,38 @@ def create_team(account, name):
 def set_division(team, division):
     """Set team's division
 
-    This is called three times:
+    This is called five times:
         1. When a team is created from a registed solo user
         2. When a team is quick registered
         3. When a team is updated/renamed
+        4. When a user joins the team
+        5. When a user edits their course list
 
     1 and 2 are part of a creation process, but are called separately
     from the create_team method.
 
+    This will move the team into upper division if any upper level courses
+    are found.
+
     """
+
+    division = int(division)
+
     team.division = division
+
+    # If setting to lower division, check courses of members
+    if division == 2:    
+        upper_courses = Course.objects(division=1)
+
+        for t in team.members:
+            if any((c in t.courses for c in upper_courses)):
+                # Found an upper division course, can't be in lower
+                team.division = 1
+
+                flash("Team moved to upper division: a member is taking an upper division course!", 'danger')
+                break
+    
     team.save()
-    # TODO make this more...robust
 
 
 def join_team(account, teamID=None, teamPass=None, team=None):
@@ -70,6 +90,11 @@ def join_team(account, teamID=None, teamPass=None, team=None):
         if len(team.members) < 3:
             team.members.append(account)
             account.team = team
+
+            # Update team's division
+            if team.division == 2:
+                set_division(team, team.division)
+
             team.save()
             account.save()
             return True

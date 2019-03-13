@@ -35,7 +35,8 @@ class SoloRegisterView(FormView):
                 password=form.password.data,
                 first_name=form.first_name.data,
                 last_name=form.last_name.data,
-                fsuid=form.fsuid.data
+                fsuid=form.fsuid.data,
+                course_list=form.courses.data
             )
 
             # Set cookie, redirect to login page (which will forward to team page).

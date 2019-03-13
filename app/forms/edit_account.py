@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Optional
-from app.util.fields import FSUIDField
+from app.util.fields import FSUIDField, CoursesField
+
+from bson import ObjectId
 
 class EditAccount(FlaskForm):
     """EditAccount
@@ -21,6 +23,10 @@ class EditAccount(FlaskForm):
 
     fsuid = FSUIDField('FSUID', validators=[
         Optional(strip_whitespace=True)
+    ])
+
+    courses = CoursesField('Extra Credit Courses', coerce=ObjectId, validators=[
+        Optional()
     ])
 
     submit = SubmitField('Update')

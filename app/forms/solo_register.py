@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectMultipleField
 from wtforms.validators import DataRequired, Email, Optional
 
-from app.util.fields import EmailField, FSUIDField
+from app.util.fields import EmailField, FSUIDField, CoursesField
 from app.util.validators import UnusedEmail
+
+from bson import ObjectId
 
 
 class SoloRegister(FlaskForm):
@@ -34,6 +36,10 @@ class SoloRegister(FlaskForm):
 
     fsuid = FSUIDField('FSUID', validators=[
         Optional(strip_whitespace=True)
+    ])
+
+    courses = CoursesField('Extra Credit Courses', coerce=ObjectId, validators=[
+        Optional()
     ])
 
     submit = SubmitField('Register')
