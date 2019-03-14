@@ -42,7 +42,8 @@ class QuickRegisterView(FormView):
                 password=pass1,
                 first_name=form.first_name1.data,
                 last_name=form.last_name1.data,
-                fsuid=form.fsuid1.data
+                fsuid=form.fsuid1.data,
+                course_list=form.courses1.data
             )
             quick_register_email(account1.email, pass1)
             accounts.append(account1)
@@ -55,7 +56,8 @@ class QuickRegisterView(FormView):
                     password=pass2,
                     first_name=form.first_name2.data,
                     last_name=form.last_name2.data,
-                    fsuid=form.fsuid2.data
+                    fsuid=form.fsuid2.data,
+                    course_list=form.courses2.data
                 )
                 quick_register_email(account2.email, pass2)
                 accounts.append(account2)
@@ -68,7 +70,8 @@ class QuickRegisterView(FormView):
                     password=pass3,
                     first_name=form.first_name3.data,
                     last_name=form.last_name3.data,
-                    fsuid=form.fsuid3.data
+                    fsuid=form.fsuid3.data,
+                    course_list=form.courses3.data
                 )
                 quick_register_email(account3.email, pass3)
                 accounts.append(account3)

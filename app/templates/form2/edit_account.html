@@ -12,22 +12,26 @@
     {{ field(form.last_name) }}
     {{ field(form.fsuid) }}
     
-    <h3>Extra Credit Courses</h3>
-    
+    {{ field(form.courses) }}
+
     <p class="help is-danger">
         Courses marked with '(not verified)' have not been verified to give extra credit.
         Speak with your professor to see if they will be giving extra credit.
     </p>
     
-    <table class="table is-fullwidth">
-        <tbody>
-            {{ form.courses }}
-        </tbody>
-    </table>
-    
     {{ button(form.submit) }}
     
 </form>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#courses').select2({
+            width: "100%"
+        });
+    });
+</script>
 
 {% endblock %}
