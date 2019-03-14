@@ -49,9 +49,6 @@ class CoursesField(wtf_SelectMultipleField):
 
     """
 
-    widget = widgets.TableWidget(with_table_tag=False)
-    option_widget = widgets.CheckboxInput()
-
     def __init__(self, *args, **kwargs):
         wtf_SelectMultipleField.__init__(self, *args, **kwargs)
         self.choices = course_util.get_choices()
