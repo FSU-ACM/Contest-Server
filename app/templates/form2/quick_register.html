@@ -48,6 +48,13 @@
             If you do not provide an FSUID you can not receive extra credit.
         </p>
 
+        {{ field(form.courses1) }}
+
+        <p class="help is-danger">
+            Courses marked with '(not verified)' have not been verified to give extra credit.
+            Speak with your professor to see if they will be giving extra credit.
+        </p>
+
         <!-- <p>You can create your team or add more members.</p>
         {{ button(form.submit) }} -->
 
@@ -68,6 +75,13 @@
             If you do not provide an FSUID you can not receive extra credit.
         </p>
 
+        {{ field(form.courses2) }}
+
+        <p class="help is-danger">
+            Courses marked with '(not verified)' have not been verified to give extra credit.
+            Speak with your professor to see if they will be giving extra credit.
+        </p>
+
         <!-- Team Member 3 -->
         <h3>Team Member 3</h3>
         {{ field(form.email3) }}
@@ -85,8 +99,32 @@
             If you do not provide an FSUID you can not receive extra credit.
         </p>
 
+        {{ field(form.courses3) }}
+
+        <p class="help is-danger">
+            Courses marked with '(not verified)' have not been verified to give extra credit.
+            Speak with your professor to see if they will be giving extra credit.
+        </p>
+
         {{ button(form.submit) }}
     </form>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#courses1').select2({
+                width: "100%"
+            });
+            $('#courses2').select2({
+                width: "100%"
+            });
+            $('#courses3').select2({
+                width: "100%"
+            });
+        });
+    </script>
 
 {% endblock %}
 
