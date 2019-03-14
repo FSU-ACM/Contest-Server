@@ -30,7 +30,8 @@ def create_account(email: str, password: str, first_name: str,
         email=email,
         first_name=first_name,
         last_name=last_name,
-        fsuid=fsuid
+        fsuid=fsuid,
+        is_admin=False
     )
 
     # Set user's extra credit courses
