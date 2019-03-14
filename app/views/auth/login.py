@@ -19,7 +19,7 @@ class LoginView(FormView):
         return not session_util.is_auth()
 
     def redirect_unauthorized(self):
-        return redirect(url_for('team'))
+        return redirect(url_for('account'))
 
     def get_template_name(self):
         return 'form2/login.html'
@@ -32,7 +32,7 @@ class LoginView(FormView):
 
         if form.validate():
             session_util.login(form.account)
-            return redirect(url_for('team'))
+            return redirect(url_for('account'))
 
         return self.render_template(form=form)
 
