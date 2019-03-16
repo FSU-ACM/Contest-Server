@@ -121,6 +121,7 @@ class CourseManageView(BaseManageView):
     column_default_sort = ('name', False)
     column_searchable_list = ('name', 'professor_name', 'professor_email',)
     column_editable_list = ('name', 'professor_name', 'division')
+    column_sortable_list = ('name', 'professor_name', 'division', 'num_students')
 
     def scaffold_form(self):
         """Replaces Division field with a Select field in the edit form.
