@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import SubmitField
 from wtforms.validators import Email
 
 from app.util.auth2 import get_account
-
+from app.util.fields import EmailField
 
 class AddMember(FlaskForm):
     """Add a member to a team.
@@ -13,7 +13,7 @@ class AddMember(FlaskForm):
 
     """
 
-    email = StringField('Enter a registered email', validators=[Email()])
+    email = EmailField('Enter a registered email', validators=[Email()])
     submit = SubmitField('Add Member')
 
     def __init__(self, *args, **kwargs):
