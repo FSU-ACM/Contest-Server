@@ -73,8 +73,9 @@ class AccountManageView(BaseManageView):
 
         """
 
-        if form.password.data[:6] != "pbkdf2":
-            model.set_password(form.password.data)
+        if hasattr(form, 'password'):
+            if form.password.data[:6] != "pbkdf2":
+                model.set_password(form.password.data)
 
 class TeamManageView(BaseManageView):
     """Admin view used to view and edit Teams.
