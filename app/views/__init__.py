@@ -20,10 +20,28 @@ class TeamListView(View):
     """
 
     def dispatch_request(self):
-        teams = Team.objects.filter(team_name__exists=True, members__exists=True, division__exists=True)
+        """Prepares list of valid teams, counts number of participants, and
+        renders the template.
+
+        """
+
+        # A team is only valid if:
+        #   1. teamname is a valid property (exists) and not empty
+        #   2. There is at least one member
+        #   3. It has an assigned division
+        teams = Team.objects.filter(
+            team_name__exists=True, team_name__ne="",
+            members__0__exists=True,
+            division__exists=True
+        )
+
         num_members = sum([len(team.members) for team in teams])
-        return render_template('form2/allteams.html', teams=teams,
-                                num_members=num_members)
+
+        return render_template(
+            'form2/allteams.html',
+            teams=teams,
+            num_members=num_members
+        )
 
 @app.errorhandler(404)
 def page_not_found(e):
