@@ -60,7 +60,7 @@ class AccountManageView(BaseManageView):
 
     column_exclude_list = ('password',)
     column_searchable_list = ('email', 'fsuid', 'first_name', 'last_name',)
-    column_default_sort = [('last_name', True)]
+    column_default_sort = ('last_name', False)
     column_filters = ('signin',)
     column_editable_list = ('first_name', 'last_name', 'fsuid',)
 
@@ -83,7 +83,6 @@ class TeamManageView(BaseManageView):
     """
 
     column_searchable_list = ('team_name',)
-    column_default_sort = ('team_name', True)
     column_filters = ('division',)
     column_editable_list = ('team_name', 'division')
 
