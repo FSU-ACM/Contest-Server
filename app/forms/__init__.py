@@ -3,6 +3,6 @@ from .edit_account import EditAccount
 from .login import Login
 from .quick_registration import QuickRegister
 from .reset_password import ResetPassword
-from .sign_in import SignIn
+from .sign_in import SignIn, SignInAll
 from .solo_register import SoloRegister
 from .team import CreateTeam, UpdateTeam, AddTeamMember
