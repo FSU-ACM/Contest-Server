@@ -84,6 +84,7 @@ routes = [
     Route('/account/team/remove', team.RemoveView.as_view('team_remove')),
 
     Route('/admin/signin', admin.SignInView.as_view('sign_in')),
+    Route('/admin/signin_all', admin.SigninAllView.as_view('sign_in_all')),
 ]
 
 [app.add_url_rule(route.url, view_func=route.view) for route in routes]

@@ -29,3 +29,9 @@ class SignIn(FlaskForm):
 
         self.account = account
         return True
+
+class SignInAll(FlaskForm):
+    submit = SubmitField('Sign In All')
+
+    def validate(self):
+        return FlaskForm.validate(self)

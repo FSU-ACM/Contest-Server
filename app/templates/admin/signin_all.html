@@ -1,0 +1,22 @@
+{% extends "form2/base.html" %}
+
+{% block formsize %} is-8 {% endblock %}
+
+{% block form %}
+
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    {{ button(form.submit) }}
+  </form>
+
+
+{% endblock %}
+
+
+{# This disables the navbar and footer on the signin page. #}
+
+{% block navbar %}
+{% endblock %}
+
+{% block footer %}
+{% endblock footer %}
